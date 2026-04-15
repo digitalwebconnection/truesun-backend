@@ -4,6 +4,7 @@ import { apiUrl } from '../../lib/api';
 /* ── Blog type (matches MongoDB model) ──────────────────── */
 export interface Blog {
   _id?: string;
+  slug?: string;
   title: string;
   excerpt: string;
   categories: string;
@@ -25,6 +26,17 @@ const EMPTY: Blog = {
   image: '',
   content: '',
 };
+
+/** Mirror the backend slugify logic so the preview is accurate */
+function slugify(text: string): string {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_]+/g, '-')
+    .replace(/-+/g, '-');
+}
 
 /* ── Tiny style helpers ────────────────────────────────────── */
 const S: Record<string, React.CSSProperties> = {
@@ -263,6 +275,25 @@ export default function BlogForm({ blog, onSuccess, onClose }: Props) {
                 <Field label="Blog Title">
                   <TextInput id="f-title" value={form.title} onChange={v => set('title', v)} placeholder="e.g. Solar Trends 2024" />
                 </Field>
+                {/* Slug preview — auto-generated from title, read-only */}
+                <div>
+                  <label style={S.label}>URL Slug <span style={{ color: '#94a3b8', fontWeight: 400 }}>(auto-generated from title)</span></label>
+                  <div style={{
+                    display: 'flex', alignItems: 'center', gap: '0.4rem',
+                    background: '#f1f5f9', border: '1px solid #e2e8f0',
+                    borderRadius: '7px', padding: '0.5rem 0.75rem',
+                  }}>
+                    <span style={{ color: '#94a3b8', fontSize: '0.82rem', whiteSpace: 'nowrap' }}>/Knowledgwe/</span>
+                    <span style={{ color: '#FC763A', fontSize: '0.85rem', fontWeight: 600, wordBreak: 'break-all' }}>
+                      {form.title ? slugify(form.title) : <span style={{ color: '#cbd5e1' }}>your-blog-title</span>}
+                    </span>
+                  </div>
+                  {form._id && form.slug && (
+                    <p style={{ fontSize: '0.72rem', color: '#64748b', marginTop: '0.3rem' }}>
+                      Current saved slug: <strong>{form.slug}</strong>
+                    </p>
+                  )}
+                </div>
               </div>
               <div style={{ ...S.grid2, marginTop: '0.75rem' }}>
                 <Field label="Category / Categories">

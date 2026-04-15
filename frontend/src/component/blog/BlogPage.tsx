@@ -5,6 +5,7 @@ import { apiUrl } from "../../lib/api";
 
 interface Blog {
   _id: string;
+  slug: string;
   title: string;
   excerpt: string;
   categories: string;
@@ -67,7 +68,7 @@ const BlogPage = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-10">
           {blogs.map((post) => (
-            <Link to={`/Knowledgwe/${post._id}`} key={post._id} className="group">
+            <Link to={`/Knowledgwe/${post.slug || post._id}`} key={post._id} className="group">
               <div className="rounded-xl border border-gray-200 bg-white shadow-md hover:shadow-2xl transition-all duration-300 h-full flex flex-col overflow-hidden">
 
                 <div className="overflow-hidden">

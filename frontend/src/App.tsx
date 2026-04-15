@@ -68,7 +68,7 @@ function AppInner() {
 
         <Route path="/Knowledgwe" element={<BlogMain />} /> {/* Blog Main Page Path Is /Knowledge */}
 
-        <Route path="/Knowledgwe/:id" element={<BlogDetails />} /> {/* Blog Details Page Path Is /Knowledge/:id where :id is the dynamic parameter for blog post */}
+        <Route path="/Knowledgwe/:slug" element={<BlogDetails />} /> {/* Blog Details Page Path Is /Knowledge/:slug where :slug is the URL-friendly blog title */}
 
         <Route path="/contact" element={<ContactUsMain />} /> {/* Contact Us Page Path Is /contact */}
 
