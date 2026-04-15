@@ -1,8 +1,9 @@
- 
+
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Helmet } from "react-helmet";
 
 const DEFAULT_ITEMS = [
   {
@@ -29,13 +30,13 @@ const DEFAULT_ITEMS = [
     answer:
       "Not at all! Robust Design is the core of our offerings. We install the solar plant on flat cement and metal roofs without puncturing the roof.  Load bearing capacity and wind speed zone are in our primary considerations while designing & installing the plant.",
   },
-   {
+  {
     id: "required",
     question: "What is the maintenance required for a solar plant?",
     answer:
       "Once installed, the plant is almost maintenance free.  All that is required from you is to clean the dust on the panels once or twice in a month.Preventive health check twice a year would ascertain plant longetivity.",
   },
-    {
+  {
     id: "required",
     question: "What are the warranties on the system?",
     answer:
@@ -152,8 +153,6 @@ const DEFAULT_ITEMS = [
 
 ];
 
-
-
 const INITIAL_VISIBLE = 5;
 
 export default function PremiumFAQ({ items = DEFAULT_ITEMS }) {
@@ -161,112 +160,202 @@ export default function PremiumFAQ({ items = DEFAULT_ITEMS }) {
   const [showAll, setShowAll] = useState(false);
 
   const visibleItems = showAll ? items : items.slice(0, INITIAL_VISIBLE);
+  // ✅ 🔥 FAQ SCHEMA (DYNAMIC)
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "I don’t have any available roof space available but ground space is available. Can I utilize this for solar power generation?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. The regulation allows you to use this space for solar power generation."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "What is the minimum area required to install a rooftop Solar Plant?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "100 Sq feet or 10 meter square to install 1KWp Solar plant."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "How much energy can a 1KWp solar plant generate?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "A 1KWp solar plant will generate approximately 120 units per month. However, the exact power generated will be subject to location of the plant."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "Will my rooftop get damaged while installing a solar plant?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Not at all. We install solar plants without damaging roofs and ensure proper structural safety."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "What maintenance is required for a solar plant?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Solar plants require minimal maintenance. Cleaning panels once or twice a month and periodic health checks are sufficient."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "What are the warranties on the system?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Typically, panels have a 25–30 year performance warranty and inverters have 5 years warranty."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "What is solar rooftop?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Solar rooftop systems are installed on building roofs to generate electricity from sunlight."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "Why is rooftop solar a good investment?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Solar reduces electricity bills, offers long-term savings, and provides high ROI over 25 years."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "How to apply for a solar rooftop installation?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Share your electricity bill, get site evaluation, and receive a customized quotation."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "What is a Net Meter?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "A net meter tracks electricity imported and exported to calculate your final bill."
+        }
+      }
+    ]
+  };
 
   return (
-    <section className="mx-auto max-w-4xl overflow-hidden px-4 py-16">
-      
-      {/* Header */}
-      <motion.header
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="mb-12 text-center"
-      >
-        <h2 className="text-4xl font-black tracking-tight text-[#686868]">
-          Frequently Asked <span className="text-[#FC763A]">Questions</span>
-        </h2>
-        <p className="mt-4 text-lg text-gray-500">
-          Everything you need to know about switching to clean energy.
-        </p>
-      </motion.header>
+    <>
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
+        </script>
+      </Helmet>
+      <section className="mx-auto max-w-4xl overflow-hidden px-4 py-16">
 
-      {/* FAQ List */}
-      <div className="space-y-6">
-        {visibleItems.map(({ id, question, answer }, index) => {
-          const isOpen = openItem === id;
-          const slideFrom = index % 2 === 0 ? 80 : -80;
+        {/* Header */}
+        <motion.header
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-12 text-center"
+        >
+          <h2 className="text-4xl font-black tracking-tight text-[#686868]">
+            Frequently Asked <span className="text-[#FC763A]">Questions</span>
+          </h2>
+          <p className="mt-4 text-lg text-gray-500">
+            Everything you need to know about switching to clean energy.
+          </p>
+        </motion.header>
 
-          return (
-            <motion.div
-              key={id}
-              initial={{ opacity: 0, x: slideFrom }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{
-                duration: 0.6,
-                delay: 0.1,
-                type: "spring",
-                stiffness: 100,
-              }}
-              className={`group overflow-hidden rounded-2xl border transition-shadow duration-300 ${
-                isOpen
+        {/* FAQ List */}
+        <div className="space-y-6">
+          {visibleItems.map(({ id, question, answer }, index) => {
+            const isOpen = openItem === id;
+            const slideFrom = index % 2 === 0 ? 80 : -80;
+
+            return (
+              <motion.div
+                key={id}
+                initial={{ opacity: 0, x: slideFrom }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.1,
+                  type: "spring",
+                  stiffness: 100,
+                }}
+                className={`group overflow-hidden rounded-2xl border transition-shadow duration-300 ${isOpen
                   ? "border-[#FC763A] bg-orange-50/30 shadow-lg"
                   : "border-gray-200 bg-white hover:border-orange-300 hover:shadow-md"
-              }`}
-            >
-              <button
-                onClick={() => setOpenItem(isOpen ? null : id)}
-                className="flex w-full items-center justify-between p-6 text-left"
-              >
-                <span
-                  className={`text-lg font-bold transition-colors ${
-                    isOpen ? "text-[#FC763A]" : "text-gray-900"
                   }`}
+              >
+                <button
+                  onClick={() => setOpenItem(isOpen ? null : id)}
+                  className="flex w-full items-center justify-between p-6 text-left"
                 >
-                  {question}
-                </span>
+                  <span
+                    className={`text-lg font-bold transition-colors ${isOpen ? "text-[#FC763A]" : "text-gray-900"
+                      }`}
+                  >
+                    {question}
+                  </span>
 
-                <div
-                  className={`ml-4 shrink-0 rounded-full p-1 transition-colors ${
-                    isOpen
+                  <div
+                    className={`ml-4 shrink-0 rounded-full p-1 transition-colors ${isOpen
                       ? "bg-[#FC763A] text-white"
                       : "bg-gray-100 text-gray-500"
-                  }`}
-                >
-                  <ChevronDown
-                    className={`h-5 w-5 transition-transform duration-500 ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </div>
-              </button>
-
-              <AnimatePresence>
-                {isOpen && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{
-                      duration: 0.4,
-                      ease: [0.04, 0.62, 0.23, 0.98],
-                    }}
+                      }`}
                   >
-                    <div className="px-6 pb-6">
-                      <div className="mb-4 h-px w-full bg-orange-100" />
-                      <p className="text-gray-600 leading-relaxed italic">
-                        {answer}
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          );
-        })}
-      </div>
+                    <ChevronDown
+                      className={`h-5 w-5 transition-transform duration-500 ${isOpen ? "rotate-180" : ""
+                        }`}
+                    />
+                  </div>
+                </button>
 
-      {/* Show More Button */}
-      {items.length > INITIAL_VISIBLE && (
-        <div className="mt-10 text-center">
-          <button
-            onClick={() => setShowAll(!showAll)}
-            className="rounded-full bg-[#FC763A] px-8 py-3 text-white font-semibold shadow-lg  transition"
-          >
-            {showAll ? "Show Less" : "Show More FAQs"}
-          </button>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{
+                        duration: 0.4,
+                        ease: [0.04, 0.62, 0.23, 0.98],
+                      }}
+                    >
+                      <div className="px-6 pb-6">
+                        <div className="mb-4 h-px w-full bg-orange-100" />
+                        <p className="text-gray-600 leading-relaxed italic">
+                          {answer}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
-      )}
-    </section>
+
+        {/* Show More Button */}
+        {items.length > INITIAL_VISIBLE && (
+          <div className="mt-10 text-center">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="rounded-full bg-[#FC763A] px-8 py-3 text-white font-semibold shadow-lg  transition"
+            >
+              {showAll ? "Show Less" : "Show More FAQs"}
+            </button>
+          </div>
+        )}
+      </section>
+    </>
   );
 }

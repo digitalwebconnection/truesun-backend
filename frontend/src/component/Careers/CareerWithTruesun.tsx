@@ -119,6 +119,43 @@ const openings = [
       "Own vehicle preferred"
     ],
   },
+  {
+  title: "Admin & Executive Assistant (EA)",
+  location: "Mumbai (On-site)",
+  type: "Full-time",
+  experience: "1–3 years",
+
+  summary:
+    "Responsible for managing day-to-day administrative operations, supporting leadership with scheduling and coordination, maintaining records, and ensuring smooth communication across teams and external stakeholders.",
+
+  points: [
+    "Manage calendars across Microsoft Teams, Outlook, and Google Calendar",
+    "Track and monitor expenses, including petty cash management",
+    "Oversee office supplies and ensure smooth office operations",
+    "Support client outreach through calls and follow-ups",
+    "Maintain and update attendance records",
+    "Update and manage CRM data regularly",
+    "Coordinate with external agencies and vendors",
+    "Handle documentation and maintain organized records",
+    "Assist in team scheduling, planning, and reporting",
+    "Maintain employee performance and activity reports",
+    "Coordinate between Sales and Operations teams",
+    "Manage onboarding documentation and joining formalities",
+    "Respond to emails and handle communication efficiently"
+  ],
+
+  skills: [
+    "1–3 years experience in administrative or EA role",
+    "Strong organizational and multitasking skills",
+    "Proficiency in MS Office (Excel, Word, Outlook)",
+    "Experience with CRM tools is preferred",
+    "Good communication and coordination skills",
+    "Ability to handle confidential information",
+    "Strong attention to detail",
+    "Basic understanding of office operations",
+    "Proactive and problem-solving mindset"
+  ]
+}
 ];
 
 const steps = [

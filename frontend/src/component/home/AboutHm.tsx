@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import type React from "react";
 import {
@@ -25,8 +24,8 @@ export default function AboutTrueSunNew() {
             <div className="relative mx-auto max-w-7xl px-6 lg:px-0 space-y-16 lg:space-y-10">
                 {/* === SECTION 1: CENTERED HEADLINE & VALUE PROPOSITION === */}
                 <div className="mx-auto max-w-7xl text-center">
-                    <span className="inline-flex items-center gap-2 rounded-full bg-[#FC763A] px-8 py-2 text-sm font-semibold text-black ring-1 ring-amber-300">
-                        <Sun className="h-4 w-4 text-black" />
+                    <span className="inline-flex items-center gap-2 rounded-full bg-[#FC763A] px-8 py-2 text-sm font-semibold text-white ring-1 ring-amber-300">
+                        <Sun className="h-4 w-4 text-white" />
                         TrueSun Energy Solutions
                     </span>
 
@@ -181,7 +180,7 @@ export default function AboutTrueSunNew() {
                             "OPEX/RESCO Models",
                         ]}
                     />
-
+    
                     <PillarCard
                         image="https://synergysolar.in/wp-content/uploads/2026/01/Carbon-Credit-for-Solar-Farm-1080x400.webp"
                         Icon={DollarSign}
@@ -193,8 +192,6 @@ export default function AboutTrueSunNew() {
                             "Optimal Finance Structuring",
                         ]}
                     />
-
-
                 </div>
 
 
@@ -213,13 +210,13 @@ export default function AboutTrueSunNew() {
                         <p className="text-gray-600 text-lg mb-6 leading-relaxed">
                             Every rooftop has a unique energy story. At TrueSun, we combine engineering precision with ground-level execution to turn your roof into a strategic asset.
                         </p>
-                       <div className="flex gap-4 items-center">
-  <Link to="/projects">
-    <button className="bg-gray-900 text-white px-10 py-3 rounded-full font-medium hover:bg-[#fc763a] transition-all">
-      View All Projects
-    </button>
-  </Link>
-</div>
+                        <div className="flex gap-4 items-center">
+                            <Link to="/projects">
+                                <button className="bg-gray-900 text-white px-10 py-3 rounded-full font-medium hover:bg-[#fc763a] transition-all">
+                                    View All Projects
+                                </button>
+                            </Link>
+                        </div>
                     </div>
 
                     {/* Right Column: Story-Based Impact Cards */}

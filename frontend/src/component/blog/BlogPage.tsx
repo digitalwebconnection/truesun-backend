@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Clock, Loader2, AlertCircle } from "lucide-react";
 import { apiUrl } from "../../lib/api";
 
+
 interface Blog {
   _id: string;
   title: string;
@@ -57,6 +58,8 @@ const BlogPage = () => {
   }
 
   return (
+    <>
+    
     <div className="max-w-7xl mx-auto px-4 py-10">
       <h1 className="text-5xl text-center font-bold mb-8 text-[#FC763A]"> Blogs</h1>
 
@@ -78,7 +81,7 @@ const BlogPage = () => {
                   />
                 </div>
 
-                <div className="p-6 flex flex-col flex-grow">
+                <div className="p-6 flex flex-col grow">
                   <div className="flex justify-between items-center mb-4">
                     <span className="bg-slate-100 text-slate-800 font-semibold px-3 py-1 rounded-full text-[13px]">
                       {post.categories}
@@ -103,6 +106,7 @@ const BlogPage = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

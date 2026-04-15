@@ -1,6 +1,6 @@
 const SolarFinanceHero = () => {
     return (
-        <section className="relative h-[620px] flex items-center">
+        <section className="relative h-150 flex items-center">
 
             {/* Background Image */}
             <img

@@ -9,13 +9,13 @@ const ServicesHero: React.FC = () => {
   const [openLeadPopup, setOpenLeadPopup] = useState(false);
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative h-150 overflow-hidden">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('https://goldisolar.com/wp-content/uploads/2022/07/money-1200x675.jpg')",
+            "url('https://mlgqoqszabs9.i.optimole.com/w:1243/h:500/q:mauto/f:best/https://www.loofal.com/wp-content/uploads/2020/04/loofal-solar-work-solar-services.jpg')",
         }}
       />
 
@@ -23,7 +23,7 @@ const ServicesHero: React.FC = () => {
       <div className="absolute inset-0 bg-black/70" />
 
       {/* Content */}
-      <div className="relative mx-auto flex max-w-7xl flex-col-reverse items-center gap-12 px-6 py-20  md:flex-row md:pt-22">
+      <div className="relative mx-auto flex max-w-7xl flex-col-reverse text-center  gap-12 px-6 py-22 justify-center items-center  md:flex-row md:pt-32">
 
         {/* LEFT CONTENT */}
         <div className="w-full max-w-2xl text-white space-y-6 text-center md:text-left">

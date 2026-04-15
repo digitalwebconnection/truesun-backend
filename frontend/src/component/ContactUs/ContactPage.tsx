@@ -69,6 +69,7 @@ function ContactForm(): JSX.Element {
           <input
             name="name"
             type="text"
+
             placeholder="Your name"
             required
             className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-[#FC763A] focus:ring-2 focus:ring-[#FC763A]  focus:outline-none transition"
@@ -93,6 +94,7 @@ function ContactForm(): JSX.Element {
           <label className="text-xs font-medium text-slate-700">Email</label>
           <input
             name="email"
+
             type="email"
             placeholder="you@example.com"
             required
@@ -106,6 +108,7 @@ function ContactForm(): JSX.Element {
           </label>
           <input
             name="phone"
+            required
             type="tel"
             placeholder="+91......"
             className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-[#FC763A] focus:ring-2 focus:ring-[#FC763A] focus:outline-none transition"
@@ -119,6 +122,7 @@ function ContactForm(): JSX.Element {
         </label>
         <select
           name="requirementType"
+          required
           className="w-full rounded-lg border border-slate-600/50 px-3 py-2 text-sm focus:border-[#FC763A] focus:ring-2 focus:ring-[#FC763A] focus:outline-none transition"
         >
           <option>Rooftop – Residential</option>
@@ -134,6 +138,7 @@ function ContactForm(): JSX.Element {
         <label className="text-xs font-medium text-slate-700">City / Location</label>
         <input
           name="city"
+          required
           type="text"
           placeholder="City, State"
           className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-[#FC763A] focus:ring-2 focus:ring-[#FC763A] focus:outline-none transition"

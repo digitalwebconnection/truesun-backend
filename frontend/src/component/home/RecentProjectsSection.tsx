@@ -1,28 +1,84 @@
 import LeadPopup from "../../component/LeadPopup";
-import { useState, useEffect } from "react";
-import { apiUrl } from "../../lib/api";
+import {  useState } from "react";
+
+import bloom from "../../assets/Bloom Packaging/2.jpg"
+import rentokil from "../../assets/PCI Rentokill/2.jpg";
+import rustomjee from "../../assets/Rustomjee virar/5.png";
+import oberoi from "../../assets/Oberoi Realty/3.png";
+import landmark from "../../assets/Landmrk Pllatinum/5.jpeg";
+import kalpataru from "../../assets/Kalpataru Estate CHS Limited/6.jpeg";
+import ganesh from "../../assets/Ganesh kung/4.png";
+import sharad from "../../assets/Sharad Apt/3.jpeg";
+import bungalow from "../../assets/Andheri Bungalow/1.png";
+
+const projects = [
+  {
+    id: 1,
+    title: "Bloom Packaging Solar Plant",
+    type: "Industrial · 60 kW",
+    location: "Daman, India",
+    image: bloom, // use image from old website
+  },
+  {
+    id: 2,
+    title: "Rentokil PCI Rooftop Solar",
+    type: "Commercial & Industrial · 48 kW",
+    location: "Goregaon West, Mumbai",
+    image: rentokil,
+  },
+  {
+    id: 3,
+    title: "Rustomjee Global City Solar Installation",
+    type: "Residential · 40 kW",
+    location: "Virar, Mumbai",
+    image: rustomjee,
+  },
+  {
+    id: 4,
+    title: "Oberoi Realty Rooftop Solar",
+    type: "Highrise Residential · 75 kW",
+    location: "Bhandup West, Mumbai",
+    image: oberoi,
+  },
+  {
+    id: 5,
+    title: "Landmark Platina Solar Project",
+    type: "Commercial · 30 kW",
+    location: "Bandra East, Mumbai",
+    image: landmark,
+  },
+  {
+    id: 6,
+    title: "Kalpataru Society Solar Plant",
+    type: "Residential Society · 115 kW",
+    location: "Andheri, Mumbai",
+    image: kalpataru,
+  },
+  {
+    id: 7,
+    title: "Ganesh Kunj Rooftop Solar",
+    type: "Residential · 15 kW",
+    location: "Andheri East, Mumbai",
+    image: ganesh,
+  },
+  {
+    id: 8,
+    title: "Sharad Apartment Solar System",
+    type: "Residential · 12 kW",
+    location: "Goregaon West, Mumbai",
+    image: sharad,
+  },
+  {
+    id: 9,
+    title: "Villa & Bungalow Solar System",
+    type: "Residential Bungalow · 15 kW",
+    location: "Andheri, Mumbai",
+    image: bungalow,
+  },
+];
 
 export default function RecentProjectsSection() {
-  const [projects, setProjects] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [openLeadPopup, setOpenLeadPopup] = useState(false);
-
-  useEffect(() => {
-    fetch(apiUrl("/api/projects"))
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          // Limit to first 9 projects for the home page section
-          setProjects(data.data.slice(0, 9));
-        }
-      })
-      .catch((err) => console.error("Error fetching projects:", err))
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) return null; // Or a skeleton loader
-  if (projects.length === 0) return null; // Hide section if no projects
-
+    const [openLeadPopup, setOpenLeadPopup] = useState(false);
   return (
     <section className="relative py-16 lg:py-20 bg-linear-to-b from-white via-[#FFF8F0] to-white">
       {/* soft background glow */}
@@ -49,28 +105,28 @@ export default function RecentProjectsSection() {
         <div className="grid gap-5 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project) => (
             <article
-              key={project._id}
+              key={project.id}
               className="group relative overflow-hidden rounded-3xl bg-white border border-[#FC763A] shadow-[0_18px_45px_rgba(15,23,42,0.06)] transition hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(15,23,42,0.12)]"
             >
               {/* image */}
               <div className="relative h-48 sm:h-52 overflow-hidden">
                 <img
                   src={project.image}
-                  alt={project.name}
+                  alt={project.title}
                   className="h-full w-full object-cover transition duration-500 group-hover:scale-105 group-hover:brightness-110"
                   loading="lazy"
                 />
                 {/* category badge */}
                 <div className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-black/55 px-3 py-1 text-[11px] font-medium text-white backdrop-blur">
                   <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#FC763A]" />
-                  <span>{project.segment} · {project.capacity}</span>
+                  <span>{project.type}</span>
                 </div>
               </div>
 
               {/* content */}
               <div className="p-4 sm:p-5">
                 <h3 className="text-sm sm:text-base font-semibold text-slate-900 line-clamp-2">
-                  {project.name}
+                  {project.title}
                 </h3>
                 <p className="mt-2 text-xs sm:text-sm text-slate-500 flex items-center gap-1.5">
                   <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#FC763A] " />
