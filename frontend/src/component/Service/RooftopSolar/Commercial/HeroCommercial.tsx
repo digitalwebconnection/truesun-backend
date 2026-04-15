@@ -16,7 +16,7 @@ const EASE_IN_OUT: [number, number, number, number] = [0.4, 0, 0.2, 1];
 export default function CommercialSolarHero() {
   return (
     <section
-      className="relative overflow-hidden"
+      className="relative h-150 overflow-hidden"
       style={{
         backgroundImage: `url('https://sunifysolar.in/uploads/media/686655279d5ef.webp')`,
         backgroundSize: "cover",

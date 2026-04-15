@@ -31,7 +31,7 @@ export default function IndustrialHeroStatic({
   const heroFade = useTransform(scrollYProgress, [0, 0.2], [1, 0.3]);
 
   return (
-    <section className="relative py-2 w-full overflow-hidden">
+    <section className="relative py-2 h-150 w-full overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <div

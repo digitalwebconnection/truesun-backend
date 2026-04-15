@@ -1,8 +1,22 @@
-
+import { Helmet } from "react-helmet";
 
 const PrivacyPolicy = () => {
   return (
+    <>
+    <Helmet>
+        <title>Privacy Policy | TrueSun Energy Solar Services</title>
+
+        <meta
+          name="description"
+          content="Read our privacy policy to understand how we collect, use, and protect your data while providing solar panel installation and energy services."
+        />
+
+        <meta name="keywords" content="Privacy Policy" />
+
+        <link rel="canonical" href="https://yourdomain.com/PrivacyPolicy" />
+      </Helmet>   
     <div className="bg-white">
+      
       {/* HERO */}
       <div className="bg-linear-to-r from-[#FC763A] to-[#FFB347] pt-26 pb-10 px-4 text-center text-white">
         <h1 className="text-3xl md:text-4xl font-bold">
@@ -110,6 +124,7 @@ const PrivacyPolicy = () => {
 
       </div>
     </div>
+    </>
   )
 }
 

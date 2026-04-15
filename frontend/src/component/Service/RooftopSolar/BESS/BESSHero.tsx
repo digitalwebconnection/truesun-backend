@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function BESSHero() {
         const [openLeadPopup, setOpenLeadPopup] = useState(false);
     return (
-        <section className="relative py-24 px-6 md:px-16  overflow-hidden">
+        <section className="relative py-24 px-6 md:px-16  h-150 overflow-hidden">
 
             {/* Background Image */}
             <div className="absolute inset-0">

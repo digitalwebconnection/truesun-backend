@@ -1,8 +1,6 @@
- 
-
 import React from "react";
 import { motion, type Variants, easeInOut } from "framer-motion";
-
+import nitumam  from "../../assets/team/NituMam.jpg"
 /* -------------------- Types -------------------- */
 type Leader = {
   name: string;
@@ -18,7 +16,7 @@ const LEADERS: Leader[] = [
   {
     name: "Nitu Goel",
     title: "Founder & CEO",
-    image: "https://truesun.in/wp-content/uploads/2022/02/2-1.png",
+    image: nitumam,
     bio: "15+ years in clean energy and climate finance, steering multi-MW programs and strategic partnerships that scale reliable solar outcomes.",
     tags: ["Climate Strategy", "Solar EPC", "Partnerships"],
     linkedin: "https://www.linkedin.com/",
@@ -38,6 +36,15 @@ const LEADERS: Leader[] = [
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabOgeMNrSqYJ4c2-kMg0I_QreIqbVVfgvWQ&s",
     bio: "Engineer with MBA in Power Management, optimizing performance ratios, open access, and O&M playbooks for long-term yield.",
+    tags: ["Performance PR", "Open Access", "O&M"],
+    linkedin: "https://www.linkedin.com/",
+  },
+   {
+    name: "MD Saif Ansari.",
+    title: "Site Engineer",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabOgeMNrSqYJ4c2-kMg0I_QreIqbVVfgvWQ&s",
+    bio: " He holds a Diploma in Electrical Engineering with 20+ years of experience in electrical and solar energy systems. He specializes in site inspections, electricity analysis, BOQ, design planning, and project execution. He ensures smooth coordination and delivers reliable, cost-effective solutions.",
     tags: ["Performance PR", "Open Access", "O&M"],
     linkedin: "https://www.linkedin.com/",
   },
@@ -218,7 +225,7 @@ export default function LeadershipSectionModern() {
           Meet the Visionaries
         </p>
         <h2 className="mt-2 text-4xl font-extrabold tracking-tight text-[#686868] sm:text-5xl">
-          Leadership Team
+         Meet Our Team Membes
         </h2>
         <p className="mt-4 text-lg text-neutral-600">
           A seasoned group shaping renewable energy with financial rigor, technical depth,
@@ -232,7 +239,7 @@ export default function LeadershipSectionModern() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.2 }}
-        className="mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-8 px-6 sm:grid-cols-2 lg:grid-cols-3"
+        className="mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-8 px-6 sm:grid-cols-2 lg:grid-cols-4"
       >
         {LEADERS.map((m) => (
           <motion.article

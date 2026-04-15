@@ -13,7 +13,7 @@ interface BenefitItemProps {
 
 const TruesunSolarFinanceHero: React.FC = () => {
   return (
-    <section className="relative overflow-hidden bg-slate-900 text-slate-50">
+    <section className="relative h-150 overflow-hidden bg-slate-900 text-slate-50">
       {/* Background image */}
       <div className="pointer-events-none absolute inset-0">
         <div

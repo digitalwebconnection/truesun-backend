@@ -3,6 +3,7 @@ import { Zap, MapPin, Ruler, CreditCard, Users, ArrowRight, CheckCircle2, Trendi
 import { motion, AnimatePresence } from "framer-motion";
 
 /* ========= CONFIG & CONSTANTS ========= */
+
 const WEB3FORMS_ACCESS_KEY = "379a21a3-04ba-4421-80fd-31fe44886bf5";
 const PRICE_PER_UNIT = 10;
 const ONE_KW_SOLAR_AREA = 70;
@@ -101,7 +102,7 @@ export default function SolarCalculator() {
         <div className="grid lg:grid-cols-12 gap-8 items-start">
 
           {/* INPUT SECTION */}
-          <div className="lg:col-span-5 bg-white p-8  shadow-xl shadow-slate-800/60 border border-slate-100">
+          <div className="lg:col-span-5 bg-white p-8  shadow-xl shadow-slate-800/60 hover:shadow-2xl border border-slate-100">
             <h2 className="text-xl font-bold mb-2 flex items-center  gap-2">
               <TrendingUp className="w-5 h-5 text-[#FC763A]" /> Configuration
             </h2>
@@ -113,6 +114,7 @@ export default function SolarCalculator() {
                   <MapPin className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
                   <input
                     placeholder="e.g. 110001"
+                    required
                     value={pincode}
                     onChange={(e) => setPincode(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FC763A] focus:border-transparent outline-none transition-all"
@@ -126,6 +128,7 @@ export default function SolarCalculator() {
                   <Ruler className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
                   <input
                     type="number"
+                    required
                     value={rooftopArea}
                     onChange={(e) => setRooftopArea(Number(e.target.value))}
                     className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FC763A] outline-none transition-all"
@@ -138,7 +141,8 @@ export default function SolarCalculator() {
                 <div className="relative">
                   <CreditCard className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
                   <input
-                    type="number"
+                    type=""
+                    required
                     value={monthlyBill}
                     onChange={(e) => setMonthlyBill(Number(e.target.value))}
                     className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FC763A] outline-none transition-all"
@@ -152,6 +156,7 @@ export default function SolarCalculator() {
                   <Users className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
                   <select
                     value={category}
+                    required
                     onChange={(e) => setCategory(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl appearance-none focus:ring-2 focus:ring-[#FC763A] outline-none transition-all"
                   >
