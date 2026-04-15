@@ -4,7 +4,7 @@ import { Sun, Eye, EyeOff, Lock, User } from 'lucide-react';
 
 /* ── Hardcoded credentials ─────────────────────────────────── */
 const ADMIN_USERNAME = 'truesun_admin';
-const ADMIN_PASSWORD = 'TrueSun@2025';
+const ADMIN_PASSWORD = 'Truesun@2025';
 
 /* ── Styles ────────────────────────────────────────────────── */
 const S: Record<string, React.CSSProperties> = {

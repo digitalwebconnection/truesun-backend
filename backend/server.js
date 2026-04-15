@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 // Allow the Vercel frontend + local dev; add any extra origins to the array
 const allowedOrigins = [
   process.env.FRONTEND_URL   || 'http://localhost:5173',
-  process.env.FRONTEND_URL_2 || 'https://truesun-frontend.vercel.app',   // optional second origin (e.g. custom domain)
+  process.env.FRONTEND_URL_2 || 'https://truesun.vercel.app',   // optional second origin (e.g. custom domain)
 ].filter(Boolean);
 
 app.use(cors({
