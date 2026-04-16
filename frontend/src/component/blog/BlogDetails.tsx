@@ -6,6 +6,7 @@ import { apiUrl } from "../../lib/api";
 
 interface Blog {
   _id: string;
+  slug: string;
   title: string;
   excerpt: string;
   categories: string;
@@ -16,7 +17,7 @@ interface Blog {
 }
 
 const BlogDetails = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [blog, setBlog] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -25,7 +26,14 @@ const BlogDetails = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await fetch(apiUrl(`/api/blogs/${id}`));
+        // If the URL param looks like a MongoDB ObjectId (24-char hex), use the /:id endpoint.
+        // Otherwise use the slug endpoint for clean URLs.
+        const isObjectId = /^[a-f\d]{24}$/i.test(slug || '');
+        const endpoint = isObjectId
+          ? apiUrl(`/api/blogs/${slug}`)
+          : apiUrl(`/api/blogs/slug/${slug}`);
+
+        const res = await fetch(endpoint);
         const data = await res.json();
         if (data.success) {
           setBlog(data.data);
@@ -39,7 +47,7 @@ const BlogDetails = () => {
       }
     };
     fetchBlog();
-  }, [id]);
+  }, [slug]);
 
   if (loading) {
     return (
@@ -85,11 +93,13 @@ const BlogDetails = () => {
 
       <h1 className="text-4xl md:text-5xl font-bold mt-2 text-slate-900 leading-tight">{blog.title}</h1>
 
-      <img
-        src={blog.image}
-        alt={blog.title}
-        className="mt-8 w-full md:h-[500px] object-cover rounded-2xl shadow-lg"
-      />
+      {blog.image && (
+        <img
+          src={blog.image}
+          alt={blog.title}
+          className="mt-8 w-full md:h-[500px] object-cover rounded-2xl shadow-lg"
+        />
+      )}
 
       <div className="mt-12 whitespace-pre-line text-gray-800 text-lg md:text-xl leading-relaxed text-justify">
         {blog.content}

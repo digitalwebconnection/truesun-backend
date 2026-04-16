@@ -5,6 +5,38 @@ const { cloudinary }       = require('../config/cloudinary');
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 /**
+ * Convert a blog title to a URL-friendly slug.
+ * e.g. "My Blog Post! #1" → "my-blog-post-1"
+ */
+function slugify(text) {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')   // remove non-word chars except hyphens
+    .replace(/[\s_]+/g, '-')    // spaces/underscores → hyphens
+    .replace(/-+/g, '-');        // collapse consecutive hyphens
+}
+
+/**
+ * Generate a unique slug for a blog post.
+ * Appends a counter suffix if the slug already exists.
+ */
+async function generateUniqueSlug(title, excludeId = null) {
+  const base = slugify(title);
+  let slug = base;
+  let counter = 1;
+  while (true) {
+    const query = { slug };
+    if (excludeId) query._id = { $ne: excludeId };
+    const existing = await Blog.findOne(query);
+    if (!existing) break;
+    slug = `${base}-${counter++}`;
+  }
+  return slug;
+}
+
+/**
  * Extract Cloudinary public_id from a secure URL so we can delete the old file.
  * e.g. https://res.cloudinary.com/<cloud>/image/upload/v123/truesun/images/abc.jpg
  *      → "truesun/images/abc"
@@ -142,7 +174,18 @@ const getAllBlogs = async (_req, res) => {
   }
 };
 
-/** GET /api/blogs/:id — single blog */
+/** GET /api/blogs/slug/:slug — single blog by slug */
+const getBlogBySlug = async (req, res) => {
+  try {
+    const blog = await Blog.findOne({ slug: req.params.slug });
+    if (!blog) return res.status(404).json({ success: false, message: 'Blog not found' });
+    res.json({ success: true, data: blog });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+/** GET /api/blogs/:id — single blog by MongoDB id (kept for admin use) */
 const getBlogById = async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);
@@ -159,8 +202,12 @@ const createBlog = async (req, res) => {
     const { body } = req;
     const imageUrl = req.cloudinaryFile ? req.cloudinaryFile.secure_url : (body.image || '');
 
+    const title = body.title || '';
+    const slug  = await generateUniqueSlug(title);
+
     const data = {
-      title:      body.title      || '',
+      title,
+      slug,
       excerpt:    body.excerpt    || '',
       categories: body.categories || '',
       readTime:   body.readTime   || '',
@@ -194,6 +241,11 @@ const updateBlog = async (req, res) => {
     const scalars = ['title', 'excerpt', 'categories', 'readTime', 'date', 'content'];
     scalars.forEach(f => { if (body[f] !== undefined) blog[f] = body[f]; });
 
+    // Regenerate slug if title changed
+    if (body.title !== undefined) {
+      blog.slug = await generateUniqueSlug(body.title, blog._id);
+    }
+
     await blog.save();
     res.json({ success: true, data: blog });
   } catch (err) {
@@ -225,6 +277,7 @@ module.exports = {
   deleteProject,
   // Blogs
   getAllBlogs,
+  getBlogBySlug,
   getBlogById,
   createBlog,
   updateBlog,
