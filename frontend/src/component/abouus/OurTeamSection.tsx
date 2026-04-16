@@ -1,6 +1,8 @@
 import React from "react";
 import { motion, type Variants, easeInOut } from "framer-motion";
 import nitumam  from "../../assets/team/NituMam.jpg"
+import Saif  from "../../assets/team/Saif.jpeg";
+import rc from "../../assets/team/rc.jpeg"
 /* -------------------- Types -------------------- */
 type Leader = {
   name: string;
@@ -24,8 +26,7 @@ const LEADERS: Leader[] = [
   {
     name: "R.C. Goyal",
     title: "Head of Project Finance",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabOgeMNrSqYJ4c2-kMg0I_QreIqbVVfgvWQ&s",
+    image: rc,
     bio: "Chartered Accountant leading bankable structures, SPVs, and risk frameworks to accelerate distributed solar portfolios across India.",
     tags: ["Project Finance", "Risk & Compliance", "SPV Structuring"],
     linkedin: "https://www.linkedin.com/",
@@ -42,8 +43,7 @@ const LEADERS: Leader[] = [
    {
     name: "MD Saif Ansari.",
     title: "Site Engineer",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabOgeMNrSqYJ4c2-kMg0I_QreIqbVVfgvWQ&s",
+    image: Saif,
     bio: " He holds a Diploma in Electrical Engineering with 20+ years of experience in electrical and solar energy systems. He specializes in site inspections, electricity analysis, BOQ, design planning, and project execution. He ensures smooth coordination and delivers reliable, cost-effective solutions.",
     tags: ["Performance PR", "Open Access", "O&M"],
     linkedin: "https://www.linkedin.com/",
