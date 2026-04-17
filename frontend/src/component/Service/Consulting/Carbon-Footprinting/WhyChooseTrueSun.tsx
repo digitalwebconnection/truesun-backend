@@ -64,11 +64,10 @@ const WhyChooseTrueSun = () => {
               <div className={`absolute inset-0 bg-linear-to-br ${reason.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10`} />
 
               <div className="flex flex-col h-full">
-                <div className="mb-8 flex justify-between items-start">
+                <div className="mb-8 flex items-start">
                   <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center text-[#FC763A] group-hover:bg-white group-hover:shadow-xl transition-all duration-500">
                     {reason.icon}
                   </div>
-                  <ArrowUpRight className="text-slate-200 group-hover:text-[#FC763A] transition-colors" size={28} />
                 </div>
 
                 <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:translate-x-1 transition-transform">

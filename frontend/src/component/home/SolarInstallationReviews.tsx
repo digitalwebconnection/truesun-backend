@@ -25,7 +25,7 @@ export default function ModernReviewSection() {
       location: "Daman",
       rating: 5,
       comment:
-          "The team at TrueSun has been very supportive and have installed the system very neatly, following all safety measures like walkways, lifeline, etc. We are satisfied with their work and recommend them.",
+        "The team at TrueSun has been very supportive and have installed the system very neatly, following all safety measures like walkways, lifeline, etc. We are satisfied with their work and recommend them.",
       video: tv1,
       logo: bloomLogo,
     },
@@ -34,7 +34,7 @@ export default function ModernReviewSection() {
       location: "Mumbai",
       rating: 5,
       comment:
- "We found TrueSun to be a company which is the right fit for us. For us quality comes first and TrueSun met all our expectations. They installed this plant on a high rise building while following all safety protocols.",
+        "We found TrueSun to be a company which is the right fit for us. For us quality comes first and TrueSun met all our expectations. They installed this plant on a high rise building while following all safety protocols.",
       video: tv2,
       logo: oberoiLogo,
     },
@@ -43,7 +43,7 @@ export default function ModernReviewSection() {
       location: "Mumbai",
       rating: 5,
       comment:
-        "We appreciate the way TrueSun explained every aspect in detail right from designing to addressing Managing committee concerns. With TrueSun's proper guidance we now have a 115 KW solar plant.",  
+        "We appreciate the way TrueSun explained every aspect in detail right from designing to addressing Managing committee concerns. With TrueSun's proper guidance we now have a 115 KW solar plant.",
       video: tv1,
       logo: kalpataruLogo,
     },
@@ -54,7 +54,7 @@ export default function ModernReviewSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % reviews.length);
-    }, 6000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, []);
@@ -86,8 +86,9 @@ export default function ModernReviewSection() {
               src={review.video}
               className="w-full h-[450px] object-cover"
               autoPlay
-              muted
               loop
+              controls
+              muted
               playsInline
 
             />
@@ -110,9 +111,8 @@ export default function ModernReviewSection() {
               {[...Array(5)].map((_, i) => (
                 <span
                   key={i}
-                  className={`text-2xl ${
-                    i < review.rating ? "text-yellow-500" : "text-gray-300"
-                  }`}
+                  className={`text-2xl ${i < review.rating ? "text-yellow-500" : "text-gray-300"
+                    }`}
                 >
                   ★
                 </span>
@@ -145,9 +145,8 @@ export default function ModernReviewSection() {
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`h-3 w-3 rounded-full ${
-                i === current ? "bg-[#FC763A]" : "bg-gray-300"
-              }`}
+              className={`h-3 w-3 rounded-full ${i === current ? "bg-[#FC763A]" : "bg-gray-300"
+                }`}
             />
           ))}
         </div>

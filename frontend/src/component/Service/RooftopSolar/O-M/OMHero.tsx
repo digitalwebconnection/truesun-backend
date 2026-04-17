@@ -26,8 +26,8 @@ export default function SolarHero() {
             OPERATION & MAINTENANCE
           </h4>
 
-          <h1 className="text-3xl md:text-5xl max-w-4xl  font-bold leading-tight mb-6">
-            Maximise the Performance & Lifespan of Your Rooftop Solar
+          <h1 className="text-3xl md:text-5xl max-w-4xl font-bold leading-tight mb-6">
+            Maximise the Performance & Lifespan <span className="text-[#FC763A]">of Your Rooftop Solar</span>
           </h1>
 
           <p className="text-gray-200 text-lg mb-8">

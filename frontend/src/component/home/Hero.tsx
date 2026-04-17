@@ -70,9 +70,9 @@ export default function HeroSection() {
 
           <div className="my-8 flex flex-wrap items-center gap-4">
 
-            <p className="text-xs sm:text-sm text-slate-500">
+            {/* <p className="text-xs sm:text-sm text-slate-500">
               Takes less than 60 seconds. No obligation.
-            </p>
+            </p> */}
           </div>
 
         </div>
@@ -119,7 +119,7 @@ export default function HeroSection() {
           />
 
           {/* Floating savings badge */}
-          <div className="absolute bottom-6 left-6 max-w-xs rounded-2xl bg-white/85 px-4 py-3 shadow-xl backdrop-blur-sm">
+          <div className="absolute bottom-6 left-6 max-w-md rounded-2xl bg-white/85 px-4 py-3 shadow-xl backdrop-blur-sm">
             <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[#FC763A] mb-2">
               Savings & Sustainability
             </p>

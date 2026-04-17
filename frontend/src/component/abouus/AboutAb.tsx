@@ -106,7 +106,7 @@ function HeroSplit() {
           Trusted Solar Partner for Homes & Businesses
         </div>
 
-        <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-[#686868] sm:text-5xl">
+        <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-black sm:text-5xl">
           About{" "}
           <span className="text-[#fc763a]">
             TrueSun
@@ -391,7 +391,7 @@ function ZigZagWhyUs() {
     <div className="relative bg-white py-10">
       <div className="mx-auto max-w-7xl px-6 lg:px-0">
         <motion.div {...fadeUpProps} className="mx-auto mb-10 max-w-3xl text-center">
-          <h2 className="text-3xl text-[#686868] font-bold md:text-5xl">
+          <h2 className="text-3xl text-black font-bold md:text-5xl">
             Why industry leaders <span className="text-[#fc763a]">trust us</span>
           </h2>
           <p className="mt-4 text-[#686868]">
@@ -514,7 +514,7 @@ function CurvedSteps() {
           {...fadeUpProps}
           className="mx-auto mb-12 max-w-4xl text-center"
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-[#686868]">
+          <h2 className="text-3xl md:text-5xl font-bold text-black">
             Our Hassle-Free <span className="text-[#fc763a]"> Process </span>
           </h2>
           <p className="mt-3 text-gray-700">

@@ -108,7 +108,7 @@ export default function AboutTrueSunNew() {
 
                                 <MiniStat
                                     label="Government Subsidy"
-                                    value="Up to ₹78,000"
+                                    value="Up to ₹18,000/- per KW"
                                     subtitle="PM Surya Ghar Yojana"
                                 />
 
@@ -150,7 +150,7 @@ export default function AboutTrueSunNew() {
                         image="https://sahajsolar.com/wp-content/uploads/2025/08/roof-topp-1.jpg"
                         Icon={Factory}
                         title="End-to-End Rooftop EPC"
-                        desc="A complete rooftop solar EPC solution delivering reliable, site-specific installations built to last."
+                        desc="A complete rooftop solar EPC(Engineering, Procurement, and Construction) solution delivering reliable, site-specific installations built to last."
                         features={[
                             "Industrial & Commercial Rooftops",
                             "Residential & Societies",
@@ -161,7 +161,7 @@ export default function AboutTrueSunNew() {
                     <PillarCard
                         image="https://news-images.dhan.co/waaree-renewable-technologies-secures-704-mwac-solar-project-worth-10-40-billion.jpg"
                         Icon={Handshake}
-                        title="O&M"
+                        title="O&M (Operations and Maintenance)"
                         desc="Strategic solar consultancy, Industrial solar project consulting, Solar project consultancy"
                         features={[
                             "Project Management Consulting",
@@ -172,7 +172,7 @@ export default function AboutTrueSunNew() {
                     <PillarCard
                         image="https://img-cdn.publive.online/fit-in/640x430/filters:format(webp)/saur-energy/media/post_attachments/2024/02/financing-for-solar.jpg"
                         Icon={Wallet}
-                        title="Solar Finance"
+                        title="Financing of the Solar"
                         desc="Tie ups with leading Financial Institutions to provide seamless financing options for your solar rooftop projets"
                         features={[
                             "Low or Zero upfront cost",
@@ -337,7 +337,7 @@ export function PillarCard({
                         {title}
                     </h4>
 
-                    <p className="text-sm text-gray-600 mb-4">{desc}</p>
+                    <p className="text-sm text-gray-600 mb-4 text-justify">{desc}</p>
 
                     <ul className="text-sm text-gray-700 space-y-1">
                         {features.map((f, i) => (

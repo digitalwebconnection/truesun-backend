@@ -61,7 +61,7 @@ export default function AppSimple() {
         </div>
 
         {/* --- Project Tags Area (Left aligned) --- */}
-        <div className="max-w-3xl mt-8">
+        {/* <div className="max-w-3xl mt-8">
           <h3 className="text-lg font-semibold text-gray-100 mb-4 drop-shadow">Filter by Segment:</h3>
           <div className="flex flex-wrap gap-3">
             {tags.map((tag) => (
@@ -75,7 +75,7 @@ export default function AppSimple() {
               </button>
             ))}
           </div>
-        </div>
+        </div> */}
         
       </div>
       {/* Popup Mount */}

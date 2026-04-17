@@ -6,6 +6,10 @@ import {
   CreditCard,
   CircleDollarSign,
   Handshake,
+  CheckCircle2,
+  HelpCircle,
+  PhoneCall,
+  ArrowRight
 } from "lucide-react";
 import LeadPopup from "../../component/LeadPopup";
 
@@ -102,8 +106,8 @@ function EmiCalculatorMini({
   onBook: () => void;
 }) {
   // Inputs: monthlyBill & tariff (basic approach)
-  const [monthlyBill, setMonthlyBill] = useState<number>(4000);
-  const [tariff, setTariff] = useState<number>(10);
+  const [monthlyBill, setMonthlyBill] = useState<number | "">(1000);
+  const [tariff, setTariff] = useState<number | "">(10);
   const [tenure, setTenure] = useState<number>(5);
   const [rate] = useState<number>(12); // APR
   const [applySubsidy, setApplySubsidy] = useState<boolean>(true);
@@ -114,7 +118,9 @@ function EmiCalculatorMini({
   const costPerKw = 55000;
 
   const estimated = useMemo(() => {
-    const monthlyKWh = tariff > 0 ? monthlyBill / tariff : 0;
+    const bill = Number(monthlyBill) || 0;
+    const tf = Number(tariff) || 0;
+    const monthlyKWh = tf > 0 ? bill / tf : 0;
     const targetKWh = monthlyKWh * 0.8;
     const kWhPerKwMonth = sunHours * 30 * PR;
     const recommendedKw = kWhPerKwMonth > 0 ? Math.max(0.3, Math.min(25, targetKWh / kWhPerKwMonth)) : 0;
@@ -123,7 +129,7 @@ function EmiCalculatorMini({
     const principal = Math.max(0, capex - subsidy);
     const emi = calcEmi(principal, rate, tenure);
     const monthlyGen = Math.round(recommendedKw * kWhPerKwMonth);
-    const monthlySavings = Math.round(monthlyGen * tariff);
+    const monthlySavings = Math.round(monthlyGen * tf);
     return { recommendedKw: Number(recommendedKw.toFixed(2)), capex, subsidy, principal, emi, monthlyGen, monthlySavings };
   }, [monthlyBill, tariff, tenure, rate, applySubsidy]);
 
@@ -143,7 +149,7 @@ function EmiCalculatorMini({
             className="w-full mt-1 rounded-md border px-3 py-2 text-sm"
             type="number"
             value={monthlyBill}
-            onChange={(e) => setMonthlyBill(Number(e.target.value || 0))}
+            onChange={(e) => setMonthlyBill(e.target.value === "" ? "" : Number(e.target.value))}
           />
         </label>
 
@@ -154,7 +160,7 @@ function EmiCalculatorMini({
             type="number"
             step="0.1"
             value={tariff}
-            onChange={(e) => setTariff(Number(e.target.value || 0))}
+            onChange={(e) => setTariff(e.target.value === "" ? "" : Number(e.target.value))}
           />
         </label>
 
@@ -326,89 +332,138 @@ export default function SolarFinancePage() {
 
       {/* COMPARISON */}
       <Section>
-        <div className="mt-10 overflow-x-auto rounded-lg border bg-white p-4 shadow-sm">
-          <div className="mb-4">
-            <h3 className="text-lg font-semibold text-slate-900">Which model suits you?</h3>
-            <div className="text-xs text-slate-500">Quick comparison to pick the right fit</div>
+        <div className="mt-16 overflow-hidden rounded-3xl border border-orange-100 bg-white shadow-lg">
+          <div className="border-b border-orange-100 bg-orange-50/50 px-8 py-6">
+            <h3 className="text-2xl font-bold text-[#FC763A]">Which model suits you?</h3>
+            <div className="mt-1 text-sm text-slate-600">Quick comparison to pick the right fit for your solar journey.</div>
           </div>
 
-          <table className="min-w-full table-auto text-sm">
-            <thead>
-              <tr className="text-left text-xs text-slate-500">
-                <th className="py-2 pr-6">Feature</th>
-                <th className="py-2 pr-6">EMI / Loan</th>
-                <th className="py-2 pr-6">Zero-Upfront (OPEX)</th>
-                <th className="py-2 pr-6">Subsidy + Loan</th>
-              </tr>
-            </thead>
-            <tbody className="text-slate-700">
-              <tr className="border-t">
-                <td className="py-3 pr-6">Upfront cost</td>
-                <td>Partial / No (loan)</td>
-                <td>Zero</td>
-                <td>Low (subsidy reduces principal)</td>
-              </tr>
-              <tr className="border-t">
-                <td className="py-3 pr-6">Ownership</td>
-                <td>Customer</td>
-                <td>Provider (PPA/lease)</td>
-                <td>Customer</td>
-              </tr>
-              <tr className="border-t">
-                <td className="py-3 pr-6">Balance sheet</td>
-                <td>On balance sheet</td>
-                <td>Off balance sheet</td>
-                <td>On balance sheet</td>
-              </tr>
-              <tr className="border-t">
-                <td className="py-3 pr-6">Best for</td>
-                <td>Homes & small businesses</td>
-                <td>Large commercial & industries</td>
-                <td>Residential users eligible for subsidy</td>
-              </tr>
-              <tr className="border-t">
-                <td className="py-3 pr-6">Typical tenor</td>
-                <td>1–7 years</td>
-                <td>5–10 years</td>
-                <td>1–5 years</td>
-              </tr>
-            </tbody>
-          </table>
+          <div className="overflow-x-auto p-8">
+            <table className="min-w-full table-auto text-sm">
+              <thead>
+                <tr className="text-left text-xs font-semibold uppercase tracking-wider text-slate-500 border-b border-slate-200">
+                  <th className="pb-4 pr-6 font-bold text-slate-900">Feature</th>
+                  <th className="pb-4 pr-6">EMI / Loan</th>
+                  <th className="pb-4 pr-6">Zero-Upfront (OPEX)</th>
+                  <th className="pb-4 pr-6 text-[#FC763A]">Subsidy + Loan</th>
+                </tr>
+              </thead>
+              <tbody className="text-slate-700">
+                <tr className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                  <td className="py-4 pr-6 font-medium text-slate-900">Upfront cost</td>
+                  <td className="py-4">Partial / No (loan)</td>
+                  <td className="py-4 font-semibold text-emerald-600">Zero</td>
+                  <td className="py-4 font-semibold text-[#FC763A]">Low <span className="text-xs font-normal text-slate-500 block">subsidy reduces principal</span></td>
+                </tr>
+                <tr className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                  <td className="py-4 pr-6 font-medium text-slate-900">Ownership</td>
+                  <td className="py-4">Customer</td>
+                  <td className="py-4">Provider <span className="text-xs block text-slate-500">(PPA/lease)</span></td>
+                  <td className="py-4">Customer</td>
+                </tr>
+                <tr className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                  <td className="py-4 pr-6 font-medium text-slate-900">Balance sheet</td>
+                  <td className="py-4">On balance sheet</td>
+                  <td className="py-4">Off balance sheet</td>
+                  <td className="py-4">On balance sheet</td>
+                </tr>
+                <tr className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                  <td className="py-4 pr-6 font-medium text-slate-900">Best for</td>
+                  <td className="py-4">Homes & small businesses</td>
+                  <td className="py-4">Large commercial & industries</td>
+                  <td className="py-4">Residential users eligible for subsidy</td>
+                </tr>
+                <tr className="hover:bg-slate-50 transition-colors">
+                  <td className="py-4 pr-6 font-medium text-slate-900">Typical tenor</td>
+                  <td className="py-4">1–7 years</td>
+                  <td className="py-4">5–10 years</td>
+                  <td className="py-4">1–5 years</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </Section>
 
       {/* PROCESS + FAQ + CTA */}
       <Section>
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          <div className="rounded-2xl border bg-white p-4 shadow-sm">
-            <h4 className="text-sm font-semibold text-slate-900">5-step process</h4>
-            <ol className="mt-3 space-y-2 text-sm text-slate-700">
-              <li>1. Share last 2–3 bills</li>
-              <li>2. We size the system & model</li>
-              <li>3. Choose EMI / OPEX / Subsidy mix</li>
-              <li>4. Faster loan approvals & install</li>
-              <li>5. Start saving — payments begin</li>
+        <div className="mt-16 grid gap-8 md:grid-cols-3">
+          {/* Process Card */}
+          <div className="rounded-3xl border border-orange-100 bg-white p-8 shadow-md hover:shadow-xl transition-shadow relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
+              <CheckCircle2 size={120} />
+            </div>
+            <div className="w-12 h-12 bg-orange-50 text-[#FC763A] rounded-xl flex items-center justify-center mb-6">
+              <CheckCircle2 size={24} />
+            </div>
+            <h4 className="text-xl font-bold text-slate-900">5-step process</h4>
+            <ol className="mt-6 space-y-4 text-sm text-slate-700 relative z-10">
+              <li className="flex gap-3 items-center"><span className="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-500">1</span> <span>Share last 2–3 bills</span></li>
+              <li className="flex gap-3 items-center"><span className="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-500">2</span> <span>We size the system & model</span></li>
+              <li className="flex gap-3 items-center"><span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#FC763A]/20 flex items-center justify-center font-bold text-[#FC763A]">3</span> <span className="font-semibold text-slate-900">Choose EMI / OPEX mix</span></li>
+              <li className="flex gap-3 items-center"><span className="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-500">4</span> <span>Faster loan approvals & install</span></li>
+              <li className="flex gap-3 items-center"><span className="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-500">5</span> <span>Start saving payments begin</span></li>
             </ol>
           </div>
 
-          <div className="rounded-2xl border bg-white p-4 shadow-sm">
-            <h4 className="text-sm font-semibold text-slate-900">FAQ</h4>
-            <details className="mt-3 space-y-2 text-sm text-slate-700">
-              <summary className="cursor-pointer font-medium">How long does loan approval take?</summary>
-              <div className="mt-2 text-sm text-slate-600">Typically 3–7 working days once documents are complete. We help with paperwork.</div>
+          {/* FAQ Card */}
+          <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-md hover:shadow-xl transition-shadow relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-opacity text-slate-500">
+              <HelpCircle size={120} />
+            </div>
+            <div className="w-12 h-12 bg-slate-100 text-slate-600 rounded-xl flex items-center justify-center mb-6">
+              <HelpCircle size={24} />
+            </div>
+            <h4 className="text-xl font-bold text-slate-900 mb-6">Quick Finance FAQ</h4>
+            <div className="space-y-4 relative z-10">
+              <details className="group/nav cursor-pointer">
+                <summary className="font-semibold text-slate-800 tracking-tight outline-none hover:text-[#FC763A] transition-colors flex justify-between items-center">
+                  How long does loan approval take?
+                  <span className="text-[#FC763A] group-open/nav:rotate-45 transition-transform">+</span>
+                </summary>
+                <div className="mt-3 text-sm text-slate-600 pl-4 border-l-2 border-[#FC763A]/30">Typically 3–7 working days once documents are complete. We help with paperwork.</div>
+              </details>
+              
+              <details className="group/nav cursor-pointer">
+                <summary className="font-semibold text-slate-800 tracking-tight outline-none hover:text-[#FC763A] transition-colors flex justify-between items-center">
+                  Can EMI be paid from savings?
+                  <span className="text-[#FC763A] group-open/nav:rotate-45 transition-transform">+</span>
+                </summary>
+                <div className="mt-3 text-sm text-slate-600 pl-4 border-l-2 border-[#FC763A]/30">Yes — most residential customers find EMI ≤ savings from reduced electricity bills.</div>
+              </details>
 
-              <summary className="cursor-pointer font-medium mt-3">Can EMI be paid from monthly savings?</summary>
-              <div className="mt-2 text-sm text-slate-600">Yes — most residential customers find EMI ≤ savings from reduced electricity bills.</div>
-
-              <summary className="cursor-pointer font-medium mt-3">Do you assist with subsidies?</summary>
-              <div className="mt-2 text-sm text-slate-600">We help with eligibility checks and claim filing for state / central schemes.</div>
-            </details>
+              <details className="group/nav cursor-pointer">
+                <summary className="font-semibold text-slate-800 tracking-tight outline-none hover:text-[#FC763A] transition-colors flex justify-between items-center">
+                  Do you assist with subsidies?
+                  <span className="text-[#FC763A] group-open/nav:rotate-45 transition-transform">+</span>
+                </summary>
+                <div className="mt-3 text-sm text-slate-600 pl-4 border-l-2 border-[#FC763A]/30">We help with eligibility checks and claim filing for state / central schemes.</div>
+              </details>
+            </div>
           </div>
 
-          <div className="rounded-2xl border bg-white p-4 shadow-sm">
-            <h4 className="text-sm font-semibold text-slate-900">Ready to start?</h4>
-            <p className="mt-2 text-sm text-slate-700">Share a few details and we’ll call you with a clear plan and numbers.</p>
+          {/* CTA Card */}
+          <div className="rounded-3xl bg-[linear-gradient(135deg,#FC763A,#e65c20)] p-8 shadow-xl text-white flex flex-col justify-between relative overflow-hidden group">
+            <div className="absolute -bottom-10 -right-10 opacity-20 group-hover:scale-110 transition-transform duration-500">
+              <PhoneCall size={180} />
+            </div>
+            
+            <div className="relative z-10">
+              <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center mb-6 shadow-inner">
+                <PhoneCall size={24} className="text-white" />
+              </div>
+              <h4 className="text-3xl font-bold leading-tight">Ready to<br/>start saving?</h4>
+              <p className="mt-4 text-orange-50 font-medium opacity-90 text-[15px] leading-relaxed">
+                Share a few details and we’ll call you with a clear plan and exact numbers.
+              </p>
+            </div>
 
+            <button 
+              onClick={() => setOpenLeadPopup(true)} 
+              className="mt-8 w-full bg-white text-[#FC763A] font-bold py-4 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2 relative z-10"
+            >
+              Get Free Estimate <ArrowRight size={18} />
+            </button>
           </div>
         </div>
       </Section>

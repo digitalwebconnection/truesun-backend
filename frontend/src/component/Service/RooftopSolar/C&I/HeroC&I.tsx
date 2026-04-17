@@ -19,6 +19,8 @@ import {
   TrendingUp,
   Users,
   ShieldCheck,
+  Activity,
+  PiggyBank,
 } from "lucide-react";
 
 const BRAND = {
@@ -181,7 +183,7 @@ export default function CIHeroSection() {
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: EASE_OUT, delay: 0.05 }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px]  backdrop-blur-sm"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 text-white px-3 py-1 text-[11px]  backdrop-blur-sm"
             >
               <Sun className="h-3.5 w-3.5" /> {segment.pill}
             </motion.div>
@@ -400,20 +402,24 @@ function VisualCard({
         {/* KPI Widgets */}
         <div className="mt-4 grid grid-cols-2 gap-3">
           <SmallStat
-            icon={<TrendingUp className="h-4 w-4" />}
+            icon={<TrendingUp className="h-5 w-5 text-emerald-500" />}
             label="IRR"
             value={segmentKey === "industrial" ? "18–22%" : "16–20%"}
           />
           <SmallStat
-            icon={<Users className="h-4 w-4" />}
+            icon={<Users className="h-5 w-5 text-blue-500" />}
             label="Sites Covered"
             value={segmentKey === "industrial" ? "250+" : "300+"}
           />
-          <Dial label="Uptime" value={99.8} />
-          <Dial
+          <SmallStat
+            icon={<Activity className="h-5 w-5 text-orange-500" />}
+            label="Uptime"
+            value="100%"
+          />
+          <SmallStat
+            icon={<PiggyBank className="h-5 w-5 text-purple-500" />}
             label="Savings"
-            value={segmentKey === "industrial" ? 42 : 38}
-            suffix="%"
+            value={segmentKey === "industrial" ? "42%" : "38%"}
           />
         </div>
       </motion.div>

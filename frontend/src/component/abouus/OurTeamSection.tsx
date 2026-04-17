@@ -1,5 +1,6 @@
 import React from "react";
-import { motion, type Variants, easeInOut } from "framer-motion";
+import { motion, type Variants, easeInOut, AnimatePresence } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import nitumam  from "../../assets/team/NituMam.jpg"
 /* -------------------- Types -------------------- */
 type Leader = {
@@ -19,7 +20,7 @@ const LEADERS: Leader[] = [
     image: nitumam,
     bio: "15+ years in clean energy and climate finance, steering multi-MW programs and strategic partnerships that scale reliable solar outcomes.",
     tags: ["Climate Strategy", "Solar EPC", "Partnerships"],
-    linkedin: "https://www.linkedin.com/",
+    linkedin: "https://www.linkedin.com/in/nitug/",
   },
   {
     name: "R.C. Goyal",
@@ -28,7 +29,7 @@ const LEADERS: Leader[] = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabOgeMNrSqYJ4c2-kMg0I_QreIqbVVfgvWQ&s",
     bio: "Chartered Accountant leading bankable structures, SPVs, and risk frameworks to accelerate distributed solar portfolios across India.",
     tags: ["Project Finance", "Risk & Compliance", "SPV Structuring"],
-    linkedin: "https://www.linkedin.com/",
+    linkedin: "https://www.linkedin.com/company/truesun/",
   },
   {
     name: "Ashutosh Dwivedi",
@@ -37,16 +38,16 @@ const LEADERS: Leader[] = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabOgeMNrSqYJ4c2-kMg0I_QreIqbVVfgvWQ&s",
     bio: "Engineer with MBA in Power Management, optimizing performance ratios, open access, and O&M playbooks for long-term yield.",
     tags: ["Performance PR", "Open Access", "O&M"],
-    linkedin: "https://www.linkedin.com/",
+    linkedin: "https://www.linkedin.com/company/truesun/",
   },
    {
     name: "MD Saif Ansari.",
     title: "Site Engineer",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabOgeMNrSqYJ4c2-kMg0I_QreIqbVVfgvWQ&s",
-    bio: " He holds a Diploma in Electrical Engineering with 20+ years of experience in electrical and solar energy systems. He specializes in site inspections, electricity analysis, BOQ, design planning, and project execution. He ensures smooth coordination and delivers reliable, cost-effective solutions.",
+    bio: " He holds a Diploma in Electrical Engineering with 20+ years of experience in electrical and solar energy systems. He specializes in site inspections, electricity analysis, BOQ, design planning, and project execution.",
     tags: ["Performance PR", "Open Access", "O&M"],
-    linkedin: "https://www.linkedin.com/",
+    linkedin: "https://www.linkedin.com/in/md-saif-ansari-753a80288/",
   },
 ];
 
@@ -77,109 +78,116 @@ const fadeUpProps = {
   transition: { duration: 0.5, ease: easeInOut as any },
 };
 
-/* -------------------- FAQ (boxed, one Q/A per card) -------------------- */
-
-type AccordionItemProps = { q: string; a: string };
-
-function FAQCard({ q, a }: AccordionItemProps) {
-  const [open, setOpen] = React.useState(false);
-  const id = React.useId();
-
-  return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 10 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.3 } },
-      }}
-      className="rounded-2xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md"
-    >
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        aria-controls={id}
-        className="flex w-full items-center justify-between gap-4 px-5 py-4"
-      >
-        <span className="text-base font-semibold text-neutral-900">{q}</span>
-        <span
-          className={`inline-flex h-7 w-7 items-center justify-center rounded-full ring-1 ring-neutral-300 transition-transform ${
-            open ? "rotate-45" : ""
-          }`}
-          aria-hidden
-        >
-          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
-            <path
-              d="M12 5v14M5 12h14"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
-        </span>
-      </button>
-
-      {/* content box with smooth height/opacity */}
-      <motion.div
-        id={id}
-        initial={false}
-        animate={open ? "open" : "collapsed"}
-        variants={{
-          open: { height: "auto", opacity: 1 },
-          collapsed: { height: 0, opacity: 0 },
-        }}
-        transition={{ duration: 0.28, ease: "easeInOut" }}
-        className="overflow-hidden px-5"
-      >
-        <div className="pb-5">
-          <p className="text-sm leading-relaxed text-neutral-600">{a}</p>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-}
+/* -------------------- FAQ (boxed, matching SolarFAQ design) -------------------- */
 
 function FAQSection() {
-  const faqs: AccordionItemProps[] = [
+  const faqs = [
     {
+      id: "f1",
       q: "Can you help with subsidies?",
       a: "Yes, we handle end-to-end documentation and DISCOM coordination for applicable schemes.",
     },
     {
+      id: "f2",
       q: "Do you offer O&M?",
       a: "We provide AMC and remote monitoring with SLAs tailored to your plant size.",
     },
     {
+      id: "f3",
       q: "What warranties do I get?",
       a: "Typically 30-year performance on modules, 5–10 years on inverters, and workmanship warranty.",
     },
     {
+      id: "f4",
       q: "How soon can I go live?",
       a: "Residential systems often go live in 2–4 weeks depending on approvals; commercial timelines vary.",
     },
   ];
 
+  const [openItem, setOpenItem] = React.useState<string | null>(null);
+
   return (
-    <div className="bg-linear-to-br from-white via-amber-50/50 to-emerald-50/50 py-16">
-      <div className="mx-auto max-w-5xl px-6">
-        <motion.div {...fadeUpProps} className="mx-auto mb-8 max-w-2xl text-center">
-          <h2 className="text-3xl font-bold text-[#fc763a]">FAQs</h2>
-          <p className="mt-2 text-gray-600">Quick answers to common questions</p>
+    <section className="bg-linear-to-br from-white via-amber-50/50 to-emerald-50/50 py-16">
+      <div className="mx-auto max-w-4xl px-4">
+        <motion.div {...fadeUpProps} className="mx-auto mb-12 text-center">
+          <h2 className="text-4xl font-black tracking-tight text-black">
+            Frequently Asked <span className="text-[#FC763A]">Questions</span>
+          </h2>
+          <p className="mt-4 text-lg text-gray-500">Quick answers to common questions</p>
         </motion.div>
 
-        {/* grid of individual boxed items (no divide-y) */}
-        <motion.div
-          variants={{ hidden: { opacity: 1 }, show: { opacity: 1, transition: { staggerChildren: 0.08 } } }}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 gap-4"
-        >
-          {faqs.map((f, i) => (
-            <FAQCard key={i} q={f.q} a={f.a} />
-          ))}
-        </motion.div>
+        <div className="space-y-6">
+          {faqs.map(({ id, q, a }, index) => {
+            const isOpen = openItem === id;
+            const slideFrom = index % 2 === 0 ? 80 : -80;
+
+            return (
+              <motion.div
+                key={id}
+                initial={{ opacity: 0, x: slideFrom }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.1,
+                  type: "spring",
+                  stiffness: 100,
+                }}
+                className={`group overflow-hidden rounded-2xl border transition-shadow duration-300 ${
+                  isOpen
+                    ? "border-[#FC763A] bg-orange-50/30 shadow-lg"
+                    : "border-gray-200 bg-white hover:border-orange-300 hover:shadow-md"
+                }`}
+              >
+                <button
+                  onClick={() => setOpenItem(isOpen ? null : id)}
+                  className="flex w-full items-center justify-between p-6 text-left"
+                >
+                  <span
+                    className={`text-lg font-bold transition-colors ${
+                      isOpen ? "text-[#FC763A]" : "text-gray-900"
+                    }`}
+                  >
+                    {q}
+                  </span>
+
+                  <div
+                    className={`ml-4 shrink-0 rounded-full p-1 transition-colors ${
+                      isOpen ? "bg-[#FC763A] text-white" : "bg-gray-100 text-gray-500"
+                    }`}
+                  >
+                    <ChevronDown
+                      className={`h-5 w-5 transition-transform duration-500 ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                </button>
+
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{
+                        duration: 0.4,
+                        ease: [0.04, 0.62, 0.23, 0.98],
+                      }}
+                    >
+                      <div className="px-6 pb-6">
+                        <div className="mb-4 h-px w-full bg-orange-100" />
+                        <p className="text-gray-600 leading-relaxed italic">{a}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -224,7 +232,7 @@ export default function LeadershipSectionModern() {
         <p className="text-sm font-semibold uppercase tracking-wider text-[#FC763A]">
           Meet the Visionaries
         </p>
-        <h2 className="mt-2 text-4xl font-extrabold tracking-tight text-[#686868] sm:text-5xl">
+        <h2 className="mt-2 text-4xl font-extrabold tracking-tight text-black sm:text-5xl">
          Meet Our Team Membes
         </h2>
         <p className="mt-4 text-lg text-neutral-600">
@@ -246,7 +254,7 @@ export default function LeadershipSectionModern() {
             key={m.name}
             variants={card}
             whileHover={{ y: -6, scale: 1.01 }}
-            className="group relative overflow-hidden rounded-2xl bg-white shadow-2xl shadow-black/30 ring-2 ring-amber-600/20 transition-all"
+            className="group relative flex flex-col h-full overflow-hidden rounded-2xl bg-white shadow-2xl shadow-black/30 ring-2 ring-amber-600/20 transition-all"
           >
             {/* subtle gradient border on hover */}
             <div
@@ -263,7 +271,7 @@ export default function LeadershipSectionModern() {
             />
 
             {/* Image */}
-            <div className="relative h-80 w-full overflow-hidden">
+            <div className="relative h-80 w-full overflow-hidden shrink-0">
               <img
                 src={m.image}
                 alt={m.name}
@@ -276,11 +284,11 @@ export default function LeadershipSectionModern() {
             </div>
 
             {/* Body */}
-            <div className="p-6">
+            <div className="p-6 flex flex-col flex-1">
               <h3 className="text-xl font-semibold text-neutral-900">{m.name}</h3>
               <p className="mt-2 text-sm leading-relaxed text-neutral-600">{m.bio}</p>
 
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-auto pt-4 flex flex-wrap gap-2">
                 {m.tags.map((t) => (
                   <motion.span
                     key={t}

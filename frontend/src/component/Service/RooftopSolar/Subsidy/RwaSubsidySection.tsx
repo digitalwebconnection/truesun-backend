@@ -1,3 +1,5 @@
+import { Building2, Zap, CheckCircle2 } from "lucide-react";
+
 const RWASubsidySection = () => {
 
 
@@ -47,31 +49,49 @@ const RWASubsidySection = () => {
           <div className="w-full h-px bg-gray-200 my-12"></div>
 
           {/* Bottom Content */}
-          <div className="grid md:grid-cols-2 gap-16">
+          <div className="grid md:grid-cols-2 gap-8">
 
             {/* Designed For */}
-            <div>
-              <h4 className="text-gray-900 font-semibold text-lg mb-6">
-                This is specifically designed for
+            <div className="bg-white border text-center border-orange-200 rounded-2xl p-8 shadow-lg md:hover:-translate-y-1 shadow-orange-500/10 hover:shadow-xl transition-all">
+              <div className="w-14 h-14 bg-orange-50 border border-orange-100 text-[#FC763A] rounded-xl flex items-center justify-center mx-auto mb-6">
+                <Building2 className="w-7 h-7" />
+              </div>
+              <h4 className="text-gray-900 font-extrabold text-xl mb-6">
+                Specifically Designed For
               </h4>
 
-              <ul className="space-y-4 text-gray-700 text-lg">
-                <li>Apartment complexes</li>
-                <li>Gated communities</li>
-                <li>Housing societies</li>
+              <ul className="space-y-3 text-gray-700 text-lg mx-auto text-left inline-block">
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#FC763A]" /> Apartment complexes
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#FC763A]" /> Gated communities
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#FC763A]" /> Housing societies
+                </li>
               </ul>
             </div>
 
             {/* Reduces Cost */}
-            <div>
-              <h4 className="text-gray-900 font-semibold text-lg mb-6">
-                This significantly reduces the cost of powering
+            <div className="bg-white border text-center border-orange-200 rounded-2xl p-8 shadow-lg md:hover:-translate-y-1 shadow-orange-500/10 hover:shadow-xl transition-all">
+              <div className="w-14 h-14 bg-orange-50 border border-orange-100 text-[#FC763A] rounded-xl flex items-center justify-center mx-auto mb-6">
+                <Zap className="w-7 h-7" />
+              </div>
+              <h4 className="text-gray-900 font-extrabold text-xl mb-6">
+                Significantly Reduces Cost Of
               </h4>
 
-              <ul className="space-y-4 text-gray-700 text-lg">
-                <li>Common lighting</li>
-                <li>Elevators</li>
-                <li>Water systems</li>
+              <ul className="space-y-3 text-gray-700 text-lg mx-auto text-left inline-block">
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#FC763A]" /> Common lighting
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#FC763A]" /> Elevators
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#FC763A]" /> Water systems
+                </li>
               </ul>
             </div>
 
@@ -88,23 +108,23 @@ const RWASubsidySection = () => {
         </h2>
 
         {/* One Line Content */}
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-4 text-gray-700 text-sm md:text-base">
+        <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-4 text-sm md:text-base font-semibold">
 
-          <span>Reduction in monthly maintenance charges</span>
-
-          <span className="text-gray-300">|</span>
-
-          <span>Lower common electricity bills</span>
-
-          <span className="text-gray-300">|</span>
-
-          <span>
-            Payback period: <span className="text-[#FC763A] font-semibold">3–5 years</span>
+          <span className="bg-orange-50 text-orange-900 px-5 py-2.5 rounded-full border border-orange-200 shadow-sm">
+            Reduction in monthly maintenance charges
           </span>
 
-          <span className="text-gray-300">|</span>
+          <span className="bg-orange-50 text-orange-900 px-5 py-2.5 rounded-full border border-orange-200 shadow-sm">
+            Lower common electricity bills
+          </span>
 
-          <span>Long-term savings shared across residents</span>
+          <span className="bg-[#FC763A] text-white px-5 py-2.5 rounded-full shadow-sm">
+            Payback period: <span className="font-extrabold">3–5 years</span>
+          </span>
+
+          <span className="bg-orange-50 text-orange-900 px-5 py-2.5 rounded-full border border-orange-200 shadow-sm">
+            Long-term savings shared across residents
+          </span>
 
         </div>
 

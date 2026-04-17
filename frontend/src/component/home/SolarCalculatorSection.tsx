@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Zap, MapPin, Ruler, CreditCard, Users, ArrowRight, CheckCircle2, TrendingUp, PiggyBank, Calendar } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import LeadPopup from "../LeadPopup";
 
 /* ========= CONFIG & CONSTANTS ========= */
 
@@ -31,6 +32,7 @@ export default function SolarCalculator() {
   const [category, setCategory] = useState("RESIDENTIAL");
 
   const [openPopup, setOpenPopup] = useState(false);
+  const [openLeadPopup, setOpenLeadPopup] = useState(false);
   const [leadSubmitted, setLeadSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -238,6 +240,17 @@ export default function SolarCalculator() {
                   </div>
                 )}
                 <p className="text-xl ">Thank you for contacting TrueSun — our team will get back to you within 24 hours.</p>
+                <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+
+
+                  <button
+                    onClick={() => setOpenLeadPopup(true)}
+                    className="inline-flex items-center justify-center rounded-full bg-[#FC763A]  px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-300/50 transition hover:shadow-lg hover:brightness-105"
+                  >
+                    Book a Free Site Visit
+                  </button>
+
+                </div>
               </motion.div>
             )}
           </div>
@@ -280,6 +293,7 @@ export default function SolarCalculator() {
           </div>
         )}
       </AnimatePresence>
+      {openLeadPopup && <LeadPopup onClose={() => setOpenLeadPopup(false)} />}
     </div>
   );
 }

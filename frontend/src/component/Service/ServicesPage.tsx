@@ -13,7 +13,8 @@ export default function ServicesPage() {
       {/* ===== PAGE TITLE ===== */}
       <section className="text-center space-y-4">
         <h1 className="text-3xl md:text-4xl font-bold text-[#686868]">
-          Premium Solar Solutions for Every Need
+          Premium Solar Solutions for
+          <span className="text-[#FC763A]"> Every Need</span>
         </h1>
         <p className="text-slate-600 max-w-2xl mx-auto text-sm md:text-base">
           Rooftop and consulting services built for real savings and reliable performance.
@@ -376,7 +377,7 @@ function SegmentStep({
           {chips.map((chip) => (
             <span
               key={chip}
-              className="rounded-full bg-slate-50 px-2.5 py-1 text-[11px] text-slate-700 border border-slate-200"
+              className="rounded-full bg-orange-50 px-2.5 py-1 text-[11px] text-[#FC763A] border border-orange-200"
             >
               {chip}
             </span>
