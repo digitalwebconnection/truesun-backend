@@ -31,15 +31,7 @@ const LEADERS: Leader[] = [
     tags: ["Project Finance", "Risk & Compliance", "SPV Structuring"],
     linkedin: "https://www.linkedin.com/",
   },
-  {
-    name: "Ashutosh Dwivedi",
-    title: "Senior Technical Advisor",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabOgeMNrSqYJ4c2-kMg0I_QreIqbVVfgvWQ&s",
-    bio: "Engineer with MBA in Power Management, optimizing performance ratios, open access, and O&M playbooks for long-term yield.",
-    tags: ["Performance PR", "Open Access", "O&M"],
-    linkedin: "https://www.linkedin.com/",
-  },
+
    {
     name: "MD Saif Ansari.",
     title: "Site Engineer",
@@ -239,7 +231,7 @@ export default function LeadershipSectionModern() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.2 }}
-        className="mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-8 px-6 sm:grid-cols-2 lg:grid-cols-4"
+        className="mx-auto mt-12 grid max-w-6xl grid-cols-1 gap-8 px-6 sm:grid-cols-2 lg:grid-cols-3"
       >
         {LEADERS.map((m) => (
           <motion.article
