@@ -2,8 +2,8 @@ import React from "react";
 import { motion, type Variants, easeInOut, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import nitumam  from "../../assets/team/NituMam.jpg"
-import Saif  from "../../assets/team/Saif.jpeg";
-import rc from "../../assets/team/rc.jpeg"
+import Saif  from "../../assets/team/SaifTeam.jpeg";
+import rc from "../../assets/team/MrRc.jpeg"
 /* -------------------- Types -------------------- */
 type Leader = {
   name: string;
@@ -36,7 +36,7 @@ const LEADERS: Leader[] = [
     name: "MD Saif Ansari.",
     title: "Site Engineer",
     image: Saif,
-    bio: "He holds a Diploma in Electrical Engineering with 20+ years of experience in electrical and solar energy systems. He specializes in site inspections, electricity analysis, BOQ, design planning, and project execution.",
+    bio: "He holds a Diploma in Electrical Engineering with hands-on experience in electrical and solar energy systems. His expertise includes site inspections, electricity bill analysis, BOQ preparation, design drawings, and proposal development. He also manages site execution, client coordination, and project follow-ups to ensure smooth and efficient project delivery. His focus is on providing reliable, practical, and cost-effective electrical and solar solutions.",
     tags: ["Performance PR", "Open Access", "O&M"],
     linkedin: "https://www.linkedin.com/in/md-saif-ansari-753a80288/",
   },
@@ -238,7 +238,7 @@ export default function LeadershipSectionModern() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.2 }}
-        className="mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-8 px-6 sm:grid-cols-2 lg:grid-cols-4"
+        className="mx-auto mt-12 grid max-w-6xl grid-cols-1 gap-8 px-6 sm:grid-cols-2 lg:grid-cols-3"
       >
         {LEADERS.map((m) => (
           <motion.article
