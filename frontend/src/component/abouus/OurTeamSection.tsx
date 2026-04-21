@@ -2,7 +2,7 @@ import React from "react";
 import { motion, type Variants, easeInOut } from "framer-motion";
 import nitumam  from "../../assets/team/NituMam.jpg"
 import Saif  from "../../assets/team/Saif.jpeg";
-import rc from "../../assets/team/rc.jpeg"
+import rc from "../../assets/team/RC.jpeg"
 /* -------------------- Types -------------------- */
 type Leader = {
   name: string;
