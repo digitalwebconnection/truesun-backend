@@ -231,13 +231,14 @@ const [openIndex, setOpenIndex] = useState<number | null>(0)
       <hr className="mx-auto max-w-7xl border-slate-200" />
 
       {/* ===== VALUES ===== */}
-      <section className="py-16 sm:py-10" style={{ backgroundColor: brandBlue }}>
+      <section className="py-16 sm:py-20 bg-white border-y border-slate-100 relative">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-orange-50/80 via-white to-white -z-10" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: brandYellow }}>
+          <div className="mb-14 text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#FC763A]">
               Our Culture & Foundation
             </p>
-            <h2 className="mt-2 text-3xl font-bold text-white sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-bold text-[#686868] sm:text-4xl">
               The TrueSun Way
             </h2>
           </div>
@@ -246,15 +247,15 @@ const [openIndex, setOpenIndex] = useState<number | null>(0)
             {values.map((val) => (
               <div
                 key={val.title}
-                className="flex flex-col gap-3 rounded-xl bg-white/30 p-5 ring-1 ring-white/10 backdrop-blur-sm transition hover:bg-white/10"
+                className="group flex flex-col gap-3 rounded-2xl bg-white p-8 shadow-sm ring-1 ring-slate-100 transition-all hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1"
               >
-                <div className="h-8 w-8 text-center" style={{ color: brandYellow }}>
+                <div className="h-14 w-14 rounded-xl bg-orange-50 text-[#FC763A] flex items-center justify-center ring-1 ring-orange-100 group-hover:bg-[#FC763A] group-hover:text-white transition-colors">
                   {val.icon}
                 </div>
-                <h3 className="text-base font-bold text-white pt-1">
+                <h3 className="text-xl font-bold text-slate-900 pt-2">
                   {val.title}
                 </h3>
-                <p className="text-sm text-slate-200">{val.body}</p>
+                <p className="text-sm text-slate-600 leading-relaxed">{val.body}</p>
               </div>
             ))}
           </div>

@@ -1,4 +1,4 @@
- 
+
 
 import React from "react";
 import {
@@ -127,7 +127,7 @@ export default function SolarFooter() {
                         {/* Contact */}
                         <div className="lg:col-span-2 ms-0 md:-ms-20">
                             <h4 className="mb-3 text-sm font-semibold tracking-wide text-white">
-                                Contact
+                                Connect with Us
                             </h4>
                             <div className="grid gap-2 text-sm text-neutral-300">
                                 <p className="inline-flex items-start gap-2">
@@ -138,8 +138,8 @@ export default function SolarFooter() {
                                         className="flex items-start gap-2 hover:text-[#FC763A]"
                                     >
                                         <MapPin className="mt-0.5 h-12 w-12  py-4" />
-                                    8th floor, B-Wing, Peninsula Business Park, Tower B, Lower Parel
-Mumbai - 400013 </a>
+                                        8th floor, B-Wing, Peninsula Business Park, Tower B, Lower Parel
+                                        Mumbai - 400013 </a>
                                 </p>
 
                                 <p className="inline-flex items-start gap-2">

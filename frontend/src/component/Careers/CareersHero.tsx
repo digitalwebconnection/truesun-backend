@@ -8,7 +8,7 @@ export default function CareersPage() {
     <>
       {/* ================= HERO SECTION ================= */}
       <section className="relative overflow-hidden bg-white text-slate-900/80">
-        <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6 pb-16 pt-16 lg:flex-row lg:items-center lg:px-0 lg:pt-20">
+        <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6 pb-16 pt-32 lg:flex-row lg:items-center lg:px-10 lg:pt-32">
           
           {/* LEFT SIDE */}
           <div className="w-full lg:w-6/12">
@@ -18,7 +18,7 @@ export default function CareersPage() {
               transition={{ duration: 0.45 }}
               className="text-[11px] font-semibold uppercase tracking-[0.25em] text-slate-500"
             >
-              Want to work with us?
+              Ready to power the future with us?
             </motion.p>
 
             <motion.h1

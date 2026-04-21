@@ -11,10 +11,10 @@ import {
 
 const steps = [
   { text: "Customer Shares Bill & Location", icon: <FileText size={20} /> },
-  { text: "TrueSun Site Visit & Proposal", icon: <MapPin size={20} /> },
-  { text: "TrueSun Gets Approvals", icon: <ClipboardCheck size={20} /> },
-  { text: "TrueSun Installs Plant", icon: <Wrench size={20} /> },
-  { text: "TrueSun Maintains Plant", icon: <Settings size={20} /> },
+  { text: "We Site Visit & Proposal", icon: <MapPin size={20} /> },
+  { text: "We Gets Approvals", icon: <ClipboardCheck size={20} /> },
+  { text: "We Installs Plant", icon: <Wrench size={20} /> },
+  { text: "We Maintains Plant", icon: <Settings size={20} /> },
   { text: "Happy Customer", icon: <Smile size={20} /> },
 ];
 

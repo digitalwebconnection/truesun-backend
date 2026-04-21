@@ -2,17 +2,18 @@ import {
     SunMedium,
 } from "lucide-react";
 import BlogPage from "./BlogPage";
+import heroImg from "../../assets/pexels-gunas4life-19205947.jpg";
 
 export default function SolarBlogPage() {
 
     return (
         <>
             {/* ===== BLOG HERO / INTRO ===== */}
-            <section className="relative overflow-hidden rounded-3xl text-slate-50 px-6 py-8 md:px-10 md:py-32">
+            <section className="relative overflow-hidden text-slate-50 px-6 py-8 md:px-10 md:py-32">
                 {/* Background image */}
                 <div className="absolute inset-0">
                     <img
-                        src="https://images.indianexpress.com/2025/08/Solar-Panels-1.jpg"
+                        src={heroImg}
                         alt="Solar panels at sunset"
                         className="h-full w-full object-cover"
                     />
@@ -27,7 +28,7 @@ export default function SolarBlogPage() {
                 {/* Content */}
                 <div className="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between py-12 md:py-0">
                     <div className="space-y-4 max-w-xl">
-                        <div className="inline-flex items-center gap-2 rounded-full border border-slate-700/70 bg-slate-900/70 px-3 py-1 text-[11px] font-medium tracking-[0.18em] uppercase text-slate-300 backdrop-blur-sm">
+                        <div className="text-[#FC763A] inline-flex items-center gap-2 rounded-full border border-slate-700/70 bg-slate-900/70 px-3 py-1 text-[11px] font-medium tracking-[0.18em] uppercase backdrop-blur-sm">
                             <span className="flex h-4 w-4 items-center justify-center rounded-full bg-[#FC763A]/20">
                                 <SunMedium className="h-3 w-3" />
                             </span>
@@ -35,10 +36,10 @@ export default function SolarBlogPage() {
                         </div>
 
                         <div className="space-y-3">
-                            <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight">
-                                Learn Solar in Simple, Practical Language.
+                            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+                                Learn Solar in <span className="text-[#FC763A]">Simple, Practical Language.</span>
                             </h1>
-                            <p className="text-sm md:text-base text-slate-200/90">
+                            <p className="text-md md:text-lg text-white">
                                 Guides, case studies and explainers to help you make confident
                                 solar decisions for your home, factory or business.
                             </p>
@@ -59,8 +60,8 @@ export default function SolarBlogPage() {
 
                     {/* Right highlight card */}
                     <div className="relative mt-2 md:mt-0">
-                        <div className="rounded-2xl border border-slate-700/80 bg-slate-900/80 px-4 py-4 md:px-5 md:py-5 shadow-xl backdrop-blur-sm max-w-xs md:max-w-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
-                            <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
+                        {/* <div className="rounded-2xl border border-slate-700/80 bg-slate-900/80 px-4 py-4 md:px-5 md:py-5 shadow-xl backdrop-blur-sm max-w-xs md:max-w-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                            <p className="text-xs uppercase tracking-[0.18em] text-[#FC763A] mb-2">
                                 Featured Reading
                             </p>
                             <p className="text-sm md:text-base font-medium text-slate-50">
@@ -68,7 +69,7 @@ export default function SolarBlogPage() {
                                 start if you’re new to rooftop solar.
                             </p>
                          
-                        </div>
+                        </div> */}
 
                         {/* subtle glow behind card */}
                         <div className="pointer-events-none absolute -right-10 -bottom-10 h-32 w-32 rounded-full bg-[#FC763A]/25 blur-3xl" />

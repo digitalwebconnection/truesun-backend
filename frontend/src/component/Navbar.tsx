@@ -13,7 +13,7 @@ import {
 import {
   Menu,
   X,
-  Sun,  
+  Sun,
   ChevronDown,
   ChevronRight,
   Wrench,
@@ -41,10 +41,10 @@ const SERVICES: ServiceGroup[] = [
     label: "Rooftop Solar",
     icon: <Wrench className="h-4 w-4" />,
     children: [
-      { label: "C&I", to: "/services/rooftop/C&I" },
+      { label: "C&I (Commercial & Industrial)", to: "/services/rooftop/C&I" },
       { label: "Residential", to: "/services/rooftop/residential" },
-      { label: "O&M ", to: "/services/rooftop/O&M" },
-      { label: "BESS ", to: "/services/rooftop/BESS" },
+      { label: "O&M (Operations and Maintenance)", to: "/services/rooftop/O&M" },
+      { label: "BESS (Battery Energy Storage Systems)", to: "/services/rooftop/BESS" },
       { label: "Subsidy ", to: "/services/rooftop/Subsidy" },
       // { label: "Solar Finance Solutions ", to: "/services/rooftop/Solar-Finance-Solutions" },
     ],

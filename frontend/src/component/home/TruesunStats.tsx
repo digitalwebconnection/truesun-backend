@@ -188,7 +188,7 @@ const itemVariants: Variants = {
 // --------------------------- Defaults ---------------------------
 const DEFAULT_STATS: Stat[] = [
   { id: "projects", value: 100, suffix: "+", label: "Roofs Powered", icon: "Building" },
-  { id: "cities", value: 100, suffix: "%", label: "Up to 100% Savings on Electricity Bills", icon: "Receipt" },
+  { id: "cities", value: 80, suffix: "%", label: "Up to 80% Savings on Electricity Bills", icon: "Receipt" },
   { id: "countries", value: 70, suffix: "%", label: "Up to 70% Return on Investment", icon: "LineChart" },
 
 ];
@@ -199,21 +199,21 @@ function StatItem({ stat, prefix }: { stat: Stat; prefix?: string }) {
   const Icon = Svg[stat.icon as keyof typeof Svg];
 
   return (
-    <motion.div variants={itemVariants} className="group flex items-center  gap-4" role="listitem">
+    <motion.div variants={itemVariants} className="group flex items-start gap-4 sm:gap-6 bg-slate-50/50 p-6 rounded-3xl border border-slate-100 hover:border-orange-100 hover:shadow-xl hover:bg-white transition-all duration-300" role="listitem">
       <div
-        className="grid h-14 w-14 place-items-center rounded-full
-               shadow-sm transition-transform duration-300 group-hover:scale-105"
+        className="grid shrink-0 h-14 w-14 sm:h-16 sm:w-16 place-items-center rounded-2xl bg-orange-50 text-[#FC763A]
+               shadow-md shadow-orange-100 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105"
       >
-        <Icon className="h-10 w-10 text-[#FC763A] " />
+        <Icon className="h-7 w-7 sm:h-8 sm:w-8" />
       </div>
 
-      <div className="flex flex-col">
-        <dd ref={ref} className="text-2xl sm:text-3xl font-semibold text-neutral-900">
+      <div className="flex flex-col text-left pt-1">
+        <dd ref={ref} className="text-3xl sm:text-4xl font-extrabold text-[#686868] drop-shadow-sm">
           {prefix ?? ""}
           {display}
-          {stat.suffix && <span className="ml-1 text-neutral-600">{stat.suffix}</span>}
+          {stat.suffix && <span className="ml-1 text-2xl sm:text-3xl">{stat.suffix}</span>}
         </dd>
-        <dt className="mt-1 text-sm sm:text-base text-neutral-600">{stat.label}</dt>
+        <dt className="mt-2 text-sm sm:text-base font-medium leading-snug text-neutral-600">{stat.label}</dt>
       </div>
     </motion.div>
   );
@@ -232,9 +232,9 @@ export default function ImpactStats({
   compact?: boolean;
   prefix?: string;
 }) {
-  const gridCols = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-x-8 mx-auto max-w-7xl  gap-x-10 sm:gap-y-12";
-  const padY = compact ? "py-12 sm:py-14" : "py-20 sm:py-24 lg:py-18";
-  const headingSpace = compact ? "mb-8 sm:mb-10" : "mb-10 sm:mb-12";
+  const gridCols = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 sm:gap-y-10 gap-x-6 lg:gap-x-10 mx-auto max-w-7xl px-4 sm:px-0";
+  const padY = compact ? "py-12 sm:py-14" : "py-16 sm:py-24 lg:py-28";
+  const headingSpace = compact ? "mb-8 sm:mb-10" : "mb-10 sm:mb-16";
 
   return (
     <section className={`relative overflow-hidden text-center max-w-7xl mx-auto  bg-white ${padY}`}>

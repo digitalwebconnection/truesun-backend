@@ -31,7 +31,7 @@ export default function WhatsAppDockFlowFlat({
   subtitle = "Your Solar Experts",
   logoUrl,
   brand = { from: "#0DB02B", to: "#0F7F34", ring: "#FFC527" },
-  footerText = "Call: +91 88508 45149 · Support@truesun.in",
+  footerText = "Call: +91 88508 45149 · info@truesun.in",
   web3ToEmail = null,
 }: WhatsAppDockFlowProps) {
   const [open, setOpen] = useState(false);

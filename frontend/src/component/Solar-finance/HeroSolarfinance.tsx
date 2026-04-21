@@ -1,10 +1,11 @@
- 
+
 
 import React from "react";
 import {
   CreditCard,
   Percent,
 } from "lucide-react";
+import heroImage from "../../assets/pexels-gustavo-fring-4254172.jpg";
 
 interface BenefitItemProps {
   title: string;
@@ -19,8 +20,7 @@ const TruesunSolarFinanceHero: React.FC = () => {
         <div
           className="absolute inset-0 bg-cover bg-center opacity-35"
           style={{
-            backgroundImage:
-              "url('https://taqat.moustadama.ps/sites/default/files/2022-09/hero-image.jpg')",
+            backgroundImage: `url(${heroImage})`,
           }}
         />
       </div>
@@ -28,10 +28,10 @@ const TruesunSolarFinanceHero: React.FC = () => {
       {/* Gradient overlay for readability */}
       {/* <div className="absolute inset-0 bg-black/20" /> */}
 
-      <div className="relative mx-auto flex max-w-7xl flex-col gap-12 px-6 pt-16 pb-5 lg:flex-row lg:items-center lg:pt-24">
+      <div className="relative mx-auto flex max-w-7xl flex-col gap-12 px-6 pt-28 pb-10 lg:flex-row lg:items-center lg:pt-32">
         {/* LEFT SIDE CONTENT */}
         <div className="max-w-4xl space-y-6">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#FC763A] bg-[#FC763A]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#FC763A] bg-[#FC763A]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-[#FC763A]">
             <CreditCard className="h-3.5 w-3.5" />
             Truesun • Solar Finance
           </span>
@@ -72,7 +72,7 @@ const TruesunSolarFinanceHero: React.FC = () => {
 
 
             <a
-                 href="tel:+918850845149"
+              href="tel:+918850845149"
               className="inline-flex items-center justify-center rounded-xl border border-slate-600 px-5 py-3 text-sm font-semibold text-slate-100 bg-slate-900/50 hover:bg-slate-800/70 transition"
             >
               Request a Call

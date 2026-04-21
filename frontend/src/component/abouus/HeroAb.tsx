@@ -60,7 +60,7 @@ function AboutHeroV2({
 
                     {/* Heading */}
                     <motion.h1
-                        className="mt-3 text-4xl sm:text-6xl font-extrabold leading-tight max-w-3xl"
+                        className="mt-3 text-3xl text-[#FC763A] sm:text-5xl font-extrabold leading-tight max-w-3xl"
                         variants={itemVariants}
                     >
                         {title}

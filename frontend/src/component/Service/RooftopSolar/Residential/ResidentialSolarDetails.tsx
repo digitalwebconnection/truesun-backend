@@ -1,7 +1,9 @@
  
 
+import { useState } from "react";
 import type { FC, ReactNode } from "react";
 import type { SVGProps, ComponentType } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Sun,
   Home,
@@ -15,6 +17,7 @@ import {
   IndianRupee,
   CheckCircle,
   FileText,
+  ChevronDown,
 } from "lucide-react";
 
 /* ───────────────────────────────── Types ───────────────────────────────── */
@@ -43,7 +46,7 @@ interface FAQItem {
 const benefitItems: BenefitItem[] = [
   {
     icon: Gauge,
-    title: "Reduce electricity bills by 80–90%",
+    title: "Reduce electricity bills Upto 80%",
     desc: "Residential solar rooftop systems for apartments, villas and bungalows can offset most of your monthly power consumption.",
   },
   {
@@ -118,7 +121,7 @@ const faqs: FAQItem[] = [
   },
   {
     q: "Is my terrace strong enough for a solar plant?",
-    a: "During the site survey we check roof condition, load-bearing capacity and shade. Only after confirming feasibility do we move forward with design.",
+    a: "During the site survey, we assess the roof condition, load-bearing capacity, and shading. We proceed with the design only after confirming feasibility.",
   },
   {
     q: "Will solar panels give me backup during power cuts?",
@@ -137,6 +140,8 @@ const faqs: FAQItem[] = [
 /* ───────────────────────────── Main Page Component ─────────────────────── */
 
 const ResidentialSolarDetailsPage: FC = () => {
+  const [openItem, setOpenItem] = useState<number | null>(null);
+
   return (
     <main className="max-w-7xl mx-auto bg-linear-to-b from-slate-50 via-white to-slate-50 text-slate-900">
       {/* HERO – SEO-friendly keyword rich */}
@@ -172,7 +177,7 @@ const ResidentialSolarDetailsPage: FC = () => {
             
               {/* Simple stats strip */}
               <div className="mt-8 flex flex-wrap gap-6 text-sm">
-                <StatInline label="Typical savings" value="80–90% bill reduction" />
+                <StatInline label="Typical savings" value="Upto 80% bill reduction" />
                 <StatInline label="Payback period" value="3–4 years" />
                 <StatInline label="Segments served" value="Societies, villas, bungalows" />
               </div>
@@ -490,24 +495,90 @@ const ResidentialSolarDetailsPage: FC = () => {
 
       {/* FAQs */}
       <section className="py-10">
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-2xl sm:text-3xl text-center font-bold text-[#FC763A]">
-            Residential Solar FAQs
-          </h2>
-          <p className="mt-2 text-center text-slate-600 text-sm">
-            Common questions from housing societies, villa owners and bungalow owners planning to install rooftop solar.
-          </p>
-          <div className="mt-6 divide-y divide-slate-200 rounded-3xl border border-slate-200 bg-white/80 backdrop-blur">
-            {faqs.map((f, i) => (
-              <details key={i} className="group p-5 sm:p-6">
-                <summary className="flex w-full cursor-pointer list-none items-center justify-between">
-                  <span className="font-semibold text-slate-900 text-sm sm:text-base">{f.q}</span>
-                  <span className="ml-4 text-slate-500 group-open:hidden">+</span>
-                  <span className="ml-4 text-slate-500 hidden group-open:inline">−</span>
-                </summary>
-                <p className="mt-2 text-slate-800 text-sm">{f.a}</p>
-              </details>
-            ))}
+        <div className="max-w-4xl mx-auto px-6">
+          <motion.header
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-12 text-center"
+          >
+            <h2 className="text-4xl font-black tracking-tight text-[#686868]">
+              Residential <span className="text-[#FC763A]">Solar FAQs</span>
+            </h2>
+            <p className="mt-4 text-lg text-gray-500">
+              Common questions from housing societies, villa owners and bungalow owners.
+            </p>
+          </motion.header>
+
+          <div className="space-y-6">
+            {faqs.map((f, index) => {
+              const isOpen = openItem === index;
+              const slideFrom = index % 2 === 0 ? 80 : -80;
+
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: slideFrom }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.1,
+                    type: "spring",
+                    stiffness: 100,
+                  }}
+                  className={`group overflow-hidden rounded-2xl border transition-shadow duration-300 ${
+                    isOpen
+                      ? "border-[#FC763A] bg-orange-50/30 shadow-lg"
+                      : "border-gray-200 bg-white hover:border-orange-300 hover:shadow-md"
+                  }`}
+                >
+                  <button
+                    onClick={() => setOpenItem(isOpen ? null : index)}
+                    className="flex w-full items-center justify-between p-6 text-left"
+                  >
+                    <span
+                      className={`text-lg font-bold transition-colors ${
+                        isOpen ? "text-[#FC763A]" : "text-gray-900"
+                      }`}
+                    >
+                      {f.q}
+                    </span>
+
+                    <div
+                      className={`ml-4 shrink-0 rounded-full p-1 transition-colors ${
+                        isOpen ? "bg-[#FC763A] text-white" : "bg-gray-100 text-gray-500"
+                      }`}
+                    >
+                      <ChevronDown
+                        className={`h-5 w-5 transition-transform duration-500 ${
+                          isOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </div>
+                  </button>
+
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{
+                          duration: 0.4,
+                          ease: [0.04, 0.62, 0.23, 0.98],
+                        }}
+                      >
+                        <div className="px-6 pb-6">
+                          <div className="mb-4 h-px w-full bg-orange-100" />
+                          <p className="leading-relaxed text-gray-600 italic">{f.a}</p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

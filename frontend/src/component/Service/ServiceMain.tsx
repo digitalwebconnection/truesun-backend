@@ -1,17 +1,9 @@
-import { useEffect, useState } from "react"
 import { Helmet } from "react-helmet";
 import ServicesHero from "./ServiceHero"
 import RooftopSolarServicesPage from "./ServicesPage"
-import LeadPopup from "../../component/LeadPopup";
 import CustomerJourney from "./CustomerJourney";
 
 const ServiceMain = () => {
-  const [showPopup, setShowPopup] = useState(false)
-
-  useEffect(() => {
-    // Open popup when page loads
-    setShowPopup(true)
-  }, [])
 
   return (
     <>
@@ -52,9 +44,6 @@ const ServiceMain = () => {
       <RooftopSolarServicesPage />
       <CustomerJourney/>
 
-      {showPopup && (
-        <LeadPopup onClose={() => setShowPopup(false)} />
-      )}
     </>
   )
 }

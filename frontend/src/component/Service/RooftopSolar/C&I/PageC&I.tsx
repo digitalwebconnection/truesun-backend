@@ -1,5 +1,6 @@
-
+import { useState } from "react";
 import { motion, type Variants } from "framer-motion";
+import LeadPopup from "../../../LeadPopup";
 import {
   Sun,
   Building2,
@@ -50,8 +51,7 @@ const item: Variants = {
 };
 
 export default function SolarNovaIndustrialPage() {
-
-
+  const [openLeadPopup, setOpenLeadPopup] = useState(false);
 
   return (
     <section
@@ -123,24 +123,24 @@ export default function SolarNovaIndustrialPage() {
                 Replace volatile grid tariffs with predictable solar generation. Built for offices, hospitals, schools,
                 malls, and factories that work hardest in daylight.
               </motion.p>
-             
+
 
               {/* KPI strip */}
               <motion.div variants={container} className="mt-8 grid gap-4 sm:grid-cols-3">
                 {[
                   { k: "Payback", v: "< 3 yrs" },
-                  { k: "Warranty", v: "25 yrs" },
+                  { k: "Warranty", v: "30 yrs" },
                   { k: "Policy", v: "Net metering" },
                 ].map((m) => (
                   <motion.div
                     key={m.k}
                     variants={item}
-                    className="rounded-xl border border-black/50 bg-white p-4 shadow-lg shadow-black/20"
+                    className="rounded-xl border border-orange-200 bg-orange-50 p-4 shadow-lg shadow-orange-500/10"
                   >
-                    <p className="text-xs" style={{ color: "#0e172699" }}>
+                    <p className="text-xs text-black">
                       {m.k}
                     </p>
-                    <p className="text-lg font-semibold" style={{ color: THEME.ink }}>
+                    <p className="text-lg font-semibold text-[#FC763A]">
                       {m.v}
                     </p>
                   </motion.div>
@@ -167,7 +167,7 @@ export default function SolarNovaIndustrialPage() {
               className="rounded-2xl border border-black/50 bg-white p-6 shadow-xl shadow-black/10"
             >
               <div className="inline-flex items-center gap-2 rounded-full bg-[rgba(255,107,53,0.06)] px-3 py-1 text-xs font-medium"
-                   style={{ color: THEME.ink }}>
+                style={{ color: THEME.ink }}>
                 <Building2 className="h-4 w-4" />
                 Solar Power for Commercial
               </div>
@@ -196,14 +196,14 @@ export default function SolarNovaIndustrialPage() {
                 </li>
               </ul>
               <div className="mt-5">
-                <a
-                  href="#quote"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:-translate-y-px"
+                <button
+                  onClick={() => setOpenLeadPopup(true)}
+                  className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:-translate-y-px"
                   style={{ background: THEME.accent }}
                 >
                   Get a Free Site Assessment for Your Business
                   <ChevronRight className="h-4 w-4" />
-                </a>
+                </button>
               </div>
             </motion.div>
 
@@ -213,7 +213,7 @@ export default function SolarNovaIndustrialPage() {
               className="rounded-2xl border border-black/50 bg-white p-6 shadow-xl shadow-black/10"
             >
               <div className="inline-flex items-center gap-2 rounded-full bg-[rgba(110,231,183,0.12)] px-3 py-1 text-xs font-medium"
-                   style={{ color: THEME.ink }}>
+                style={{ color: THEME.ink }}>
                 <Factory className="h-4 w-4" />
                 Solar Power for Modern Industry
               </div>
@@ -321,102 +321,102 @@ export default function SolarNovaIndustrialPage() {
           </div>
         </div>
       </div>
-{/* ================= INDUSTRIAL SOLAR BENEFITS (REIMAGINED) ================= */}
-<section className="relative mx-auto max-w-7xl px-6 py-14">
-  <motion.div
-    variants={container}
-    initial="hidden"
-    whileInView="show"
-    viewport={{ once: true, amount: 0.2 }}
-    className="space-y-12"
-  >
-    {/* Headline and Subtext */}
-    <div className="mx-auto max-w-7xl text-center">
-      <motion.h2
-        variants={item}
-        className="text-3xl font-extrabold tracking-tight sm:text-4xl"
-        style={{ color: THEME.ink }}
-      >
-        Unlock Industrial Efficiency with Solar
-      </motion.h2>
-      <motion.p variants={item} className="mt-4 text-lg" style={{ color: '#0e1726b3' }}>
-        Installing solar on your factory or warehouse is a strategic move that fundamentally reduces operational costs. Leverage industrial roofs for fast, scalable installation and maximize yield with smart optimizations.
-      </motion.p>
-    </div>
+      {/* ================= INDUSTRIAL SOLAR BENEFITS (REIMAGINED) ================= */}
+      <section className="relative mx-auto max-w-7xl px-6 py-14">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          className="space-y-12"
+        >
+          {/* Headline and Subtext */}
+          <div className="mx-auto max-w-7xl text-center">
+            <motion.h2
+              variants={item}
+              className="text-3xl font-extrabold tracking-tight sm:text-4xl"
+              style={{ color: THEME.ink }}
+            >
+              Unlock Industrial Efficiency with Solar
+            </motion.h2>
+            <motion.p variants={item} className="mt-4 text-lg" style={{ color: '#0e1726b3' }}>
+              Installing solar on your factory or warehouse is a strategic move that fundamentally reduces operational costs. Leverage industrial roofs for fast, scalable installation and maximize yield with smart optimizations.
+            </motion.p>
+          </div>
 
-    {/* Key Metrics / Financial Summary - The New Focus */}
-    <motion.div
-      variants={item}
-      className="grid grid-cols-1 gap-6 sm:grid-cols-3"
-    >
-      <div className="text-center rounded-xl bg-white p-6 shadow-lg border-t-4 border-[#FC763A]">
-        <div className="text-4xl font-bold" style={{ color: '#000000' }}>
-          &gt;30%
-        </div>
-        <div className="mt-2 text-sm font-medium uppercase tracking-wider text-gray-500">
-          Return on Investment
-        </div>
-      </div>
-      <div className="text-center rounded-xl bg-white p-6 shadow-lg border-t-4 border-[#FC763A]">
-        <div className="text-4xl font-bold" style={{ color: '#000000' }}>
-          &lt;4 Years
-        </div>
-        <div className="mt-2 text-sm font-medium uppercase tracking-wider text-gray-500">
-          Typical Payback Period
-        </div>
-      </div>
-      <div className="text-center rounded-xl bg-white p-6 shadow-lg border-t-4 border-[#FC763A]">
-        <div className="text-4xl font-bold" style={{ color: '#000000' }}>
-          60–80%+
-        </div>
-        <div className="mt-2 text-sm font-medium uppercase tracking-wider text-gray-500">
-          Electricity Demand Offset
-        </div>
-      </div>
-    </motion.div>
-
-    {/* Detailed Benefits Grid (from old bullets and key facts) */}
-    <motion.ul variants={container} className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 pt-4">
-      {[
-        {
-          icon: ShieldCheck,
-          title: 'Immediate Cost Reduction',
-          desc: 'Directly lowers operational expenses tied to high energy consumption and lighting requirements.',
-        },
-        {
-          icon: Zap,
-          title: 'Power Heavy Machinery',
-          desc: 'The solar installation reliably supports heavy process loads, machinery, and essential ventilation systems.',
-        },
-        {
-          icon: DollarSign,
-          title: 'Accelerated Tax Edge',
-          desc: 'Benefit from accelerated depreciation (AD) and relevant state/central government incentives for a faster financial closure.',
-        },
-        {
-          icon: HardHat,
-          title: 'Simplified Installation',
-          desc: 'Metal sheds and RCC roofs simplify the engineering, making installation fast, scalable, and non-disruptive.',
-        },
-      ].map((b) => (
-        <motion.li key={b.title} variants={item} className="space-y-3  hover:bg-amber-700/30 p-4 rounded-xl transition">
-          <div
-            className="flex h-12 w-12 items-center justify-center  rounded-xl"
-            style={{ background: "#f0fdf4", color: "#047857" }} // Light Green background
+          {/* Key Metrics / Financial Summary - The New Focus */}
+          <motion.div
+            variants={item}
+            className="grid grid-cols-1 gap-6 sm:grid-cols-3"
           >
-            <b.icon className="h-6 w-6" />
-          </div>
-          <div className="font-semibold" style={{ color: THEME.ink }}>
-            {b.title}
-          </div>
-          <div className="text-sm" style={{ color: '#0e1726b3' }}>
-            {b.desc}
-          </div>
-        </motion.li>
-      ))}
-    </motion.ul>
-  </motion.div>
-</section>
+            <div className="text-center rounded-xl bg-white p-6 shadow-lg border-t-4 border-[#FC763A]">
+              <div className="text-4xl font-bold" style={{ color: '#000000' }}>
+                &gt;30%
+              </div>
+              <div className="mt-2 text-sm font-medium uppercase tracking-wider text-gray-500">
+                Return on Investment
+              </div>
+            </div>
+            <div className="text-center rounded-xl bg-white p-6 shadow-lg border-t-4 border-[#FC763A]">
+              <div className="text-4xl font-bold" style={{ color: '#000000' }}>
+                &lt;4 Years
+              </div>
+              <div className="mt-2 text-sm font-medium uppercase tracking-wider text-gray-500">
+                Typical Payback Period
+              </div>
+            </div>
+            <div className="text-center rounded-xl bg-white p-6 shadow-lg border-t-4 border-[#FC763A]">
+              <div className="text-4xl font-bold" style={{ color: '#000000' }}>
+                60–80%+
+              </div>
+              <div className="mt-2 text-sm font-medium uppercase tracking-wider text-gray-500">
+                Electricity Demand Offset
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Detailed Benefits Grid (from old bullets and key facts) */}
+          <motion.ul variants={container} className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 pt-4">
+            {[
+              {
+                icon: ShieldCheck,
+                title: 'Immediate Cost Reduction',
+                desc: 'Directly lowers operational expenses tied to high energy consumption and lighting requirements.',
+              },
+              {
+                icon: Zap,
+                title: 'Power Heavy Machinery',
+                desc: 'The solar installation reliably supports heavy process loads, machinery, and essential ventilation systems.',
+              },
+              {
+                icon: DollarSign,
+                title: 'Accelerated Tax Edge',
+                desc: 'Benefit from accelerated depreciation (AD) and relevant state/central government incentives for a faster financial closure.',
+              },
+              {
+                icon: HardHat,
+                title: 'Simplified Installation',
+                desc: 'Metal sheds and RCC roofs simplify the engineering, making installation fast, scalable, and non-disruptive.',
+              },
+            ].map((b) => (
+              <motion.li key={b.title} variants={item} className="space-y-3  hover:bg-amber-700/30 p-4 rounded-xl transition">
+                <div
+                  className="flex h-12 w-12 items-center justify-center  rounded-xl"
+                  style={{ background: "#f0fdf4", color: "#047857" }} // Light Green background
+                >
+                  <b.icon className="h-6 w-6" />
+                </div>
+                <div className="font-semibold" style={{ color: THEME.ink }}>
+                  {b.title}
+                </div>
+                <div className="text-sm" style={{ color: '#0e1726b3' }}>
+                  {b.desc}
+                </div>
+              </motion.li>
+            ))}
+          </motion.ul>
+        </motion.div>
+      </section>
 
       {/* ================= RESULTS ================= */}
       <div className="bg-white py-14">
@@ -464,8 +464,7 @@ export default function SolarNovaIndustrialPage() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
-          className="grid items-center gap-8 rounded-2xl p-6 ring-1"
-          style={{ background: "linear-gradient(45deg,#ffedd5,#fef3c7)", borderColor: "#f59e0b33" }}
+          className="grid items-center gap-8 rounded-2xl bg-white p-6 shadow-xl ring-1 ring-black/10"
         >
           <motion.div variants={item} className="space-y-3">
             <div className="text-sm font-semibold" style={{ color: "#78350f" }}>
@@ -478,7 +477,7 @@ export default function SolarNovaIndustrialPage() {
               High peak load and large rooftops make solar perfect for factories and warehouses. Reduce your carbon
               footprint while boosting profitability.
             </p>
-           
+
           </motion.div>
           <motion.div variants={item} className="grid grid-cols-2 gap-3">
             {[
@@ -489,14 +488,16 @@ export default function SolarNovaIndustrialPage() {
             ].map((c) => (
               <div
                 key={c.t}
-                className="rounded-xl p-4 ring-1"
-                style={{ background: "white", borderColor: "#f59e0b33" }}
+                className="group relative overflow-hidden rounded-xl border border-orange-100 bg-white p-4 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-[#FC763A]/20"
               >
-                <div className="text-sm font-medium" style={{ color: THEME.ink }}>
-                  {c.t}
-                </div>
-                <div className="text-sm" style={{ color: "#0e1726b3" }}>
-                  {c.d}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-white to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="relative z-10 flex flex-col gap-1">
+                  <span className="text-sm font-extrabold text-[#686868] transition-colors group-hover:text-black">
+                    {c.t}
+                  </span>
+                  <span className="text-sm font-medium leading-snug text-[#FC763A]">
+                    {c.d}
+                  </span>
                 </div>
               </div>
             ))}
@@ -567,17 +568,17 @@ export default function SolarNovaIndustrialPage() {
                   <motion.div
                     key={i}
                     variants={item}
-                    className="flex items-center justify-between rounded-xl border border-black/50 bg-white p-4 shadow-lg shadow-black/50"
+                    className="flex items-center justify-between rounded-xl border border-orange-200 bg-orange-50 p-4 shadow-lg shadow-orange-500/10 transition-colors hover:bg-orange-100"
                   >
                     <div>
-                      <p className="text-sm font-semibold" style={{ color: THEME.ink }}>
+                      <p className="text-sm font-semibold text-black">
                         {cs.n}
                       </p>
-                      <p className="text-xs" style={{ color: "#0e172699" }}>
+                      <p className="mt-1 text-xs font-semibold text-[#FC763A]">
                         {cs.s} • {cs.o}
                       </p>
                     </div>
-                    <LineChart className="h-5 w-5" style={{ color: "#0e172666" }} />
+                    <LineChart className="h-5 w-5 text-orange-400" />
                   </motion.div>
                 ))}
               </div>
@@ -647,6 +648,7 @@ export default function SolarNovaIndustrialPage() {
           </motion.form>
         </motion.div>
       </section> */}
+      {openLeadPopup && <LeadPopup onClose={() => setOpenLeadPopup(false)} />}
     </section>
   );
 }

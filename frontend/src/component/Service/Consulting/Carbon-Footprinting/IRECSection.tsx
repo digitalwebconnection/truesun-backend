@@ -29,7 +29,7 @@ const IRECSection = () => {
                             </p>
                             <p>
                                 Each I-REC represents <span className="text-slate-900 font-semibold">1 MWh</span> of renewable electricity
-                                generated from sources such as solar, wind, or hydro.By purchasing I-RECs, your business can claim renewable energy usage without changing your physical power source.
+                                generated from sources such as solar, wind, or hydro. By purchasing I-RECs.
                             </p>
                             <p className="bg-slate-50 p-4 rounded-2xl border-l-4 border-[#FC763A] ">
                                 "Claim renewable energy usage without changing your physical power source."

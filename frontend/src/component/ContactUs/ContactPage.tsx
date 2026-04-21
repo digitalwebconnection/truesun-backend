@@ -1,4 +1,5 @@
 import React, { useState, type JSX } from "react";
+import { PhoneCall, MessageCircle, Mail, MapPin } from "lucide-react";
 
 type Status = {
   loading: boolean;
@@ -12,10 +13,44 @@ function ContactForm(): JSX.Element {
     message: "",
     ok: null,
   });
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [emailValidation, setEmailValidation] = useState<{status: 'idle'|'valid'|'error', msg: string}>({status: 'idle', msg: ''});
+  const [phoneValidation, setPhoneValidation] = useState<{status: 'idle'|'valid'|'error', msg: string}>({status: 'idle', msg: ''});
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value.replace(/\D/g, '').slice(0, 10);
+    setPhone(val);
+    if (val.length === 0) {
+      setPhoneValidation({status: 'idle', msg: ''});
+    } else if (val.length < 10) {
+      setPhoneValidation({status: 'error', msg: 'Incorrect.'});
+    } else {
+      setPhoneValidation({status: 'valid', msg: 'Valid phone number.'});
+    }
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setEmail(val);
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (val.length === 0) {
+      setEmailValidation({status: 'idle', msg: ''});
+    } else if (!emailRegex.test(val)) {
+      setEmailValidation({status: 'error', msg: 'Incorrect email format.'});
+    } else {
+      setEmailValidation({status: 'valid', msg: 'Valid email address.'});
+    }
+  };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus({ loading: true, message: "", ok: null });
+
+    if (emailValidation.status === 'error' || phoneValidation.status === 'error' || !email || !phone || phone.length < 10) {
+      setStatus({ loading: false, message: "Please fix the validation errors before submitting.", ok: false });
+      return;
+    }
 
     const form = e.currentTarget;
     const fd = new FormData(form);
@@ -44,6 +79,10 @@ function ContactForm(): JSX.Element {
           ok: true,
         });
         form.reset();
+        setEmail("");
+        setPhone("");
+        setEmailValidation({status: 'idle', msg: ''});
+        setPhoneValidation({status: 'idle', msg: ''});
       } else {
         setStatus({
           loading: false,
@@ -94,12 +133,21 @@ function ContactForm(): JSX.Element {
           <label className="text-xs font-medium text-slate-700">Email</label>
           <input
             name="email"
-
             type="email"
             placeholder="you@example.com"
             required
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-[#FC763A] focus:ring-2 focus:ring-[#FC763A] focus:outline-none transition"
+            value={email}
+            onChange={handleEmailChange}
+            className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none transition ${
+              emailValidation.status === 'error'
+                ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20" 
+                : emailValidation.status === 'valid'
+                ? "border-emerald-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+                : "border-slate-300 focus:border-[#FC763A] focus:ring-2 focus:ring-[#FC763A]"
+            }`}
           />
+          {emailValidation.status === 'error' && <p className="text-xs text-red-500 mt-1">{emailValidation.msg}</p>}
+          {emailValidation.status === 'valid' && <p className="text-xs text-emerald-500 mt-1">{emailValidation.msg}</p>}
         </div>
 
         <div className="space-y-1">
@@ -111,8 +159,18 @@ function ContactForm(): JSX.Element {
             required
             type="tel"
             placeholder="+91......"
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-[#FC763A] focus:ring-2 focus:ring-[#FC763A] focus:outline-none transition"
+            value={phone}
+            onChange={handlePhoneChange}
+            className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none transition ${
+              phoneValidation.status === 'error'
+                ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20" 
+                : phoneValidation.status === 'valid'
+                ? "border-emerald-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+                : "border-slate-300 focus:border-[#FC763A] focus:ring-2 focus:ring-[#FC763A]"
+            }`}
           />
+          {phoneValidation.status === 'error' && <p className="text-xs text-red-500 mt-1">{phoneValidation.msg}</p>}
+          {phoneValidation.status === 'valid' && <p className="text-xs text-emerald-500 mt-1">{phoneValidation.msg}</p>}
         </div>
       </div>
 
@@ -209,36 +267,63 @@ const ContactPage: React.FC = () => {
       {/* ========= CONTACT CARDS ========= */}
       <div className="max-w-7xl mx-auto px-6 grid gap-6 md:grid-cols-3 mb-16">
         {/* Phone */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#FC763A]/60 transition-all duration-300 ease-out">
-          <p className="text-xs uppercase tracking-wide text-slate-500">Call / WhatsApp</p>
-          <h3 className="mt-2 text-lg font-semibold text-slate-900">Talk to our team</h3>
-          <p className="mt-2 text-sm text-slate-600">For quick queries or site visit scheduling.</p>
-          <div className="mt-4 space-y-1 text-sm">
-            <a href="tel:+918850845149" className="text-[#FC763A] hover:underline inline-flex items-center text-lg gap-1"><span>📞</span> +91 88508 45149</a> <br />
-            <a href="https://wa.me/918850845149" target="_blank" rel="noreferrer" className="text-emerald-600 hover:underline inline-flex text-lg items-center gap-1"><span>💬</span> Chat on WhatsApp</a>
+        <div className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#FC763A]/50 transition-all duration-300 ease-out relative overflow-hidden">
+          <div className="absolute -top-4 -right-4 p-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
+            <PhoneCall size={120} />
+          </div>
+          <div className="w-14 h-14 bg-orange-50 text-[#FC763A] rounded-xl flex items-center justify-center mb-6">
+            <PhoneCall size={28} />
+          </div>
+          <p className="text-xs font-bold uppercase tracking-wide text-[#FC763A]">Call / WhatsApp</p>
+          <h3 className="mt-2 text-xl font-bold text-slate-900">Talk to our team</h3>
+          <p className="mt-2 text-sm text-slate-600 leading-relaxed">For quick queries, pricing estimates, or site visit scheduling.</p>
+          <div className="mt-6 space-y-4 text-sm">
+            <a href="tel:+918850845149" className="text-slate-800 font-semibold hover:text-[#FC763A] transition-colors flex items-center gap-3 text-base">
+              <span className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center"><PhoneCall size={16} className="text-[#FC763A]" /></span> +91 88508 45149
+            </a>
+            <a href="https://wa.me/918850845149" target="_blank" rel="noreferrer" className="text-slate-800 font-semibold hover:text-emerald-500 transition-colors flex items-center gap-3 text-base">
+              <span className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center"><MessageCircle size={16} className="text-emerald-500" /></span> Chat on WhatsApp
+            </a>
           </div>
         </div>
 
         {/* Email */}
-        <div className="rounded-2xl border border-slate-600/50 bg-white p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#FC763A]/60 transition-all duration-300 ease-out">
-          <p className="text-xs uppercase tracking-wide text-slate-500">Email</p>
-          <h3 className="mt-2 text-lg font-semibold text-slate-900">Project & Partnerships</h3>
-          <p className="mt-2 text-sm text-slate-600">Send RFQs, energy bills, or proposal requests.</p>
-          <div className="mt-4 text-sm space-y-1">
-            <a href="mailto:info@truesun.in" className="text-[#FC763A] text-lg hover:underline break-all">info@truesun.in</a>
+        <div className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#FC763A]/50 transition-all duration-300 ease-out relative overflow-hidden">
+          <div className="absolute -top-4 -right-4 p-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
+            <Mail size={120} />
+          </div>
+          <div className="w-14 h-14 bg-orange-50 text-[#FC763A] rounded-xl flex items-center justify-center mb-6">
+            <Mail size={28} />
+          </div>
+          <p className="text-xs font-bold uppercase tracking-wide text-[#FC763A]">Email</p>
+          <h3 className="mt-2 text-xl font-bold text-slate-900">Project Quotes</h3>
+          <p className="mt-2 text-sm text-slate-600 leading-relaxed">Send RFQs, energy bills, tender details, or proposal requests.</p>
+          <div className="mt-6 space-y-4 text-sm">
+            <a href="mailto:info@truesun.in" className="text-slate-800 font-semibold hover:text-[#FC763A] transition-colors flex items-center gap-3 text-base break-all">
+              <span className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0"><Mail size={16} className="text-[#FC763A]" /></span> info@truesun.in
+            </a>
           </div>
         </div>
 
         {/* Address */}
-        <div className="rounded-2xl border border-slate-600/50 bg-white p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#FC763A]/60 transition-all duration-300 ease-out">
-          <p className="text-xs uppercase tracking-wide text-slate-500">Office</p>
-          <h3 className="mt-2 text-lg font-semibold text-slate-900">Visit TrueSun</h3>
-          <p className="mt-2 text-md text-slate-900">Meet our engineering team and discuss your requirement.</p>
-          <p className="mt-4 text-sm text-slate-700">
-            8th floor, B-Wing, Peninsula Business Park, Tower B, Lower Parel
-            Mumbai - 400013
-          </p>
-          <p className="mt-3 text-xs text-slate-500">Appointments preferred · Parking available</p>
+        <div className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#FC763A]/50 transition-all duration-300 ease-out relative overflow-hidden">
+          <div className="absolute -top-4 -right-4 p-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
+            <MapPin size={120} />
+          </div>
+          <div className="w-14 h-14 bg-orange-50 text-[#FC763A] rounded-xl flex items-center justify-center mb-6">
+            <MapPin size={28} />
+          </div>
+          <p className="text-xs font-bold uppercase tracking-wide text-[#FC763A]">Office</p>
+          <h3 className="mt-2 text-xl font-bold text-slate-900">Visit TrueSun</h3>
+          <p className="mt-2 text-sm text-slate-600 leading-relaxed">Meet our engineering team and discuss your solar requirement in person.</p>
+          <div className="mt-6 text-sm text-slate-800 font-medium flex items-start gap-3">
+            <span className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0"><MapPin size={16} className="text-[#FC763A]" /></span>
+            <span className="leading-relaxed relative top-1">
+              8th floor, B-Wing, Peninsula Business Park, Tower B, Lower Parel, 
+              Mumbai - 400013
+            </span>
+          </div>
+          <p className="mt-5 text-xs font-semibold text-slate-400">Appointments preferred · Parking available</p>
         </div>
       </div>
 

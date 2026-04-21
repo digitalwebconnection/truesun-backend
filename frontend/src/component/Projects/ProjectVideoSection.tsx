@@ -5,10 +5,10 @@ import v3 from "../../assets/videos/3.mp4";
 import v4 from "../../assets/videos/4.mp4";
 
 const videos = [
-  { video: v1, title: "Residential Rooftop" },
-  { video: v2, title: "Commercial Solar Farm" },
-  { video: v3, title: "Industrial Storage" },
-  { video: v4, title: "Hybrid Energy System" },
+  { video: v1, title: "Residential Rooftop", detail: "Pune, Maharashtra" },
+  { video: v2, title: "Commercial Setup", detail: "Mumbai, Maharashtra" },
+  { video: v3, title: "Industrial Storage", detail: "Nashik, Maharashtra" },
+  { video: v4, title: "Hybrid Energy System", detail: "Surat, Gujarat" },
 ];
 
 export default function ProjectVideoSection() {
@@ -61,10 +61,15 @@ export default function ProjectVideoSection() {
               </div>
 
               {/* Content */}
-              <div className="p-6 flex justify-between items-center">
-                <h3 className="text-xl font-bold text-[#2D2D2D] group-hover:text-[#FC763A]">
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-[#2D2D2D] group-hover:text-[#FC763A] transition-colors">
                   {item.title}
                 </h3>
+                {item.detail && (
+                  <p className="mt-2 text-sm text-slate-500 font-medium">
+                    {item.detail}
+                  </p>
+                )}
               </div>
             </div>
           ))}

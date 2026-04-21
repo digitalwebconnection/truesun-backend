@@ -35,12 +35,12 @@ export default function WhyOMSection() {
 
         {/* LEFT SIDE */}
         <div>
-          <h4 className="text-sm tracking-widest text-[#FC763A] font-semibold mb-3 uppercase">
+          <h4 className="text-sm tracking-widest text-black font-semibold mb-3 uppercase">
             WHY O&M FROM TRUESUN
           </h4>
 
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
-            Protecting Your <span className="text-[#FC763A]">Solar Investment</span>
+            <span className="text-[#FC763A]">Protecting Your Solar Investment</span>
           </h2>
 
           <p className="text-gray-600 text-lg leading-relaxed">

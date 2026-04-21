@@ -107,7 +107,7 @@ export default function WhyTrueSun() {
           <h2 className="text-4xl md:text-5xl font-bold text-[#4A4A4A]">
             Why{" "}
             <span className="bg-[#FC763A]  bg-clip-text text-transparent">
-              TrueSun
+              TrueSun?
             </span>
           </h2>
           <p className="mt-4 text-[#686868] max-w-2xl mx-auto text-lg">

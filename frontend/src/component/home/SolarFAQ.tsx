@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet";
 const DEFAULT_ITEMS = [
   {
     id: "cost",
-    question: "I don’t have any available roof space available but ground space is available. Can I utilize this for solar power generation?",
+    question: "I don’t have rooftop space available, but I have ground space. Can this be utilized for solar power generation?",
     answer:
       "Yes. The regulation allows you to use this space for solar power generation.",
   },

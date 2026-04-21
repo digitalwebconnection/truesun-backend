@@ -1,21 +1,14 @@
 
 import {
-  Building2,
-  Factory,
-  Home,
+
   Sun,
-  Layers,
+
 } from "lucide-react";
 import { useState } from "react";
 import LeadPopup from "../LeadPopup";
 
 // --- Configuration Data ---
-const tags = [
-  { label: "Residential", icon: Home, color: "text-orange-300" },
-  { label: "Commercial", icon: Building2, color: "text-sky-300" },
-  { label: "Industrial", icon: Factory, color: "text-emerald-300" },
-  { label: "CSR & Institutions", icon: Layers, color: "text-purple-300" },
-];
+
 
 export default function AppSimple() {
   const [openLeadPopup, setOpenLeadPopup] = useState(false);
@@ -61,7 +54,7 @@ export default function AppSimple() {
         </div>
 
         {/* --- Project Tags Area (Left aligned) --- */}
-        <div className="max-w-3xl mt-8">
+        {/* <div className="max-w-3xl mt-8">
           <h3 className="text-lg font-semibold text-gray-100 mb-4 drop-shadow">Filter by Segment:</h3>
           <div className="flex flex-wrap gap-3">
             {tags.map((tag) => (
@@ -75,7 +68,7 @@ export default function AppSimple() {
               </button>
             ))}
           </div>
-        </div>
+        </div> */}
         
       </div>
       {/* Popup Mount */}
