@@ -1,21 +1,10 @@
 
 import {
-  Building2,
-  Factory,
-  Home,
   Sun,
-  Layers,
+
 } from "lucide-react";
 import { useState } from "react";
 import LeadPopup from "../LeadPopup";
-
-// --- Configuration Data ---
-const tags = [
-  { label: "Residential", icon: Home, color: "text-orange-300" },
-  { label: "Commercial", icon: Building2, color: "text-sky-300" },
-  { label: "Industrial", icon: Factory, color: "text-emerald-300" },
-  { label: "CSR & Institutions", icon: Layers, color: "text-purple-300" },
-];
 
 export default function AppSimple() {
   const [openLeadPopup, setOpenLeadPopup] = useState(false);

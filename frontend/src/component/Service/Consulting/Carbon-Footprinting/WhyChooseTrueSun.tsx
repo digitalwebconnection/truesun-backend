@@ -1,4 +1,4 @@
-import { Layers, Globe, Zap, Target, ArrowUpRight } from 'lucide-react';
+import { Layers, Globe, Zap, Target} from 'lucide-react';
 
 const WhyChooseTrueSun = () => {
   const reasons = [

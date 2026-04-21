@@ -5,9 +5,8 @@ import LeadPopup from "../../../LeadPopup";
 import {
   motion,
   AnimatePresence,
-  useInView,
   useMotionValue,
-  useSpring,
+ 
   useTransform,
 } from "framer-motion";
 import {
@@ -531,104 +530,6 @@ function Sparkles({ count = 16 }: { count?: number }) {
   );
 }
 
-
-
-function Dial({
-  label,
-  value,
-  suffix = "%",
-}: {
-  label: string;
-  value: number;
-  suffix?: string;
-}) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { once: true, amount: 0.6 });
-  const progress = useSpring(0, { stiffness: 120, damping: 18 });
-
-  useEffect(() => {
-    if (inView) progress.set(value);
-  }, [inView, value, progress]);
-
-  const angle = useTransform(progress, [0, 100], [0, 180]);
-
-  return (
-    <div
-      ref={ref}
-      className="flex items-center gap-3 rounded-lg bg-white/90 p-3 text-slate-800 ring-1 ring-slate-900/10"
-    >
-      <div className="relative h-10 w-10">
-        <svg viewBox="0 0 36 20" className="h-10 w-10 -rotate-90">
-          <path
-            d="M18 18 A 16 16 0 0 1 2 2"
-            fill="none"
-            stroke="#e2e8f0"
-            strokeWidth="4"
-          />
-          <path
-            d="M18 18 A 16 16 0 0 1 2 2"
-            fill="none"
-            stroke="#0f172a"
-            strokeWidth="4"
-            strokeDasharray="50"
-            strokeDashoffset="50"
-          >
-            <animate
-              attributeName="stroke-dashoffset"
-              from="50"
-              to={`${50 - (value / 100) * 50}`}
-              dur="1.2s"
-              fill="freeze"
-              begin="indefinite"
-            />
-          </path>
-        </svg>
-        <motion.div
-          className="absolute left-1/2 top-1/2 h-3 w-0.5 -translate-x-1/2 -translate-y-1/2 origin-bottom rounded-full bg-slate-900"
-          style={{ rotate: angle }}
-        />
-      </div>
-      <div>
-        <div className="text-[10px] uppercase tracking-wide text-slate-500">
-          {label}
-        </div>
-        <div className="text-xs font-semibold">
-          <AnimatedCounter to={value} suffix={suffix} />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Animated counter for numeric strings
-function AnimatedCounter({
-  to,
-  suffix = "",
-  inlineFallback,
-}: {
-  to: number;
-  suffix?: string;
-  inlineFallback?: string;
-}) {
-  const ref = useRef<HTMLSpanElement | null>(null);
-  const inView = useInView(ref, { once: true, amount: 0.8 });
-  const mv = useMotionValue(0);
-  const spring = useSpring(mv, { stiffness: 120, damping: 16 });
-  const rounded = useTransform(spring, (v) => Math.round(v));
-
-  useEffect(() => {
-    if (inView) mv.set(to);
-  }, [inView, to, mv]);
-
-  if (Number.isNaN(to)) return <span ref={ref}>{inlineFallback ?? "—"}</span>;
-
-  return (
-    <span ref={ref}>
-      <motion.span>{rounded}</motion.span>
-      {suffix}
-    </span>
-  );
-}
 
 
 

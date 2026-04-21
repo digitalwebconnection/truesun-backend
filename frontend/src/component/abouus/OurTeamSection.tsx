@@ -33,25 +33,10 @@ const LEADERS: Leader[] = [
     linkedin: "https://www.linkedin.com/company/truesun/",
   },
   {
-    name: "Ashutosh Dwivedi",
-    title: "Senior Technical Advisor",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabOgeMNrSqYJ4c2-kMg0I_QreIqbVVfgvWQ&s",
-    bio: "Engineer with MBA in Power Management, optimizing performance ratios, open access, and O&M playbooks for long-term yield.",
-    tags: ["Performance PR", "Open Access", "O&M"],
-    linkedin: "https://www.linkedin.com/company/truesun/",
-  },
-   {
     name: "MD Saif Ansari.",
     title: "Site Engineer",
-<<<<<<< HEAD
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabOgeMNrSqYJ4c2-kMg0I_QreIqbVVfgvWQ&s",
-    bio: " He holds a Diploma in Electrical Engineering with 20+ years of experience in electrical and solar energy systems. He specializes in site inspections, electricity analysis, BOQ, design planning, and project execution.",
-=======
     image: Saif,
-    bio: " He holds a Diploma in Electrical Engineering with 20+ years of experience in electrical and solar energy systems. He specializes in site inspections, electricity analysis, BOQ, design planning, and project execution. He ensures smooth coordination and delivers reliable, cost-effective solutions.",
->>>>>>> dfec7389566f927a0e29f37819d3cb09380a6da6
+    bio: "He holds a Diploma in Electrical Engineering with 20+ years of experience in electrical and solar energy systems. He specializes in site inspections, electricity analysis, BOQ, design planning, and project execution.",
     tags: ["Performance PR", "Open Access", "O&M"],
     linkedin: "https://www.linkedin.com/in/md-saif-ansari-753a80288/",
   },

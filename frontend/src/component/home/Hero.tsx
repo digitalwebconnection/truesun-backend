@@ -69,16 +69,6 @@ export default function HeroSection() {
           </div>
 
           <div className="my-8 flex flex-wrap items-center gap-4">
-
-<<<<<<< HEAD
-            {/* <p className="text-xs sm:text-sm text-slate-500">
-              Takes less than 60 seconds. No obligation.
-            </p> */}
-=======
-            <p className="text-xs sm:text-sm text-slate-500">
-              Takes less than 60 seconds to submit your enquiry. No obligation
-            </p>
->>>>>>> dfec7389566f927a0e29f37819d3cb09380a6da6
           </div>
 
         </div>
