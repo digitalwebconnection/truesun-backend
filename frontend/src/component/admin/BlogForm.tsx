@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { apiUrl } from '../../lib/api';
+import RichTextEditor from './RichTextEditor';
 
 /* ── Blog type (matches MongoDB model) ──────────────────── */
 export interface Blog {
@@ -317,8 +318,12 @@ export default function BlogForm({ blog, onSuccess, onClose }: Props) {
 
             <div style={S.section}>
               <div style={S.sectionTitle}>Content</div>
-              <Field label="Blog Content (Markdown supported)">
-                <TextArea id="f-content" value={form.content} onChange={v => set('content', v)} placeholder="Write your blog post content here..." rows={10} />
+              <Field label="Blog Content">
+                <RichTextEditor
+                  value={form.content}
+                  onChange={v => set('content', v)}
+                  placeholder="Write your blog post content here..."
+                />
               </Field>
             </div>
 

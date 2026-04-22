@@ -101,9 +101,10 @@ const BlogDetails = () => {
         />
       )}
 
-      <div className="mt-12 whitespace-pre-line text-gray-800 text-lg md:text-xl leading-relaxed text-justify">
-        {blog.content}
-      </div>
+      <div 
+        className="mt-12 text-gray-800 text-lg md:text-xl leading-relaxed text-justify blog-content"
+        dangerouslySetInnerHTML={{ __html: blog.content }}
+      />
 
       {/* CTA */}
       <div className="mt-16 p-8 bg-slate-50 border border-slate-200 rounded-2xl text-center shadow-sm">
@@ -118,6 +119,21 @@ const BlogDetails = () => {
       {openLeadPopup && (
         <LeadPopup onClose={() => setOpenLeadPopup(false)} />
       )}
+
+      <style>{`
+        .blog-content h1 { font-size: 2.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; }
+        .blog-content h2 { font-size: 2rem; font-weight: 700; margin-top: 1.75rem; margin-bottom: 0.85rem; }
+        .blog-content h3 { font-size: 1.75rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        .blog-content h4 { font-size: 1.5rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.65rem; }
+        .blog-content h5 { font-size: 1.25rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; }
+        .blog-content h6 { font-size: 1.1rem; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.5rem; }
+        .blog-content p { margin-bottom: 1.25rem; }
+        .blog-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1.25rem; }
+        .blog-content ol { list-style-type: decimal; margin-left: 1.5rem; margin-bottom: 1.25rem; }
+        .blog-content img { max-width: 100%; height: auto; border-radius: 12px; margin: 2rem 0; }
+        .blog-content a { color: #FC763A; text-decoration: underline; }
+        .blog-content blockquote { border-left: 4px solid #FC763A; padding-left: 1.5rem; font-style: italic; margin: 1.5rem 0; color: #475569; }
+      `}</style>
     </div>
   );
 };

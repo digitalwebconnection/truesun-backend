@@ -6,6 +6,7 @@ const connectDB             = require('./src/config/db');
 const { verifyCloudinary }  = require('./src/config/cloudinary');
 const projectsRouter        = require('./src/routes/projects');
 const blogsRouter           = require('./src/routes/blogs');
+const uploadRouter          = require('./src/routes/upload');
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 const app  = express();
@@ -34,6 +35,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // ─── Routes ───────────────────────────────────────────────────────────────────
 app.use('/api/projects', projectsRouter);
 app.use('/api/blogs',    blogsRouter);
+app.use('/api/upload',   uploadRouter);
 
 app.get('/api/health', (_req, res) => {
   res.json({
