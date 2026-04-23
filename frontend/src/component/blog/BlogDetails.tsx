@@ -71,8 +71,8 @@ const BlogDetails = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-10 pb-20 relative">
 
-      <Link 
-        to="/Knowledgwe" 
+      <Link
+        to="/Knowledgwe"
         className="inline-flex items-center gap-2 px-4 mt-12 py-2 mb-8 text-sm font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors shadow-sm w-fit"
       >
         <ArrowLeft size={16} />
@@ -82,12 +82,12 @@ const BlogDetails = () => {
       <div className="flex flex-wrap items-center gap-4 mt-2 text-gray-600 text-sm mb-5">
         <span className="bg-slate-100 px-3 py-1 border rounded-full text-slate-800 font-semibold">{blog.categories}</span>
         <div className="flex items-center gap-1.5">
-           <Calendar size={15} />
-           <span>{blog.date}</span>
+          <Calendar size={15} />
+          <span>{blog.date}</span>
         </div>
         <div className="flex items-center gap-1.5">
-           <Clock size={15} />
-           <span>{blog.readTime}</span>
+          <Clock size={15} />
+          <span>{blog.readTime}</span>
         </div>
       </div>
 
@@ -101,8 +101,8 @@ const BlogDetails = () => {
         />
       )}
 
-      <div 
-        className="mt-12 text-gray-800 text-lg md:text-xl leading-relaxed text-justify blog-content"
+      <div
+        className="mt-12 text-gray-800 text-lg md:text-xl text-break text-justify blog-content"
         dangerouslySetInnerHTML={{ __html: blog.content }}
       />
 
@@ -121,21 +121,34 @@ const BlogDetails = () => {
       )}
 
       <style>{`
-        .blog-content h1 { font-size: 2.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; }
-        .blog-content h2 { font-size: 2rem; font-weight: 700; margin-top: 1.75rem; margin-bottom: 0.85rem; }
+        .blog-content {
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+        }
+        .blog-content h1 { font-size: 2.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; line-height: 1.2; }
+        .blog-content h2 { font-size: 2rem; font-weight: 700; margin-top: 1.75rem; margin-bottom: 0.85rem; line-height: 1.25; }
         .blog-content h3 { font-size: 1.75rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; }
         .blog-content h4 { font-size: 1.5rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.65rem; }
-        .blog-content h5 { font-size: 1.25rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; }
-        .blog-content h6 { font-size: 1.1rem; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.5rem; }
         .blog-content p { margin-bottom: 1.25rem; }
         .blog-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1.25rem; }
         .blog-content ol { list-style-type: decimal; margin-left: 1.5rem; margin-bottom: 1.25rem; }
         .blog-content img { max-width: 100%; height: auto; border-radius: 12px; margin: 2rem 0; }
+        .blog-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .blog-content table td, .blog-content table th { border: 1px solid #e2e8f0; padding: 0.75rem; text-align: left; }
         .blog-content a { color: #FC763A; text-decoration: underline; }
         .blog-content blockquote { border-left: 4px solid #FC763A; padding-left: 1.5rem; font-style: italic; margin: 1.5rem 0; color: #475569; }
+        .blog-content pre { background: #f1f5f9; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1.5rem 0; }
+        .blog-content iframe, .blog-content video { max-width: 100%; border-radius: 12px; margin: 2rem 0; }
+        
+        @media (max-width: 768px) {
+          .blog-content h1 { font-size: 2rem; }
+          .blog-content h2 { font-size: 1.75rem; }
+          .blog-content h3 { font-size: 1.5rem; }
+          .blog-content { font-size: 1.125rem; }
+        }
       `}</style>
     </div>
   );
 };
 
-export default BlogDetails;
+export default BlogDetails;

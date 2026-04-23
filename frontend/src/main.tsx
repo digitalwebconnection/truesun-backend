@@ -10,7 +10,7 @@ if (rootEl) {
     rootEl,
     <BrowserRouter>
       <App />
-    </BrowserRouter>  
+    </BrowserRouter> 
   );
 } else {
   console.error("Root element not found for hydration");
