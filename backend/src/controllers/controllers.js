@@ -73,7 +73,7 @@ async function destroyCloudinaryImage(url) {
 /** GET /api/projects — list all (newest first) */
 const getAllProjects = async (_req, res) => {
   try {
-    const projects = await Project.find().sort({ createdAt: -1 });
+    const projects = await Project.find().sort({ createdAt: -1 }).lean();
     res.json({ success: true, data: projects });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
@@ -83,7 +83,7 @@ const getAllProjects = async (_req, res) => {
 /** GET /api/projects/:id — single project */
 const getProjectById = async (req, res) => {
   try {
-    const project = await Project.findById(req.params.id);
+    const project = await Project.findById(req.params.id).lean();
     if (!project) return res.status(404).json({ success: false, message: 'Project not found' });
     res.json({ success: true, data: project });
   } catch (err) {
@@ -167,7 +167,7 @@ const deleteProject = async (req, res) => {
 /** GET /api/blogs — list all (newest first) */
 const getAllBlogs = async (_req, res) => {
   try {
-    const blogs = await Blog.find().sort({ createdAt: -1 });
+    const blogs = await Blog.find().sort({ createdAt: -1 }).lean();
     res.json({ success: true, data: blogs });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
@@ -177,7 +177,7 @@ const getAllBlogs = async (_req, res) => {
 /** GET /api/blogs/slug/:slug — single blog by slug */
 const getBlogBySlug = async (req, res) => {
   try {
-    const blog = await Blog.findOne({ slug: req.params.slug });
+    const blog = await Blog.findOne({ slug: req.params.slug }).lean();
     if (!blog) return res.status(404).json({ success: false, message: 'Blog not found' });
     res.json({ success: true, data: blog });
   } catch (err) {
@@ -188,7 +188,7 @@ const getBlogBySlug = async (req, res) => {
 /** GET /api/blogs/:id — single blog by MongoDB id (kept for admin use) */
 const getBlogById = async (req, res) => {
   try {
-    const blog = await Blog.findById(req.params.id);
+    const blog = await Blog.findById(req.params.id).lean();
     if (!blog) return res.status(404).json({ success: false, message: 'Blog not found' });
     res.json({ success: true, data: blog });
   } catch (err) {

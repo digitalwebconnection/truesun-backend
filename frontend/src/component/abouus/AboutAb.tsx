@@ -106,12 +106,12 @@ function HeroSplit() {
           Trusted Solar Partner for Homes & Businesses
         </div>
 
-        <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-black sm:text-5xl">
+        <h2 className="mt-2 text-4xl font-extrabold tracking-tight text-black sm:text-5xl">
           About{" "}
           <span className="text-[#fc763a]">
             TrueSun
           </span>
-        </h1>
+        </h2>
 
         <p className="mx-auto mt-4 max-w-7xl text-lg text-gray-700">
           We turn rooftops and land into long-term energy assets—delivering

@@ -13,7 +13,6 @@ import {
 import {
   Menu,
   X,
-  Sun,
   ChevronDown,
   ChevronRight,
   Wrench,
@@ -537,10 +536,7 @@ export default function Navbar() {
             className="flex items-center gap-2"
             onClick={() => setIsOpen(false)}
           >
-            <Sun className="h-8 w-8 text-[#FC763A]" />
-            <h2 className="text-2xl font-extrabold text-gray-900">
-              True<span className="text-[#FC763A]">Sun</span>
-            </h2>
+            <img src={logo} alt="" />
           </Link>
 
           <button
