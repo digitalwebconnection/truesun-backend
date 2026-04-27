@@ -108,7 +108,7 @@ const CarbonFootprintSectionWhite = () => {
 
                 </div>
                 <div className=' max-w-7xl mt-15 mx-auto text-center'>
-                    <h1 className='text-4xl py-5  font-bold'>From Measurement to Action</h1>
+                    <h2 className='text-4xl py-5  font-bold'>From Measurement to Action</h2>
                     <p className='text-md '>At TrueSun, we go beyond reporting. We help you reduce and offset emissions through renewable energy solutions, I-RECs, and carbon credits.</p>
                 </div>
                 {openLeadPopup && (

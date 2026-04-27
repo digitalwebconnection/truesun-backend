@@ -55,9 +55,9 @@ export default function NetZeroCommandCenterAddOn({
                             GHG Protocol • ISO 14064 • Global Carbon Markets
                         </div>
 
-                        <h2 className="mt-6 text-3xl sm:text-4xl max-w-4xl  font-bold text-white leading-tight">
+                        <h1 className="mt-6 text-3xl sm:text-4xl max-w-4xl  font-bold text-white leading-tight">
                             Carbon Footprinting, I-RECs & Carbon Credit Sourcing
-                        </h2>
+                        </h1>
 
                         <p className="mt-5 text-lg text-slate-300 max-w-4xl">
                             As businesses accelerate their transition towards sustainability and net-zero goals, managing carbon emissions has become a strategic priority. At TrueSun Energy Solutions, we provide end-to-end carbon management solutions—from measuring your carbon footprint to sourcing I-RECs and carbon credits across global markets.  </p>

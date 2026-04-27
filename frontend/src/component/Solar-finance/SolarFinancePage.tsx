@@ -233,9 +233,9 @@ export default function SolarFinancePage() {
             <p className="inline-flex items-center gap-2 rounded-full bg-[rgba(252,118,58,0.08)] px-3 py-1 text-sm font-semibold" style={{ color: PALETTE.primary }}>
               Finance made simple
             </p>
-            <h1 className="mt-4 text-3xl font-extrabold leading-tight text-[#686868] sm:text-4xl">
+            <h2 className="mt-4 text-3xl font-extrabold leading-tight text-[#686868] sm:text-4xl">
               Own solar with flexible finance — EMI, Zero-Upfront, or Subsidy combos
-            </h1>
+            </h2>
             <p className="mt-3 text-slate-700 max-w-xl">
               Pick a model that suits your budget. We work with banks and NBFCs to offer low-interest loans, and OPEX models for zero upfront capital. Get a clear number in under 2 minutes.
             </p>

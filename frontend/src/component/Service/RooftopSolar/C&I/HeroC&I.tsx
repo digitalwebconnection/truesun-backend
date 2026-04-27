@@ -225,9 +225,9 @@ export default function CIHeroSection() {
                 className="mt-5 text-white/80"
               >
                 <div className="relative inline-block">
-                  <h2 className="text-4xl font-extrabold leading-[1.1] text-white sm:text-5xl">
+                  <h1 className="text-4xl font-extrabold leading-[1.1] text-white sm:text-5xl">
                     {segment.title}
-                  </h2>
+                  </h1>
                   <motion.span
                     aria-hidden
                     className="absolute left-0 -bottom-2 h-[3px] w-full rounded-full"

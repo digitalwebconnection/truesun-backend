@@ -112,13 +112,13 @@ export default function SolarNovaIndustrialPage() {
               >
                 <Sparkles className="h-4 w-4" color={THEME.accent} /> A new standard for commercial & industrial solar
               </motion.span>
-              <motion.h1
+              <motion.h2
                 variants={item}
                 className="mt-4 text-3xl font-semibold leading-tight md:text-5xl"
                 style={{ color: THEME.ink }}
               >
                 Clean power that strengthens your bottom line
-              </motion.h1>
+              </motion.h2>
               <motion.p variants={item} className="mt-4 max-w-2xl" style={{ color: "#0e1726b3" }}>
                 Replace volatile grid tariffs with predictable solar generation. Built for offices, hospitals, schools,
                 malls, and factories that work hardest in daylight.

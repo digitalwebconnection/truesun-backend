@@ -156,9 +156,9 @@ const ResidentialSolarDetailsPage: FC = () => {
                 Residential Solar Panel Installation for Housing Societies, Villas & Bungalows
               </span>
 
-              <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl text-[#686868] font-extrabold tracking-tight leading-tight">
+              <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl text-[#686868] font-extrabold tracking-tight leading-tight">
                 Solar for Homes, Housing Societies, Villas & Bungalows
-              </h1>
+              </h2>
 
               <p className="mt-4 text-slate-700 leading-relaxed max-w-2xl">
                 We design and install grid-tied rooftop solar plants for cooperative housing societies, premium villas and independent bungalows.

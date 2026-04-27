@@ -92,9 +92,9 @@ export default function SolarCalculator() {
             <span className="inline-block px-4 py-1.5 mb-4 text-xs font-bold tracking-widest text-orange-600 uppercase bg-orange-100 rounded-full">
               Solar ROI Estimator
             </span>
-            <h1 className="text-3xl font-extrabold tracking-tight lg:text-5xl text-[#686868]">
+            <h2 className="text-3xl font-extrabold tracking-tight lg:text-5xl text-[#686868]">
               Switch to Solar, <span className="text-[#FC763A]">Save Forever.</span>
-            </h1>
+            </h2>
             <p className="max-w-3xl mx-auto mt-6 text-lg text-[#686868]">
               Calculate your system size, estimated savings, and government subsidies in under 60 seconds.
             </p>

@@ -1,8 +1,8 @@
 import React from "react";
 import { motion, type Variants, easeInOut, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import nitumam  from "../../assets/team/NituMam.jpg"
-import Saif  from "../../assets/team/SaifTeam.jpeg";
+import nitumam from "../../assets/team/NituMam.jpg"
+import Saif from "../../assets/team/SaifTeam.jpeg";
 import rc from "../../assets/team/MrRc.jpeg"
 /* -------------------- Types -------------------- */
 type Leader = {
@@ -99,6 +99,42 @@ function FAQSection() {
 
   return (
     <section className="bg-linear-to-br from-white via-amber-50/50 to-emerald-50/50 py-16">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: `
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Can you help with subsidies?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes, we handle end-to-end documentation and DISCOM coordination for applicable schemes."
+    }
+  },{
+    "@type": "Question",
+    "name": "Do you offer O&M?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "We provide AMC and remote monitoring with SLAs tailored to your plant size."
+    }
+  },{
+    "@type": "Question",
+    "name": "What warranties do I get?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Typically 30-year performance on modules, 5–10 years on inverters, and workmanship warranty."
+    }
+  },{
+    "@type": "Question",
+    "name": "How soon can I go live?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Residential systems often go live in 2–4 weeks depending on approvals; commercial timelines vary."
+    }
+  }]
+}
+      ` }} />
       <div className="mx-auto max-w-4xl px-4">
         <motion.div {...fadeUpProps} className="mx-auto mb-12 text-center">
           <h2 className="text-4xl font-black tracking-tight text-black">
@@ -124,33 +160,29 @@ function FAQSection() {
                   type: "spring",
                   stiffness: 100,
                 }}
-                className={`group overflow-hidden rounded-2xl border transition-shadow duration-300 ${
-                  isOpen
+                className={`group overflow-hidden rounded-2xl border transition-shadow duration-300 ${isOpen
                     ? "border-[#FC763A] bg-orange-50/30 shadow-lg"
                     : "border-gray-200 bg-white hover:border-orange-300 hover:shadow-md"
-                }`}
+                  }`}
               >
                 <button
                   onClick={() => setOpenItem(isOpen ? null : id)}
                   className="flex w-full items-center justify-between p-6 text-left"
                 >
                   <span
-                    className={`text-lg font-bold transition-colors ${
-                      isOpen ? "text-[#FC763A]" : "text-gray-900"
-                    }`}
+                    className={`text-lg font-bold transition-colors ${isOpen ? "text-[#FC763A]" : "text-gray-900"
+                      }`}
                   >
                     {q}
                   </span>
 
                   <div
-                    className={`ml-4 shrink-0 rounded-full p-1 transition-colors ${
-                      isOpen ? "bg-[#FC763A] text-white" : "bg-gray-100 text-gray-500"
-                    }`}
+                    className={`ml-4 shrink-0 rounded-full p-1 transition-colors ${isOpen ? "bg-[#FC763A] text-white" : "bg-gray-100 text-gray-500"
+                      }`}
                   >
                     <ChevronDown
-                      className={`h-5 w-5 transition-transform duration-500 ${
-                        isOpen ? "rotate-180" : ""
-                      }`}
+                      className={`h-5 w-5 transition-transform duration-500 ${isOpen ? "rotate-180" : ""
+                        }`}
                     />
                   </div>
                 </button>
@@ -224,7 +256,7 @@ export default function LeadershipSectionModern() {
           Meet the Visionaries
         </p>
         <h2 className="mt-2 text-4xl font-extrabold tracking-tight text-black sm:text-5xl">
-         Meet Our Team Membes
+          Meet Our Team Membes
         </h2>
         <p className="mt-4 text-lg text-neutral-600">
           A seasoned group shaping renewable energy with financial rigor, technical depth,
@@ -338,3 +370,4 @@ export default function LeadershipSectionModern() {
     </section>
   );
 }
+
