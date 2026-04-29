@@ -84,7 +84,6 @@ export default function SolarCalculator() {
     }
 
     setLoading(true);
-    const form = e.currentTarget;
     const submissionData = new FormData();
     submissionData.append("access_key", WEB3FORMS_ACCESS_KEY);
     submissionData.append("name", formData.name);
