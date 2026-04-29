@@ -20,7 +20,7 @@ const LEADERS: Leader[] = [
     name: "Nitu Goel",
     title: "Founder & CEO",
     image: nitumam,
-    bio: "15+ years in clean energy and climate finance, steering multi-MW programs and strategic partnerships that scale reliable solar outcomes.",
+    bio: "20+ years in clean energy and climate finance, steering multi-MW programs and strategic partnerships that scale reliable solar outcomes.Trusted leader in forging high-impact collaborations with policymakers, investors, developers, and global technology partners to advance decarbonization at scale.Committed to transforming the clean energy landscape through strategic vision, operational excellence, and long-term value creation in solar and sustainable infrastructure.",
     tags: ["Climate Strategy", "Solar EPC", "Partnerships"],
     linkedin: "https://www.linkedin.com/in/nitug/",
   },
@@ -28,7 +28,7 @@ const LEADERS: Leader[] = [
     name: "R.C. Goyal",
     title: "Head of Project Finance",
     image: rc,
-    bio: "Chartered Accountant leading bankable structures, SPVs, and risk frameworks to accelerate distributed solar portfolios across India.",
+    bio: "Chartered Accountant leading bankable structures, SPVs, and risk frameworks to accelerate distributed solar portfolios across India.Bringing deep financial expertise in project structuring, compliance, and investment strategy to support scalable renewable energy ventures.Specialized in designing robust financial models, optimizing capital deployment, and ensuring regulatory alignment for large-scale solar initiatives.",
     tags: ["Project Finance", "Risk & Compliance", "SPV Structuring"],
     linkedin: "https://www.linkedin.com/company/truesun/",
   },
@@ -137,7 +137,7 @@ function FAQSection() {
       ` }} />
       <div className="mx-auto max-w-4xl px-4">
         <motion.div {...fadeUpProps} className="mx-auto mb-12 text-center">
-          <h2 className="text-4xl font-black tracking-tight text-black">
+          <h2 className="text-4xl font-black tracking-tight text-[#686868]">
             Frequently Asked <span className="text-[#FC763A]">Questions</span>
           </h2>
           <p className="mt-4 text-lg text-gray-500">Quick answers to common questions</p>
@@ -255,7 +255,7 @@ export default function LeadershipSectionModern() {
         <p className="text-sm font-semibold uppercase tracking-wider text-[#FC763A]">
           Meet the Visionaries
         </p>
-        <h2 className="mt-2 text-4xl font-extrabold tracking-tight text-black sm:text-5xl">
+        <h2 className="mt-2 text-4xl font-extrabold tracking-tight text-[#686868] sm:text-5xl">
           Meet Our Team Membes
         </h2>
         <p className="mt-4 text-lg text-neutral-600">

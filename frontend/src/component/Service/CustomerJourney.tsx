@@ -10,12 +10,12 @@ import {
 } from "lucide-react";
 
 const steps = [
-  { text: "Customer Shares Bill & Location", icon: <FileText size={20} /> },
-  { text: "We Site Visit & Proposal", icon: <MapPin size={20} /> },
-  { text: "We Gets Approvals", icon: <ClipboardCheck size={20} /> },
-  { text: "We Installs Plant", icon: <Wrench size={20} /> },
-  { text: "We Maintains Plant", icon: <Settings size={20} /> },
-  { text: "Happy Customer", icon: <Smile size={20} /> },
+  { text: "We review your bill and capture site details", icon: <FileText size={20} /> },
+  { text: "We conduct the site assessment and create a custom proposal", icon: <MapPin size={20} /> },
+  { text: "We manage approvals, permits, and documentation", icon: <ClipboardCheck size={20} /> },
+  { text: "We install and commission your solar system", icon: <Wrench size={20} /> },
+  { text: "We monitor performance and provide ongoing maintenance", icon: <Settings size={20} /> },
+  { text: "You start saving on electricity bills", icon: <Smile size={20} /> },
 ];
 
 const containerVariants: Variants = {
@@ -71,7 +71,7 @@ export default function CustomerJourney() {
           <motion.h2 
              initial={{ opacity: 0, y: 10 }}
              whileInView={{ opacity: 1, y: 0 }}
-             className="text-4xl md:text-5xl font-extrabold text-[#333] mb-6"
+             className="text-4xl md:text-5xl font-extrabold text-[#686868] mb-6"
           >
             From Inquiry to <span className="text-[#FC763A]">Energy Independence</span>
           </motion.h2>

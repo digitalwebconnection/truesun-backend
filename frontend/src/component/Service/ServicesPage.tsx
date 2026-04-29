@@ -94,10 +94,10 @@ export default function ServicesPage() {
 
             <div className="flex flex-wrap gap-2 text-xs text-center justify-center">
               <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1">
-                High daytime consumption
+                Peak Daytime Demand
               </span>
               <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1">
-                Roof & ground-mounted
+                Rooftop Solutions
               </span>
               <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1">
                 Aesthetics + performance
@@ -133,11 +133,11 @@ export default function ServicesPage() {
                 chips={[
                   "Clean Cabling",
                   "Premium Finish",
-                  "Silent Operation",
+                  "Non-leakage Structure",
                 ]}
               />
 
-              <SegmentStep
+              {/* <SegmentStep
                 icon="🏥"
                 title="Hospitals & Critical Infra"
                 subtitle="Reliable power backup for mission-critical operations."
@@ -147,7 +147,7 @@ export default function ServicesPage() {
                   "Zero Downtime",
                   "High Reliability",
                 ]}
-              />
+              /> */}
 
               <SegmentStep
                 icon="🎓"

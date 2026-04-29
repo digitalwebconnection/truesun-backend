@@ -43,8 +43,9 @@ const SERVICES: ServiceGroup[] = [
       { label: "C&I (Commercial & Industrial)", to: "/services/rooftop/C&I" },
       { label: "Residential", to: "/services/rooftop/residential" },
       { label: "O&M (Operations and Maintenance)", to: "/services/rooftop/O&M" },
-      { label: "BESS (Battery Energy Storage Systems)", to: "/services/rooftop/BESS" },
       { label: "Subsidy ", to: "/services/rooftop/Subsidy" },
+      { label: "BESS (Battery Energy Storage Systems)", to: "/services/rooftop/BESS" }
+      
       // { label: "Solar Finance Solutions ", to: "/services/rooftop/Solar-Finance-Solutions" },
     ],
   },
