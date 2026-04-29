@@ -26,7 +26,7 @@ const DEFAULT_ITEMS = [
   },
   {
     id: "battery",
-    question: "Will my rooftop will get damaged while installing a rooftop solar plant?",
+    question: "Will my rooftop get damaged while installing a rooftop solar plant?",
     answer:
       "Not at all! Robust Design is the core of our offerings. We install the solar plant on flat cement and metal roofs without puncturing the roof.  Load bearing capacity and wind speed zone are in our primary considerations while designing & installing the plant.",
   },

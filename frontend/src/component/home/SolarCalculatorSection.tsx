@@ -27,20 +27,24 @@ const fmtINR = new Intl.NumberFormat("en-IN", {
 
 export default function SolarCalculator() {
   const [pincode, setPincode] = useState("");
-  const [rooftopArea, setRooftopArea] = useState<number>(800);
-  const [monthlyBill, setMonthlyBill] = useState<number>(3000);
+  const [rooftopArea, setRooftopArea] = useState<string>("");
+  const [monthlyBill, setMonthlyBill] = useState<string>("");
   const [category, setCategory] = useState("RESIDENTIAL");
+  const [mainErrors, setMainErrors] = useState<{ pincode?: string; area?: string; bill?: string }>({});
 
   const [openPopup, setOpenPopup] = useState(false);
   const [openLeadPopup, setOpenLeadPopup] = useState(false);
   const [leadSubmitted, setLeadSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
+  const [errors, setErrors] = useState<{ phone?: string; email?: string }>({});
+
   const selectedCategory = CUSTOMER_CATEGORY.find((c) => c.value === category);
 
   const result = useMemo(() => {
-    const safeArea = Math.max(0, rooftopArea);
-    const safeBill = Math.max(0, monthlyBill);
+    const safeArea = parseFloat(rooftopArea) || 0;
+    const safeBill = parseFloat(monthlyBill) || 0;
     const areaKW = Math.round(safeArea / ONE_KW_SOLAR_AREA);
     const units = safeBill / PRICE_PER_UNIT;
     const billKW = Math.round(units / UNIT_MONTHLY_ONE_KW);
@@ -59,17 +63,40 @@ export default function SolarCalculator() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrors({});
+
+    const newErrors: { phone?: string; email?: string } = {};
+
+    // phone validation
+    if (!/^\d{10}$/.test(formData.phone)) {
+      newErrors.phone = "Phone number must be 10 digits.";
+    }
+
+    // email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      newErrors.email = "Invalid email format.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     setLoading(true);
     const form = e.currentTarget;
-    const formData = new FormData(form);
-    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
-    formData.append("pincode", pincode);
-    formData.append("monthly_bill", String(monthlyBill));
-    formData.append("rooftop_area", String(rooftopArea));
-    formData.append("category", category);
+    const submissionData = new FormData();
+    submissionData.append("access_key", WEB3FORMS_ACCESS_KEY);
+    submissionData.append("name", formData.name);
+    submissionData.append("email", formData.email);
+    submissionData.append("phone", formData.phone);
+    submissionData.append("pincode", pincode);
+    submissionData.append("monthly_bill", String(monthlyBill));
+    submissionData.append("rooftop_area", String(rooftopArea));
+    submissionData.append("category", category);
 
     try {
-      const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: formData });
+      const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: submissionData });
       const data = await res.json();
       if (data.success) {
         setLeadSubmitted(true);
@@ -80,6 +107,20 @@ export default function SolarCalculator() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleCalculateClick = () => {
+    const errs: any = {};
+    if (!pincode) errs.pincode = "Please fill this";
+    if (!rooftopArea) errs.area = "Please fill this";
+    if (!monthlyBill) errs.bill = "Please fill this";
+    
+    if (Object.keys(errs).length > 0) {
+      setMainErrors(errs);
+      return;
+    }
+    setMainErrors({});
+    setOpenPopup(true);
   };
 
   return (
@@ -118,10 +159,15 @@ export default function SolarCalculator() {
                     placeholder="e.g. 110001"
                     required
                     value={pincode}
-                    onChange={(e) => setPincode(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FC763A] focus:border-transparent outline-none transition-all"
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/\D/g, "").slice(0, 6);
+                      setPincode(val);
+                      if (mainErrors.pincode) setMainErrors(prev => ({ ...prev, pincode: undefined }));
+                    }}
+                    className={`w-full pl-10 pr-4 py-3 bg-slate-50 border rounded-xl focus:ring-2 focus:ring-[#FC763A] focus:border-transparent outline-none transition-all ${mainErrors.pincode ? "border-red-500" : "border-slate-200"}`}
                   />
                 </div>
+                {mainErrors.pincode && <div className="text-[10px] text-red-500 px-1">{mainErrors.pincode}</div>}
               </div>
 
               <div className="space-y-2">
@@ -131,11 +177,16 @@ export default function SolarCalculator() {
                   <input
                     type="number"
                     required
+                    placeholder="e.g. 800"
                     value={rooftopArea}
-                    onChange={(e) => setRooftopArea(Number(e.target.value))}
-                    className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FC763A] outline-none transition-all"
+                    onChange={(e) => {
+                      setRooftopArea(e.target.value);
+                      if (mainErrors.area) setMainErrors(prev => ({ ...prev, area: undefined }));
+                    }}
+                    className={`w-full pl-10 pr-4 py-3 bg-slate-50 border rounded-xl focus:ring-2 focus:ring-[#FC763A] outline-none transition-all ${mainErrors.area ? "border-red-500" : "border-slate-200"}`}
                   />
                 </div>
+                {mainErrors.area && <div className="text-[10px] text-red-500 px-1">{mainErrors.area}</div>}
               </div>
 
               <div className="space-y-2">
@@ -143,13 +194,18 @@ export default function SolarCalculator() {
                 <div className="relative">
                   <CreditCard className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
                   <input
-                    type=""
+                    type="number"
                     required
+                    placeholder="e.g. 3000"
                     value={monthlyBill}
-                    onChange={(e) => setMonthlyBill(Number(e.target.value))}
-                    className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FC763A] outline-none transition-all"
+                    onChange={(e) => {
+                      setMonthlyBill(e.target.value);
+                      if (mainErrors.bill) setMainErrors(prev => ({ ...prev, bill: undefined }));
+                    }}
+                    className={`w-full pl-10 pr-4 py-3 bg-slate-50 border rounded-xl focus:ring-2 focus:ring-[#FC763A] outline-none transition-all ${mainErrors.bill ? "border-red-500" : "border-slate-200"}`}
                   />
                 </div>
+                {mainErrors.bill && <div className="text-[10px] text-red-500 px-1">{mainErrors.bill}</div>}
               </div>
 
               <div className="space-y-2">
@@ -170,7 +226,7 @@ export default function SolarCalculator() {
               </div>
 
               <button
-                onClick={() => setOpenPopup(true)}
+                onClick={handleCalculateClick}
                 className="w-full mt-4 bg-[#FC763A] hover:bg-[#e0652f] text-white py-4 rounded-xl font-bold text-lg shadow-lg shadow-orange-200 transition-all flex items-center justify-center gap-2 group"
               >
                 Calculate Savings <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -277,13 +333,51 @@ export default function SolarCalculator() {
                 <p className="text-orange-100 text-sm mt-1">Submit to view your detailed solar breakdown</p>
               </div>
               <form onSubmit={handleSubmit} className="p-8 space-y-4">
-                <input name="name" required placeholder="Full Name" className="w-full border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-[#FC763A] outline-none transition-all" />
-                <input name="email" required type="email" placeholder="Email Address" className="w-full border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-[#FC763A] outline-none transition-all" />
-                <input name="phone" required placeholder="Phone Number" className="w-full border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-[#FC763A] outline-none transition-all" />
+                <div className="space-y-1">
+                  <input 
+                    name="name" 
+                    required 
+                    placeholder="Full Name" 
+                    value={formData.name}
+                    onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                    className="w-full border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-[#FC763A] outline-none transition-all" 
+                  />
+                </div>
+                
+                <div className="space-y-1">
+                  <input 
+                    name="email" 
+                    required 
+                    placeholder="Email Address" 
+                    value={formData.email}
+                    onChange={(e) => {
+                      setFormData(prev => ({ ...prev, email: e.target.value }));
+                      if (errors.email) setErrors(prev => ({ ...prev, email: undefined }));
+                    }}
+                    className={`w-full border p-3 rounded-xl focus:ring-2 focus:ring-[#FC763A] outline-none transition-all ${errors.email ? "border-red-500" : "border-slate-200"}`} 
+                  />
+                  {errors.email && <div className="text-[10px] text-red-500 px-1">{errors.email}</div>}
+                </div>
+
+                <div className="space-y-1">
+                  <input 
+                    name="phone" 
+                    required 
+                    placeholder="Phone Number (10 digits)" 
+                    value={formData.phone}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                      setFormData(prev => ({ ...prev, phone: val }));
+                      if (errors.phone) setErrors(prev => ({ ...prev, phone: undefined }));
+                    }}
+                    className={`w-full border p-3 rounded-xl focus:ring-2 focus:ring-[#FC763A] outline-none transition-all ${errors.phone ? "border-red-500" : "border-slate-200"}`} 
+                  />
+                  {errors.phone && <div className="text-[10px] text-red-500 px-1">{errors.phone}</div>}
+                </div>
 
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || !formData.name || !formData.email || !formData.phone}
                   className="w-full bg-slate-900 text-white py-4 rounded-xl font-bold mt-2 hover:bg-slate-800 transition-colors disabled:opacity-50"
                 >
                   {loading ? "Generating Report..." : "Show My Results"}

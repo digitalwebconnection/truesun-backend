@@ -61,7 +61,7 @@ export default function AboutTrueSunNew() {
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                         <BenefitItem
                             icon={<DollarSign className="h-5 w-5" />}
-                            title="Save up to 80%"
+                            title="Save up to 90%"
                             desc="Offset a major share of your recurring electricity costs with rooftop solar."
                         />
                         <BenefitItem
@@ -150,7 +150,7 @@ export default function AboutTrueSunNew() {
                         image="https://sahajsolar.com/wp-content/uploads/2025/08/roof-topp-1.jpg"
                         Icon={Factory}
                         title="End-to-End Rooftop EPC"
-                        desc="A complete rooftop solar EPC(Engineering, Procurement, and Construction) solution delivering reliable, site-specific installations built to last."
+                        desc="A complete rooftop solar EPC (Engineering, Procurement, and Construction) solution delivering reliable, site-specific installations built to last."
                         features={[
                             "Industrial & Commercial Rooftops",
                             "Residential & Societies",
@@ -164,9 +164,9 @@ export default function AboutTrueSunNew() {
                         title="O&M (Operations and Maintenance)"
                         desc="Strategic solar consultancy, Industrial solar project consulting, Solar project consultancy"
                         features={[
-                            "Project Management Consulting",
-                            "Technology & Vendor Audits",
-                            "Detailed Payback Modeling",
+                            "Preventive Maintenance & Cleaning",
+                            "Real-Time Monitoring & Optimisation",
+                            "Quick Support & System Reliability",
                         ]}
                     />
                     <PillarCard
@@ -180,16 +180,18 @@ export default function AboutTrueSunNew() {
                             "OPEX/RESCO Models",
                         ]}
                     />
-    
+
                     <PillarCard
                         image="https://synergysolar.in/wp-content/uploads/2026/01/Carbon-Credit-for-Solar-Farm-1080x400.webp"
                         Icon={DollarSign}
                         title="Sustainability & Carbon Credit Advisory"
-                        desc="TrueSun’s carbon and finance advisory services help organizations unlock greater value from solar investments."
+                        desc="We partner with businesses to turn sustainability goals into clear, actionable outcomes.
+                        Our approach combines strategy and market access to accelerate your journey to carbon neutrality."
+                       
                         features={[
-                            "Carbon Footprinting & Reporting",
-                            "Carbon Credit Value Assessment",
-                            "Optimal Finance Structuring",
+                            "Sustainability advisory – Assess and reduce your carbon footprint with clear, business-aligned strategies.",
+                            "Carbon credits & I-REC sourcing – Access high-quality offsets and renewable certificates to move toward carbon neutrality.",
+                            "Net-zero roadmap – Practical plans to measure, reduce, and offset emissions end-to-end",
                         ]}
                     />
                 </div>
@@ -211,9 +213,9 @@ export default function AboutTrueSunNew() {
                             Every rooftop has a unique energy story. At TrueSun, we combine engineering precision with ground-level execution to turn your roof into a strategic asset.
                         </p>
                         <div className="flex gap-4 items-center">
-                            <Link to="/projects">
+                            <Link to="/#">
                                 <button className="bg-gray-900 text-white px-10 py-3 rounded-full font-medium hover:bg-[#fc763a] transition-all">
-                                    View All Projects
+                                    Our Brochure
                                 </button>
                             </Link>
                         </div>
@@ -329,7 +331,7 @@ export function PillarCard({
                     </div>
 
                 </div>
-                <div className="absolute inset-0 rounded-xl bg-white shadow-md p-6  overflow-hidden transform-[rotateY(180deg)] backface-hidden">
+                <div className="absolute inset-0 rounded-xl bg-white shadow-md p-6 overflow-y-auto transform-[rotateY(180deg)] backface-hidden">
 
                     <Icon className="h-10 w-10 text-[#FC763A] mb-4" />
 

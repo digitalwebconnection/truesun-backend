@@ -31,7 +31,7 @@ export default function WhatsAppDockFlowFlat({
   subtitle = "Your Solar Experts",
   logoUrl,
   brand = { from: "#0DB02B", to: "#0F7F34", ring: "#FFC527" },
-  footerText = "Call: +91 88508 45149 · info@truesun.in",
+  footerText = "Call: +91 88508 45149 · support@truesun.in ",
   web3ToEmail = null,
 }: WhatsAppDockFlowProps) {
   const [open, setOpen] = useState(false);
@@ -52,6 +52,7 @@ export default function WhatsAppDockFlowFlat({
   const [clientPhone, setClientPhone] = useState("");
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
+  const [errors, setErrors] = useState<{ phone?: string; email?: string }>({});
 
   // submission state
   const [submitting, setSubmitting] = useState(false);
@@ -110,9 +111,29 @@ export default function WhatsAppDockFlowFlat({
   const WEB3FORMS_ACCESS_KEY = "379a21a3-04ba-4421-80fd-31fe44886bf5";
 
   const handleSend = async () => {
+    setErrors({});
+    
     // basic client validation
-    if (!name || !clientPhone) {
-      pushBot("Please provide your name and phone number before sending.");
+    if (!name || !clientPhone || !email || !location) {
+      pushBot("All fields are required. Please fill in all details before sending.");
+      return;
+    }
+
+    const newErrors: { phone?: string; email?: string } = {};
+
+    // phone validation: 10 digits
+    if (!/^\d{10}$/.test(clientPhone)) {
+      newErrors.phone = "Phone number must be 10 digits.";
+    }
+
+    // email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      newErrors.email = "Invalid email format.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
@@ -163,17 +184,12 @@ export default function WhatsAppDockFlowFlat({
       const data = await response.json();
 
       if (data.success) {
-        setResultMessage("Success! Your details have been sent via email.");
-        pushBot("Thank you — we've recorded your inquiry and sent it by email. Someone will contact you soon.");
+        setResultMessage(null);
       } else {
-        setResultMessage("Error sending via email. Please check Web3Forms configuration.");
-        pushBot("There was an issue sending your details via email. Please try again later.");
         console.error("Web3Forms response error:", data);
       }
     } catch (err) {
       console.error("Web3Forms submit error:", err);
-      setResultMessage("Network error while sending. Please try again later.");
-      pushBot("There was a network error while sending your details. Please try again later.");
     } finally {
       setSubmitting(false);
     }
@@ -257,17 +273,58 @@ export default function WhatsAppDockFlowFlat({
 
                     {step === "collectDetails" && (
                       <div className="mt-3 space-y-2">
-                        <input aria-label="Name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" className="w-full rounded-xl border px-3 py-2 text-sm" />
-                        <input aria-label="Phone" value={clientPhone} onChange={(e) => setClientPhone(e.target.value)} placeholder="Phone" className="w-full rounded-xl border px-3 py-2 text-sm" />
-                        <input aria-label="Email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email (optional)" className="w-full rounded-xl border px-3 py-2 text-sm" />
-                        <input aria-label="Location" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Location / City" className="w-full rounded-xl border px-3 py-2 text-sm" />
+                        <div className="space-y-1">
+                          <input 
+                            aria-label="Name" 
+                            value={name} 
+                            onChange={(e) => setName(e.target.value)} 
+                            placeholder="Name *" 
+                            className="w-full rounded-xl border px-3 py-2 text-sm" 
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <input 
+                            aria-label="Phone" 
+                            value={clientPhone} 
+                            onChange={(e) => {
+                              const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                              setClientPhone(val);
+                              if (errors.phone) setErrors(prev => ({ ...prev, phone: undefined }));
+                            }} 
+                            placeholder="Phone (10 digits) *" 
+                            className={`w-full rounded-xl border px-3 py-2 text-sm ${errors.phone ? "border-red-500" : ""}`} 
+                          />
+                          {errors.phone && <div className="text-[10px] text-red-500 px-1">{errors.phone}</div>}
+                        </div>
+                        <div className="space-y-1">
+                          <input 
+                            aria-label="Email" 
+                            value={email} 
+                            onChange={(e) => {
+                              setEmail(e.target.value);
+                              if (errors.email) setErrors(prev => ({ ...prev, email: undefined }));
+                            }} 
+                            placeholder="Email *" 
+                            className={`w-full rounded-xl border px-3 py-2 text-sm ${errors.email ? "border-red-500" : ""}`} 
+                          />
+                          {errors.email && <div className="text-[10px] text-red-500 px-1">{errors.email}</div>}
+                        </div>
+                        <div className="space-y-1">
+                          <input 
+                            aria-label="Location" 
+                            value={location} 
+                            onChange={(e) => setLocation(e.target.value)} 
+                            placeholder="Location / City *" 
+                            className="w-full rounded-xl border px-3 py-2 text-sm" 
+                          />
+                        </div>
                         <div className="mt-2 flex justify-between items-center">
                           <div className="text-xs text-gray-500">{resultMessage}</div>
                           <button
                             onClick={handleSend}
-                            disabled={!name || !clientPhone || submitting}
-                            aria-disabled={!name || !clientPhone || submitting}
-                            className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm text-white ${!name || !clientPhone || submitting ? "opacity-60 cursor-not-allowed" : ""}`}
+                            disabled={!name || !clientPhone || !email || !location || submitting}
+                            aria-disabled={!name || !clientPhone || !email || !location || submitting}
+                            className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm text-white ${!name || !clientPhone || !email || !location || submitting ? "opacity-60 cursor-not-allowed" : ""}`}
                             style={{ backgroundImage: `linear-gradient(135deg, ${brand.from}, ${brand.to})` }}
                           >
                             {submitting ? "Sending..." : <><Send className="h-4 w-4" /> Send</>}

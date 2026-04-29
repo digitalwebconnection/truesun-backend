@@ -188,7 +188,7 @@ const itemVariants: Variants = {
 // --------------------------- Defaults ---------------------------
 const DEFAULT_STATS: Stat[] = [
   { id: "projects", value: 100, suffix: "+", label: "Roofs Powered", icon: "Building" },
-  { id: "cities", value: 80, suffix: "%", label: "Up to 80% Savings on Electricity Bills", icon: "Receipt" },
+  { id: "cities", value: 90, suffix: "%", label: "Up to 90% Savings on Electricity Bills", icon: "Receipt" },
   { id: "countries", value: 70, suffix: "%", label: "Up to 70% Return on Investment", icon: "LineChart" },
 
 ];

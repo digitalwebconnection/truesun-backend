@@ -1,4 +1,6 @@
 import { CheckCircle } from "lucide-react";
+import { Link } from "react-router-dom";
+
 import { easeOut, motion } from "framer-motion";
 
 export default function WhyTrueSun() {
@@ -95,9 +97,9 @@ export default function WhyTrueSun() {
   return (
     <section className="py-14 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        
+
         {/* Animated Title Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -117,7 +119,7 @@ export default function WhyTrueSun() {
         </motion.div>
 
         {/* Animated Grid */}
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -163,13 +165,19 @@ export default function WhyTrueSun() {
                     ))}
                   </ul>
                 </div>
-                
                 {/* Optional: Subtle indicator for interactivity */}
                 <div className="w-8 h-1 bg-[#FC763A] group-hover:bg-white transition-all duration-300 rounded-full mt-6"></div>
               </div>
             </motion.div>
           ))}
         </motion.div>
+        <div className="flex gap-4 items-center justify-center mt-8">
+          <Link to="/#">
+            <button className="bg-gray-900 text-white px-10 py-3 rounded-full font-medium hover:bg-[#fc763a] transition-all">
+              get a free quote
+            </button>
+          </Link>
+        </div>
       </div>
     </section>
   );

@@ -67,7 +67,7 @@ export default function HeroSection() {
               30+ years performance life
             </span>
           </div>
-
+          <p className="mt-4 text-sm sm:text-base text-black   max-w-xl">It takes less than 60 seconds to complete, with no obligation or commitment required.</p>
           <div className="my-8 flex flex-wrap items-center gap-4">
           </div>
 
@@ -115,15 +115,12 @@ export default function HeroSection() {
           />
 
           {/* Floating savings badge */}
-          <div className="absolute bottom-6 left-6 max-w-md rounded-2xl bg-white/85 px-4 py-3 shadow-xl backdrop-blur-sm">
-            <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[#FC763A] mb-2">
-              Savings & Sustainability
+          <div className="absolute bottom-16 left-6 max-w-md rounded-2xl bg-white/85 px-4 py-3 shadow-xl backdrop-blur-sm">
+            <p className="text-md font-semibold tracking-[0.18em] uppercase text-[#FC763A] mb-2">
+              Rentokil PCI
             </p>
             <p className="mt-1 text-sm font-semibold text-[#686868]">
-              “This system paid back its cost in just a few years.”
-            </p>
-            <p className="mt-1 text-[11px] text-black">
-              Cut power costs with reliable solar energy solutions built to perform for decades.
+              48 kW rooftop solar installation for Rentokil PCI delivering reliable renewable energy and reducing electricity costs for the facility.
             </p>
           </div>
         </div>
