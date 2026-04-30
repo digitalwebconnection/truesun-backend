@@ -4,6 +4,7 @@ import { ChevronDown } from "lucide-react";
 import nitumam from "../../assets/team/NituMam.jpg"
 import Saif from "../../assets/team/SaifTeam.jpeg";
 import rc from "../../assets/team/MrRc.jpeg"
+import Ashutosh from "../../assets/team/sample_img.jpg"
 /* -------------------- Types -------------------- */
 type Leader = {
   name: string;
@@ -20,7 +21,7 @@ const LEADERS: Leader[] = [
     name: "Nitu Goel",
     title: "Founder & CEO",
     image: nitumam,
-    bio: "20+ years in clean energy and climate finance, steering multi-MW programs and strategic partnerships that scale reliable solar outcomes.Trusted leader in forging high-impact collaborations with policymakers, investors, developers, and global technology partners to advance decarbonization at scale.Committed to transforming the clean energy landscape through strategic vision, operational excellence, and long-term value creation in solar and sustainable infrastructure.",
+    bio: "20+ years in clean energy and climate finance, steering multi-MW programs and strategic partnerships that scale reliable solar outcomes.Trusted leader in forging high-impact collaborations with policymakers, investors, developers, and global technology partners to advance decarbonization at scale.",
     tags: ["Climate Strategy", "Solar EPC", "Partnerships"],
     linkedin: "https://www.linkedin.com/in/nitug/",
   },
@@ -28,7 +29,7 @@ const LEADERS: Leader[] = [
     name: "R.C. Goyal",
     title: "Head of Project Finance",
     image: rc,
-    bio: "Chartered Accountant leading bankable structures, SPVs, and risk frameworks to accelerate distributed solar portfolios across India.Bringing deep financial expertise in project structuring, compliance, and investment strategy to support scalable renewable energy ventures.Specialized in designing robust financial models, optimizing capital deployment, and ensuring regulatory alignment for large-scale solar initiatives.",
+    bio: "Chartered Accountant leading bankable structures, SPVs, and risk frameworks to accelerate distributed solar portfolios across India.Bringing deep financial expertise in project structuring, compliance, and investment strategy to support scalable renewable energy ventures.",
     tags: ["Project Finance", "Risk & Compliance", "SPV Structuring"],
     linkedin: "https://www.linkedin.com/company/truesun/",
   },
@@ -36,10 +37,18 @@ const LEADERS: Leader[] = [
     name: "MD Saif Ansari.",
     title: "Site Engineer",
     image: Saif,
-    bio: "He holds a Diploma in Electrical Engineering with hands-on experience in electrical and solar energy systems. His expertise includes site inspections, electricity bill analysis, BOQ preparation, design drawings, and proposal development. He also manages site execution, client coordination, and project follow-ups to ensure smooth and efficient project delivery. His focus is on providing reliable, practical, and cost-effective electrical and solar solutions.",
+    bio: "He holds a Diploma in Electrical Engineering with hands-on experience in electrical and solar energy systems. His expertise includes site inspections, electricity bill analysis, BOQ preparation, design drawings, and proposal development. He also manages site execution, client coordination, and project follow-ups to ensure smooth and efficient project delivery.",
     tags: ["Performance PR", "Open Access", "O&M"],
     linkedin: "https://www.linkedin.com/in/md-saif-ansari-753a80288/",
   },
+  {
+    name: "Ashutosh Dwivedi",
+    title: "Senior Technical Advisor",
+    image: Ashutosh,
+    bio: "Engineer with MBA in Power Management, optimizing performance ratios, open access, and O&M playbooks for long-term yield.Experienced in driving operational efficiency, maximizing asset performance, and implementing scalable renewable energy solutions that enhance project profitability, sustainability, and lifecycle value across distributed and utility-scale solar portfolios.",
+    tags: ["Performance PR", "Open Access", "O&M"],
+    linkedin: "https://www.linkedin.com/company/truesun/",
+  }
 ];
 
 /* -------------------- Motion Variants -------------------- */
@@ -270,7 +279,7 @@ export default function LeadershipSectionModern() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.2 }}
-        className="mx-auto mt-12 grid max-w-6xl grid-cols-1 gap-8 px-6 sm:grid-cols-2 lg:grid-cols-3"
+        className="mx-auto mt-12 grid max-w-8xl grid-cols-1 gap-4 px-6 sm:grid-cols-2 lg:grid-cols-4"
       >
         {LEADERS.map((m) => (
           <motion.article

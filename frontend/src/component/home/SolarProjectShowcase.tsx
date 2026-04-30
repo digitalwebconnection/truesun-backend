@@ -1,4 +1,4 @@
- 
+
 import { useEffect, useState } from "react";
 import { Zap, MapPin, X, ChevronLeft, ChevronRight } from "lucide-react";
 

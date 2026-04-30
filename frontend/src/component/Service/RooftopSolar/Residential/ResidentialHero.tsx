@@ -5,6 +5,7 @@ import { Sun, Leaf, Zap, ArrowRight, Home, Building2 } from "lucide-react";
 
 import LeadPopup from "../../../LeadPopup";
 import { useState } from "react";
+import ResidentialHeroImg from "../../../../assets/residantailhero.jpg";
 // --------------------- FIXED VARIANT ---------------------
 const textVariant: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -26,11 +27,11 @@ export default function ResidentialHero() {
       className="relative overflow-hidden h-150 bg-center bg-cover bg-no-repeat"
       style={{
         backgroundImage:
-          "url('https://images.mid-day.com/images/images/2023/may/May1-tamilna_d.jpg')",
+          `url(${ResidentialHeroImg})`,
       }}
     >
       {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-linear-to-l from-black/30 via-black/50 to-black/80"></div>
+      <div className="absolute inset-0 bg-linear-to-l from-black/20 via-black/30 to-black/40"></div>
 
       <div className="relative container max-w-7xl mx-auto px-6 md:px-0 py-18 lg:py-26 flex flex-col lg:flex-row items-center gap-10">
         

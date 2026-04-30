@@ -218,8 +218,8 @@ const ResidentialSolarDetailsPage: FC = () => {
       {/* BENEFITS */}
       <section id="benefits" className="py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-2xl sm:text-3xl max-w-3xl  mx-auto text-center text-[#686868] font-bold">
-            Benefits of Residential Solar Panel Installation for <span className="text-[#FC763A]">Housing Societies , Villas & Bungalows</span>
+          <h2 className="text-3xl sm:text-4xl max-w-4xl  mx-auto text-center text-[#686868] font-bold">
+            Why Solar is Ideal for Housing Societies, <br /><span className="text-[#FC763A]">Villas & Bungalows</span>
           </h2>
           <p className="mt-2 text-slate-600 max-w-5xl mx-auto text-center">
             Whether you live in a cooperative housing society, a gated villa community or an independent bungalow, rooftop solar can cut your
@@ -240,7 +240,7 @@ const ResidentialSolarDetailsPage: FC = () => {
         </div>
       </section>
 
-     <section className="py-16 lg:py-20 bg-white">
+     <section className="py-2 lg:py-4 bg-white">
   <div className="max-w-7xl mx-auto px-6">
 
     <div className="grid gap-12 lg:grid-cols-[1.05fr,1.1fr] text-center items-center">

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, type Variants } from "framer-motion";
+import CISectionImg from "../../../../assets/C&I_section.jpg";
 import LeadPopup from "../../../LeadPopup";
 import {
   Sun,
@@ -87,7 +88,7 @@ export default function SolarNovaIndustrialPage() {
             <motion.div variants={item} className="relative">
               <div className="relative rounded-2xl border border-black/10 bg-white/80 p-2 shadow-2xl shadow-black/40 backdrop-blur">
                 <img
-                  src="https://images.unsplash.com/photo-1558449028-b53a39d100fc?q=80&w=1600&auto=format&fit=crop"
+                  src={CISectionImg}
                   alt="Rooftop solar on a modern building"
                   className="h-[380px] w-full rounded-xl object-cover"
                   loading="eager"
@@ -115,7 +116,7 @@ export default function SolarNovaIndustrialPage() {
               <motion.h2
                 variants={item}
                 className="mt-4 text-3xl font-semibold leading-tight md:text-5xl"
-                style={{ color: THEME.ink }}
+                style={{ color: THEME.accent }}
               >
                 Clean power that strengthens your bottom line
               </motion.h2>
@@ -192,7 +193,7 @@ export default function SolarNovaIndustrialPage() {
                 </li>
                 <li className="flex gap-2">
                   <Check className="mt-0.5 h-4 w-4" style={{ color: THEME.accent }} />
-                  Trusted by shops, schools, offices, and SMBs across 38 cities.
+                  Trusted by shops, schools, offices, and SMBs.
                 </li>
               </ul>
               <div className="mt-5">
@@ -215,7 +216,7 @@ export default function SolarNovaIndustrialPage() {
               <div className="inline-flex items-center gap-2 rounded-full bg-[rgba(110,231,183,0.12)] px-3 py-1 text-xs font-medium"
                 style={{ color: THEME.ink }}>
                 <Factory className="h-4 w-4" />
-                Solar Power for Modern Industry
+                Solar Power for Industry
               </div>
               <h2 className="mt-4 text-xl font-semibold md:text-2xl" style={{ color: THEME.ink }}>
                 Powering Industry with Clean Energy.
@@ -260,10 +261,10 @@ export default function SolarNovaIndustrialPage() {
       <div id="benefits" className="bg-white py-14">
         <div className="mx-auto max-w-7xl px-6">
           <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
-            <motion.h2 variants={item} className="text-2xl font-semibold md:text-3xl" style={{ color: THEME.ink }}>
-              Why businesses & industries choose solar
+            <motion.h2 variants={item} className="text-3xl font-bold tracking-tight sm:text-4xl text-[#686868] text-center">
+              Why businesses & <span style={{ color: THEME.accent }}>industries choose solar</span>
             </motion.h2>
-            <motion.p variants={item} className="mt-2 max-w-3xl" style={{ color: "#0e1726b3" }}>
+            <motion.p variants={item} className="mt-2 max-w-3xl  mx-auto text-center" style={{ color: "#0e1726b3" }}>
               Finance-smart, brand-positive, and engineered for reliability.
             </motion.p>
 
@@ -334,10 +335,11 @@ export default function SolarNovaIndustrialPage() {
           <div className="mx-auto max-w-7xl text-center">
             <motion.h2
               variants={item}
-              className="text-3xl font-extrabold tracking-tight sm:text-4xl"
-              style={{ color: THEME.ink }}
+              className="text-3xl font-bold tracking-tight sm:text-4xl text-[#686868]"
+              
             >
-              Unlock Industrial Efficiency with Solar
+              Unlock Industrial
+              <span style={{ color: THEME.accent }}> Efficiency with Solar</span>
             </motion.h2>
             <motion.p variants={item} className="mt-4 text-lg" style={{ color: '#0e1726b3' }}>
               Installing solar on your factory or warehouse is a strategic move that fundamentally reduces operational costs. Leverage industrial roofs for fast, scalable installation and maximize yield with smart optimizations.
@@ -561,9 +563,9 @@ export default function SolarNovaIndustrialPage() {
               </motion.h3>
               <div className="mt-6 space-y-4">
                 {[
-                  { n: "Nova Tech Park", s: "500 kW", o: "₹60L annual offset" },
-                  { n: "Apex Hospitals", s: "180 kW", o: "₹20L annual offset" },
-                  { n: "City Centre Mall", s: "350 kW", o: "₹42L annual offset" },
+                  { n: "Andheri Independent Bungalow", s: "27,375 kWh Annual generation", o: "₹60L annual offset" },
+                  { n: "Sharad Apartment", s: "20,151 kWh Annual generation", o: "₹20L annual offset" },
+                  { n: "Ganesh Kunj", s: "22,732 kWh Annual generation", o: "₹42L annual offset" },
                 ].map((cs, i) => (
                   <motion.div
                     key={i}
@@ -575,7 +577,8 @@ export default function SolarNovaIndustrialPage() {
                         {cs.n}
                       </p>
                       <p className="mt-1 text-xs font-semibold text-[#FC763A]">
-                        {cs.s} • {cs.o}
+                        {cs.s} 
+                        {/* • {cs.o} */}
                       </p>
                     </div>
                     <LineChart className="h-5 w-5 text-orange-400" />
@@ -596,11 +599,10 @@ export default function SolarNovaIndustrialPage() {
               </div>
               <blockquote className="mt-6">
                 <p className="text-lg leading-relaxed" style={{ color: "#0e1726cc" }}>
-                  “Our grid bills dropped immediately and the project went live ahead of schedule. Clean, quiet, and
-                  dependable.”
+                  Delivers reliable and efficient solutions with great professionalism and support.”
                 </p>
                 <footer className="mt-4 text-sm" style={{ color: "#0e172699" }}>
-                  — Facilities Head, Fortune-500 Tenant
+                  — Vrushali Kulkarni,Mumbai, Maharashtra
                 </footer>
               </blockquote>
             </motion.div>

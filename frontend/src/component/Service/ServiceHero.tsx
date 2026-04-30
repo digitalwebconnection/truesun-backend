@@ -20,10 +20,10 @@ const ServicesHero: React.FC = () => {
       />
 
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/70" />
+      <div className="absolute inset-0 bg-black/50" />
 
       {/* Content */}
-      <div className="relative mx-auto flex max-w-7xl flex-col-reverse text-center  gap-12 px-6 py-22 justify-center items-center  md:flex-row md:pt-32">
+      <div className="relative mx-auto flex max-w-7xl flex-col-reverse text-center gap-12 px-6 py-22 justify-center items-center md:flex-row md:pt-32">
 
         {/* LEFT CONTENT */}
         <div className="w-full max-w-2xl text-white space-y-6 text-center md:text-left">

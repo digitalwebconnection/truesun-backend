@@ -403,7 +403,7 @@ function VisualCard({
           <SmallStat
             icon={<TrendingUp className="h-5 w-5 text-emerald-500" />}
             label="IRR"
-            value={segmentKey === "industrial" ? "18–22%" : "16–20%"}
+            value={segmentKey === "industrial" ? "30–40%" : "16–20%"}
           />
           <SmallStat
             icon={<Users className="h-5 w-5 text-blue-500" />}
