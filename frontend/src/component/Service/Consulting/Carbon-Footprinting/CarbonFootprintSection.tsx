@@ -1,6 +1,6 @@
 import { Leaf, Factory, Zap, Globe, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useState } from 'react';
-import LeadPopup from '../../../LeadPopup';
+import CtaPopup from '../../../CtaPopup';
 
 const CarbonFootprintSectionWhite = () => {
     const scopes = [
@@ -26,7 +26,7 @@ const CarbonFootprintSectionWhite = () => {
             icon: <Globe className="w-6 h-6" />,
         },
     ];
-    const [openLeadPopup, setOpenLeadPopup] = useState(false);
+    const [openCtaPopup, setOpenCtaPopup] = useState(false);
 
     return (
         <section className="bg-white text-slate-800 py-14 px-6 overflow-hidden">
@@ -85,7 +85,7 @@ const CarbonFootprintSectionWhite = () => {
                         </p>
                         <button
 
-                            onClick={() => setOpenLeadPopup(true)}
+                            onClick={() => setOpenCtaPopup(true)}
                             className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#FC763A] text-white font-semibold group hover:bg-[#e5652e] transition-colors shadow-lg shadow-[#FC763A]/20">
                             Get Started <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
                         </button>
@@ -108,11 +108,13 @@ const CarbonFootprintSectionWhite = () => {
 
                 </div>
                 <div className=' max-w-7xl mt-15 mx-auto text-center'>
-                    <h2 className='text-4xl py-5  font-bold'>From Measurement to Action</h2>
+                    <h2 className='text-3xl md:text-5xl font-extrabold text-[#686868] leading-tight tracking-tight'>
+                        From Measurement<span className="text-[#FC763A]"> to Action</span>
+                    </h2>
                     <p className='text-md '>At TrueSun, we go beyond reporting. We help you reduce and offset emissions through renewable energy solutions, I-RECs, and carbon credits.</p>
                 </div>
-                {openLeadPopup && (
-                    <LeadPopup onClose={() => setOpenLeadPopup(false)} />
+                {openCtaPopup && (
+                    <CtaPopup onClose={() => setOpenCtaPopup(false)} title="Please leave your details" />
                 )}
             </div>
         </section>

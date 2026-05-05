@@ -22,7 +22,7 @@ export default function SolarHero() {
         
         {/* Left Content */}
         <div className="max-w-4xl">
-          <h4 className="text-sm md:text-base tracking-widest text-white  mb-4">
+          <h4 className="text-sm md:text-base tracking-widest text-white pt-4 md:pt-8 mb-4">
             OPERATION & MAINTENANCE
           </h4>
 

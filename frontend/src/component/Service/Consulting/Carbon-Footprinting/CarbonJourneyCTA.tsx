@@ -1,10 +1,10 @@
 import { ArrowRight, Globe, Zap, ShieldCheck, Mail } from 'lucide-react';
-import LeadPopup from '../../../LeadPopup';
+import CtaPopup from '../../../CtaPopup';
 import { useState } from 'react';
 
 const CarbonJourneyCTA = () => {
 
-  const [openLeadPopup, setOpenLeadPopup] = useState(false);
+  const [openCtaPopup, setOpenCtaPopup] = useState(false);
   return (
     <section className="bg-white py-4 px-6 overflow-hidden relative">
       {/* Dynamic Background Accents - No Boxes */}
@@ -49,7 +49,7 @@ const CarbonJourneyCTA = () => {
         {/* Primary Action */}
         <div className="flex flex-col items-center gap-2">
           <button
-            onClick={() => setOpenLeadPopup(true)}
+            onClick={() => setOpenCtaPopup(true)}
             className="group relative px-18 py-2 bg-[#FC763A] text-white font-black rounded-4xl text-xl transition-all hover:bg-slate-900 hover:shadow-[0_20px_50px_rgba(252,118,58,0.3)] transform hover:-translate-y-2 active:scale-95 overflow-hidden">
             <span className="relative z-10 flex items-center gap-4">
               Connect With Us Today
@@ -66,8 +66,8 @@ const CarbonJourneyCTA = () => {
 
 
       </div>
-      {openLeadPopup && (
-        <LeadPopup onClose={() => setOpenLeadPopup(false)} />
+      {openCtaPopup && (
+        <CtaPopup onClose={() => setOpenCtaPopup(false)} title="Please leave your details" />
       )}
       <style>{`
         @keyframes bounce-subtle {

@@ -1,11 +1,14 @@
 import { useState } from "react";
 import LeadPopup from "../../../LeadPopup";
+import CtaPopup from "../../../CtaPopup";
 
 export default function ProcessAndPlans() {
   // function setOpenLeadPopup(_arg0: boolean): void {
   //   throw new Error("Function not implemented.");
   // }
+  // }
   const [openLeadPopup, setOpenLeadPopup] = useState(false);
+  const [openCtaPopup, setOpenCtaPopup] = useState(false);
   return (
     <section className="bg-[#F8FAFC] py-20 px-6 md:px-16">
       <div className="max-w-7xl mx-auto">
@@ -123,7 +126,7 @@ export default function ProcessAndPlans() {
               <p className="mb-4 text-gray-700 font-medium">Vendor bears risk</p>
 
               <button
-                onClick={() => setOpenLeadPopup(true)}
+                onClick={() => setOpenCtaPopup(true)}
                 className="mt-6 bg-[#FC763A] text-white font-bold px-6 py-3 rounded-full hover:bg-orange-600 shadow-md transition hover:-translate-y-px"
               >
                 Get Started
@@ -135,6 +138,9 @@ export default function ProcessAndPlans() {
       </div>
       {openLeadPopup && (
         <LeadPopup onClose={() => setOpenLeadPopup(false)} />
+      )}
+      {openCtaPopup && (
+        <CtaPopup onClose={() => setOpenCtaPopup(false)} title="Please leave your details" />
       )}
     </section>
   );

@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import CtaPopup from "./CtaPopup";
 
 const NotFound = () => {
+  const [openCtaPopup, setOpenCtaPopup] = useState(false);
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-black text-white overflow-hidden">
 
@@ -63,14 +66,18 @@ const NotFound = () => {
             Go to Home
           </Link>
 
-          <Link
-            to="/contact"
+          <button
+            onClick={() => setOpenCtaPopup(true)}
             className="px-8 py-3 border border-white rounded-full font-semibold hover:bg-white hover:text-black transition"
           >
             Talk to Expert
-          </Link>
+          </button>
 
         </motion.div>
+
+        {openCtaPopup && (
+          <CtaPopup onClose={() => setOpenCtaPopup(false)} title="Please leave your details" />
+        )}
 
       </div>
 

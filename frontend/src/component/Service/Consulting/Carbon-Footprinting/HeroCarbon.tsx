@@ -4,7 +4,7 @@ import {
     CheckCircle2,
 } from "lucide-react";
 import { useState } from "react";
-import LeadPopup from "../../../LeadPopup";
+import CtaPopup from "../../../CtaPopup";
 
 type Props = {
     accent?: "emerald" | "sky" | string;
@@ -21,7 +21,7 @@ export default function NetZeroCommandCenterAddOn({
     accent = "emerald",
 }: Props) {
     const accentGradient = accentCls(accent);
-    const [openLeadPopup, setOpenLeadPopup] = useState(false);
+    const [openCtaPopup, setOpenCtaPopup] = useState(false);
     return (
         <section
             className="relative h-150 overflow-hidden py-24"
@@ -66,7 +66,7 @@ export default function NetZeroCommandCenterAddOn({
                         <div className="mt-8 flex gap-4 flex-wrap">
 
                             <button
-                                onClick={() => setOpenLeadPopup(true)}
+                                onClick={() => setOpenCtaPopup(true)}
                                 className="px-6 py-2 bg-[#FC763A] rounded-full text-white"
 
                             >
@@ -90,8 +90,8 @@ export default function NetZeroCommandCenterAddOn({
                         </div>
                     </div>
 
-                    {openLeadPopup && (
-                        <LeadPopup onClose={() => setOpenLeadPopup(false)} />
+                    {openCtaPopup && (
+                        <CtaPopup onClose={() => setOpenCtaPopup(false)} title="Please leave your details" />
                     )}
                 </div>
             </div>

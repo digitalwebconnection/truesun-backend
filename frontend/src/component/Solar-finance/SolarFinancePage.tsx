@@ -12,6 +12,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import LeadPopup from "../../component/LeadPopup";
+import CtaPopup from "../../component/CtaPopup";
 
 
 
@@ -223,6 +224,7 @@ function EmiCalculatorMini({
    ========================= */
 export default function SolarFinancePage() {
   const [openLeadPopup, setOpenLeadPopup] = useState(false);
+  const [openCtaPopup, setOpenCtaPopup] = useState(false);
 
   return (
     <main className="relative mx-auto max-w-7xl px-4 py-12 md:px-0">
@@ -307,7 +309,7 @@ export default function SolarFinancePage() {
               {/* CTA */}
               <div className="mt-6 flex items-center justify-between">
                 <button
-                  onClick={() => setOpenLeadPopup(true)}
+                  onClick={() => setOpenCtaPopup(true)}
                   className="rounded-full bg-linear-to-r from-[#FC763A] to-[#FFB347] px-5 py-2 text-sm font-semibold text-white shadow-md transition hover:scale-105"
                 >
                   Get Started →
@@ -484,6 +486,7 @@ export default function SolarFinancePage() {
 
       {/* Lead popup mount */}
       {openLeadPopup && <LeadPopup onClose={() => setOpenLeadPopup(false)} />}
+      {openCtaPopup && <CtaPopup onClose={() => setOpenCtaPopup(false)} title="Please leave your details" />}
     </main>
   );
 }

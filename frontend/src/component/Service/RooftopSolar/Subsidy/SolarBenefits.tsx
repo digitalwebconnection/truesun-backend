@@ -29,9 +29,9 @@ const SolarBenefits = () => {
     ];
 
     const data = [
-        { range: "Up to 2 kW", subsidy: "₹30,000 per kW" },
-        { range: "2–3 kW", subsidy: "₹18,000 per kW" },
-        { range: "Above 3 kW", subsidy: "Max ₹78,000" },
+        { range: "1-2 kW System (0-150 units usage)", subsidy: "₹30,000 - ₹60,000." },
+        { range: "2-3 kW System (150-300 units usage)", subsidy: "₹60,000 - ₹78,000." },
+        { range: "Above 3 kW System (>300 units usage)", subsidy: "Capped at a flat ₹78,000." },
     ];
 
     return (
@@ -95,7 +95,7 @@ const SolarBenefits = () => {
                     <div>
 
                         <h2 className="text-3xl text-[#FC763A] md:text-4xl font-bold">
-                            Subsidy for Individual Households
+                            Subsidy for Homes and Cooperative Housing Society
                         </h2>
 
                         <p className="text-gray-500 mt-3">

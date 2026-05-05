@@ -1,4 +1,8 @@
+import { useState } from "react";
+import CtaPopup from "../../../CtaPopup";
+
 const SolarFinanceHero = () => {
+    const [openCtaPopup, setOpenCtaPopup] = useState(false);
     return (
         <section className="relative h-150 flex items-center">
 
@@ -40,13 +44,16 @@ const SolarFinanceHero = () => {
                         Get Financing Options
                     </button>
 
-                    <button className="px-8 py-3 border border-white rounded-full font-semibold hover:bg-white hover:text-black transition">
+                    <button onClick={() => setOpenCtaPopup(true)} className="px-8 py-3 border border-white rounded-full font-semibold hover:bg-white hover:text-black transition">
                         Talk to Expert
                     </button>
 
                 </div>
 
             </div>
+            {openCtaPopup && (
+                <CtaPopup onClose={() => setOpenCtaPopup(false)} title="Please leave your details" />
+            )}
         </section>
     );
 };
