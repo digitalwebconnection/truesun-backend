@@ -16,7 +16,7 @@ const ReelsShowcaseSection = () => {
       title: "PM Surya Ghar Subsidy Guide",
       description:
         "Understanding government solar subsidies and how homeowners can benefit from the PM Surya Ghar Yojana.",
-      video: "https://www.instagram.com/reel/DU2UWGpgZ1N/",
+      video: "https://www.instagram.com/reel/DXeYarYFLq9/?igsh=NHcxcGd1Y2k2bTNx",
     },
     {
       title: "Solar System ROI & Payback",
