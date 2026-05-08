@@ -40,6 +40,7 @@ const BlogDetails = () => {
         } else {
           setError(data.message);
         }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         setError("Failed to load blog post. Please try again later.");
       } finally {
