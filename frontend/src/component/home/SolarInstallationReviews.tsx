@@ -10,6 +10,8 @@ import tv2 from "../../assets/TestiminialVideo/rustamji testimonial.mp4";
 
 interface Review {
   name: string;
+  designation: string;
+  projectName: string;
   location: string;
   rating: number;
   comment: string;
@@ -22,6 +24,8 @@ export default function ModernReviewSection() {
   const reviews: Review[] = [
     {
       name: "Bloom Packaging",
+      designation: "Facility Manager",
+      projectName: "60 kW Industrial Solar Plant",
       location: "Daman",
       rating: 5,
       comment:
@@ -31,6 +35,8 @@ export default function ModernReviewSection() {
     },
     {
       name: "Oberoi Realty Group",
+      designation: "Estate Manager",
+      projectName: "75 kW High-rise Solar Installation",
       location: "Mumbai",
       rating: 5,
       comment:
@@ -40,6 +46,41 @@ export default function ModernReviewSection() {
     },
     {
       name: "Kalpataru Estate (Residential)",
+      designation: "Committee Member",
+      projectName: "115 kW Residential Society Project",
+      location: "Mumbai",
+      rating: 5,
+      comment:
+        "We appreciate the way TrueSun explained every aspect in detail right from designing to addressing Managing committee concerns. With TrueSun's proper guidance we now have a 115 KW solar plant.",
+      video: tv1,
+      logo: kalpataruLogo,
+    },
+    {
+      name: "Bloom Packaging",
+      designation: "Facility Manager",
+      projectName: "60 kW Industrial Solar Plant",
+      location: "Daman",
+      rating: 5,
+      comment:
+        "The team at TrueSun has been very supportive and have installed the system very neatly, following all safety measures like walkways, lifeline, etc. We are satisfied with their work and recommend them.",
+      video: tv1,
+      logo: bloomLogo,
+    },
+    {
+      name: "Oberoi Realty Group",
+      designation: "Estate Manager",
+      projectName: "75 kW High-rise Solar Installation",
+      location: "Mumbai",
+      rating: 5,
+      comment:
+        "We found TrueSun to be a company which is the right fit for us. For us quality comes first and TrueSun met all our expectations. They installed this plant on a high rise building while following all safety protocols.",
+      video: tv2,
+      logo: oberoiLogo,
+    },
+    {
+      name: "Kalpataru Estate (Residential)",
+      designation: "Committee Member",
+      projectName: "115 kW Residential Society Project",
       location: "Mumbai",
       rating: 5,
       comment:
@@ -124,13 +165,18 @@ export default function ModernReviewSection() {
               "{review.comment}"
             </p>
 
-            {/* NAME */}
+            {/* NAME & DETAILS */}
             <div className="text-center">
               <h4 className="text-xl font-semibold text-gray-900">
                 {review.name}
               </h4>
-
-              <p className="text-[#FC763A] font-medium">
+              <p className="text-sm text-gray-500 font-medium">
+                {review.designation}
+              </p>
+              <p className="text-[#FC763A] font-semibold mt-1">
+                {review.projectName}
+              </p>
+              <p className="text-gray-400 text-sm italic">
                 {review.location}
               </p>
             </div>
