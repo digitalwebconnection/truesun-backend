@@ -98,7 +98,7 @@ export default function ModernReviewSection() {
     }, 10000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [reviews.length]);
 
   const review = reviews[current];
 
