@@ -2,7 +2,7 @@ import {
     SunMedium,
 } from "lucide-react";
 import BlogPage from "./BlogPage";
-import heroImg from "../../assets/pexels-gunas4life-19205947.jpg";
+import heroImg from "../../assets/blog-img.webp";
 
 export default function SolarBlogPage() {
 
@@ -18,7 +18,7 @@ export default function SolarBlogPage() {
                         className="h-full w-full object-cover"
                     />
                     {/* Dark gradient overlay */}
-                    <div className="absolute inset-0 bg-linear-to-br from-slate-950/50 via-slate-900/35 to-slate-900/10" />
+                    <div className="absolute inset-0 bg-black/30" />
                 </div>
 
                 {/* Subtle corner glow */}

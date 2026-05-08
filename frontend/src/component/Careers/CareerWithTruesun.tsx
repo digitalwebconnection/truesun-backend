@@ -199,7 +199,7 @@ const [openIndex, setOpenIndex] = useState<number | null>(0)
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10 text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: brandYellow }}>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#FC763A]">
               Your Career Benefits
             </p>
             <h2 className="mt-2 text-3xl font-bold text-[#686868] sm:text-4xl">
@@ -274,13 +274,13 @@ const [openIndex, setOpenIndex] = useState<number | null>(0)
 
           {/* Header */}
           <div className="mb-10 text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#FC763A]">
               Current Opportunities
             </p>
             <h2 className="mt-2 text-3xl font-bold text-[#686868] sm:text-4xl">
               Join Our Team
             </h2>
-            <p className="mt-3 max-w-2xl mx-auto text-sm text-slate-600">
+            <p className="mt-3 max-w-2xl mx-auto text-sm text-black">
               Don&apos;t see a perfect role? Send your profile to{" "}
               <span className="font-semibold text-slate-800">
                 info@truesun.in
@@ -363,7 +363,9 @@ const [openIndex, setOpenIndex] = useState<number | null>(0)
                         </p>
 
                         <a
-                          href={`mailto:info@truesun.in?subject=Application - ${job.title} - TrueSun`}
+                          href={`https://wa.me/918850845149?text=${encodeURIComponent(`Hello, I am interested in applying for the ${job.title} position at TrueSun.`)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="rounded-full bg-linear-to-r from-[#FC763A] to-[#FFB347] px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:scale-105"
                         >
                           Apply Now →
@@ -383,7 +385,7 @@ const [openIndex, setOpenIndex] = useState<number | null>(0)
       <section className="py-8 sm:py-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10 text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#FC763A]">
               Your Journey
             </p>
             <h2 className="mt-2 text-3xl font-bold text-[#686868] sm:text-4xl">
@@ -394,7 +396,7 @@ const [openIndex, setOpenIndex] = useState<number | null>(0)
           <div className="relative grid gap-8 md:grid-cols-4">
             {/* The vertical connector line for desktop */}
             <div className="absolute top-0 bottom-0 left-0 hidden w-full md:block">
-              <div className="h-1 w-full absolute top-12 left-0 right-0" style={{ backgroundColor: brandYellow + "80" }} />
+              <div className="h-1 w-full absolute top-12 left-0 right-0 bg-[#FC763A]"/>
             </div>
 
             {steps.map((s) => (
@@ -405,7 +407,7 @@ const [openIndex, setOpenIndex] = useState<number | null>(0)
                 {/* Step Circle with Icon */}
                 <div
                   className="absolute -top-3 left-1/2 -translate-x-1/2 md:-top-6 md:left-auto md:translate-x-0 h-10 w-10 md:h-12 md:w-12 rounded-full flex items-center justify-center border-4 z-10"
-                  style={{ borderColor: brandYellow, backgroundColor: brandLight }}
+                  style={{ borderColor: '#FC763A', backgroundColor: brandLight }}
                 >
                   {s.icon}
                 </div>
@@ -413,7 +415,7 @@ const [openIndex, setOpenIndex] = useState<number | null>(0)
                 {/* Step Number Badge */}
                 <p
                   className="text-xs font-bold tracking-[0.16em] absolute top-2 right-4 rounded-full px-2 py-0.5"
-                  style={{ color: brandBlue, backgroundColor: brandYellow + "30" }}
+                  style={{ color: '#FC763A', backgroundColor: brandLight }}
                 >
                   STEP {s.step}
                 </p>

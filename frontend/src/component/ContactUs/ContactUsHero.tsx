@@ -10,7 +10,7 @@ const ContactHero = () => {
                     className="h-full w-full object-cover"
                 />
                 {/* Dark overlay */}
-                <div className="absolute inset-0 bg-[#050814]/60" />
+                <div className="absolute inset-0 bg-black/20" />
             </div>
 
             {/* Content */}
@@ -23,14 +23,14 @@ const ContactHero = () => {
                 {/* Heading - Emphasizing the Engineering/Savings Hook */}
                 <h1 className="text-4xl sm:text-5xl font-semibold leading-tight">
                     Let's Start Your <span className="text-[#FC763A]">Solar Project</span> with an
-                    <span className="block  text-[#FC763A] mt-1">
+                    <span className="block text-[#FC763A] mt-1">
                         Engineering-First Approach
                     </span>
                 </h1>
 
                 {/* Subtext - Clear Scope and Value Proposition */}
                 <p className="text-slate-200 mt-6 max-w-2xl  text-base sm:text-lg leading-relaxed">
-                    Whether you need a **data-driven analysis for industrial savings or a
+                    Whether you need a data-driven analysis for industrial savings or a
                     reliable rooftop system, our engineering team provides clear guidance and
                     guarantees systems that perform.
                 </p>
@@ -40,7 +40,7 @@ const ContactHero = () => {
                    
                     <a
                         href="tel:+918850845149" // 🔁 replace with Creasun's real number
-                        className="border border-white/25 bg-white/5 px-7 py-3 rounded-full text-white hover:border-[#FC763A] hover:text-[#FC763A] transition"
+                        className="border border-white/25 bg-white px-7 py-3 rounded-full text-[#FC763A] hover:border-[#FC763A] hover:text-[#FC763A] transition"
                     >
                         Call Our Experts Now
                     </a>

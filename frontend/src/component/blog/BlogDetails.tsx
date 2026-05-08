@@ -102,7 +102,7 @@ const BlogDetails = () => {
       )}
 
       <div
-        className="mt-12 text-gray-800 text-lg md:text-xl text-break text-justify blog-content"
+        className="mt-12 text-gray-800 text-lg md:text-xl blog-content"
         dangerouslySetInnerHTML={{ __html: blog.content }}
       />
 
@@ -124,14 +124,18 @@ const BlogDetails = () => {
         .blog-content {
           overflow-wrap: break-word;
           word-wrap: break-word;
+          word-break: break-word;
+          text-align: left;
+          line-height: 1.8;
         }
-        .blog-content h1 { font-size: 2.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; line-height: 1.2; }
-        .blog-content h2 { font-size: 2rem; font-weight: 700; margin-top: 1.75rem; margin-bottom: 0.85rem; line-height: 1.25; }
-        .blog-content h3 { font-size: 1.75rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-        .blog-content h4 { font-size: 1.5rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.65rem; }
-        .blog-content p { margin-bottom: 1.25rem; }
+        .blog-content h1 { font-size: 2.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; line-height: 1.2; text-align: left; }
+        .blog-content h2 { font-size: 2rem; font-weight: 700; margin-top: 1.75rem; margin-bottom: 0.85rem; line-height: 1.25; text-align: left; }
+        .blog-content h3 { font-size: 1.75rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; text-align: left; }
+        .blog-content h4 { font-size: 1.5rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.65rem; text-align: left; }
+        .blog-content p { margin-bottom: 1.25rem; line-height: 1.8; text-align: left; white-space: normal; }
         .blog-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1.25rem; }
         .blog-content ol { list-style-type: decimal; margin-left: 1.5rem; margin-bottom: 1.25rem; }
+        .blog-content li { margin-bottom: 0.5rem; line-height: 1.8; }
         .blog-content img { max-width: 100%; height: auto; border-radius: 12px; margin: 2rem 0; }
         .blog-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .blog-content table td, .blog-content table th { border: 1px solid #e2e8f0; padding: 0.75rem; text-align: left; }

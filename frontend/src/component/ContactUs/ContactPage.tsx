@@ -267,7 +267,7 @@ const ContactPage: React.FC = () => {
       {/* ========= CONTACT CARDS ========= */}
       <div className="max-w-7xl mx-auto px-6 grid gap-6 md:grid-cols-3 mb-16">
         {/* Phone */}
-        <div className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#FC763A]/50 transition-all duration-300 ease-out relative overflow-hidden">
+        <div className="group rounded-2xl border border-slate-200 bg-white p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#FC763A]/50 transition-all duration-300 ease-out relative overflow-hidden">
           <div className="absolute -top-4 -right-4 p-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
             <PhoneCall size={120} />
           </div>
@@ -288,7 +288,7 @@ const ContactPage: React.FC = () => {
         </div>
 
         {/* Email */}
-        <div className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#FC763A]/50 transition-all duration-300 ease-out relative overflow-hidden">
+        <div className="group rounded-2xl border border-slate-200 bg-white p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#FC763A]/50 transition-all duration-300 ease-out relative overflow-hidden">
           <div className="absolute -top-4 -right-4 p-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
             <Mail size={120} />
           </div>
@@ -306,7 +306,7 @@ const ContactPage: React.FC = () => {
         </div>
 
         {/* Address */}
-        <div className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#FC763A]/50 transition-all duration-300 ease-out relative overflow-hidden">
+        <div className="group rounded-2xl border border-slate-200 bg-white p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#FC763A]/50 transition-all duration-300 ease-out relative overflow-hidden">
           <div className="absolute -top-4 -right-4 p-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
             <MapPin size={120} />
           </div>

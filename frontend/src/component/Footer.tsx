@@ -125,41 +125,42 @@ export default function SolarFooter() {
                         </div>
 
                         {/* Contact */}
-                        <div className="lg:col-span-2 ms-0 md:-ms-20">
+                        <div className="lg:col-span-2 md:-ms-20">
                             <h4 className="mb-3 text-sm font-semibold tracking-wide text-white">
                                 Connect with Us
                             </h4>
-                            <div className="grid gap-2 text-sm text-neutral-300">
-                                <p className="inline-flex items-start gap-2">
+                            <div className="grid gap-4 text-sm text-neutral-300">
+                                <div className="flex items-start gap-3">
+                                    <MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-[#FC763A]" />
                                     <a
-                                        href="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3453.199038507266!2d72.82532862520335!3d18.998344432190336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1s8th%20floor%2C%20B-Wing%2C%20Peninsula%20Business%20Park%20Tower%20B%2C%20Lower%20Parel%20Mumbai%20-%20400013!5e1!3m2!1sen!2sin!4v1775206753967!5m2!1sen!2sin"
+                                        href="https://www.google.com/maps/search/?api=1&query=8th+floor,+B-Wing,+Peninsula+Business+Park,+Tower+B,+Lower+Parel+Mumbai+-+400013"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="flex items-start gap-2 hover:text-[#FC763A]"
+                                        className="hover:text-[#FC763A] transition-colors leading-relaxed"
                                     >
-                                        <MapPin className="mt-0.5 h-12 w-12  py-4" />
-                                        8th floor, B-Wing, Peninsula Business Park, Tower B, Lower Parel
-                                        Mumbai - 400013 </a>
-                                </p>
+                                        8th floor, B-Wing, Peninsula Business Park, Tower B, Lower Parel, Mumbai - 400013
+                                    </a>
+                                </div>
 
-                                <p className="inline-flex items-start gap-2">
+                                <div className="flex items-center gap-3">
+                                    <Phone className="h-4 w-4 flex-shrink-0 text-[#FC763A]" />
                                     <a
                                         href="tel:+918850845149"
-                                        className="flex items-start gap-2 hover:text-[#FC763A]"
+                                        className="hover:text-[#FC763A] transition-colors"
                                     >
-                                        <Phone className="mt-0.5 h-4 w-4" /> +91 88508 45149
+                                        +91 88508 45149
                                     </a>
-                                </p>
+                                </div>
 
-                                <p className="inline-flex items-start gap-2">
+                                <div className="flex items-center gap-3">
+                                    <Mail className="h-4 w-4 flex-shrink-0 text-[#FC763A]" />
                                     <a
                                         href="mailto:info@truesun.in"
-                                        className="flex items-start gap-2 hover:text-[#FC763A]"
+                                        className="hover:text-[#FC763A] transition-colors"
                                     >
-                                        <Mail className="mt-0.5 h-4 w-4" /> info@truesun.in
+                                        info@truesun.in
                                     </a>
-                                </p>
-
+                                </div>
                             </div>
                             <div className="mt-4 flex items-center gap-2 hover:text-[#fc763a]">
                                 <Social href="https://www.facebook.com/savewithtruesun" label="Facebook">
@@ -197,16 +198,19 @@ export default function SolarFooter() {
                     </div>
 
                     {/* Bottom bar */}
-                    <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t pt-6 text-sm  border-white/10 text-neutral-400 md:flex-row">
-                        <p>© {new Date().getFullYear()} <span className="w-6 h-6 text-lg  font-semibold text-[#FC763A]"> TrueSun</span>. All rights reserved.</p>
-                        <p className="flex md:me-25 md:px-10 items-center justify-center gap-2 ms-3 md:ms-0   text-white text-[13px] md:text-sm">
-                            <Code2 className="w-6 h-6 text-[#FC763A]" />
-                            <p>
-                                Developed by <a href="https://digitalwebconnection.com/" target="_blank" className="text-[#FC763A] font-semibold">Digital Web Connection</a>
-                            </p>
-
+                    <div className="mt-8 flex flex-col items-start justify-between gap-6 border-t pt-6 text-sm border-white/10 text-neutral-400 md:flex-row md:items-center">
+                        <p className="text-left">
+                            © {new Date().getFullYear()} <span className="text-lg font-semibold text-[#FC763A]">TrueSun</span>. All rights reserved.
                         </p>
-                        <div className="flex items-center gap-5 me-20 md:me-35">
+                        
+                        <div className="flex items-center justify-start gap-2 text-white text-[13px] md:text-sm">
+                            <Code2 className="w-5 h-5 text-[#FC763A]" />
+                            <span>
+                                Developed by <a href="https://digitalwebconnection.com/" target="_blank" rel="noopener noreferrer" className="text-[#FC763A] font-semibold hover:underline">Digital Web Connection</a>
+                            </span>
+                        </div>
+
+                        <div className="flex items-center justify-start">
                             <FooterLink to="/PrivacyPolicy">Privacy Policy</FooterLink>
                         </div>
                     </div>

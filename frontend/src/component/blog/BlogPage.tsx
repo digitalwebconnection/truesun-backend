@@ -97,7 +97,7 @@ const BlogPage = () => {
                     {post.title}
                   </h3>
 
-                  <p className="text-slate-600 text-base leading-relaxed line-clamp-3">
+                  <p className="text-slate-600">
                     {post.excerpt}
                   </p>
                 </div>

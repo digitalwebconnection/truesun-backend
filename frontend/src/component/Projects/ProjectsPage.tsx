@@ -166,18 +166,6 @@ export default function ProjectShowcasePage() {
     [projects]
   );
 
-  const uniqueStates = useMemo(
-    () =>
-      Array.from(
-        new Set(
-          projects.map(p => {
-            const parts = (p.location || "").split(",");
-            return parts[parts.length - 1].trim();
-          })
-        )
-      ),
-    [projects]
-  );
 
   const activeProject = projects[activeIndex] ?? projects[0];
 
@@ -293,7 +281,7 @@ export default function ProjectShowcasePage() {
 
           <div className="grid gap-3 sm:grid-cols-2">
             <InfoCard icon={Building2} label="Segments Served" value={uniqueSegments.join(" • ")} />
-            <InfoCard icon={MapPin} label="Installations Across" value={`${uniqueStates.length}+ states`} />
+            <InfoCard icon={MapPin} label="Installations Across" value="1 state" />
           </div>
 
           <div className="rounded-2xl border border-dashed border-emerald-600/50 bg-emerald-50/70 p-3 text-[11px] text-emerald-900">
@@ -302,50 +290,55 @@ export default function ProjectShowcasePage() {
         </div>
       </div>
 
-      {/* Horizontal rail of projects */}
-      <div className="mt-10">
-        <div className="mb-3 flex items-center justify-between gap-2">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Browse Other Installations</div>
+      {/* Grid of projects (3x3 format) */}
+      <div className="mt-12">
+        <div className="mb-6 flex items-center justify-between gap-2">
+          <div className="text-[12px] font-bold uppercase tracking-[0.2em] text-slate-600">Browse Installations</div>
           <div className="text-[11px] text-slate-400">Click a card to open full case study</div>
         </div>
 
-        <div className="-mx-6 flex gap-4 overflow-x-auto px-1 pb-2 pt-1 scroll-smooth lg:mx-0">
-          {projects.map((project, index) => {
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.slice(0, 9).map((project, index) => {
             const isActive = index === activeIndex;
             return (
               <button
                 key={project._id ?? project.name}
                 type="button"
                 onClick={() => openModalForProject(project, index)}
-                className={`relative flex w-64 shrink-0 flex-col overflow-hidden rounded-2xl border bg-white text-left shadow-sm transition-transform duration-200 ${
+                className={`group relative flex w-full flex-col overflow-hidden rounded-2xl border bg-white text-left shadow-sm transition-all duration-300 ${
                   isActive
-                    ? "border-sky-500 shadow-[0_0_0_1px_rgba(56,189,248,0.4)] scale-[1.02]"
-                    : "border-slate-600/50 hover:border-sky-300 hover:shadow-md hover:scale-[1.01]"
+                    ? "border-sky-500 ring-2 ring-sky-500/20 scale-[1.02] z-10"
+                    : "border-slate-200 hover:border-sky-400 hover:shadow-xl hover:-translate-y-1"
                 }`}
               >
-                <div className="relative h-28 w-full">
-                  <img src={imgSrc(project.image)} alt={project.name} className="h-full w-full object-cover" loading="lazy" />
+                <div className="relative h-44 w-full overflow-hidden">
+                  <img 
+                    src={imgSrc(project.image)} 
+                    alt={project.name} 
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                    loading="lazy" 
+                  />
                   <div className="absolute inset-0 bg-linear-to-t from-slate-900/80 via-slate-900/10 to-transparent" />
-                  <div className="absolute bottom-2 left-3 flex items-center gap-2 text-[10px] text-slate-50">
-                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-900/70 px-2 py-0.5">
+                  <div className="absolute bottom-3 left-3 flex flex-wrap items-center gap-2 text-[10px] text-slate-50">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-900/70 px-2.5 py-1 backdrop-blur-sm">
                       <SunMedium className="h-3 w-3 text-amber-300" /> {project.segment}
                     </span>
-                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-900/60 px-2 py-0.5">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-900/60 px-2.5 py-1 backdrop-blur-sm">
                       <MapPin className="h-3 w-3 text-sky-300" /> {project.location}
                     </span>
                   </div>
                 </div>
 
-                <div className="flex flex-1 flex-col px-3.5 py-3">
-                  <div className="line-clamp-2 text-xs font-semibold text-slate-900">{project.name}</div>
-                  <div className="mt-2 flex flex-wrap items-center gap-1.5 text-[10px] text-slate-600">
-                    <span className="rounded-full bg-slate-100 px-2 py-0.5">{project.capacity}</span>
-                    <span className="rounded-full bg-slate-100 px-2 py-0.5">{project.roofType}</span>
-                    <span className="rounded-full bg-slate-100 px-2 py-0.5">{project.payback} payback</span>
+                <div className="flex flex-1 flex-col px-4 py-4">
+                  <div className="line-clamp-2 text-sm font-bold text-slate-900 group-hover:text-sky-700 transition-colors">{project.name}</div>
+                  <div className="mt-3 flex flex-wrap items-center gap-2 text-[10px] text-slate-600">
+                    <span className="rounded-full bg-slate-100 px-2.5 py-1 font-medium">{project.capacity}</span>
+                    <span className="rounded-full bg-slate-100 px-2.5 py-1 font-medium">{project.roofType}</span>
+                    <span className="rounded-full bg-emerald-50 text-emerald-700 px-2.5 py-1 font-semibold">{project.payback} payback</span>
                   </div>
-                  <div className="mt-3 flex items-center justify-between text-[11px] text-slate-500">
-                    <span>Tap to view details</span>
-                    {isActive && <ChevronRight className="h-3.5 w-3.5 text-sky-600" />}
+                  <div className="mt-4 flex items-center justify-between border-t border-slate-50 pt-3 text-[11px] font-medium text-slate-500">
+                    <span>View Case Study</span>
+                    <ChevronRight className={`h-4 w-4 transition-transform duration-300 ${isActive || "group-hover:translate-x-1"} ${isActive ? "text-sky-600" : "text-slate-300"}`} />
                   </div>
                 </div>
               </button>

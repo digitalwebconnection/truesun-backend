@@ -18,7 +18,7 @@ export default function AppSimple() {
             "url('https://d3nut88kxhmnud.cloudfront.net/2025/12/10kw-ongrid-solar-installation.jpg')",
         }}
       >
-        <div className="absolute inset-0 bg-black opacity-70"></div> {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black opacity-40"></div> {/* Dark overlay */}
       </div>
 
       {/* Content container aligned left */}
@@ -34,7 +34,7 @@ export default function AppSimple() {
           Powering  with <span className="text-[#FC763A]">Sustainable Solar Solutions</span>
         </h1>
 
-        <p className="text-md text-gray-200 max-w-2xl mb-10 drop-shadow">
+        <p className="text-md text-white max-w-2xl mb-10 drop-shadow">
           As a leading provider, TrueSun delivers high-performance solar installations that drive energy independence and measurable results across the state.</p>
 
         {/* --- CTA Buttons (Left aligned) --- */}
