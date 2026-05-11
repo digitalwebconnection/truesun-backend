@@ -210,7 +210,7 @@ export default function SolarFooter() {
                             </span>
                         </div>
 
-                        <div className="flex items-center justify-start">
+                        <div className="flex items-center me-30 justify-start">
                             <FooterLink to="/PrivacyPolicy">Privacy Policy</FooterLink>
                         </div>
                     </div>
