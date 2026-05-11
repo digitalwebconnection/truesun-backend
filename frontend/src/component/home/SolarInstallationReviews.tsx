@@ -3,7 +3,6 @@ import { useRef, useState } from "react";
 /* 👉 ADD YOUR LOGOS HERE */
 import bloomLogo from "../../assets/TestiminialVideo/Bloomlogo.png";
 import oberoiLogo from "../../assets/TestiminialVideo/oberoilogo.png";
-import kalpataruLogo from "../../assets/TestiminialVideo/Kalpatarulogo.png";
 
 import tv1 from "../../assets/TestiminialVideo/Testimonial-1.mp4";
 import tv2 from "../../assets/TestiminialVideo/rustamji testimonial.mp4";
