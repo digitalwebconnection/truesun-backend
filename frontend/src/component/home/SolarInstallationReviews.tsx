@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 
 /* 👉 ADD YOUR LOGOS HERE */
 import bloomLogo from "../../assets/TestiminialVideo/Bloomlogo.png";
@@ -91,14 +91,11 @@ export default function ModernReviewSection() {
   ];
 
   const [current, setCurrent] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % reviews.length);
-    }, 100000);
-
-    return () => clearInterval(interval);
-  }, [reviews.length]);
+  const handleVideoEnded = () => {
+    setCurrent((prev) => (prev + 1) % reviews.length);
+  };
 
   const review = reviews[current];
 
@@ -123,15 +120,15 @@ export default function ModernReviewSection() {
           {/* LEFT VIDEO */}
           <div className="relative w-full rounded-2xl overflow-hidden shadow-xl">
             <video
+              ref={videoRef}
               key={current}
               src={review.video}
               className="w-full h-[450px] object-cover"
               autoPlay
-              loop
               controls
               muted
               playsInline
-
+              onEnded={handleVideoEnded}
             />
           </div>
 
