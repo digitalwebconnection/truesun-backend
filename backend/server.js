@@ -14,11 +14,12 @@ const app  = express();
 const PORT = process.env.PORT || 5000;
 
 // ─── CORS ─────────────────────────────────────────────────────────────────────
-// Allow the Vercel frontend + local dev; add any extra origins to the array
-const allowedOrigins = [
-  process.env.FRONTEND_URL   || 'http://localhost:5173',
-  process.env.FRONTEND_URL_2 || 'https://truesun.vercel.app',   // optional second origin (e.g. custom domain)
-].filter(Boolean);
+// FRONTEND_URL can be a comma-separated list, e.g.
+// FRONTEND_URL=http://localhost:5173,https://truesun.vercel.app,https://truesun.in
+const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
+  .split(',')
+  .map(u => u.trim())
+  .filter(Boolean);
 
 app.use(cors({
   origin: (origin, cb) => {
