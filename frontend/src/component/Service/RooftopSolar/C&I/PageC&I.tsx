@@ -563,9 +563,8 @@ export default function SolarNovaIndustrialPage() {
               </motion.h3>
               <div className="mt-6 space-y-4">
                 {[
-                  { n: "Andheri Independent Bungalow", s: "27,375 kWh Annual generation", o: "₹60L annual offset" },
-                  { n: "Sharad Apartment", s: "20,151 kWh Annual generation", o: "₹20L annual offset" },
-                  { n: "Ganesh Kunj", s: "22,732 kWh Annual generation", o: "₹42L annual offset" },
+                  { n: "Rentokil PCI", s: "74,664 kWh Annual generation", o: "₹60L annual offset" },
+                  { n: "Landmark Platinum", s: "45,750 kWh Annual generation", o: "₹20L annual offset" }
                 ].map((cs, i) => (
                   <motion.div
                     key={i}

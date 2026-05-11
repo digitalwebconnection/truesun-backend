@@ -69,69 +69,150 @@ export default function ProcessAndPlans() {
         </div>
 
         {/* Plan Comparison */}
-        <div className="bg-white px-2 pb-8">
-          <div className="p-8 border-b border-orange-100/50 mb-8">
+        <div className="pb-8">
+          <div className="p-8 mb-6">
             <h3 className="text-2xl md:text-3xl font-bold text-[#FC763A] text-center">
               Plan Comparison
             </h3>
           </div>
 
-          <div className="grid md:grid-cols-3 text-center rounded-2xl shadow-md border border-orange-100 bg-white items-center">
-            {/* Feature Column */}
-            <div className="bg-orange-50/40 p-6 text-left h-full rounded-l-2xl">
-              <p className="mb-6 text-xl font-bold text-gray-900">
-                Aspect
-              </p>
+          <div className="overflow-x-auto rounded-2xl shadow-xl border border-slate-200">
+            <table className="w-full border-collapse text-sm md:text-base">
+              {/* Header */}
+              <thead>
+                <tr>
+                  {/* Aspect header - same gray-blue as column */}
+                  <th className="text-left px-6 py-4 font-bold text-sm md:text-base bg-[#d6dfe8] text-[#1B2A4A] border-r border-white/50 w-[35%] rounded-tl-2xl">
+                    Aspect
+                  </th>
+                  {/* Preventive header - white like column */}
+                  <th className="px-6 py-4 font-bold text-sm md:text-base bg-white text-[#1B2A4A] border-r border-slate-200 w-[32.5%]">
+                    Preventive
+                  </th>
+                  {/* Comprehensive header - blue like column */}
+                  <th className="px-6 py-4 font-bold text-sm md:text-base bg-[#2d4a7a] text-white w-[32.5%] rounded-tr-2xl">
+                    <span>Comprehensive</span>
+                    <span className="ml-2 inline-block bg-[#FC763A] text-white text-[10px] md:text-xs font-bold px-2.5 py-0.5 rounded-full align-middle">
+                      Recommended
+                    </span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  {
+                    aspect: "Routine Inspections",
+                    preventive: { type: "check", text: "4 visits/year" },
+                    comprehensive: { type: "check", text: "4 visits/year" },
+                  },
+                  {
+                    aspect: "Module Cleaning",
+                    preventive: { type: "check", text: "Basic" },
+                    comprehensive: { type: "check", text: "18 visits/year" },
+                  },
+                  {
+                    aspect: "Fault Repair",
+                    preventive: { type: "cross", text: "Extra cost" },
+                    comprehensive: { type: "check", text: "Included" },
+                  },
+                  {
+                    aspect: "Component Replacement",
+                    preventive: { type: "cross", text: "" },
+                    comprehensive: { type: "check", text: "" },
+                  },
+                  {
+                    aspect: "Emergency Services",
+                    preventive: { type: "text", text: "₹1,800/visit" },
+                    comprehensive: { type: "check", text: "Included" },
+                  },
+                  {
+                    aspect: "Breakdown Response",
+                    preventive: { type: "text", text: "Within 72 hrs" },
+                    comprehensive: { type: "text", text: "Priority response" },
+                  },
+                  {
+                    aspect: "Performance Monitoring",
+                    preventive: { type: "check", text: "Periodic" },
+                    comprehensive: { type: "text", text: "Continuous" },
+                  },
+                  {
+                    aspect: "Reports & Analytics",
+                    preventive: { type: "text", text: "Basic reports" },
+                    comprehensive: { type: "text", text: "Detailed insights" },
+                  },
+                  {
+                    aspect: "Corrective Maintenance",
+                    preventive: { type: "cross", text: "" },
+                    comprehensive: { type: "check", text: "" },
+                  },
+                  {
+                    aspect: "System Optimization",
+                    preventive: { type: "cross", text: "" },
+                    comprehensive: { type: "check", text: "" },
+                  },
+                  {
+                    aspect: "Annual Cost",
+                    preventive: { type: "text", text: "₹20,000/year" },
+                    comprehensive: { type: "text", text: "Higher (all-inclusive)" },
+                  },
+                  {
+                    aspect: "Risk Coverage",
+                    preventive: { type: "text", text: "Client bears risk" },
+                    comprehensive: { type: "text", text: "Vendor bears risk" },
+                  },
+                  {
+                    aspect: "Best For",
+                    preventive: { type: "text", text: "Budget-conscious users" },
+                    comprehensive: { type: "text", text: "Hassle-free performance" },
+                  },
+                ].map((row, i) => {
+                  const isEven = i % 2 === 0;
+                  const isLast = i === 12;
+                  return (
+                    <tr key={row.aspect}>
+                      {/* Aspect column - consistent light gray-blue */}
+                      <td
+                        className={`text-left px-6 py-3.5 font-semibold text-[#1B2A4A] border-r border-white/50 border-b border-b-[#c5d0dc] ${
+                          isEven ? "bg-[#e4eaf1]" : "bg-[#dbe2eb]"
+                        } ${isLast ? "rounded-bl-2xl" : ""}`}
+                      >
+                        {row.aspect}
+                      </td>
+                      {/* Preventive column - consistent white */}
+                      <td
+                        className={`text-center px-6 py-3.5 border-r border-slate-200 border-b border-b-slate-100 bg-white`}
+                      >
+                        <CellContent data={row.preventive} />
+                      </td>
+                      {/* Comprehensive column - consistent lighter blue */}
+                      <td
+                        className={`text-center px-6 py-3.5 border-b border-b-[#3d5a8a] ${
+                          isEven ? "bg-[#2d4a7a]" : "bg-[#345285]"
+                        } ${isLast ? "rounded-br-2xl" : ""}`}
+                      >
+                        <CellContent data={row.comprehensive} dark />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
 
-              <p className="mb-4 font-semibold text-gray-700">Routine checks</p>
-              <p className="mb-4 font-semibold text-gray-700">Cleaning</p>
-              <p className="mb-4 font-semibold text-gray-700">Fault repair</p>
-              <p className="mb-4 font-semibold text-gray-700">Component replacement</p>
-              <p className="mb-4 font-semibold text-gray-700">Cost</p>
-              <p className="mb-4 font-semibold text-gray-700">Risk</p>
-            </div>
-
-            {/* Preventive Plan */}
-            <div className="p-6 border-l border-orange-100 h-full flex flex-col justify-center">
-              <h4 className="text-xl font-bold mb-6 text-gray-900">
-                Preventive
-              </h4>
-
-              <p className="mb-4 text-emerald-500 font-bold text-lg">✔️</p>
-              <p className="mb-4 text-emerald-500 font-bold text-lg">✔️</p>
-              <p className="mb-4 text-rose-500 font-medium text-sm">✖️ Extra cost</p>
-              <p className="mb-4 text-rose-500 font-bold text-lg">✖️</p>
-              <p className="mb-4 text-gray-700 font-medium">Lower</p>
-              <p className="mb-4 text-gray-700 font-medium">Client bears risk</p>
-
-              <button
-                onClick={() => setOpenLeadPopup(true)}
-                className="mt-6 border-2 border-[#FC763A] text-[#FC763A] font-semibold px-5 py-2 rounded-full hover:bg-[#FC763A] hover:text-white transition"
-              >
-                Choose Plan
-              </button>
-            </div>
-
-            {/* Comprehensive Plan - Highlighting as Premium Tiers typically are */}
-            <div className="p-8 bg-orange-50 text-gray-900 md:scale-105 shadow-xl rounded-2xl relative z-10 flex flex-col justify-center border border-orange-200">
-              <h4 className="text-2xl font-extrabold mb-6 text-[#FC763A]">
-                Comprehensive
-              </h4>
-
-              <p className="mb-4 text-emerald-500 font-bold text-lg">✔️</p>
-              <p className="mb-4 text-emerald-500 font-bold text-lg">✔️</p>
-              <p className="mb-4 text-emerald-500 font-bold text-sm tracking-wide">✔️ INCLUDED</p>
-              <p className="mb-4 text-emerald-500 font-bold text-lg">✔️</p>
-              <p className="mb-4 text-gray-700 font-medium">Higher</p>
-              <p className="mb-4 text-gray-700 font-medium">Vendor bears risk</p>
-
-              <button
-                onClick={() => setOpenCtaPopup(true)}
-                className="mt-6 bg-[#FC763A] text-white font-bold px-6 py-3 rounded-full hover:bg-orange-600 shadow-md transition hover:-translate-y-px"
-              >
-                Get Started
-              </button>
-            </div>
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
+            <button
+              onClick={() => setOpenLeadPopup(true)}
+              className="border-2 border-[#1B2A4A] text-[#1B2A4A] font-semibold px-8 py-2.5 rounded-full hover:bg-[#1B2A4A] hover:text-white transition"
+            >
+              Choose Plan
+            </button>
+            <button
+              onClick={() => setOpenCtaPopup(true)}
+              className="bg-[#FC763A] text-white font-bold px-8 py-2.5 rounded-full hover:bg-orange-600 shadow-md transition hover:-translate-y-px"
+            >
+              Get Started
+            </button>
           </div>
         </div>
 
@@ -143,5 +224,41 @@ export default function ProcessAndPlans() {
         <CtaPopup onClose={() => setOpenCtaPopup(false)} title="Please leave your details" />
       )}
     </section>
+  );
+}
+
+function CellContent({
+  data,
+  dark,
+}: {
+  data: { type: string; text: string };
+  dark?: boolean;
+}) {
+  if (data.type === "check") {
+    return (
+      <span className="inline-flex items-center justify-center gap-1.5">
+        <span className="text-base text-emerald-400">✓</span>
+        {data.text && (
+          <span className={`text-sm font-medium ${dark ? "text-white" : "text-gray-700"}`}>
+            {data.text}
+          </span>
+        )}
+      </span>
+    );
+  }
+  if (data.type === "cross") {
+    return (
+      <span className="inline-flex items-center justify-center gap-1.5">
+        <span className={`text-base ${dark ? "text-red-400" : "text-red-500"}`}>✗</span>
+        {data.text && (
+          <span className={`text-sm font-medium ${dark ? "text-red-400" : "text-red-500"}`}>{data.text}</span>
+        )}
+      </span>
+    );
+  }
+  return (
+    <span className={`text-sm font-medium ${dark ? "text-white/90" : "text-gray-700"}`}>
+      {data.text}
+    </span>
   );
 }

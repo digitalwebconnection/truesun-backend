@@ -5,9 +5,9 @@ import v3 from "../../assets/videos/3.mp4";
 import v4 from "../../assets/videos/4.mp4";
 
 const videos = [
-  { video: v1, title: "Residential Rooftop", detail: "Pune, Maharashtra" },
+  { video: v3, title: "Residential Rooftop", detail: "Andheri East, Mumbai" },
   { video: v2, title: "Commercial Setup", detail: "Mumbai, Maharashtra" },
-  { video: v3, title: "Industrial Storage", detail: "Nashik, Maharashtra" },
+  { video: v1, title: "Industrial Storage", detail: "Nashik, Maharashtra" },
   { video: v4, title: "Hybrid Energy System", detail: "Surat, Gujarat" },
 ];
 

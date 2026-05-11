@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import brochurePdf from "../../assets/TrueSun Brochure .pdf";
 import type React from "react";
 import {
     Leaf,
@@ -213,11 +213,11 @@ export default function AboutTrueSunNew() {
                             Every rooftop has a unique energy story. At TrueSun, we combine engineering precision with ground-level execution to turn your roof into a strategic asset.
                         </p>
                         <div className="flex gap-4 items-center">
-                            <Link to="/#">
+                            <a href={brochurePdf} download="TrueSun Brochure.pdf">
                                 <button className="bg-gray-900 text-white px-10 py-3 rounded-full font-medium hover:bg-[#fc763a] transition-all">
                                     Our Brochure
                                 </button>
-                            </Link>
+                            </a>
                         </div>
                     </div>
 
