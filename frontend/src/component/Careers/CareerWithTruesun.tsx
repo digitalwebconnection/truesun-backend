@@ -283,7 +283,7 @@ const [openIndex, setOpenIndex] = useState<number | null>(0)
             <p className="mt-3 max-w-2xl mx-auto text-sm text-black">
               Don&apos;t see a perfect role? Send your profile to{" "}
               <span className="font-semibold text-slate-800">
-                info@truesun.in
+                support@truesun.in
               </span>{" "}
               for future consideration.
             </p>

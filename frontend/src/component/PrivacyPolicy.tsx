@@ -118,7 +118,7 @@ const PrivacyPolicy = () => {
           </p>
 
           <p className="mt-3 text-sm font-medium text-[#FC763A]">
-            📧 info@truesun.in
+            📧 support@truesun.in
           </p>
         </section>
 

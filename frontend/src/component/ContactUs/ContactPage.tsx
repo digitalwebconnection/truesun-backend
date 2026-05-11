@@ -61,7 +61,7 @@ function ContactForm(): JSX.Element {
     // create subject with "Sun" title and append owner email for reference
     const name = fd.get("name")?.toString().trim() || "Website Visitor";
     fd.append("subject", `Sun - Owner Email | New enquiry from ${name}`);
-    fd.append("owner_email", "info@truesun.in");
+    fd.append("owner_email", "support@truesun.in");
     fd.append("source", "Contact Page - TrueSun");
 
     try {
@@ -299,8 +299,8 @@ const ContactPage: React.FC = () => {
           <h3 className="mt-2 text-xl font-bold text-slate-900">Project Quotes</h3>
           <p className="mt-2 text-sm text-slate-600 leading-relaxed">Send RFQs, energy bills, tender details, or proposal requests.</p>
           <div className="mt-6 space-y-4 text-sm">
-            <a href="mailto:info@truesun.in" className="text-slate-800 font-semibold hover:text-[#FC763A] transition-colors flex items-center gap-3 text-base break-all">
-              <span className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0"><Mail size={16} className="text-[#FC763A]" /></span> info@truesun.in
+            <a href="mailto:support@truesun.in" className="text-slate-800 font-semibold hover:text-[#FC763A] transition-colors flex items-center gap-3 text-base break-all">
+              <span className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0"><Mail size={16} className="text-[#FC763A]" /></span> support@truesun.in
             </a>
           </div>
         </div>

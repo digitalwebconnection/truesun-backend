@@ -155,10 +155,10 @@ export default function SolarFooter() {
                                 <div className="flex items-center gap-3">
                                     <Mail className="h-4 w-4 flex-shrink-0 text-[#FC763A]" />
                                     <a
-                                        href="mailto:info@truesun.in"
+                                        href="mailto:support@truesun.in"
                                         className="hover:text-[#FC763A] transition-colors"
                                     >
-                                        info@truesun.in
+                                        support@truesun.in
                                     </a>
                                 </div>
                             </div>
