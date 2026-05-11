@@ -8,7 +8,7 @@ const videos = [
   { video: v3, title: "Ganesh Kunj (Residential Rooftop)", detail: "Andheri East, Mumbai" },
   { video: v2, title: "Rentokil PCI (C&I Setup)", detail: "Goregaon West, Mumbai" },
   { video: v1, title: "UPL(Industrial Storage)", detail: "Daman" },
-  { video: v4, title: "Kalpataru Society (Residential Society)", detail: "Andheri, Mumba" },
+  { video: v4, title: "Kalpataru Society (Residential Society)", detail: "Andheri, Mumbai" },
 ];
 
 export default function ProjectVideoSection() {
