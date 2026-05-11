@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Zap, MapPin, Ruler, CreditCard, Users, ArrowRight, CheckCircle2, TrendingUp, PiggyBank, Calendar } from "lucide-react";
+import { MapPin, Ruler, CreditCard, Users, ArrowRight, CheckCircle2, TrendingUp, PiggyBank, Calendar } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import LeadPopup from "../LeadPopup";
 
@@ -235,78 +235,117 @@ export default function SolarCalculator() {
 
           {/* RESULT SECTION */}
           <div className="lg:col-span-7">
-            {!leadSubmitted ? (
-              <div className="h-full min-h-[400px] flex flex-col items-center justify-center border-2 border-dashed border-slate-200 rounded-3xl bg-slate-50/50 p-8 text-center">
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-4">
-                  <Zap className="w-8 h-8 text-slate-300" />
-                </div>
-                <p className="text-slate-500 font-medium italic">Complete the form to unlock your personalized solar report.</p>
-              </div>
-            ) : (
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6">
-
+            <div className="relative">
+              <div className="space-y-6 transition-all duration-500">
                 {/* HERO RESULT */}
-                <div className="bg-[#e0652f] text-white p-8  shadow-2xl relative overflow-hidden">
+                <div className="bg-[#e0652f] text-white p-8 shadow-2xl relative overflow-hidden rounded-3xl">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-[#FC763A] opacity-20 blur-3xl -mr-10 -mt-10"></div>
-                  <div className="flex justify-between  items-start">
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-5 blur-2xl -ml-10 -mb-10"></div>
+                  
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                     <div>
-                      <p className="text-white font-bold uppercase tracking-wider text-xs mb-2">Recommended Capacity</p>
-                      <h2 className="text-6xl font-black">{result.recommendedKw} <span className="text-2xl font-normal text-white">kW</span></h2>
+                      <p className="text-orange-100 font-bold uppercase tracking-widest text-[10px] mb-2 bg-white/10 w-fit px-2 py-0.5 rounded">Recommended Capacity</p>
+                      <h2 className={`text-6xl md:text-7xl font-black tabular-nums transition-all ${!leadSubmitted ? "opacity-20 select-none" : ""}`}>
+                        {leadSubmitted ? result.recommendedKw : "5.0"} 
+                        <span className="text-2xl font-light text-orange-100 ml-2 uppercase">kW</span>
+                      </h2>
                     </div>
-                    <div className="text-center pt-2  ">
-                      <p className="text-white text-lg">Payback Period</p>
-                      <p className="text-3xl font-bold">{result.payback.toFixed(1)} <span className="text-sm font-normal">Years</span></p>
+                    <div className="flex items-center gap-8 border-l border-white/20 pl-8">
+                      <div className="text-center">
+                        <p className="text-orange-100 text-xs uppercase font-bold tracking-wider mb-1">Payback</p>
+                        <p className={`text-3xl font-bold tabular-nums transition-all ${!leadSubmitted ? "opacity-20 select-none" : ""}`}>
+                          {leadSubmitted ? result.payback.toFixed(1) : "3.4"}
+                          <span className="text-sm font-normal ml-1">Yrs</span>
+                        </p>
+                      </div>
+                      <div className="bg-white/20 p-3 rounded-full">
+                        <CheckCircle2 className="text-white w-8 h-8" />
+                      </div>
                     </div>
-                    <CheckCircle2 className="text-green-400 w-10 h-10" />
                   </div>
-
                 </div>
 
                 {/* STATS GRID */}
                 <div className="grid md:grid-cols-2 gap-4">
-                  <div className="bg-white p-6  border border-slate-500/40 shadow-sm flex items-center gap-4">
-                    <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center text-green-600">
-                      <PiggyBank className="w-6 h-6" />
+                  <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex items-center gap-4 hover:shadow-md transition-shadow">
+                    <div className="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 shrink-0">
+                      <PiggyBank className="w-7 h-7" />
                     </div>
                     <div>
-                      <p className="text-slate-500 text-xs font-bold uppercase">Monthly Savings</p>
-                      <p className="text-xl font-bold text-slate-900">{fmtINR.format(result.monthlySavings)}</p>
+                      <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-0.5">Monthly Savings</p>
+                      <p className={`text-2xl font-bold text-slate-900 tabular-nums transition-all ${!leadSubmitted ? "opacity-20 select-none" : ""}`}>
+                        {leadSubmitted ? fmtINR.format(result.monthlySavings) : "₹4,850"}
+                      </p>
                     </div>
                   </div>
 
-                  <div className="bg-white p-6  border border-slate-500/40 shadow-sm flex items-center gap-4">
-                    <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
-                      <Calendar className="w-6 h-6" />
+                  <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex items-center gap-4 hover:shadow-md transition-shadow">
+                    <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 shrink-0">
+                      <Calendar className="w-7 h-7" />
                     </div>
                     <div>
-                      <p className="text-slate-500 text-xs font-bold uppercase">Annual Savings</p>
-                      <p className="text-xl font-bold text-slate-900">{fmtINR.format(result.annualSavings)}</p>
+                      <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-0.5">Annual Savings</p>
+                      <p className={`text-2xl font-bold text-slate-900 tabular-nums transition-all ${!leadSubmitted ? "opacity-20 select-none" : ""}`}>
+                        {leadSubmitted ? fmtINR.format(result.annualSavings) : "₹58,200"}
+                      </p>
                     </div>
                   </div>
                 </div>
-                {/* SUBSIDY ALERT */}
-                {result.subsidy > 0 && (
-                  <div className="bg-emerald-50 border border-emerald-100 p-4 rounded-2xl flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <span className="flex h-3 w-3 rounded-full bg-emerald-500 animate-pulse"></span>
-                      <p className="text-emerald-800 font-medium">Government Subsidy Applied</p>
+
+                {/* SUBSIDY & CTA SECTION */}
+                <div className="bg-slate-900 text-white p-6 rounded-3xl overflow-hidden relative">
+                   <div className="absolute top-0 right-0 w-64 h-64 bg-[#FC763A] opacity-10 blur-[80px] -mr-32 -mt-32"></div>
+                   
+                   <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></div>
+                          <p className="text-emerald-400 text-sm font-bold uppercase tracking-wider">Govt. Subsidy eligible</p>
+                        </div>
+                        <p className="text-slate-300 text-xs">Based on latest MNRE guidelines and {leadSubmitted ? category.toLowerCase().replace('_', ' ') : "residential"} category.</p>
+                      </div>
+                      
+                      <div className="text-right">
+                        <p className="text-slate-400 text-[10px] uppercase font-bold mb-1">Estimated Subsidy</p>
+                        <p className={`text-3xl font-bold text-white tabular-nums transition-all ${!leadSubmitted ? "opacity-20 select-none" : ""}`}>
+                          {leadSubmitted ? fmtINR.format(result.subsidy) : "₹78,000"}
+                        </p>
+                      </div>
+                   </div>
+                </div>
+
+                {leadSubmitted && (
+                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+                    <p className="text-lg text-slate-600 font-medium leading-relaxed">
+                      Thank you for contacting <span className="text-[#FC763A] font-bold">TrueSun</span> — our technical team will reach out to you within 24 hours to schedule a free site assessment.
+                    </p>
+                    <div className="pt-2">
+                      <button
+                        onClick={() => setOpenLeadPopup(true)}
+                        className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-[#FC763A] px-8 py-3.5 font-bold text-white shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-orange-300/50"
+                      >
+                        <span className="relative">Book a Free Site Visit</span>
+                        <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                      </button>
                     </div>
-                    <span className="text-emerald-700 font-bold">+{fmtINR.format(result.subsidy)}</span>
-                  </div>
+                  </motion.div>
                 )}
-                <p className="text-xl ">Thank you for contacting TrueSun — our team will get back to you within 24 hours.</p>
-                <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+              </div>
+            </div>
 
-
-                  <button
-                    onClick={() => setOpenLeadPopup(true)}
-                    className="inline-flex items-center justify-center rounded-full bg-[#FC763A]  px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-300/50 transition hover:shadow-lg hover:brightness-105"
-                  >
-                    Book a Free Site Visit
-                  </button>
-
-                </div>
-              </motion.div>
+            {!leadSubmitted && (
+              <div className="mt-8 grid grid-cols-3 gap-4">
+                {[
+                  { label: "Tier-1 Panels", icon: CheckCircle2 },
+                  { label: "25yr Warranty", icon: CheckCircle2 },
+                  { label: "Remote Monitoring", icon: CheckCircle2 },
+                ].map((item, i) => (
+                  <div key={i} className="flex flex-col items-center text-center p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                    <item.icon className="w-5 h-5 text-emerald-500 mb-2" />
+                    <span className="text-[10px] font-bold text-slate-600 uppercase tracking-tight">{item.label}</span>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
         </div>
