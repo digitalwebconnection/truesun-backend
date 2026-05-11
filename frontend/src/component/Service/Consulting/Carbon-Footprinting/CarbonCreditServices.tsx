@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Search, Compass, ShieldCheck, Target, ArrowRight, Globe } from 'lucide-react';
+import { Search, Compass, ShieldCheck, Target } from 'lucide-react';
 import LeadPopup from '../../../LeadPopup';
 
 const CarbonServicesAutoFlow = () => {
@@ -138,15 +138,7 @@ const CarbonServicesAutoFlow = () => {
 
                                 <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium max-w-xl mb-10">
                                     {service.desc}
-                                </p>
-
-                                <div className="flex items-center gap-6">
-                                    <button
-                                        onClick={() => setOpenLeadPopup(true)} className="px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl flex items-center gap-3 hover:bg-[#FC763A] transition-all group">
-                                        Learn More <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-                                    </button>
-                                    <Globe className="text-slate-200 w-12 h-12" />
-                                </div>
+                                </p>   
                             </div>
                             
                         ))}

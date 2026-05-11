@@ -23,21 +23,21 @@ export default function ModernReviewSection() {
 
   const reviews: Review[] = [
     {
-      name: "Bloom Packaging",
-      designation: "Facility Manager",
-      projectName: "60 kW Industrial Solar Plant",
-      location: "Daman",
+      name: "Mr Umesh",
+      designation: "Senior Manager",
+      projectName: "PCI Rentokil, 50 kW Commercial Solar Plant",
+      location: "Goregaon West, Mumbai",
       rating: 5,
       comment:
-        "The team at TrueSun has been very supportive and have installed the system very neatly, following all safety measures like walkways, lifeline, etc. We are satisfied with their work and recommend them.",
+       "",
       video: tv1,
       logo: bloomLogo,
     },
     {
-      name: "Oberoi Realty Group",
-      designation: "Estate Manager",
-      projectName: "75 kW High-rise Solar Installation",
-      location: "Mumbai",
+      name: "Ms. Annie chairman",
+      designation: "chairman",
+      projectName: "Global City Rustomjee Virar, 40 KW Residential Project",
+      location: "Virar, Mumbai",
       rating: 5,
       comment:
         "We found TrueSun to be a company which is the right fit for us. For us quality comes first and TrueSun met all our expectations. They installed this plant on a high rise building while following all safety protocols.",
@@ -95,7 +95,7 @@ export default function ModernReviewSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % reviews.length);
-    }, 10000);
+    }, 100000);
 
     return () => clearInterval(interval);
   }, [reviews.length]);
@@ -138,14 +138,7 @@ export default function ModernReviewSection() {
           {/* RIGHT CONTENT */}
           <div className="bg-white p-8 rounded-2xl shadow-lg relative">
 
-            {/* LOGO */}
-            <div className="flex justify-center mb-6">
-              <img
-                src={review.logo}
-                alt={review.name}
-                className="h-14 object-contain"
-              />
-            </div>
+            
 
             {/* STARS */}
             <div className="flex justify-center mb-4">
@@ -160,10 +153,7 @@ export default function ModernReviewSection() {
               ))}
             </div>
 
-            {/* COMMENT */}
-            <p className="text-lg text-gray-700 italic mb-6 leading-relaxed text-center">
-              "{review.comment}"
-            </p>
+           
 
             {/* NAME & DETAILS */}
             <div className="text-center">

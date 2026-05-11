@@ -5,10 +5,10 @@ import v3 from "../../assets/videos/3.mp4";
 import v4 from "../../assets/videos/4.mp4";
 
 const videos = [
-  { video: v3, title: "Residential Rooftop", detail: "Andheri East, Mumbai" },
-  { video: v2, title: "Commercial Setup", detail: "Mumbai, Maharashtra" },
-  { video: v1, title: "Industrial Storage", detail: "Nashik, Maharashtra" },
-  { video: v4, title: "Hybrid Energy System", detail: "Surat, Gujarat" },
+  { video: v3, title: "Ganesh Kunj (Residential Rooftop)", detail: "Andheri East, Mumbai" },
+  { video: v2, title: "Rentokil PCI (C&I Setup)", detail: "Goregaon West, Mumbai" },
+  { video: v1, title: "UPL(Industrial Storage)", detail: "Daman" },
+  { video: v4, title: "Kalpataru Society (Residential Society)", detail: "Andheri, Mumba" },
 ];
 
 export default function ProjectVideoSection() {
