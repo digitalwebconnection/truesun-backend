@@ -5,7 +5,7 @@ import bloomLogo from "../../assets/TestiminialVideo/Bloomlogo.png";
 import oberoiLogo from "../../assets/TestiminialVideo/oberoilogo.png";
 
 import tv1 from "../../assets/TestiminialVideo/Testimonial-1.mp4";
-import tv2 from "../../assets/TestiminialVideo/rustamji testimonial.mp4";
+import tv2 from "../../assets/TestiminialVideo/Testimonial-2.mp4";
 
 interface Review {
   name: string;
