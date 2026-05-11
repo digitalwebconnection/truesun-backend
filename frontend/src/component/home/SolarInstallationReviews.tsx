@@ -34,7 +34,7 @@ export default function ModernReviewSection() {
       logo: bloomLogo,
     },
     {
-      name: "Ms. Annie chairman",
+      name: "Ms. Annie",
       designation: "chairman",
       projectName: "Global City Rustomjee Virar, 40 KW Residential Project",
       location: "Virar, Mumbai",
@@ -43,51 +43,7 @@ export default function ModernReviewSection() {
         "We found TrueSun to be a company which is the right fit for us. For us quality comes first and TrueSun met all our expectations. They installed this plant on a high rise building while following all safety protocols.",
       video: tv2,
       logo: oberoiLogo,
-    },
-    {
-      name: "Kalpataru Estate (Residential)",
-      designation: "Committee Member",
-      projectName: "115 kW Residential Society Project",
-      location: "Mumbai",
-      rating: 5,
-      comment:
-        "We appreciate the way TrueSun explained every aspect in detail right from designing to addressing Managing committee concerns. With TrueSun's proper guidance we now have a 115 KW solar plant.",
-      video: tv1,
-      logo: kalpataruLogo,
-    },
-    {
-      name: "Bloom Packaging",
-      designation: "Facility Manager",
-      projectName: "60 kW Industrial Solar Plant",
-      location: "Daman",
-      rating: 5,
-      comment:
-        "The team at TrueSun has been very supportive and have installed the system very neatly, following all safety measures like walkways, lifeline, etc. We are satisfied with their work and recommend them.",
-      video: tv1,
-      logo: bloomLogo,
-    },
-    {
-      name: "Oberoi Realty Group",
-      designation: "Estate Manager",
-      projectName: "75 kW High-rise Solar Installation",
-      location: "Mumbai",
-      rating: 5,
-      comment:
-        "We found TrueSun to be a company which is the right fit for us. For us quality comes first and TrueSun met all our expectations. They installed this plant on a high rise building while following all safety protocols.",
-      video: tv2,
-      logo: oberoiLogo,
-    },
-    {
-      name: "Kalpataru Estate (Residential)",
-      designation: "Committee Member",
-      projectName: "115 kW Residential Society Project",
-      location: "Mumbai",
-      rating: 5,
-      comment:
-        "We appreciate the way TrueSun explained every aspect in detail right from designing to addressing Managing committee concerns. With TrueSun's proper guidance we now have a 115 KW solar plant.",
-      video: tv1,
-      logo: kalpataruLogo,
-    },
+    }
   ];
 
   const [current, setCurrent] = useState(0);
