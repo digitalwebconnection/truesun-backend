@@ -204,6 +204,7 @@ export default function AdminDashboard() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [toast, setToast] = useState('');
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   /* ── fetch ── */
   const fetchData = async (tab: ActiveTab) => {
@@ -236,6 +237,10 @@ export default function AdminDashboard() {
 
   /* ── logout ── */
   const handleLogout = () => {
+    setShowLogoutConfirm(true);
+  };
+
+  const confirmLogout = () => {
     localStorage.removeItem('adminAuth');
     navigate('/admin', { replace: true });
   };
@@ -499,6 +504,25 @@ export default function AdminDashboard() {
           onSuccess={handleFormSuccess}
           onClose={() => { setShowForm(false); setEditItem(null); }}
         />
+      )}
+
+      {/* ── Logout Confirmation ── */}
+      {showLogoutConfirm && (
+        <div style={S.confirmOverlay}>
+          <div style={S.confirmBox}>
+            <div style={S.confirmIcon}>
+              <LogOut size={22} color={CLR.danger} />
+            </div>
+            <div style={S.confirmTitle}>Confirm Logout</div>
+            <div style={S.confirmSub}>
+              Are you sure you want to log out of the admin panel?
+            </div>
+            <div style={S.confirmRow}>
+              <button style={S.confirmCancel} onClick={() => setShowLogoutConfirm(false)}>Cancel</button>
+              <button style={S.confirmDelete} onClick={confirmLogout}>Yes, Logout</button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* ── Delete Confirmation ── */}

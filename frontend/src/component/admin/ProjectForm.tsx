@@ -250,13 +250,8 @@ export default function ProjectForm({ project, onSuccess, onClose }: Props) {
     }
   };
 
-  // Close on overlay click
-  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if ((e.target as HTMLElement) === e.currentTarget) onClose();
-  };
-
   return (
-    <div style={S.overlay} onClick={handleOverlayClick}>
+    <div style={S.overlay}>
       <div style={S.modal}>
         {/* Header */}
         <div style={S.header}>
