@@ -216,7 +216,7 @@ const ResidentialSolarDetailsPage: FC = () => {
       </section>
 
       {/* BENEFITS */}
-      <section id="benefits" className="py-12 lg:py-16">
+      <section id="benefits" className="py-6 lg:py-8">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-3xl sm:text-4xl max-w-4xl  mx-auto text-center text-[#686868] font-bold">
             Why Solar is Ideal for Housing Societies, <br /><span className="text-[#FC763A]">Villas & Bungalows</span>
@@ -379,7 +379,7 @@ const ResidentialSolarDetailsPage: FC = () => {
       </section>
 
       {/* FINANCE & PAYBACK */}
-     <section className="py-16 bg-[#f9fafb]">
+     <section className="py-8 bg-[#f9fafb]">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* HEADER */}

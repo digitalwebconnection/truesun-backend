@@ -32,7 +32,7 @@ const useCases = [
 
 export default function BESSUseCases() {
   return (
-    <section className="bg-white py-16 px-6 md:px-10">
+    <section className="bg-white py-12 px-6 md:px-10">
       <div className="max-w-7xl mx-auto">
 
         {/* Heading */}

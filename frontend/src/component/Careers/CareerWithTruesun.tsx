@@ -231,7 +231,7 @@ const [openIndex, setOpenIndex] = useState<number | null>(0)
       <hr className="mx-auto max-w-7xl border-slate-200" />
 
       {/* ===== VALUES ===== */}
-      <section className="py-16 sm:py-20 bg-white border-y border-slate-100 relative">
+      <section className="py-8 md:py-12 bg-white border-y border-slate-100 relative">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-orange-50/80 via-white to-white -z-10" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-14 text-center">

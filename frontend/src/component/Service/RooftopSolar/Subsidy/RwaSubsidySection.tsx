@@ -5,7 +5,7 @@ const RWASubsidySection = () => {
 
   return (
     <>
-      <section className="py-20 bg-white">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
 
           {/* Top Heading */}
@@ -99,7 +99,7 @@ const RWASubsidySection = () => {
 
         </div>
       </section>
-     <section className="py-10 bg-white">
+     <section className="py-8 bg-white">
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Heading */}

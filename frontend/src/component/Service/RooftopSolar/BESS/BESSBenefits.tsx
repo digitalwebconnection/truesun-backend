@@ -41,7 +41,7 @@ export default function BESSBenefits() {
   ];
 
   return (
-    <section className="bg-white py-16 px-6 md:px-16">
+    <section className="bg-white py-4 px-6 md:px-16">
       <div className="max-w-7xl mx-auto">
 
         {/* Heading */}

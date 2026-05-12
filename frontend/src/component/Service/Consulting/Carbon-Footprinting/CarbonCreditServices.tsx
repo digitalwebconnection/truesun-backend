@@ -48,7 +48,7 @@ const CarbonServicesAutoFlow = () => {
     const [openLeadPopup, setOpenLeadPopup] = useState(false);
 
     return (
-        <section className="bg-white py-14 px-6 overflow-hidden font-sans">
+        <section className="bg-white py-8 px-6 overflow-hidden font-sans">
             <div className="max-w-7xl mx-auto">
 
                 {/* Header Section */}

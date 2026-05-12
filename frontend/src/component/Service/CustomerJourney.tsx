@@ -56,7 +56,7 @@ export default function CustomerJourney() {
   const pathLength = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   return (
-    <section ref={containerRef} className="bg-[#fcfcfc] py-24 px-6 md:px-10 overflow-hidden">
+    <section ref={containerRef} className="bg-[#fcfcfc] py-8 px-6 md:px-10 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
         {/* HEADER */}

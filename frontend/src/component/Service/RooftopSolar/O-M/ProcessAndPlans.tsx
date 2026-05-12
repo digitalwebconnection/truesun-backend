@@ -10,7 +10,7 @@ export default function ProcessAndPlans() {
   const [openLeadPopup, setOpenLeadPopup] = useState(false);
   const [openCtaPopup, setOpenCtaPopup] = useState(false);
   return (
-    <section className="bg-[#F8FAFC] py-20 px-6 md:px-16">
+    <section className="bg-[#F8FAFC] py-16 px-6 md:px-16">
       <div className="max-w-7xl mx-auto">
 
         {/* Heading */}

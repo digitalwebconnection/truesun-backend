@@ -258,7 +258,7 @@ export default function SolarNovaIndustrialPage() {
       </section>
 
       {/* ================= WHY SOLAR (blended from both pages) ================= */}
-      <div id="benefits" className="bg-white py-14">
+      <div id="benefits" className="bg-white py-12">
         <div className="mx-auto max-w-7xl px-6">
           <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
             <motion.h2 variants={item} className="text-3xl font-bold tracking-tight sm:text-4xl text-[#686868] text-center">
@@ -421,7 +421,7 @@ export default function SolarNovaIndustrialPage() {
       </section>
 
       {/* ================= RESULTS ================= */}
-      <div className="bg-white py-14">
+      <div className="bg-white py-4">
         <div className="mx-auto max-w-7xl px-6">
           <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
             <motion.h2 variants={item} className="text-2xl font-semibold md:text-3xl" style={{ color: THEME.ink }}>

@@ -88,7 +88,7 @@ const SolarBenefits = () => {
             </section>
 
             {/* ===== SUBSIDY SECTION WITH SIDE IMAGE ===== */}
-            <section className="py-20 bg-linear-to-b from-white to-orange-50">
+            <section className="py-12 bg-linear-to-b from-white to-orange-50">
                 <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
 
                     {/* LEFT CONTENT */}
