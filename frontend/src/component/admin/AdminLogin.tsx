@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Sun, Eye, EyeOff, Lock, User } from 'lucide-react';
-
-/* ── Hardcoded credentials ─────────────────────────────────── */
-const ADMIN_USERNAME = 'truesun_admin';
-const ADMIN_PASSWORD = 'Truesun@2025';
+import { apiUrl } from '../../lib/api';
 
 /* ── Styles ────────────────────────────────────────────────── */
 const S: Record<string, React.CSSProperties> = {
@@ -152,20 +149,31 @@ export default function AdminLogin() {
     }
   }, [navigate]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
 
-    setTimeout(() => {
-      if (username.trim() === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+    try {
+      const response = await fetch(apiUrl('/api/auth/login'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: username.trim(), password })
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         localStorage.setItem('adminAuth', 'true');
         navigate('/admin/dashboard', { replace: true });
       } else {
-        setError('Invalid username or password. Please try again.');
+        setError(data.message || 'Invalid username or password. Please try again.');
         setLoading(false);
       }
-    }, 700);
+    } catch (err) {
+      setError('An error occurred during login. Please try again later.');
+      setLoading(false);
+    }
   };
 
   return (

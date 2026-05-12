@@ -38,7 +38,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative h-150 overflow-hidden bg-white">
+    <section className="relative h-full md:h-150 overflow-hidden bg-white">
       <div className="mx-auto flex flex-col lg:flex-row min-h-[60svh] lg:min-h-[65svh]">
         {/* ============= LEFT CONTENT ============= */}
         <div className="w-full lg:w-1/2 px-4 sm:px-8 lg:px-10 py-14 lg:py-25 flex flex-col justify-center">
@@ -74,7 +74,7 @@ export default function HeroSection() {
         </div>
 
         {/* ============= RIGHT IMAGE SIDE ============= */}
-        <div className="relative w-full lg:w-1/2 min-h-80 lg:min-h-[450px] overflow-hidden">
+        <div className="relative w-full lg:w-1/2 h-80 lg:min-h-[450px] overflow-hidden">
           {/* Background slider */}
           <div className="absolute inset-0">
             {bgImages.map((src, i) => {
