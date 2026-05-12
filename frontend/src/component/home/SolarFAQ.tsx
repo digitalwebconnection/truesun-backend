@@ -255,7 +255,7 @@ export default function PremiumFAQ({ items = DEFAULT_ITEMS }) {
           {JSON.stringify(faqSchema)}
         </script>
       </Helmet>
-      <section className="mx-auto max-w-4xl overflow-hidden px-4 py-16">
+      <section className="mx-auto max-w-4xl overflow-hidden px-4 py-10">
 
         {/* Header */}
         <motion.header

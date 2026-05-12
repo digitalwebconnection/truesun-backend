@@ -226,7 +226,7 @@ function FAQSection() {
 /* -------------------- Main Section -------------------- */
 export default function LeadershipSectionModern() {
   return (
-    <section className="relative overflow-hidden bg-linear-to-b from-white via-amber-50/20 to-white py-10 sm:py-14">
+    <section className="relative overflow-hidden bg-linear-to-b from-white via-amber-50/20 to-white py-10 sm:py-0">
       {/* Soft ambient glows */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <motion.div

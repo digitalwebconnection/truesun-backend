@@ -38,10 +38,10 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative h-full md:h-150 overflow-hidden bg-white">
-      <div className="mx-auto flex flex-col lg:flex-row min-h-[60svh] lg:min-h-[65svh]">
+    <section className="relative h-full md:h-120 overflow-hidden bg-white">
+      <div className="mx-auto flex flex-col  lg:flex-row gap-6 h-[60svh] lg:h-135">
         {/* ============= LEFT CONTENT ============= */}
-        <div className="w-full lg:w-1/2 px-4 sm:px-8 lg:px-10 pt-14 pb-6 lg:py-25 flex flex-col justify-center">
+        <div className="w-full lg:w-[50%] ps-4 sm:ps-8 lg:ps-10 pt-14 pb-6 lg:pt-25 flex flex-col justify-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#FC763A] mb-3">
             Save More • Go Solar
           </p>
@@ -53,10 +53,10 @@ export default function HeroSection() {
             Trusted Solar Experts
           </h1>
 
-          <p className="mt-4 text-sm sm:text-base text-black   max-w-xl">
+          <p className="mt-4 text-sm sm:text-base text-black   max-w-2xl">
             TrueSun Energy delivers clean, dependable solar energy solutions for homes and businesses across India. Our systems are designed to significantly reduce electricity bills, deliver consistent long-term performance, and support a more sustainable and energy-independent future.
           </p>
-          <div className="mt-6 flex flex-wrap items-center gap-4 text-xs sm:text-sm text-slate-500">
+          <div className="mt-3 flex flex-wrap items-center gap-4 text-xs sm:text-sm text-slate-500">
             <span className="inline-flex items-center gap-1">
               <span className="h-2 w-2 rounded-full bg-emerald-500" />
               Up to 90% savings on electricity bills*
@@ -66,15 +66,15 @@ export default function HeroSection() {
               30+ years performance life
             </span>
           </div>
-          <p className="mt-4 text-sm sm:text-base text-black   max-w-xl">Get your personalised solar savings estimate in under 60 seconds, completely free and with no obligation.
+          <p className="mt-4 text-sm sm:text-base text-black   max-w-2xl">Get your personalised solar savings estimate in under 60 seconds, completely free and with no obligation.
           </p>
           <div className="mb-2 mt-4 lg:my-8 flex flex-wrap items-center gap-4">
           </div>
 
         </div>
 
-        {/* ============= RIGHT IMAGE SIDE ============= */}
-        <div className="relative w-full lg:w-1/2 h-80 md:h-125 overflow-hidden">
+        {/* ============= RIGHT IMAGE SIDE% ============= */}
+        <div className="relative w-full lg:w-[50%] h-80 md:h-115 overflow-hidden">
           {/* Background slider */}
           <div className="absolute inset-0">
             {bgImages.map((src, i) => {
@@ -100,7 +100,7 @@ export default function HeroSection() {
           </div>
 
           {/* Floating savings badge */}
-          <div className="absolute bottom-16 left-6 max-w-md rounded-2xl bg-white/85 px-4 py-3 shadow-xl backdrop-blur-sm">
+          <div className="absolute bottom-6 left-6 max-w-md rounded-2xl bg-white/85 px-4 py-3 shadow-xl backdrop-blur-sm">
             <p className="text-md font-semibold tracking-[0.18em] uppercase text-[#FC763A] mb-2">
               Rentokil PCI
             </p>

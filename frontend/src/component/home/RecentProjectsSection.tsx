@@ -80,7 +80,7 @@ const projects = [
 export default function RecentProjectsSection() {
     const [openLeadPopup, setOpenLeadPopup] = useState(false);
   return (
-    <section className="relative py-16 lg:py-20 bg-linear-to-b from-white via-[#FFF8F0] to-white">
+    <section className="relative py-5 lg:py-6 bg-linear-to-b from-white via-[#FFF8F0] to-white">
       {/* soft background glow */}
       <div className="pointer-events-none absolute inset-x-0 top-0 mx-auto h-64 max-w-5xl rounded-full bg-orange-100/40 blur-3xl -z-10" />
 
@@ -145,7 +145,7 @@ export default function RecentProjectsSection() {
         </div>
 
         {/* CTA under grid */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
          
 
          <button

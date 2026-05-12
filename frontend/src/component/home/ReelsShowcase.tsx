@@ -32,7 +32,7 @@ const ReelsShowcaseSection = () => {
   };
 
   return (
-    <section className="bg-white py-16 px-6">
+    <section className="bg-white py-8 px-6">
       <div className="max-w-7xl mx-auto">
 
         {/* Section Header */}

@@ -55,7 +55,7 @@ export default function ModernReviewSection() {
   const review = reviews[current];
 
   return (
-    <section className="bg-gray-50 py-16 px-6">
+    <section className="bg-gray-50 py-10 px-6">
       <div className="max-w-7xl mx-auto">
 
         {/* HEADER */}

@@ -24,7 +24,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 export default function SolarFooter() {
     return (
-        <footer className="relative mt-10  bg-white text-neutral-100">
+        <footer className="relative mt-0  bg-white text-neutral-100">
             {/* Decorative top curve */}
             <div className="pointer-events-none relative -mb-1 h-20 w-full overflow-hidden">
                 <svg

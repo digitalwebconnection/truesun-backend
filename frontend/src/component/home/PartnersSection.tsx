@@ -28,7 +28,7 @@ export default function Scroll() {
 
   return (
     <main className="w-full bg-linear-to-b from-white via-slate-50 to-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-8 sm:py-6">
         <header className="mb-6 sm:mb-10 text-center">
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#fc763a]">
             Our Partners
@@ -52,7 +52,7 @@ export default function Scroll() {
       </div>
 
       {/* === SECTION 6: VISUAL MAP — COVERAGE ACROSS 38+ CITIES === */}
-      <div className="mt-6">
+      <div className="mt-2">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
           <div className="w-full">
             <div className="relative overflow-hidden rounded-2xl  border border-gray-300 bg-white shadow-xl ">
