@@ -1,9 +1,11 @@
 import { CheckCircle } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 
 import { easeOut, motion } from "framer-motion";
+import LeadPopup from "../LeadPopup";
 
 export default function WhyTrueSun() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const features = [
     {
       title: "Engineering-Led Design",
@@ -172,12 +174,14 @@ export default function WhyTrueSun() {
           ))}
         </motion.div>
         <div className="flex gap-4 items-center justify-center mt-8">
-          <Link to="/#">
-            <button className="bg-gray-900 text-white px-10 py-3 rounded-full font-medium hover:bg-[#fc763a] transition-all">
-              get a free quote
-            </button>
-          </Link>
+          <button 
+            onClick={() => setIsPopupOpen(true)}
+            className="bg-gray-900 text-white px-10 py-3 rounded-full font-medium hover:bg-[#fc763a] transition-all cursor-pointer"
+          >
+            get a free quote
+          </button>
         </div>
+        {isPopupOpen && <LeadPopup onClose={() => setIsPopupOpen(false)} />}
       </div>
     </section>
   );
