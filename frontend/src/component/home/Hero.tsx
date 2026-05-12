@@ -59,7 +59,7 @@ export default function HeroSection() {
           <div className="mt-6 flex flex-wrap items-center gap-4 text-xs sm:text-sm text-slate-500">
             <span className="inline-flex items-center gap-1">
               <span className="h-2 w-2 rounded-full bg-emerald-500" />
-              Up to 80% savings on electricity bills*
+              Up to 90% savings on electricity bills*
             </span>
             <span className="inline-flex items-center gap-1">
               <span className="h-2 w-2 rounded-full bg-[#FC763A]" />
