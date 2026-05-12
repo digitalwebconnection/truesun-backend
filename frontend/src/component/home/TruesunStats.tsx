@@ -233,7 +233,7 @@ export default function ImpactStats({
   prefix?: string;
 }) {
   const gridCols = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 sm:gap-y-10 gap-x-6 lg:gap-x-10 mx-auto max-w-7xl px-4 sm:px-0";
-  const padY = compact ? "py-12 sm:py-14" : "py-16 sm:py-24 lg:py-28";
+  const padY = compact ? "py-12 sm:py-14" : "py-8 sm:py-10 lg:py-12";
   const headingSpace = compact ? "mb-8 sm:mb-10" : "mb-10 sm:mb-16";
 
   return (

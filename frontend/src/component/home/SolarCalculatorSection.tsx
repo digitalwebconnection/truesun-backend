@@ -124,7 +124,7 @@ export default function SolarCalculator() {
 
   return (
     <div className="min-h-screen bg-[#FDFCFB] text-slate-900 font-sans selection:bg-orange-100">
-      <div className="max-w-6xl mx-auto py-12 px-6">
+      <div className="max-w-6xl mx-auto py-8 px-6">
 
         {/* HEADER */}
         <header className="text-center mb-16">

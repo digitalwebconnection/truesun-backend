@@ -74,7 +74,7 @@ export default function HeroSection() {
         </div>
 
         {/* ============= RIGHT IMAGE SIDE ============= */}
-        <div className="relative w-full lg:w-1/2 h-80 lg:min-h-[450px] overflow-hidden">
+        <div className="relative w-full lg:w-1/2 h-80 md:h-125 overflow-hidden">
           {/* Background slider */}
           <div className="absolute inset-0">
             {bgImages.map((src, i) => {
@@ -98,21 +98,6 @@ export default function HeroSection() {
               );
             })}
           </div>
-
-          {/* Top-middle angled bar */}
-          <div
-            className="absolute top-0 left-1/2 h-24 w-28 bg-emerald-500 hidden sm:block"
-            style={{
-              transform: "translateX(-50%) skewX(-30deg)",
-            }}
-          />
-          {/* Right big diagonal shape */}
-          <div
-            className="absolute bottom-0 right-0 h-64 w-64 bg-[#FC763A]/80 hidden sm:block"
-            style={{
-              clipPath: "polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%)",
-            }}
-          />
 
           {/* Floating savings badge */}
           <div className="absolute bottom-16 left-6 max-w-md rounded-2xl bg-white/85 px-4 py-3 shadow-xl backdrop-blur-sm">

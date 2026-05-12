@@ -24,7 +24,7 @@ export default function NetZeroCommandCenterAddOn({
     const [openCtaPopup, setOpenCtaPopup] = useState(false);
     return (
         <section
-            className="relative h-150 overflow-hidden py-24"
+            className="relative md:h-150 h-auto overflow-hidden py-24"
             style={{
                 backgroundImage:
                     "url('https://e6qg27vt7gu.exactdn.com/wp-content/uploads/2023/08/carbonfootprint1.jpg?strip=all')",
@@ -59,7 +59,7 @@ export default function NetZeroCommandCenterAddOn({
                             Carbon Footprinting, I-RECs & Carbon Credit Sourcing
                         </h1>
 
-                        <p className="mt-5 text-lg text-slate-300 max-w-4xl">
+                        <p className="mt-5 text-lg text-white max-w-4xl">
                             As businesses accelerate their transition towards sustainability and net-zero goals, managing carbon emissions has become a strategic priority. At TrueSun Energy Solutions, we provide end-to-end carbon management solutions—from measuring your carbon footprint to sourcing I-RECs and carbon credits across global markets.  </p>
 
                         {/* CTA */}
