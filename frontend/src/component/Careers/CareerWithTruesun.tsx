@@ -329,10 +329,10 @@ const [openIndex, setOpenIndex] = useState<number | null>(0)
 
                   {/* CONTENT */}
                   <div
-                    className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[1000px] p-5 pt-0" : "max-h-0"
+                    className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-auto p-5 pt-0" : "max-h-0"
                       }`}
                   >
-                    <div className="border-t pt-4">
+                    <div className="border-t py-4">
                       {/* Summary */}
                       <p className="text-sm text-slate-700">{job.summary}</p>
 
