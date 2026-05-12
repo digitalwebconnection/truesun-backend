@@ -75,7 +75,7 @@ export default function CarbonCreditTypesPremium() {
         <section className="relative py-8 overflow-hidden bg-white">
 
             <motion.div
-                className="relative max-w-7xl mx-auto px-6"
+                className="relative max-w-7xl mx-auto px-4 md:px-6"
                 variants={container}
                 initial="hidden"
                 whileInView="visible"
@@ -97,13 +97,13 @@ export default function CarbonCreditTypesPremium() {
                 </div>
 
                 {/* Cards */}
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                     {creditTypes.map((item, id) => (
                         <motion.div
                             key={id}
                             variants={card}
                             whileHover={{ y: -10 }}
-                            className="group relative rounded-3xl p-px  border border-black/20 bg-white hover:from-[#FC763A]transition-all shadow-xl "
+                            className="group relative rounded-3xl p-px border border-black/20 bg-white hover:from-[#FC763A] transition-all shadow-xl w-full"
                         >
                             {/* Glass Card */}
                             <div className="rounded-3xl p-6 bg-white/5 backdrop-blur-xl border border-white/10 h-full flex flex-col">

@@ -14,7 +14,7 @@ interface BenefitItemProps {
 
 const TruesunSolarFinanceHero: React.FC = () => {
   return (
-    <section className="relative h-150 overflow-hidden bg-slate-900 text-slate-50">
+    <section className="relative md:h-150 h-auto   overflow-hidden bg-slate-900 text-slate-50">
       {/* Background image */}
       <div className="pointer-events-none absolute inset-0">
         <div
@@ -38,10 +38,10 @@ const TruesunSolarFinanceHero: React.FC = () => {
 
           <div>
             <h1 className="text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
-              Solar Finance Made Simple
+              Solar Finance Made Simple {" "}
               <br className="hidden sm:block" />
               <span className="text-transparent bg-clip-text bg-[#FC763A]">
-                for homes and businesses.
+                 for homes and businesses.
               </span>
             </h1>
 

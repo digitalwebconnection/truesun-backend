@@ -143,7 +143,7 @@ const ResidentialSolarDetailsPage: FC = () => {
   const [openItem, setOpenItem] = useState<number | null>(null);
 
   return (
-    <main className="max-w-7xl mx-auto bg-linear-to-b from-slate-50 via-white to-slate-50 text-slate-900">
+    <main className="max-w-7xl mx-auto bg-linear-to-b from-slate-50 via-white to-slate-50 text-slate-900 overflow-x-hidden">
       {/* HERO – SEO-friendly keyword rich */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.14),transparent_60%)]" />
@@ -204,7 +204,7 @@ const ResidentialSolarDetailsPage: FC = () => {
                       Net-metered rooftop plants delivering stable generation and long-term energy security.
                     </Li>
                   </ul>
-                  <div className="mt-5 grid grid-cols-2 gap-3 text-xs sm:text-sm">
+                  <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
                     <Kpi label="Residential kWp Delivered" value="1000+ kWp (cumulative)" />
                     <Kpi label="Average plant uptime" value="> 98%" />
                   </div>
@@ -494,7 +494,7 @@ const ResidentialSolarDetailsPage: FC = () => {
       </section>
 
       {/* FAQs */}
-      <section className="py-10">
+      <section className="py-10 overflow-hidden">
         <div className="max-w-4xl mx-auto px-6">
           <motion.header
             initial={{ opacity: 0, y: -20 }}

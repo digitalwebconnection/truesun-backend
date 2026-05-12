@@ -24,7 +24,7 @@ export default function ResidentialHero() {
     const [openLeadPopup, setOpenLeadPopup] = useState(false);
   return (
     <section
-      className="relative overflow-hidden h-150 bg-center bg-cover bg-no-repeat"
+      className="relative overflow-hidden min-h-[600px] lg:h-[650px] bg-center bg-cover bg-no-repeat flex items-center py-20 lg:py-0"
       style={{
         backgroundImage:
           `url(${ResidentialHeroImg})`,
@@ -33,7 +33,7 @@ export default function ResidentialHero() {
       {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-linear-to-l from-black/20 via-black/30 to-black/40"></div>
 
-      <div className="relative container max-w-7xl mx-auto px-6 md:px-0 py-18 lg:py-26 flex flex-col lg:flex-row items-center gap-10">
+      <div className="relative container max-w-7xl mx-auto px-6 md:px-10 flex flex-col lg:flex-row items-center gap-10">
         
         {/* LEFT CONTENT */}
         <motion.div
@@ -74,7 +74,7 @@ export default function ResidentialHero() {
           <motion.div
             custom={4}
             variants={textVariant}
-            className="flex justify-center lg:justify-start gap-6 mt-8 text-gray-200"
+            className="flex flex-wrap justify-center lg:justify-start gap-4 md:gap-6 mt-8 text-gray-200"
           >
             <div className="flex items-center gap-2">
               <Sun className="text-amber-400" /> <span>Renewable</span>

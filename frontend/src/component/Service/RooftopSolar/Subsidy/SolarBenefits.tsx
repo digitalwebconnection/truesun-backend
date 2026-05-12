@@ -62,7 +62,7 @@ const SolarBenefits = () => {
                                 <img
                                     src={item.img}
                                     alt={item.title}
-                                    className="w-full z-5 h-47 object-cover"
+                                    className="w-full z-5 h-47 object-fill"
                                 />
 
                                 <div className="p-5">
@@ -130,7 +130,7 @@ const SolarBenefits = () => {
                         <img
                             src="https://zenithinfraprojects.in/wp-content/uploads/2026/03/ChatGPT-Image-Mar-26-2026-01_04_40-AM.png"
                             alt="Solar house"
-                            className="rounded-2xl shadow-xl w-full h-[400px] object-cover"
+                            className="rounded-2xl shadow-xl w-full h-[400px] object-fill"
                         />
                     </div>
 

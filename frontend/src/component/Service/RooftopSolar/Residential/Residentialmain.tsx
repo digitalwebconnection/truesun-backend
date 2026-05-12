@@ -39,8 +39,10 @@ const Residentialmain = () => {
         <meta name="twitter:title" content="Residential Solar System in Mumbai" />
         <meta name="twitter:description" content="Affordable rooftop solar solutions for homes. Reduce electricity bills with TrueSun Energy." />
       </Helmet>
-      <ResidentialHero/>
-      <ResidentialSolarDetailsPage/>
+      <div className="overflow-x-hidden">
+        <ResidentialHero />
+        <ResidentialSolarDetailsPage />
+      </div>
     </>
   )
 }
