@@ -41,7 +41,7 @@ export default function HeroSection() {
     <section className="relative h-full md:h-150 overflow-hidden bg-white">
       <div className="mx-auto flex flex-col lg:flex-row min-h-[60svh] lg:min-h-[65svh]">
         {/* ============= LEFT CONTENT ============= */}
-        <div className="w-full lg:w-1/2 px-4 sm:px-8 lg:px-10 py-14 lg:py-25 flex flex-col justify-center">
+        <div className="w-full lg:w-1/2 px-4 sm:px-8 lg:px-10 pt-14 pb-6 lg:py-25 flex flex-col justify-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#FC763A] mb-3">
             Save More • Go Solar
           </p>
@@ -56,7 +56,6 @@ export default function HeroSection() {
           <p className="mt-4 text-sm sm:text-base text-black   max-w-xl">
             TrueSun Energy delivers clean, dependable solar energy solutions for homes and businesses across India. Our systems are designed to significantly reduce electricity bills, deliver consistent long-term performance, and support a more sustainable and energy-independent future.
           </p>
-
           <div className="mt-6 flex flex-wrap items-center gap-4 text-xs sm:text-sm text-slate-500">
             <span className="inline-flex items-center gap-1">
               <span className="h-2 w-2 rounded-full bg-emerald-500" />
@@ -67,8 +66,9 @@ export default function HeroSection() {
               30+ years performance life
             </span>
           </div>
-          <p className="mt-4 text-sm sm:text-base text-black   max-w-xl">It takes less than 60 seconds to complete, with no obligation or commitment required.</p>
-          <div className="my-8 flex flex-wrap items-center gap-4">
+          <p className="mt-4 text-sm sm:text-base text-black   max-w-xl">Get your personalised solar savings estimate in under 60 seconds, completely free and with no obligation.
+          </p>
+          <div className="mb-2 mt-4 lg:my-8 flex flex-wrap items-center gap-4">
           </div>
 
         </div>
