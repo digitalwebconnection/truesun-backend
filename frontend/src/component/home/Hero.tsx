@@ -39,9 +39,9 @@ export default function HeroSection() {
 
   return (
     <section className="relative h-full md:h-120 overflow-hidden bg-white">
-      <div className="mx-auto flex flex-col  lg:flex-row gap-6 h-[60svh] lg:h-135">
+      <div className="mx-auto flex flex-col  lg:flex-row gap-6  lg:h-135">
         {/* ============= LEFT CONTENT ============= */}
-        <div className="w-full lg:w-[50%] ps-4 sm:ps-8 lg:ps-10 pt-14 pb-6 lg:pt-25 flex flex-col justify-center">
+        <div className="w-full lg:w-[50%] ps-4 sm:ps-8 lg:ps-10 pt-20 pb-6 lg:pt-25 flex flex-col justify-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#FC763A] mb-3">
             Save More • Go Solar
           </p>
@@ -74,7 +74,7 @@ export default function HeroSection() {
         </div>
 
         {/* ============= RIGHT IMAGE SIDE% ============= */}
-        <div className="relative w-full lg:w-[50%] h-80 md:h-115 overflow-hidden">
+        <div className="relative w-full -mt-15 md:-mt-0 lg:w-[50%] h-80 md:h-115 overflow-hidden">
           {/* Background slider */}
           <div className="absolute inset-0">
             {bgImages.map((src, i) => {
