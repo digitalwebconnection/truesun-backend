@@ -59,7 +59,7 @@ const ServicesHero: React.FC = () => {
 
         {/* RIGHT VISUAL BLOCK */}
         <div className="w-full max-w-md">
-          <div className="relative h-38 md:h-46 w-full overflow-hidden rounded-3xl bg-white/10 backdrop-blur-md p-6 shadow-2xl">
+          <div className="relative h-auto md:h-46 w-full overflow-hidden rounded-3xl bg-white/10 backdrop-blur-md p-6 shadow-2xl">
             {/* Decorative Overlay */}
             <div className="absolute inset-0 bg-linear-to-br from-[#FC763A]/30 via-transparent to-emerald-500/20" />
 
