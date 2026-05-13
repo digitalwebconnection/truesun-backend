@@ -52,7 +52,7 @@ const values = [
 const openings = [
   {
     title: "Design Engineer - Rooftop Solar (India)",
-    location: "Mumbai / Pan-India",
+    location: "Mumbai",
     type: "Full-time · On-site",
     experience: "3–4 years",
     summary:

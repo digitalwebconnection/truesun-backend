@@ -3,6 +3,7 @@ import {
 } from "lucide-react";
 import BlogPage from "./BlogPage";
 import heroImg from "../../assets/blog-img2.webp";
+import heroImgMobile from "../../assets/blog-img3.webp";
 
 export default function SolarBlogPage() {
 
@@ -12,10 +13,17 @@ export default function SolarBlogPage() {
             <section className="relative overflow-hidden text-slate-50 px-6 py-8 md:px-10 md:py-32">
                 {/* Background image */}
                 <div className="absolute inset-0">
+                    {/* Mobile Image */}
+                    <img
+                        src={heroImgMobile}
+                        alt="Solar panels mobile"
+                        className="h-full w-full object-cover md:hidden"
+                    />
+                    {/* Desktop Image */}
                     <img
                         src={heroImg}
-                        alt="Solar panels at sunset"
-                        className="h-full w-full object-cover"
+                        alt="Solar panels desktop"
+                        className="hidden md:block h-full w-full object-cover"
                     />
                     {/* Dark gradient overlay */}
                     <div className="absolute inset-0 bg-black/40" />
@@ -26,7 +34,7 @@ export default function SolarBlogPage() {
                 <div className="pointer-events-none absolute -left-16 bottom-0 h-40 w-40 rounded-full bg-sky-500/10 blur-3xl" />
 
                 {/* Content */}
-                <div className="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between py-12 md:py-0">
+                <div className="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between py-18 md:py-0">
                     <div className="space-y-4 max-w-xl">
                         <div className="text-[#FC763A] inline-flex items-center gap-2 rounded-full border border-slate-700/70 bg-slate-900/70 px-3 py-1 text-[11px] font-medium tracking-[0.18em] uppercase backdrop-blur-sm">
                             <span className="flex h-4 w-4 items-center justify-center rounded-full bg-[#FC763A]/20">
