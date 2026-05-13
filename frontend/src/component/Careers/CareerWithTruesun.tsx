@@ -51,111 +51,62 @@ const values = [
 
 const openings = [
   {
-    title: "Business Development Associate",
-    location: "Mumbai",
+    title: "Design Engineer - Rooftop Solar (India)",
+    location: "Mumbai / Pan-India",
     type: "Full-time · On-site",
     experience: "3–4 years",
-    salary: "₹4–8 LPA",
-
     summary:
-      "The role focuses on generating and closing business opportunities in the rooftop solar sector by building strong client and partner relationships. Requires strategic thinking, proactive execution, and strong communication skills.",
-
+      "We’re not looking for resume designers. We’re looking for someone who has actually designed and executed rooftop solar projects in India. Create practical layouts, handle stringing, SLDs, and optimize designs for performance and cost.\n\nWhy TrueSun: High ownership, zero bureaucracy, premium projects, and serious growth. We value people who think and act, not just talk.",
     points: [
-      "Cold calling, presentations, and pitching to senior management",
-      "Identify, screen, and close new clients using multiple strategies",
-      "Proposal development and price discovery",
-      "Develop and execute sales strategies with clear targets",
-      "Plan and manage marketing campaigns and budgets",
-      "Build relationships with regulators and renewable energy authorities",
-      "Track and close tender-based leads",
-      "Develop and manage channel partners to drive business growth"
+      "Design 10 kW – 500 kW rooftop systems (residential, commercial, industrial)",
+      "Create practical layouts (2D/3D), not just good-looking ones",
+      "Handle stringing, SLDs, DC/AC cabling, BOQs",
+      "Optimize designs to reduce cost without compromising performance",
+      "Visit sites and ensure your design works on ground reality",
+      "Factor in safety, structure, cleaning & maintenance from day one"
     ],
-
     skills: [
-      "MBA / Masters / Engineering background",
-      "3–4 years experience in rooftop solar (mandatory)",
-      "Strong communication skills (English required)",
-      "Strategic thinking and execution capability",
-      "Goal-oriented and proactive mindset",
-      "Industrial & commercial sector experience preferred",
-      "Marathi language preferred"
-    ],
-  },
-
-  {
-    title: "Solar Site & Design Engineer",
-    location: "Mumbai (Site Travel Required)",
-    type: "Full-time · On-site",
-    experience: "3–5 years",
-
-    summary:
-      "Responsible for end-to-end solar plant design, site analysis, execution supervision, and performance monitoring. Requires strong technical expertise in solar design tools and on-ground execution.",
-
-    points: [
-      "Conduct site visits and electricity bill analysis",
-      "Design plant considering shadow analysis and site conditions",
-      "Prepare structure layouts and specifications",
-      "Create plant layouts using AutoCAD and SketchUp",
-      "Perform generation analysis using PVsyst",
-      "Prepare BOM, pricing, and proposals",
-      "Handle LT & HT design and cost estimation",
-      "Perform cable and structure calculations",
-      "Supervise installation & commissioning teams",
-      "Prepare project timelines and execution reports",
-      "Handle tender submissions and documentation",
-      "Monitor plant performance and troubleshoot issues",
-      "Coordinate with technology and BoM providers"
-    ],
-
-    skills: [
-      "3–5 years experience in solar rooftop projects",
-      "Strong knowledge of AutoCAD, SketchUp, Helioscope",
-      "Understanding of net metering & subsidy policies",
-      "Knowledge of electrical & structural design",
-      "Ability to read LT & HT electricity bills",
-      "Experience with On-grid & Off-grid systems",
-      "Good communication skills (English required)",
-      "Marathi language preferred",
-      "Own vehicle preferred"
+      "3–4 years real rooftop solar design experience in India",
+      "Experience on actual sites, not just from office",
+      "Strong in SketchUp, Helioscope, ARKA 360, PVsyst",
+      "Ability to explain how your design saved cost in past projects",
+      "NO theoretical or academic-only experience",
+      "Must have handled end-to-end design",
+      "Must be able to connect design with execution"
     ],
   },
   {
-  title: "Admin & Executive Assistant (EA)",
-  location: "Mumbai (On-site)",
-  type: "Full-time",
-  experience: "1–3 years",
-
-  summary:
-    "Responsible for managing day-to-day administrative operations, supporting leadership with scheduling and coordination, maintaining records, and ensuring smooth communication across teams and external stakeholders.",
-
-  points: [
-    "Manage calendars across Microsoft Teams, Outlook, and Google Calendar",
-    "Track and monitor expenses, including petty cash management",
-    "Oversee office supplies and ensure smooth office operations",
-    "Support client outreach through calls and follow-ups",
-    "Maintain and update attendance records",
-    "Update and manage CRM data regularly",
-    "Coordinate with external agencies and vendors",
-    "Handle documentation and maintain organized records",
-    "Assist in team scheduling, planning, and reporting",
-    "Maintain employee performance and activity reports",
-    "Coordinate between Sales and Operations teams",
-    "Manage onboarding documentation and joining formalities",
-    "Respond to emails and handle communication efficiently"
-  ],
-
-  skills: [
-    "1–3 years experience in administrative or EA role",
-    "Strong organizational and multitasking skills",
-    "Proficiency in MS Office (Excel, Word, Outlook)",
-    "Experience with CRM tools is preferred",
-    "Good communication and coordination skills",
-    "Ability to handle confidential information",
-    "Strong attention to detail",
-    "Basic understanding of office operations",
-    "Proactive and problem-solving mindset"
-  ]
-}
+    title: "Senior Sales Executive – Rooftop Solar",
+    location: "Mumbai",
+    type: "Full-time · Field + Client Facing",
+    experience: "2–5 years",
+    salary: "₹5L – ₹6L Fixed + Incentives (Up to ₹8L CTC)",
+    summary:
+      "We are looking for a client-facing sales professional who can manage leads, build channel partners, and support the end-to-end sales process for rooftop solar projects. The role requires strong follow-up, basic technical understanding, and ownership of conversions.\n\nGrowth Opportunity: Fast-track growth into closing / Business Development role based on performance.",
+    points: [
+      "Call and qualify incoming leads",
+      "Analyze electricity bills and explain basic savings/ROI",
+      "Prepare and send proposals",
+      "Follow up consistently to convert leads into customers",
+      "Attend client meetings and site visits",
+      "Build and manage channel partners (brokers, electricians, RWAs, architects)",
+      "Generate new leads through partner network",
+      "Maintain and update CRM daily (lead status, follow-ups, notes)",
+      "Ensure strong pipeline tracking and no missed opportunities",
+      "Coordinate with internal teams for design and execution",
+      "Support closure of deals"
+    ],
+    skills: [
+      "2–5 years experience in sales / solar / high-value products",
+      "Good spoken and written English",
+      "Confident interacting with clients",
+      "Strong follow-up and ownership mindset",
+      "Willing to do field work across Mumbai",
+      "Comfortable using CRM tools (or quick learner)",
+      "Important: Requires discipline in CRM and follow-ups",
+      "Important: Involves working on high-value deals (₹10L+)"
+    ],
+  },
 ];
 
 const steps = [
@@ -315,6 +266,12 @@ const [openIndex, setOpenIndex] = useState<number | null>(0)
                         <span>{job.type}</span>
                         <span>•</span>
                         <span>{job.experience}</span>
+                        {job.salary && (
+                          <>
+                            <span>•</span>
+                            <span className="font-medium text-slate-700">{job.salary}</span>
+                          </>
+                        )}
                       </div>
                     </div>
 
@@ -334,7 +291,7 @@ const [openIndex, setOpenIndex] = useState<number | null>(0)
                   >
                     <div className="border-t py-4">
                       {/* Summary */}
-                      <p className="text-sm text-slate-700">{job.summary}</p>
+                      <p className="text-sm text-slate-700 whitespace-pre-line">{job.summary}</p>
 
                       {/* Responsibilities */}
                       <h4 className="mt-4 text-sm font-semibold text-slate-900">
