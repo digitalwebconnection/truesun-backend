@@ -1,4 +1,5 @@
 import { Building2, Zap, CheckCircle2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const RWASubsidySection = () => {
 
@@ -16,7 +17,7 @@ const RWASubsidySection = () => {
             </h2>
 
             <p className="mt-6 text-gray-600 text-lg leading-relaxed">
-              For common facilities in apartments and housing societies
+              For common facilities in apartments and <Link to="/services/rooftop/residential">housing societies</Link>
               including lifts, water pumps, and lighting systems.
             </p>
           </div>

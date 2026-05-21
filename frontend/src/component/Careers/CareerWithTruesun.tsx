@@ -17,7 +17,7 @@ const perks = [
   {
     icon: <Zap className="h-5 w-5" />,
     title: "Growth in a fast-moving industry",
-    body: "Solar is growing rapidly in India. At TrueSun, you work on modern tech, tools, and processes that keep you ahead.",
+    body: <>Solar is growing rapidly in India. At <a href="/" className="text-inherit no-underline">TrueSun</a>, you work on modern tech, tools, and processes that keep you ahead.</>,
   },
   {
     icon: <Award className="h-5 w-5" />,

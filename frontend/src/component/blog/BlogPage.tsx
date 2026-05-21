@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Clock, Loader2, AlertCircle } from "lucide-react";
+import { Clock, AlertCircle } from "lucide-react";
 import { apiUrl } from "../../lib/api";
 
 
@@ -40,31 +40,35 @@ const BlogPage = () => {
     fetchBlogs();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[400px] gap-3">
-        <Loader2 className="animate-spin text-[#FC763A]" size={40} />
-        <p className="text-gray-500 font-medium">Loading our latest stories...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[400px] gap-3 px-4 text-center">
-        <AlertCircle className="text-red-500" size={40} />
-        <p className="text-red-600 font-medium">{error}</p>
-      </div>
-    );
-  }
-
   return (
     <>
-    
     <div className="max-w-7xl mx-auto px-4 py-10">
       <h1 className="text-5xl text-center font-bold mb-8 text-[#FC763A]"> Blogs</h1>
 
-      {blogs.length === 0 ? (
+      {loading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-10">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="rounded-xl border border-gray-200 bg-white shadow-md h-full flex flex-col overflow-hidden animate-pulse">
+               <div className="h-56 w-full bg-gray-200"></div>
+               <div className="p-6 flex flex-col grow">
+                  <div className="flex justify-between items-center mb-4">
+                     <div className="h-6 w-20 bg-gray-200 rounded-full"></div>
+                     <div className="h-4 w-16 bg-gray-200 rounded"></div>
+                  </div>
+                  <div className="h-8 w-full bg-gray-200 rounded mt-2 mb-3"></div>
+                  <div className="h-8 w-3/4 bg-gray-200 rounded mb-3"></div>
+                  <div className="h-4 w-full bg-gray-200 rounded mb-2"></div>
+                  <div className="h-4 w-5/6 bg-gray-200 rounded"></div>
+               </div>
+            </div>
+          ))}
+        </div>
+      ) : error ? (
+        <div className="flex flex-col items-center justify-center min-h-[400px] gap-3 px-4 text-center">
+          <AlertCircle className="text-red-500" size={40} />
+          <p className="text-red-600 font-medium">{error}</p>
+        </div>
+      ) : blogs.length === 0 ? (
         <div className="text-center py-20 text-gray-500">
           <p className="text-xl">No blog posts found yet.</p>
         </div>

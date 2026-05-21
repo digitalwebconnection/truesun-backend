@@ -184,16 +184,7 @@ export default function ProjectShowcasePage() {
     setIsModalOpen(true);
   };
 
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[500px] gap-4">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#FC763A]"></div>
-        <p className="text-slate-500 font-medium animate-pulse text-sm uppercase tracking-widest">Warming up solar data...</p>
-      </div>
-    );
-  }
-
-  if (!activeProject) return null;
+  if (!loading && !activeProject) return null;
 
   return (
     <section className="relative mx-auto max-w-7xl px-6 py-16 lg:px-0">
@@ -217,15 +208,52 @@ export default function ProjectShowcasePage() {
         <div className="grid grid-cols-2 gap-2 text-xs sm:text-[13px] md:text-xs">
           <div className="rounded-2xl bg-slate-900 px-4 py-3 text-slate-50">
             <div className="text-[10px] uppercase tracking-[0.2em] text-slate-400">Cumulative Capacity</div>
-            <div className="mt-1 text-sm font-semibold">{totalCapacityLabel}</div>
+            <div className="mt-1 text-sm font-semibold">{loading ? "..." : totalCapacityLabel}</div>
           </div>
           <div className="rounded-2xl bg-emerald-50 px-4 py-3 text-emerald-900">
             <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-600">CO₂ Mitigated / year</div>
-            <div className="mt-1 text-sm font-semibold">{totalCo2Tonnes.toLocaleString()} tonnes</div>
+            <div className="mt-1 text-sm font-semibold">{loading ? "..." : `${totalCo2Tonnes.toLocaleString()} tonnes`}</div>
           </div>
         </div>
       </div>
 
+      {loading ? (
+        <>
+          <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] animate-pulse">
+            <div className="rounded-3xl bg-slate-200 h-72 sm:h-90 lg:h-140 w-full"></div>
+            <div className="space-y-4">
+              <div className="rounded-3xl bg-slate-200 h-64 w-full"></div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="rounded-2xl bg-slate-200 h-20 w-full"></div>
+                <div className="rounded-2xl bg-slate-200 h-20 w-full"></div>
+              </div>
+              <div className="rounded-2xl bg-slate-200 h-16 w-full"></div>
+            </div>
+          </div>
+          <div className="mt-12">
+            <div className="mb-6 flex items-center justify-between gap-2">
+              <div className="h-4 w-40 bg-slate-200 rounded animate-pulse"></div>
+              <div className="h-3 w-48 bg-slate-200 rounded animate-pulse"></div>
+            </div>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="flex flex-col rounded-2xl border border-slate-200 bg-white h-80 animate-pulse">
+                  <div className="h-44 bg-slate-200 w-full rounded-t-2xl"></div>
+                  <div className="p-4 space-y-3">
+                    <div className="h-5 bg-slate-200 w-3/4 rounded"></div>
+                    <div className="flex gap-2">
+                      <div className="h-6 w-16 bg-slate-200 rounded-full"></div>
+                      <div className="h-6 w-16 bg-slate-200 rounded-full"></div>
+                    </div>
+                    <div className="h-4 bg-slate-200 w-full rounded mt-4"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
       {/* Active project hero + side stats */}
       <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
         {/* Hero */}
@@ -346,6 +374,8 @@ export default function ProjectShowcasePage() {
           })}
         </div>
       </div>
+        </>
+      )}
     </section>
   );
 }

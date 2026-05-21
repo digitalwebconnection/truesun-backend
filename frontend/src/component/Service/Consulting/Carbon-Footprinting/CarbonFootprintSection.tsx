@@ -1,5 +1,6 @@
 import { Leaf, Factory, Zap, Globe, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import CtaPopup from '../../../CtaPopup';
 
 const CarbonFootprintSectionWhite = () => {
@@ -111,7 +112,7 @@ const CarbonFootprintSectionWhite = () => {
                     <h2 className='text-3xl md:text-5xl font-extrabold text-[#686868] leading-tight tracking-tight'>
                         From Measurement<span className="text-[#FC763A]"> to Action</span>
                     </h2>
-                    <p className='text-md '>At TrueSun, we go beyond reporting. We help you reduce and offset emissions through renewable energy solutions, I-RECs, and carbon credits.</p>
+                    <p className='text-md '>At <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>TrueSun</Link>, we go beyond reporting. We help you reduce and offset emissions through renewable energy solutions, I-RECs, and carbon credits.</p>
                 </div>
                 {openCtaPopup && (
                     <CtaPopup onClose={() => setOpenCtaPopup(false)} title="Please leave your details" />

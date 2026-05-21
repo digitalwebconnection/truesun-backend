@@ -40,8 +40,8 @@ export default function CareersPage() {
               transition={{ duration: 0.55, delay: 0.1 }}
               className="mt-4 max-w-md text-sm leading-relaxed text-slate-600 sm:text-base"
             >
-              Join a team that designs, sells and executes rooftop solar
-              projects across India with real responsibility from day one.
+              Join a team that designs, sells and executes rooftop solar{" "}
+              <a href="/projects" className="text-inherit no-underline">projects</a> across India with real responsibility from day one.
             </motion.p>
 
             <motion.div

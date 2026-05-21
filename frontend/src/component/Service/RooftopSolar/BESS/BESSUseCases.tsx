@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const useCases = [
   {
@@ -10,8 +11,11 @@ const useCases = [
   {
     id: "02",
     title: "Residential Buildings & Housing Societies",
-    description:
-      "Housing societies and bungalows with rooftop solar can eliminate reliance on diesel generators and grid during outages, while significantly cutting common-area electricity costs.",
+    description: (
+      <>
+        Housing societies and bungalows with <Link to="/services/rooftop/residential">rooftop solar</Link> can eliminate reliance on diesel generators and grid during outages, while significantly cutting common-area electricity costs.
+      </>
+    ),
     tag: "Backup Power",
   },
   {

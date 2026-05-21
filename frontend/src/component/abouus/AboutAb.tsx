@@ -1,7 +1,7 @@
  
 
 import { motion, useScroll, useTransform} from "framer-motion";
-
+import { Link } from "react-router-dom";
 import type { MotionProps, Variants, Easing } from "framer-motion";
 import { Sun, Zap, Leaf, Users, Award, CheckCircle , ShieldCheck, GaugeCircle, Sparkles } from "lucide-react";
 
@@ -409,7 +409,7 @@ function CurvedSteps() {
             Our Hassle-Free <span className="text-[#fc763a]"> Process </span>
           </h2>
           <p className="mt-3 text-gray-700">
-            A smooth solar journey handled by TrueSun — from the first survey to long-term performance.
+            A smooth solar journey handled by <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>TrueSun</Link> — from the first survey to long-term performance.
           </p>
         </motion.div>
 

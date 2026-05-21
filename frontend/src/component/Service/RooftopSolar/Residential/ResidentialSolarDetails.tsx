@@ -1,6 +1,7 @@
  
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import type { FC, ReactNode } from "react";
 import type { SVGProps, ComponentType } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -260,7 +261,7 @@ const ResidentialSolarDetailsPage: FC = () => {
 
         <p className="mt-4 text-gray-600  leading-relaxed">
           We have hands-on experience implementing rooftop solar projects in cooperative housing societies, gated villas and independent
-          bungalows. From shadow analysis and structure design to approvals, installation and maintenance, everything is done keeping
+          bungalows. From shadow analysis and structure design to approvals, installation and <Link to="/services/rooftop/O&M">maintenance</Link>, everything is done keeping
           long-term performance, safety and aesthetics in mind.
         </p>
 
@@ -389,7 +390,7 @@ const ResidentialSolarDetailsPage: FC = () => {
           </h2>
 
           <p className="mt-3 text-gray-600 max-w-5xl mx-auto">
-            Smart financial planning ensures your solar investment delivers maximum savings with minimal upfront burden.
+            Smart <Link to="/solar-finance">financial planning</Link> ensures your solar investment delivers maximum savings with minimal upfront burden.
           </p>
         </div>
 

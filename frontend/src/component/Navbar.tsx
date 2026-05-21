@@ -296,23 +296,33 @@ export default function Navbar() {
   }, [location.pathname]);
 
   useEffect(() => {
-    lastY.current = window.scrollY || 0;
+    // Sync initial scroll position
+    lastY.current = window.scrollY;
 
     const onScroll = () => {
       if (ticking.current) return;
       ticking.current = true;
 
       window.requestAnimationFrame(() => {
-        const y = window.scrollY || 0;
+        const y = window.scrollY;
         const diff = y - lastY.current;
+        
+        // 1. Elevation State: Add shadow/blur after slight scroll
+        setElevated(y > 10);
 
-        setElevated(y > 4);
-
+        // 2. Hide/Show Logic: Only if not at the very top and drawer is closed
         if (!isOpen) {
-          const THRESHOLD = 8;
-          if (diff > THRESHOLD) {
+          const THRESHOLD = 10;
+          const SAFE_ZONE = 80; // Navbar height approx
+
+          if (y < SAFE_ZONE) {
+            // Force visible at the top
+            setHidden(false);
+          } else if (diff > THRESHOLD) {
+            // Scrolling down intentionally
             setHidden(true);
           } else if (diff < -THRESHOLD) {
+            // Scrolling up intentionally
             setHidden(false);
           }
         }
@@ -346,11 +356,13 @@ export default function Navbar() {
         )}
         role="banner"
       >
-        {/* Top bar */}
+        {/* Main Header Container */}
         <div
           className={cn(
-            "bg-white/90 backdrop-blur-md",
-            elevated ? "shadow-lg ring-1 ring-black/5" : "shadow-none"
+            "bg-white/90 backdrop-blur-md transition-all duration-300",
+            elevated 
+              ? "shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] border-b border-black/5" 
+              : "shadow-none border-b border-transparent"
           )}
         >
           <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">

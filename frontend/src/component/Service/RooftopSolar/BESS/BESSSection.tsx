@@ -1,4 +1,6 @@
 
+import { Link } from "react-router-dom";
+
 export default function BESSSection() {
   return (
     <section className="bg-white py-16 px-6 md:px-16">
@@ -36,7 +38,7 @@ export default function BESSSection() {
             </p>
 
             <p>
-              At TrueSun, we design, supply, and commission BESS solutions tailored
+              At <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>TrueSun</Link>, we design, supply, and commission BESS solutions tailored
               to your energy consumption profile, load requirements, and site
               conditions — ensuring you get the right battery capacity and the right
               technology for your needs.
