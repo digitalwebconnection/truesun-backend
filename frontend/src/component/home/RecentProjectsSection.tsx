@@ -110,12 +110,24 @@ export default function RecentProjectsSection() {
             >
               {/* image */}
               <div className="relative h-48 sm:h-52 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105 group-hover:brightness-110"
-                  loading="lazy"
-                />
+                {project.id === 3 ? (
+                  <a href="/best-rooftop-solar-company-in-mumbai" target="_blank" rel="noopener noreferrer">
+                    <img
+                      src={project.image}
+                      alt="best rooftop solar company in mumbai"
+                      title="best rooftop solar company in mumbai"
+                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105 group-hover:brightness-110 cursor-pointer"
+                      loading="lazy"
+                    />
+                  </a>
+                ) : (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105 group-hover:brightness-110"
+                    loading="lazy"
+                  />
+                )}
                 {/* category badge */}
                 <div className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-black/55 px-3 py-1 text-[11px] font-medium text-white backdrop-blur">
                   <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#FC763A]" />

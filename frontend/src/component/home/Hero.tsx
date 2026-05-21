@@ -10,17 +10,16 @@ import i7 from "../../assets/Oberoi Realty//3.png";
 import i8 from "../../assets/PCI Rentokill/1.jpg";
 import i9 from "../../assets/Rustomjee virar/5.png";
 
-const bgImages = [
-  i1,
-  i2,
-  i3,
-  i4,
-  i5,
-  i6,
-  i7,
-  i8,
-  i9,
-  // "https://media.istockphoto.com/id/1405880267/photo/two-engineers-installing-solar-panels-on-roof.jpg?s=612x612&w=0&k=20&c=OvQDbJaTnMM4jPfIA3y5vrO88i98NZJRahZtnYFZCq0=",,
+const slideInfo = [
+  { src: i1, title: "Andheri Bungalow", desc: "Residential solar solution tailored for modern urban homes, ensuring maximum efficiency and savings." },
+  { src: i2, title: "Bloom Packaging", desc: "Industrial solar integration powering packaging manufacturing operations with green, clean energy." },
+  { src: i3, title: "Kalpataru Estate CHS Limited", desc: "Cooperative housing society installation delivering shared clean energy and reducing common area utility bills." },
+  { src: i4, title: "Ganesh Kung", desc: "Custom rooftop solar installation optimizing energy generation for residential properties." },
+  { src: i5, title: "Kruti Promotions", desc: "Commercial solar panels supporting green initiatives and lowering operational expenses." },
+  { src: i6, title: "Landmrk Pllatinum", desc: "High-rise residential building solar solution enhancing sustainable living standard." },
+  { src: i7, title: "Oberoi Realty", desc: "Premium real estate solar setup designed to offset common area electricity consumption." },
+  { src: i8, title: "Rentokil PCI", desc: "48 kW rooftop solar installation for Rentokil PCI delivering reliable renewable energy and reducing electricity costs for the facility." },
+  { src: i9, title: "Rustomjee Virar", desc: "High-performance solar installation supplying sustainable electricity for premium residential spaces." },
 ];
 
 const SLIDE_DURATION_MS = 5000;
@@ -31,7 +30,7 @@ export default function HeroSection() {
 
   useEffect(() => {
     const id = setInterval(
-      () => setIndex((i) => (i + 1) % bgImages.length),
+      () => setIndex((i) => (i + 1) % slideInfo.length),
       SLIDE_DURATION_MS
     );
     return () => clearInterval(id);
@@ -77,35 +76,65 @@ export default function HeroSection() {
         <div className="relative w-full -mt-15 md:-mt-0 lg:w-[50%] h-80 md:h-115 overflow-hidden">
           {/* Background slider */}
           <div className="absolute inset-0">
-            {bgImages.map((src, i) => {
+            {slideInfo.map((slide, i) => {
               const isActive = i === index;
+              const isTargetImg = slide.src === i9;
+
+              const style = {
+                opacity: isActive ? 1 : 0,
+                transitionProperty: "opacity",
+                transitionTimingFunction: "ease",
+                transitionDuration: `${FADE_MS}ms`,
+                animation: isActive
+                  ? `kenburnsZoom ${SLIDE_DURATION_MS + FADE_MS}ms linear forwards`
+                  : "none",
+                zIndex: isActive ? 10 : 0,
+                pointerEvents: isActive ? "auto" as const : "none" as const,
+              };
+
+              if (isTargetImg) {
+                return (
+                  <a
+                    key={i}
+                    href="/best-rooftop-solar-company-in-mumbai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute inset-0 block"
+                    style={style}
+                  >
+                    <img
+                      src={slide.src}
+                      alt="best rooftop solar company in mumbai"
+                      title="best rooftop solar company in mumbai"
+                      className="w-full h-full object-cover"
+                    />
+                  </a>
+                );
+              }
+
               return (
                 <div
                   key={i}
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{
-                    backgroundImage: `url(${src})`,
-                    opacity: isActive ? 1 : 0,
-                    transitionProperty: "opacity",
-                    transitionTimingFunction: "ease",
-                    transitionDuration: `${FADE_MS}ms`,
-                    animation: isActive
-                      ? `kenburnsZoom ${SLIDE_DURATION_MS + FADE_MS
-                      }ms linear forwards`
-                      : "none",
-                  }}
-                />
+                  className="absolute inset-0"
+                  style={style}
+                >
+                  <img
+                    src={slide.src}
+                    alt={slide.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               );
             })}
           </div>
 
           {/* Floating savings badge */}
-          <div className="absolute bottom-6 left-6 max-w-md rounded-2xl bg-white/85 px-4 py-3 shadow-xl backdrop-blur-sm">
+          <div className="absolute bottom-6 left-6 max-w-md rounded-2xl bg-white/85 px-4 py-3 shadow-xl backdrop-blur-sm z-20">
             <p className="text-md font-semibold tracking-[0.18em] uppercase text-[#FC763A] mb-2">
-              Rentokil PCI
+              {slideInfo[index]?.title || "TrueSun"}
             </p>
             <p className="mt-1 text-sm font-semibold text-[#686868]">
-              48 kW rooftop solar installation for Rentokil PCI delivering reliable renewable energy and reducing electricity costs for the facility.
+              {slideInfo[index]?.desc || "Reliable renewable solar energy installations."}
             </p>
           </div>
         </div>

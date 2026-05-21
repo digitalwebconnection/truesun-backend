@@ -89,7 +89,7 @@ export default function SolarNovaIndustrialPage() {
               <div className="relative rounded-2xl border border-black/10 bg-white/80 p-2 shadow-2xl shadow-black/40 backdrop-blur">
                 <img
                   src={CISectionImg}
-                  alt="Rooftop solar on a modern building"
+                  alt="commercial solar installation in mumbai"
                   className="h-[380px] w-full rounded-xl object-cover"
                   loading="eager"
                 />

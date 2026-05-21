@@ -23,15 +23,12 @@ export default function NetZeroCommandCenterAddOn({
     const accentGradient = accentCls(accent);
     const [openCtaPopup, setOpenCtaPopup] = useState(false);
     return (
-        <section
-            className="relative md:h-150 h-auto overflow-hidden py-24"
-            style={{
-                backgroundImage:
-                    "url('https://e6qg27vt7gu.exactdn.com/wp-content/uploads/2023/08/carbonfootprint1.jpg?strip=all')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-            }}
-        >
+        <section className="relative md:h-150 h-auto overflow-hidden py-24">
+            <img
+                src="https://e6qg27vt7gu.exactdn.com/wp-content/uploads/2023/08/carbonfootprint1.jpg?strip=all"
+                alt="Carbon Footprinting, I-RECs & Carbon Credit"
+                className="absolute inset-0 w-full h-full object-cover"
+            />
             {/* DARK OVERLAY */}
             <div className="absolute inset-0 bg-black/50" />
 

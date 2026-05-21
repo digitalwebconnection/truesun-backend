@@ -50,7 +50,7 @@ export default function BESSSection() {
             <div className="rounded-xl overflow-hidden border">
               <img
                 src="https://img.freepik.com/premium-photo/industrial-battery-storage-system-renewable-energy_1283272-1888.jpg?semt=ais_incoming&w=740&q=80"
-                alt="BESS System"
+                alt="energy storage system solutions in mumbai"
                 className="w-full h-50 object-cover"
               />
             </div>

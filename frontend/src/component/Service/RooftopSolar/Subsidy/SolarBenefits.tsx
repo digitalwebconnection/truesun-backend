@@ -129,7 +129,7 @@ const SolarBenefits = () => {
                     <div>
                         <img
                             src="https://zenithinfraprojects.in/wp-content/uploads/2026/03/ChatGPT-Image-Mar-26-2026-01_04_40-AM.png"
-                            alt="Solar house"
+                            alt="solar subsidy in india"
                             className="rounded-2xl shadow-xl w-full h-[400px] object-fill"
                         />
                     </div>

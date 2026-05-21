@@ -10,7 +10,7 @@ export default function SolarHero() {
       <div className="absolute inset-0">
         <img
           src="https://www.tatapower.com/adobe/dynamicmedia/deliver/dm-aid--88aa9115-8050-4144-a9df-2c771f06d3db/body-01.png?quality=85&preferwebp=true"
-          alt="Solar Background"
+          alt="solar maintenance services in mumbai"
           className="w-full h-full object-cover"
         />
         {/* Dark Overlay */}

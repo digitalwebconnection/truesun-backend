@@ -30,16 +30,13 @@ function AboutHeroV2({
     return (
         <section className="relative h-125  flex items-center overflow-hidden    ">
             {/* Background Image */}
-            <div className="absolute inset-0">
+            <div className="absolute inset-0 z-0">
                 <img
                     src={backgroundUrl}
-                    alt="Solar background"
+                    alt="trusted solar company in mumbai"
                     className="h-full w-full object-cover opacity-60"
-                    // onError={(e) => {
-                    //     e.currentTarget.src = "https://placehold.co/1920x1080/000/fff?text=Solar+Hero";
-                    // }}
                 />
-                <div className="absolute inset-0 bg-linear-to-br from-black/10 via-black/20 to-blue-950/30" />
+                <div className="absolute inset-0 bg-linear-to-br from-black/10 via-black/20 to-blue-950/30 pointer-events-none" />
             </div>
 
             {/* Content */}

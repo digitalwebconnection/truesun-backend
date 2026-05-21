@@ -17,11 +17,10 @@ const TruesunSolarFinanceHero: React.FC = () => {
     <section className="relative md:h-150 h-auto   overflow-hidden bg-slate-900 text-slate-50">
       {/* Background image */}
       <div className="pointer-events-none absolute inset-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-35"
-          style={{
-            backgroundImage: `url(${heroImage})`,
-          }}
+        <img
+          src={heroImage}
+          alt="affordable solar panel financing"
+          className="absolute inset-0 w-full h-full object-cover opacity-35"
         />
       </div>
 
@@ -41,7 +40,7 @@ const TruesunSolarFinanceHero: React.FC = () => {
               Solar Finance Made Simple {" "}
               <br className="hidden sm:block" />
               <span className="text-transparent bg-clip-text bg-[#FC763A]">
-                 for homes and businesses.
+                for homes and businesses.
               </span>
             </h1>
 

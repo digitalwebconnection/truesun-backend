@@ -39,6 +39,8 @@ export default function ServicesPage() {
             title="C&I Rooftop Solar"
             desc="Optimised solar for factories, warehouses and offices."
             img="https://d382rz2cea0pah.cloudfront.net/wp-content/uploads/2023/05/Untitled-design-2023-05-12T100356.968-1.jpg"
+            alt="solar panel installation in mumbai"
+            imageUrl="solar-panel-installation-in-mumbai"
             link="/services/rooftop/C&I"
             badge="Industries & Businesses"
             points={[
@@ -53,6 +55,8 @@ export default function ServicesPage() {
             title="Residential Rooftop Solar"
             desc="Clean, safe rooftop solar for homes and villas."
             img="https://www.teriin.org/sites/default/files/inline-images/rooftop-solar1.jpg"
+            alt="solar panel installation near me"
+            imageUrl="solar-panel-installation-near-me"
             link="/services/rooftop/residential"
             badge="Homes & Villas"
             points={[
@@ -67,6 +71,8 @@ export default function ServicesPage() {
             title="Carbon Footprinting & Consulting"
             desc="Track CO₂ reduction and align with ESG goals."
             img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEJFOe8Nxg95cNm1y3TJ5QgWjdDSRvibM1vg&s"
+            alt="carbon footprinting services in mumbai"
+            imageUrl="carbon-footprinting-services-in-mumbai"
             link="/services/consulting/carbon-footprinting"
             badge="ESG & Compliance"
             points={[
@@ -226,6 +232,7 @@ function ServiceCard({
   title,
   desc,
   img,
+  alt,
   link,
   badge,
   points,
@@ -233,6 +240,8 @@ function ServiceCard({
   title: string;
   desc: string;
   img: string;
+  alt?: string;
+  imageUrl?: string;
   link: string;
   badge?: string;
   points?: string[];
@@ -243,7 +252,7 @@ function ServiceCard({
       <div className="relative h-56 w-full overflow-hidden">
         <img
           src={img}
-          alt={title}
+          alt={alt ?? title}
           className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
         />
         {badge && (

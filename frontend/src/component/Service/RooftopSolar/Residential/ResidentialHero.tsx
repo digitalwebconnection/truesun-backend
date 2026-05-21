@@ -27,9 +27,16 @@ export default function ResidentialHero() {
       className="relative overflow-hidden min-h-[600px] lg:h-[650px] bg-center bg-cover bg-no-repeat flex items-center py-20 lg:py-0"
       style={{
         backgroundImage:
-          `url(${ResidentialHeroImg})`,
+          `url(${ResidentialHeroImg})`
       }}
+      aria-label="residential solar system in mumbai"
     >
+      {/* Hidden img for SEO alt text (background-image can't carry alt) */}
+      <img
+        src={ResidentialHeroImg}
+        alt="residential solar system in mumbai"
+        className="hidden"
+      />
       {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-linear-to-l from-black/20 via-black/30 to-black/40"></div>
 

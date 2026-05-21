@@ -9,6 +9,7 @@ import ProtectedRoute from "./component/admin/ProtectedRoute";
 import Navbar from "./component/Navbar";
 import SolarFooter from "./component/Footer";
 import HomeMain from "./component/home/HomeMain";
+import BestRooftopSolar from "./component/home/BestRooftopSolar";
 import MainAbout from "./component/abouus/MainAbout";
 import ConsultingMain from "./component/Service/Consulting/ConsultingMain";
 import WhatsAppDockPro from "./component/WhatsAppChatbot";
@@ -39,6 +40,8 @@ function AppInner() {
       <Routes>
 
         <Route path="/" element={<HomeMain />} /> {/* Home Page Path Is / */}
+
+        <Route path="/best-rooftop-solar-company-in-mumbai" element={<BestRooftopSolar />} />
 
         <Route path="/about" element={<MainAbout />} />{/* About Us Page  */}
 
