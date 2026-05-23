@@ -74,6 +74,8 @@ async function destroyCloudinaryImage(url) {
 const getAllProjects = async (_req, res) => {
   try {
     const projects = await Project.find().sort({ createdAt: -1 }).lean();
+    // Cache for 1 hour; stale-while-revalidate for 60 s (browsers + CDN)
+    res.set('Cache-Control', 'public, max-age=3600, stale-while-revalidate=60');
     res.json({ success: true, data: projects });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
@@ -168,6 +170,7 @@ const deleteProject = async (req, res) => {
 const getAllBlogs = async (_req, res) => {
   try {
     const blogs = await Blog.find().sort({ createdAt: -1 }).lean();
+    res.set('Cache-Control', 'public, max-age=3600, stale-while-revalidate=60');
     res.json({ success: true, data: blogs });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
@@ -179,6 +182,7 @@ const getBlogBySlug = async (req, res) => {
   try {
     const blog = await Blog.findOne({ slug: req.params.slug }).lean();
     if (!blog) return res.status(404).json({ success: false, message: 'Blog not found' });
+    res.set('Cache-Control', 'public, max-age=3600, stale-while-revalidate=60');
     res.json({ success: true, data: blog });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
@@ -190,6 +194,7 @@ const getBlogById = async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id).lean();
     if (!blog) return res.status(404).json({ success: false, message: 'Blog not found' });
+    res.set('Cache-Control', 'public, max-age=3600, stale-while-revalidate=60');
     res.json({ success: true, data: blog });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
@@ -205,6 +210,15 @@ const createBlog = async (req, res) => {
     const title = body.title || '';
     const slug  = await generateUniqueSlug(title);
 
+    let meta = {};
+    if (body.meta) {
+      try {
+        meta = typeof body.meta === 'string' ? JSON.parse(body.meta) : body.meta;
+      } catch (e) {
+        // ignore parse error
+      }
+    }
+
     const data = {
       title,
       slug,
@@ -214,6 +228,7 @@ const createBlog = async (req, res) => {
       date:       body.date       || '',
       content:    body.content    || '',
       image:      imageUrl,
+      meta,
     };
 
     const blog = await Blog.create(data);
@@ -240,6 +255,14 @@ const updateBlog = async (req, res) => {
 
     const scalars = ['title', 'excerpt', 'categories', 'readTime', 'date', 'content'];
     scalars.forEach(f => { if (body[f] !== undefined) blog[f] = body[f]; });
+
+    if (body.meta !== undefined) {
+      try {
+        blog.meta = typeof body.meta === 'string' ? JSON.parse(body.meta) : body.meta;
+      } catch (e) {
+        // ignore parse error
+      }
+    }
 
     // Regenerate slug if title changed
     if (body.title !== undefined) {

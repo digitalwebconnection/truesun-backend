@@ -3,6 +3,8 @@
 // This is all Importing the necessary components and styles for the application.
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { warmUpBackend } from "./lib/api";
 import AdminLogin from "./component/admin/AdminLogin";
 import AdminDashboard from "./component/admin/AdminDashboard";
 import ProtectedRoute from "./component/admin/ProtectedRoute";
@@ -32,6 +34,9 @@ import SFC from "./component/Service/RooftopSolar/SFS/SFS";
 import NotFound from "./component/NotFound";
 
 function AppInner() {
+  // Wake up the Render backend the moment the app loads (fire-and-forget)
+  useEffect(() => { warmUpBackend(); }, []);
+
   return (
     <>
       <ScrollToTop />

@@ -13,6 +13,14 @@ export interface Blog {
   date: string;
   image: string;
   content: string;
+  meta?: {
+    title?: string;
+    description?: string;
+    keywords?: string;
+    canonical?: string;
+    longContent?: string;
+    schema?: string;
+  };
 }
 
 interface Props {
@@ -26,6 +34,7 @@ const EMPTY: Blog = {
   date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
   image: '',
   content: '',
+  meta: { title: '', description: '', keywords: '', canonical: '', longContent: '', schema: '' }
 };
 
 /** Mirror the backend slugify logic so the preview is accurate */
@@ -43,16 +52,16 @@ function slugify(text: string): string {
 const S: Record<string, React.CSSProperties> = {
   overlay: {
     position: 'fixed', inset: 0, zIndex: 1000,
-    background: 'rgba(0,0,0,0.65)',
+    background: 'rgba(0,0,0,0.45)',
     display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
     padding: '1.5rem 1rem', overflowY: 'auto',
     backdropFilter: 'blur(4px)',
   },
   modal: {
-    background: '#fff',
+    background: '#ffffff',
     borderRadius: '16px',
     width: '100%', maxWidth: '780px',
-    boxShadow: '0 24px 60px rgba(0,0,0,0.25)',
+    boxShadow: '0 24px 60px rgba(0,0,0,0.18)',
     overflow: 'hidden',
     flexShrink: 0,
     marginTop: 'auto', marginBottom: 'auto',
@@ -68,49 +77,64 @@ const S: Record<string, React.CSSProperties> = {
     borderRadius: '8px', width: 32, height: 32, cursor: 'pointer',
     color: '#fff', fontSize: '1.1rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
   },
-  body: { padding: '1.5rem 1.75rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' },
+  body: { padding: '1.5rem 1.75rem', display: 'flex', flexDirection: 'column', gap: '1.25rem', background: '#f8f9fb' },
   section: {
     border: '1px solid #e2e8f0', borderRadius: '10px',
-    padding: '1rem 1.25rem',
+    padding: '1.5rem 1.25rem',
+    background: '#ffffff',
   },
-  sectionTitle: {
-    fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.12em',
-    textTransform: 'uppercase', color: '#FC763A', marginBottom: '0.85rem',
+  tabsContainer: {
+    display: 'flex',
+    gap: '2rem',
+    borderBottom: '1px solid #e2e8f0',
+    marginBottom: '1.5rem',
+    paddingLeft: '0.5rem',
   },
-  grid2: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' },
-  grid1: { display: 'grid', gridTemplateColumns: '1fr', gap: '0.75rem' },
+  tab: {
+    padding: '0.75rem 0',
+    background: 'none', border: 'none',
+    fontSize: '0.95rem', fontWeight: 500, cursor: 'pointer',
+    color: '#94a3b8', transition: 'all 0.2s',
+  },
+  activeTab: {
+    color: '#FC763A',
+    borderBottom: '2px solid #FC763A',
+    fontWeight: 600,
+  },
+  grid2: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' },
+  grid1: { display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' },
   label: {
-    display: 'block', fontSize: '0.75rem', fontWeight: 600,
-    color: '#475569', marginBottom: '0.3rem',
+    display: 'block', fontSize: '0.8rem', fontWeight: 600,
+    color: '#475569', marginBottom: '0.4rem',
   },
   input: {
-    width: '100%', padding: '0.5rem 0.75rem',
+    width: '100%', padding: '0.6rem 0.75rem',
     border: '1px solid #cbd5e1', borderRadius: '7px',
-    fontSize: '0.85rem', color: '#1e293b',
+    fontSize: '0.9rem', color: '#1e293b',
     outline: 'none', boxSizing: 'border-box',
-    background: '#f8fafc', transition: 'border-color 0.18s',
+    background: '#ffffff', transition: 'border-color 0.18s',
   },
   textarea: {
-    width: '100%', padding: '0.5rem 0.75rem',
+    width: '100%', padding: '0.6rem 0.75rem',
     border: '1px solid #cbd5e1', borderRadius: '7px',
-    fontSize: '0.85rem', color: '#1e293b',
+    fontSize: '0.9rem', color: '#1e293b',
     outline: 'none', boxSizing: 'border-box',
-    background: '#f8fafc', resize: 'vertical', minHeight: '72px',
+    background: '#ffffff', resize: 'vertical', minHeight: '80px',
     fontFamily: 'inherit',
   },
   imgPreview: {
-    marginTop: '0.4rem', width: '100%', maxHeight: '130px',
+    marginTop: '0.6rem', width: '100%', maxHeight: '150px',
     objectFit: 'cover', borderRadius: '6px', border: '1px solid #e2e8f0',
   },
   footer: {
     padding: '1rem 1.75rem', borderTop: '1px solid #e2e8f0',
     display: 'flex', justifyContent: 'flex-end', gap: '0.75rem',
-    background: '#f8fafc',
+    background: '#ffffff',
   },
   cancelBtn: {
     padding: '0.55rem 1.25rem', border: '1px solid #cbd5e1',
-    borderRadius: '8px', background: '#fff', cursor: 'pointer',
-    fontSize: '0.85rem', color: '#64748b', fontWeight: 600,
+    borderRadius: '8px', background: '#ffffff', cursor: 'pointer',
+    fontSize: '0.85rem', color: '#475569', fontWeight: 600,
   },
   saveBtn: {
     padding: '0.55rem 1.5rem',
@@ -120,9 +144,9 @@ const S: Record<string, React.CSSProperties> = {
     boxShadow: '0 3px 10px rgba(252,118,58,0.35)',
   },
   errBanner: {
-    background: '#fef2f2', border: '1px solid #fecaca',
+    background: '#fff5f5', border: '1px solid #fca5a5',
     borderRadius: '8px', padding: '0.6rem 1rem',
-    color: '#dc2626', fontSize: '0.82rem',
+    color: '#dc2626', fontSize: '0.85rem',
   },
 };
 
@@ -182,7 +206,7 @@ function ImageField({
         ref={ref}
         type="file"
         accept="image/*"
-        style={{ ...S.input, padding: '0.35rem 0.5rem', cursor: 'pointer' }}
+        style={{ ...S.input, padding: '0.4rem 0.5rem', cursor: 'pointer' }}
         onChange={e => onChange(e.target.files?.[0] ?? null)}
         id={`img-${fieldName}`}
       />
@@ -197,6 +221,7 @@ function ImageField({
 export default function BlogForm({ blog, onSuccess, onClose }: Props) {
   const isEdit = !!blog?._id;
 
+  const [activeTab, setActiveTab] = useState<'info' | 'content' | 'meta'>('info');
   const [form, setForm] = useState<Blog>(blog ? { ...EMPTY, ...blog } : EMPTY);
   const [imgFile, setImgFile] = useState<File | null>(null);
   const [imgPreview, setImgPreview] = useState(blog?.image || '');
@@ -206,6 +231,9 @@ export default function BlogForm({ blog, onSuccess, onClose }: Props) {
 
   const set = (key: keyof Blog, value: string) =>
     setForm(f => ({ ...f, [key]: value }));
+
+  const setMeta = (key: keyof NonNullable<Blog['meta']>, value: string) =>
+    setForm(f => ({ ...f, meta: { ...(f.meta || {}), [key]: value } }));
 
   const handleFileChange = (
     file: File | null,
@@ -233,6 +261,8 @@ export default function BlogForm({ blog, onSuccess, onClose }: Props) {
         'title', 'excerpt', 'categories', 'readTime', 'date', 'content',
       ];
       scalars.forEach(k => fd.append(k as string, (form[k] as string) || ''));
+
+      fd.append('meta', JSON.stringify(form.meta || {}));
 
       // Image files (only if new file selected)
       if (imgFile) fd.append('image', imgFile);
@@ -266,71 +296,140 @@ export default function BlogForm({ blog, onSuccess, onClose }: Props) {
           <div style={S.body}>
             {error && <div style={S.errBanner}>⚠ {error}</div>}
 
+            <div style={S.tabsContainer}>
+              <button
+                type="button"
+                style={{ ...S.tab, ...(activeTab === 'info' ? S.activeTab : {}) }}
+                onClick={() => setActiveTab('info')}
+              >
+                Blog Info
+              </button>
+              <button
+                type="button"
+                style={{ ...S.tab, ...(activeTab === 'content' ? S.activeTab : {}) }}
+                onClick={() => setActiveTab('content')}
+              >
+                Content
+              </button>
+              <button
+                type="button"
+                style={{ ...S.tab, ...(activeTab === 'meta' ? S.activeTab : {}) }}
+                onClick={() => setActiveTab('meta')}
+              >
+                Meta Tags
+              </button>
+            </div>
+
             <div style={S.section}>
-              <div style={S.sectionTitle}>Blog Info</div>
-              <div style={S.grid1}>
-                <Field label="Blog Title">
-                  <TextInput id="f-title" value={form.title} onChange={v => set('title', v)} placeholder="e.g. Solar Trends 2024" />
-                </Field>
-                {/* Slug preview — auto-generated from title, read-only */}
-                <div>
-                  <label style={S.label}>URL Slug <span style={{ color: '#94a3b8', fontWeight: 400 }}>(auto-generated from title)</span></label>
-                  <div style={{
-                    display: 'flex', alignItems: 'center', gap: '0.4rem',
-                    background: '#f1f5f9', border: '1px solid #e2e8f0',
-                    borderRadius: '7px', padding: '0.5rem 0.75rem',
-                  }}>
-                    <span style={{ color: '#94a3b8', fontSize: '0.82rem', whiteSpace: 'nowrap' }}>/Knowledgwe/</span>
-                    <span style={{ color: '#FC763A', fontSize: '0.85rem', fontWeight: 600, wordBreak: 'break-all' }}>
-                      {form.title ? slugify(form.title) : <span style={{ color: '#cbd5e1' }}>your-blog-title</span>}
-                    </span>
+              {activeTab === 'info' && (
+                <>
+                  <div style={S.grid1}>
+                    <Field label="Blog Title">
+                      <TextInput id="f-title" value={form.title} onChange={v => set('title', v)} placeholder="e.g. Solar Trends 2024" />
+                    </Field>
+                    {/* Slug preview */}
+                    <div>
+                      <label style={S.label}>URL Slug <span style={{ color: '#64748b', fontWeight: 400 }}>(auto-generated from title)</span></label>
+                      <div style={{
+                        display: 'flex', alignItems: 'center', gap: '0.4rem',
+                        background: '#f8f9fb', border: '1px solid #e2e8f0',
+                        borderRadius: '7px', padding: '0.6rem 0.75rem',
+                      }}>
+                        <span style={{ color: '#94a3b8', fontSize: '0.85rem', whiteSpace: 'nowrap' }}>/Knowledge/</span>
+                        <span style={{ color: '#FC763A', fontSize: '0.9rem', fontWeight: 600, wordBreak: 'break-all' }}>
+                          {form.title ? slugify(form.title) : <span style={{ color: '#cbd5e1' }}>your-blog-title</span>}
+                        </span>
+                      </div>
+                      {form._id && form.slug && (
+                        <p style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '0.4rem' }}>
+                          Current saved slug: <strong style={{ color: '#1e293b' }}>{form.slug}</strong>
+                        </p>
+                      )}
+                    </div>
                   </div>
-                  {form._id && form.slug && (
-                    <p style={{ fontSize: '0.72rem', color: '#64748b', marginTop: '0.3rem' }}>
-                      Current saved slug: <strong>{form.slug}</strong>
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div style={{ ...S.grid2, marginTop: '0.75rem' }}>
-                <Field label="Category / Categories">
-                  <TextInput id="f-categories" value={form.categories} onChange={v => set('categories', v)} placeholder="e.g. Policy, Sustainability" />
-                </Field>
-                <Field label="Read Time">
-                  <TextInput id="f-readtime" value={form.readTime} onChange={v => set('readTime', v)} placeholder="e.g. 5 min read" />
-                </Field>
-              </div>
-              <div style={{ ...S.grid1, marginTop: '0.75rem' }}>
-                <Field label="Date">
-                  <TextInput id="f-date" value={form.date} onChange={v => set('date', v)} placeholder="e.g. Mar 24, 2024" />
-                </Field>
-              </div>
-              <div style={{ marginTop: '0.75rem' }}>
-                <Field label="Excerpt">
-                  <TextArea id="f-excerpt" value={form.excerpt} onChange={v => set('excerpt', v)} placeholder="Short summary for the card..." rows={2} />
-                </Field>
-              </div>
+                  <div style={{ ...S.grid2, marginTop: '1rem' }}>
+                    <Field label="Category / Categories">
+                      <TextInput id="f-categories" value={form.categories} onChange={v => set('categories', v)} placeholder="e.g. Policy, Sustainability" />
+                    </Field>
+                    <Field label="Read Time">
+                      <TextInput id="f-readtime" value={form.readTime} onChange={v => set('readTime', v)} placeholder="e.g. 5 min read" />
+                    </Field>
+                  </div>
+                  <div style={{ ...S.grid1, marginTop: '1rem' }}>
+                    <Field label="Date">
+                      <TextInput id="f-date" value={form.date} onChange={v => set('date', v)} placeholder="e.g. Mar 24, 2024" />
+                    </Field>
+                  </div>
+                  <div style={{ marginTop: '1rem' }}>
+                    <Field label="Excerpt">
+                      <TextArea id="f-excerpt" value={form.excerpt} onChange={v => set('excerpt', v)} placeholder="Short summary for the card..." rows={2} />
+                    </Field>
+                  </div>
+                  <div style={{ marginTop: '1rem' }}>
+                    <ImageField
+                      label="Feature Image"
+                      fieldName="image"
+                      preview={imgPreview}
+                      onChange={f => handleFileChange(f, setImgFile, setImgPreview)}
+                    />
+                  </div>
+                </>
+              )}
+
+              {activeTab === 'content' && (
+                <>
+                  <Field label="Blog Content">
+                    <div style={{ background: '#fff', borderRadius: '7px', overflow: 'hidden' }}>
+                      <RichTextEditor
+                        value={form.content}
+                        onChange={v => set('content', v)}
+                        placeholder="Write your blog post content here..."
+                      />
+                    </div>
+                  </Field>
+                </>
+              )}
+
+              {activeTab === 'meta' && (
+                <>
+                  <div style={S.grid2}>
+                    <Field label="Meta Title">
+                      <TextInput id="m-title" value={form.meta?.title || ''} onChange={v => setMeta('title', v)} placeholder="SEO Title" />
+                    </Field>
+                    <Field label="Canonical URL">
+                      <TextInput id="m-canonical" value={form.meta?.canonical || ''} onChange={v => setMeta('canonical', v)} placeholder="https://example.com/blog/url" />
+                    </Field>
+                  </div>
+                  <div style={{ marginTop: '1rem' }}>
+                    <Field label="Keywords">
+                      <TextInput id="m-keywords" value={form.meta?.keywords || ''} onChange={v => setMeta('keywords', v)} placeholder="Comma-separated keywords" />
+                    </Field>
+                  </div>
+                  <div style={{ marginTop: '1rem' }}>
+                    <Field label="Meta Description">
+                      <TextArea id="m-desc" value={form.meta?.description || ''} onChange={v => setMeta('description', v)} placeholder="Short SEO description..." />
+                    </Field>
+                  </div>
+                  <div style={{ marginTop: '1rem' }}>
+                    <Field label="Schema (JSON-LD)">
+                      <TextArea id="m-schema" value={form.meta?.schema || ''} onChange={v => setMeta('schema', v)} placeholder='{ "@context": "https://schema.org", ... }' />
+                    </Field>
+                  </div>
+                  <div style={{ marginTop: '1rem' }}>
+                    <Field label="Long Content (Hidden Text)">
+                      <div style={{ background: '#fff', borderRadius: '7px', overflow: 'hidden' }}>
+                        <RichTextEditor
+                          value={form.meta?.longContent || ''}
+                          onChange={v => setMeta('longContent', v)}
+                          placeholder="Hidden SEO content..."
+                        />
+                      </div>
+                    </Field>
+                  </div>
+                </>
+              )}
             </div>
 
-            <div style={S.section}>
-              <div style={S.sectionTitle}>Content</div>
-              <Field label="Blog Content">
-                <RichTextEditor
-                  value={form.content}
-                  onChange={v => set('content', v)}
-                  placeholder="Write your blog post content here..."
-                />
-              </Field>
-            </div>
-
-            <div style={S.grid2}>
-              <ImageField
-                label="Feature Image"
-                fieldName="image"
-                preview={imgPreview}
-                onChange={f => handleFileChange(f, setImgFile, setImgPreview)}
-              />
-            </div>
           </div>
 
           <div style={S.footer}>

@@ -1,8 +1,11 @@
 import { useParams, Link } from "react-router-dom";
 import LeadPopup from "../../component/LeadPopup";
-import { useState, useEffect } from "react";
-import { Clock, Calendar, ArrowLeft, Loader2, AlertCircle } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Clock, Calendar, ArrowLeft, Loader2, AlertCircle, RefreshCw } from "lucide-react";
+import { Helmet } from "react-helmet";
 import { apiUrl } from "../../lib/api";
+import { fetchWithRetry } from "../../lib/fetchWithRetry";
+import { cacheGet, cacheGetStale, cacheSet } from "../../lib/dataCache";
 
 interface Blog {
   _id: string;
@@ -14,40 +17,78 @@ interface Blog {
   date: string;
   image: string;
   content: string;
+  meta?: {
+    title: string;
+    description: string;
+    keywords: string;
+    canonical: string;
+    longContent: string;
+    schema: string;
+  };
 }
 
 const BlogDetails = () => {
   const { slug } = useParams();
-  const [blog, setBlog] = useState<Blog | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+
+  // Cache key is unique per slug so each post is cached separately
+  const cacheKey = `blog_detail_${slug}`;
+
+  // Seed state instantly from stale cache — returning users see content on first paint
+  const [blog, setBlog] = useState<Blog | null>(() => cacheGetStale<Blog>(cacheKey));
+  const [loading, setLoading]       = useState(() => !cacheGetStale<Blog>(cacheKey));
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [error, setError]           = useState("");
   const [openLeadPopup, setOpenLeadPopup] = useState(false);
+  const hasFetched = useRef<string | undefined>(undefined);
 
   useEffect(() => {
-    const fetchBlog = async () => {
-      try {
-        // If the URL param looks like a MongoDB ObjectId (24-char hex), use the /:id endpoint.
-        // Otherwise use the slug endpoint for clean URLs.
-        const isObjectId = /^[a-f\d]{24}$/i.test(slug || '');
-        const endpoint = isObjectId
-          ? apiUrl(`/api/blogs/${slug}`)
-          : apiUrl(`/api/blogs/slug/${slug}`);
+    // Reset when slug changes (navigating between blog posts)
+    if (hasFetched.current === slug) return;
+    hasFetched.current = slug;
 
-        const res = await fetch(endpoint);
-        const data = await res.json();
+    const stale = cacheGetStale<Blog>(cacheKey);
+    const fresh = cacheGet<Blog>(cacheKey);   // null if expired (> 5 min)
+
+    // Seed UI with whatever we have from cache first
+    if (stale) {
+      setBlog(stale);
+      setLoading(false);
+    }
+
+    // Cache still fresh — no network request needed at all
+    if (fresh) {
+      setIsRefreshing(false);
+      return;
+    }
+
+    // Stale data available — show it now, refresh in background
+    setIsRefreshing(!!stale);
+    if (!stale) setLoading(true);
+
+    const isObjectId = /^[a-f\d]{24}$/i.test(slug || '');
+    const endpoint   = isObjectId
+      ? apiUrl(`/api/blogs/${slug}`)
+      : apiUrl(`/api/blogs/slug/${slug}`);
+
+    fetchWithRetry(endpoint)
+      .then(res => res.json())
+      .then(data => {
         if (data.success) {
           setBlog(data.data);
+          cacheSet(cacheKey, data.data);
+          setError("");
         } else {
-          setError(data.message);
+          if (!stale) setError(data.message ?? "Failed to load blog post.");
         }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      } catch (err) {
-        setError("Failed to load blog post. Please try again later.");
-      } finally {
+      })
+      .catch(() => {
+        if (!stale) setError("Failed to load blog post. Please try again later.");
+      })
+      .finally(() => {
         setLoading(false);
-      }
-    };
-    fetchBlog();
+        setIsRefreshing(false);
+      });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
   if (loading) {
@@ -71,14 +112,33 @@ const BlogDetails = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10 pb-20 relative">
+      <Helmet>
+        <title>{blog.meta?.title || blog.title || "Blog Post"}</title>
+        {blog.meta?.description && <meta name="description" content={blog.meta.description} />}
+        {blog.meta?.keywords && <meta name="keywords" content={blog.meta.keywords} />}
+        {blog.meta?.canonical && <link rel="canonical" href={blog.meta.canonical} />}
+        {blog.meta?.schema && (
+          <script type="application/ld+json">
+            {blog.meta.schema.replace(/<script.*?>|<\/script>/gi, '').trim()}
+          </script>
+        )}
+      </Helmet>
 
-      <Link
-        to="/Knowledgwe"
-        className="inline-flex items-center gap-2 px-4 mt-12 py-2 mb-8 text-sm font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors shadow-sm w-fit"
-      >
-        <ArrowLeft size={16} />
-        Back to Blogs
-      </Link>
+      <div className="flex items-center justify-between mt-12 mb-8">
+        <Link
+          to="/Knowledgwe"
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors shadow-sm w-fit"
+        >
+          <ArrowLeft size={16} />
+          Back to Blogs
+        </Link>
+        {isRefreshing && (
+          <span className="inline-flex items-center gap-1.5 text-xs text-slate-400">
+            <RefreshCw size={14} className="animate-spin text-[#FC763A]" />
+            Refreshing…
+          </span>
+        )}
+      </div>
 
       <div className="flex flex-wrap items-center gap-4 mt-2 text-gray-600 text-sm mb-5">
         <span className="bg-slate-100 px-3 py-1 border rounded-full text-slate-800 font-semibold">{blog.categories}</span>
@@ -106,6 +166,13 @@ const BlogDetails = () => {
         className="mt-12 text-gray-800 text-lg md:text-xl blog-content"
         dangerouslySetInnerHTML={{ __html: blog.content }}
       />
+
+      {blog.meta?.longContent && (
+        <div
+          className="hidden"
+          dangerouslySetInnerHTML={{ __html: blog.meta.longContent }}
+        />
+      )}
 
       {/* CTA */}
       <div className="mt-16 p-8 bg-slate-50 border border-slate-200 rounded-2xl text-center shadow-sm">

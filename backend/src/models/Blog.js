@@ -1,5 +1,14 @@
 const mongoose = require('mongoose');
 
+const MetaSchema = new mongoose.Schema({
+  title:       { type: String, default: '' },
+  description: { type: String, default: '' },
+  keywords:    { type: String, default: '' },
+  canonical:   { type: String, default: '' },
+  longContent: { type: String, default: '' },
+  schema:      { type: String, default: '' },
+}, { _id: false });
+
 const BlogSchema = new mongoose.Schema(
   {
     title:      { type: String, required: true },
@@ -10,6 +19,7 @@ const BlogSchema = new mongoose.Schema(
     date:       { type: String, default: '' },
     image:      { type: String, default: '' },
     content:    { type: String, default: '' },
+    meta:       { type: MetaSchema, default: () => ({}) },
   },
   { timestamps: true }
 );

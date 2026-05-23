@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   SunMedium,
@@ -8,8 +8,13 @@ import {
   Leaf,
   BadgeCheck,
   ChevronRight,
+  RefreshCw,
 } from "lucide-react";
 import { apiUrl } from "../../lib/api";
+import { fetchWithRetry } from "../../lib/fetchWithRetry";
+import { cacheGet, cacheGetStale, cacheSet } from "../../lib/dataCache";
+
+const CACHE_KEY = "projects_list";
 
 /* =========================
    Palette (TrueSun)
@@ -110,22 +115,45 @@ function InfoCard({
   );
 }
 
-/* ───────────────────── Main Page ───────────────────── */
+/* ──────────────────── Main Page ──────────────────── */
 export default function ProjectShowcasePage() {
-  const [projects, setProjects]     = useState<Project[]>([]);
+  // Seed state instantly from stale cache so something renders on first paint
+  const [projects, setProjects]       = useState<Project[]>(() => cacheGetStale<Project[]>(CACHE_KEY) ?? []);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [, setModalProject]         = useState<Project | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [, setModalProject]           = useState<Project | null>(null);
+  const [loading, setLoading]         = useState(() => (cacheGetStale<Project[]>(CACHE_KEY) ?? []).length === 0);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const hasFetched = useRef(false);
 
-  /* ── Fetch from API on mount ── */
+  /* ── Stale-while-revalidate fetch ── */
   useEffect(() => {
-    setLoading(true);
-    fetch(apiUrl("/api/projects"))
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
+    const stale = cacheGetStale<Project[]>(CACHE_KEY) ?? [];
+    const fresh = cacheGet<Project[]>(CACHE_KEY);        // null if expired
+
+    // Cache still fresh — render immediately, skip network
+    if (fresh && fresh.length > 0) {
+      setProjects(fresh);
+      setLoading(false);
+      return;
+    }
+
+    // Stale data available — show it instantly, refresh in background
+    if (stale.length > 0) {
+      setProjects(stale);
+      setLoading(false);
+      setIsRefreshing(true);
+    }
+
+    fetchWithRetry(apiUrl("/api/projects"))
       .then(r => r.json())
       .then(data => {
         if (data.success && Array.isArray(data.data)) {
           setProjects(data.data);
+          cacheSet(CACHE_KEY, data.data);
           setActiveIndex(0);
         }
       })
@@ -134,6 +162,7 @@ export default function ProjectShowcasePage() {
       })
       .finally(() => {
         setLoading(false);
+        setIsRefreshing(false);
       });
   }, []);
 
@@ -192,17 +221,22 @@ export default function ProjectShowcasePage() {
       <div className="pointer-events-none absolute inset-x-0 top-32 -z-10 h-72 bg-linear-to-r from-sky-100 via-emerald-50 to-transparent blur-3xl" />
 
       {/* Heading row */}
-      <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-        <div>
-          <p className="inline-flex items-center gap-2 rounded-full bg-sky-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-sky-700">
-            <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-            Project Portfolio
-          </p>
-          <h2 className="mt-3 text-3xl font-bold text-[#FC763A] sm:text-4xl">Our Solar Installations </h2>
-          <p className="mt-2 max-w-2xl text-sm text-slate-600 sm:text-base">
-            A quick view of how TrueSun implementations are helping factories, commercial complexes and institutions reduce grid dependence and improve cash flow.
-          </p>
-        </div>
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="inline-flex items-center gap-2 rounded-full bg-sky-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-sky-700">
+              <Sparkles className="h-3.5 w-3.5 text-amber-400" />
+              Project Portfolio
+            </p>
+            <div className="flex items-center gap-3 mt-3">
+              <h2 className="text-3xl font-bold text-[#FC763A] sm:text-4xl">Our Solar Installations </h2>
+              {isRefreshing && (
+                <RefreshCw size={18} className="text-[#FC763A] animate-spin mt-1" />
+              )}
+            </div>
+            <p className="mt-2 max-w-2xl text-sm text-slate-600 sm:text-base">
+              A quick view of how TrueSun implementations are helping factories, commercial complexes and institutions reduce grid dependence and improve cash flow.
+            </p>
+          </div>
 
         {/* Global stats strip */}
         <div className="grid grid-cols-2 gap-2 text-xs sm:text-[13px] md:text-xs">
