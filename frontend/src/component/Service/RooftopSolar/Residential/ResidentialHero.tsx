@@ -5,7 +5,7 @@ import { Sun, Leaf, Zap, ArrowRight, Home, Building2 } from "lucide-react";
 
 import LeadPopup from "../../../LeadPopup";
 import { useState } from "react";
-import ResidentialHeroImg from "../../../../assets/residantailhero.jpg";
+import ResidentialHeroImg from "../../../../assets/residential-solar-system-in-mumbai.jpg";
 // --------------------- FIXED VARIANT ---------------------
 const textVariant: Variants = {
   hidden: { opacity: 0, y: 40 },

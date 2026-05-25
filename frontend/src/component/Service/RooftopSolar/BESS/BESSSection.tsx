@@ -1,5 +1,6 @@
 
 import { Link } from "react-router-dom";
+import bessStorageImg from "../../../../assets/energy-storage-system-solutions-in-mumbai.avif";
 
 export default function BESSSection() {
   return (
@@ -49,7 +50,7 @@ export default function BESSSection() {
           <div>
             <div className="rounded-xl overflow-hidden border">
               <img
-                src="https://img.freepik.com/premium-photo/industrial-battery-storage-system-renewable-energy_1283272-1888.jpg?semt=ais_incoming&w=740&q=80"
+                src={bessStorageImg}
                 alt="energy storage system solutions in mumbai"
                 className="w-full h-50 object-cover"
               />

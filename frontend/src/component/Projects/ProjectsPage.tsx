@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { apiUrl } from "../../lib/api";
 import { fetchWithRetry } from "../../lib/fetchWithRetry";
-import { cacheGet, cacheGetStale, cacheSet } from "../../lib/dataCache";
+import { cacheGetStale, cacheSet } from "../../lib/dataCache";
 
 const CACHE_KEY = "projects_list";
 
@@ -132,23 +132,15 @@ export default function ProjectShowcasePage() {
     hasFetched.current = true;
 
     const stale = cacheGetStale<Project[]>(CACHE_KEY) ?? [];
-    const fresh = cacheGet<Project[]>(CACHE_KEY);        // null if expired
 
-    // Cache still fresh — render immediately, skip network
-    if (fresh && fresh.length > 0) {
-      setProjects(fresh);
-      setLoading(false);
-      return;
-    }
-
-    // Stale data available — show it instantly, refresh in background
+    // Show cached data immediately, then silently refresh in the background
     if (stale.length > 0) {
       setProjects(stale);
       setLoading(false);
       setIsRefreshing(true);
     }
 
-    fetchWithRetry(apiUrl("/api/projects"))
+    fetchWithRetry(apiUrl("/api/projects"), { cache: "no-store" })
       .then(r => r.json())
       .then(data => {
         if (data.success && Array.isArray(data.data)) {

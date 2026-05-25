@@ -1,4 +1,5 @@
 import { FaBolt, FaPiggyBank, FaLeaf, FaTools } from "react-icons/fa";
+import subsidyImg from "../../../../assets/solar-subsidy-in-india.webp";
 
 const SolarBenefits = () => {
     const benefits = [
@@ -128,7 +129,7 @@ const SolarBenefits = () => {
                     {/* RIGHT IMAGE */}
                     <div>
                         <img
-                            src="https://zenithinfraprojects.in/wp-content/uploads/2026/03/ChatGPT-Image-Mar-26-2026-01_04_40-AM.png"
+                            src={subsidyImg}
                             alt="solar subsidy in india"
                             className="rounded-2xl shadow-xl w-full h-[400px] object-fill"
                         />

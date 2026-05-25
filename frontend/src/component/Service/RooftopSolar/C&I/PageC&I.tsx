@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, type Variants } from "framer-motion";
-import CISectionImg from "../../../../assets/C&I_section.jpg";
+import CISectionImg from "../../../../assets/commercial-solar-installation-in-mumbai.jpg";
 import LeadPopup from "../../../LeadPopup";
 import {
   Sun,

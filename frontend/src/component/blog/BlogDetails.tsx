@@ -5,7 +5,8 @@ import { Clock, Calendar, ArrowLeft, Loader2, AlertCircle, RefreshCw } from "luc
 import { Helmet } from "react-helmet";
 import { apiUrl } from "../../lib/api";
 import { fetchWithRetry } from "../../lib/fetchWithRetry";
-import { cacheGet, cacheGetStale, cacheSet } from "../../lib/dataCache";
+import { cacheGetStale, cacheSet } from "../../lib/dataCache";
+import { staticBlogs } from "../../lib/staticBlogs";
 
 interface Blog {
   _id: string;
@@ -46,8 +47,32 @@ const BlogDetails = () => {
     if (hasFetched.current === slug) return;
     hasFetched.current = slug;
 
+    // Check if the blog was deleted by the admin
+    try {
+      const deletedRaw = localStorage.getItem("deleted_blog_slugs");
+      const deletedSlugs: string[] = deletedRaw ? JSON.parse(deletedRaw) : [];
+      if (deletedSlugs.includes(slug || "")) {
+        setBlog(null);
+        setError("Blog post not found.");
+        setLoading(false);
+        setIsRefreshing(false);
+        return;
+      }
+    } catch (e) {
+      console.error("Error reading deleted blog slugs:", e);
+    }
+
+    // Check if it's a static dummy blog first
+    const staticMatch = staticBlogs.find((sb) => sb.slug === slug);
+    if (staticMatch) {
+      setBlog(staticMatch as any);
+      setLoading(false);
+      setIsRefreshing(false);
+      setError("");
+      return;
+    }
+
     const stale = cacheGetStale<Blog>(cacheKey);
-    const fresh = cacheGet<Blog>(cacheKey);   // null if expired (> 5 min)
 
     // Seed UI with whatever we have from cache first
     if (stale) {
@@ -55,13 +80,7 @@ const BlogDetails = () => {
       setLoading(false);
     }
 
-    // Cache still fresh — no network request needed at all
-    if (fresh) {
-      setIsRefreshing(false);
-      return;
-    }
-
-    // Stale data available — show it now, refresh in background
+    // Refresh in background to ensure it is still active and up-to-date
     setIsRefreshing(!!stale);
     if (!stale) setLoading(true);
 
@@ -70,7 +89,7 @@ const BlogDetails = () => {
       ? apiUrl(`/api/blogs/${slug}`)
       : apiUrl(`/api/blogs/slug/${slug}`);
 
-    fetchWithRetry(endpoint)
+    fetchWithRetry(endpoint, { cache: "no-store" })
       .then(res => res.json())
       .then(data => {
         if (data.success) {
@@ -78,7 +97,10 @@ const BlogDetails = () => {
           cacheSet(cacheKey, data.data);
           setError("");
         } else {
-          if (!stale) setError(data.message ?? "Failed to load blog post.");
+          // If the server explicitly says success=false (e.g. blog deleted), we must clear the cache and show the error!
+          localStorage.removeItem(`ts_cache_${cacheKey}`);
+          setBlog(null);
+          setError(data.message ?? "Blog post not found.");
         }
       })
       .catch(() => {

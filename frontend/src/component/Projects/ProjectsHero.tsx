@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import LeadPopup from "../LeadPopup";
+import projectsHeroImg from "../../assets/solar-projects-in-mumbai.jpg";
 
 export default function AppSimple() {
   const [openLeadPopup, setOpenLeadPopup] = useState(false);
@@ -14,8 +15,7 @@ export default function AppSimple() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage:
-            "url('https://d3nut88kxhmnud.cloudfront.net/2025/12/10kw-ongrid-solar-installation.jpg')",
+          backgroundImage: `url(${projectsHeroImg})`,
         }}
       >
         <div className="absolute inset-0 bg-black opacity-40"></div> {/* Dark overlay */}

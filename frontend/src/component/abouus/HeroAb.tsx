@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import defaultBg from "../../assets/trusted-solar-company-in-mumbai.avif";
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -18,13 +19,15 @@ interface AboutHeroProps {
     title?: string;
     subtitle?: string;
     backgroundUrl?: string;
+    alt?: string;
 }
 
 function AboutHeroV2({
     eyebrow = "ABOUT US",
     title = "Driving Global Change with Solar Energy",
     subtitle = "We create high-performance solar solutions that help industries, businesses, and communities switch to clean and sustainable power.",
-    backgroundUrl = "https://images.unsplash.com/photo-1648135327756-b606e2eb8caa?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHNvbGFyJTIwcGFuZWx8ZW58MHx8MHx8fDA%3D",
+    backgroundUrl = defaultBg,
+    alt = "trusted solar company in mumbai",
 }: AboutHeroProps) {
 
     return (
@@ -33,7 +36,7 @@ function AboutHeroV2({
             <div className="absolute inset-0 z-0">
                 <img
                     src={backgroundUrl}
-                    alt="trusted solar company in mumbai"
+                    alt={alt}
                     className="h-full w-full object-cover opacity-60"
                 />
                 <div className="absolute inset-0 bg-linear-to-br from-black/10 via-black/20 to-blue-950/30 pointer-events-none" />

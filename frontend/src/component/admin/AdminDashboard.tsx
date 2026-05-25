@@ -254,8 +254,43 @@ export default function AdminDashboard() {
       const res = await fetch(endpoint, { method: 'DELETE' });
       const data = await res.json();
       if (data.success) {
-        if (activeTab === 'projects') setProjects(p => p.filter(x => x._id !== deletingId));
-        else setBlogs(b => b.filter(x => x._id !== deletingId));
+        if (activeTab === 'projects') {
+          setProjects(p => p.filter(x => x._id !== deletingId));
+          localStorage.removeItem('ts_cache_projects_list');
+        } else {
+          // Find the deleted blog to evict its specific detail cache
+          const deletedBlog = blogs.find(x => x._id === deletingId);
+          if (deletedBlog) {
+            localStorage.removeItem(`ts_cache_blog_detail_${deletedBlog.slug}`);
+            localStorage.removeItem(`ts_cache_blog_detail_${deletedBlog._id}`);
+            
+            // Cleanup clicked_blogs in localStorage
+            try {
+              const raw = localStorage.getItem("clicked_blogs");
+              if (raw) {
+                const clicked = JSON.parse(raw);
+                if (Array.isArray(clicked)) {
+                  const updated = clicked.filter((b: any) => b.slug !== deletedBlog.slug && b._id !== deletedBlog._id);
+                  localStorage.setItem("clicked_blogs", JSON.stringify(updated));
+                }
+              }
+            } catch (e) {
+              console.error("Failed to update clicked_blogs upon deletion:", e);
+            }
+
+            // Record it as deleted to prevent other views from pulling it from cache
+            try {
+              const deletedRaw = localStorage.getItem("deleted_blog_slugs");
+              const deletedSlugs = deletedRaw ? JSON.parse(deletedRaw) : [];
+              const newDeleted = Array.from(new Set([...deletedSlugs, deletedBlog.slug, deletedBlog._id]));
+              localStorage.setItem("deleted_blog_slugs", JSON.stringify(newDeleted));
+            } catch (e) {
+              console.error("Failed to update deleted_blog_slugs upon deletion:", e);
+            }
+          }
+          setBlogs(b => b.filter(x => x._id !== deletingId));
+          localStorage.removeItem('ts_cache_blogs_list');
+        }
         showToast(`${activeTab === 'projects' ? 'Project' : 'Blog'} deleted successfully`);
       } else {
         alert(data.message || 'Delete failed');
@@ -277,6 +312,7 @@ export default function AdminDashboard() {
       } else {
         setProjects(p => [project, ...p]);
       }
+      localStorage.removeItem('ts_cache_projects_list');
     } else {
       const blog = item as Blog;
       if (isEdit) {
@@ -284,6 +320,9 @@ export default function AdminDashboard() {
       } else {
         setBlogs(b => [blog, ...b]);
       }
+      localStorage.removeItem('ts_cache_blogs_list');
+      localStorage.removeItem(`ts_cache_blog_detail_${blog.slug}`);
+      localStorage.removeItem(`ts_cache_blog_detail_${blog._id}`);
     }
     setShowForm(false);
     setEditItem(null);

@@ -1,6 +1,10 @@
 
 
 import { Link } from "react-router-dom";
+import ciSolarImg from "../../assets/solar-panel-installation-in-mumbai.jpg";
+import ciSolarImg2 from "../../assets/solar-panel-installation-near-me.jpg";
+import ciSolarImg3 from "../../assets/carbon-footprinting-services-in-mumbai.jpg";
+
 import {
   ChevronRight,
 
@@ -38,7 +42,7 @@ export default function ServicesPage() {
           <ServiceCard
             title="C&I Rooftop Solar"
             desc="Optimised solar for factories, warehouses and offices."
-            img="https://d382rz2cea0pah.cloudfront.net/wp-content/uploads/2023/05/Untitled-design-2023-05-12T100356.968-1.jpg"
+            img={ciSolarImg}
             alt="solar panel installation in mumbai"
             imageUrl="solar-panel-installation-in-mumbai"
             link="/services/rooftop/C&I"
@@ -54,7 +58,7 @@ export default function ServicesPage() {
           <ServiceCard
             title="Residential Rooftop Solar"
             desc="Clean, safe rooftop solar for homes and villas."
-            img="https://www.teriin.org/sites/default/files/inline-images/rooftop-solar1.jpg"
+            img={ciSolarImg2}
             alt="solar panel installation near me"
             imageUrl="solar-panel-installation-near-me"
             link="/services/rooftop/residential"
@@ -70,7 +74,7 @@ export default function ServicesPage() {
           <ServiceCard
             title="Carbon Footprinting & Consulting"
             desc="Track CO₂ reduction and align with ESG goals."
-            img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEJFOe8Nxg95cNm1y3TJ5QgWjdDSRvibM1vg&s"
+            img={ciSolarImg3}
             alt="carbon footprinting services in mumbai"
             imageUrl="carbon-footprinting-services-in-mumbai"
             link="/services/consulting/carbon-footprinting"

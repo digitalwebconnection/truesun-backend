@@ -1,9 +1,8 @@
 import { motion} from "framer-motion";
 import {  Users } from "lucide-react";
+import careerHeroImg from "../../assets/build-your-career-in-solar-energy.webp";
 
 export default function CareersPage() {
-
-
   return (
     <>
       {/* ================= HERO SECTION ================= */}
@@ -68,15 +67,14 @@ export default function CareersPage() {
           >
             <div className="overflow-hidden rounded-3xl shadow-xl">
               <img
-                src="https://www.solluz.co.in/wp-content/uploads/elementor/thumbs/ISGEC-1000-kWp-Solar-Installation-r1ojv2y6dyldh5z7zp0buoq3bf3cb5t432k0dv4ya0.webp"
-                alt="Solar Project"
+                src={careerHeroImg}
+                alt="build your career in solar energy"
                 className="h-[400px] w-full object-cover"
               />
             </div>
           </motion.div>
         </div>
       </section>
-
     </>
   );
 }

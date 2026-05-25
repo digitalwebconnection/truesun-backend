@@ -5,7 +5,7 @@ import {
   CreditCard,
   Percent,
 } from "lucide-react";
-import heroImage from "../../assets/pexels-gustavo-fring-4254172.jpg";
+import heroImage from "../../assets/affordable-solar-panel-financing.jpg";
 
 interface BenefitItemProps {
   title: string;

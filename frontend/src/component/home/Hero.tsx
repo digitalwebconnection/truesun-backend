@@ -6,8 +6,8 @@ import i3 from "../../assets/Kalpataru Estate CHS Limited/6.jpeg";
 import i4 from "../../assets/Ganesh kung/4.png";
 import i5 from "../../assets/Kruti Promotions/1.jpg";
 import i6 from "../../assets/Landmrk Pllatinum/6.jpeg";
-import i7 from "../../assets/Oberoi Realty//3.png";
-import i8 from "../../assets/PCI Rentokill/1.jpg";
+import i7 from "../../assets/Oberoi Realty/3.png";
+import i8 from "../../assets/PCI Rentokill/best-rooftop-solar-company-in-mumbai.jpg";
 import i9 from "../../assets/Rustomjee virar/5.png";
 
 const slideInfo = [
@@ -97,10 +97,6 @@ export default function HeroSection() {
                   <a
                     key={i}
                     href="/best-rooftop-solar-company-in-mumbai"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute inset-0 block"
-                    style={style}
                   >
                     <img
                       src={slide.src}

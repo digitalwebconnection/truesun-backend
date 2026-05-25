@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { Clock, AlertCircle, RefreshCw } from "lucide-react";
 import { apiUrl } from "../../lib/api";
 import { fetchWithRetry } from "../../lib/fetchWithRetry";
-import { cacheGet, cacheGetStale, cacheSet } from "../../lib/dataCache";
+import { cacheSet } from "../../lib/dataCache";
+import { staticBlogs } from "../../lib/staticBlogs";
 
 const CACHE_KEY = "blogs_list";
 
@@ -17,59 +18,102 @@ interface Blog {
   date: string;
   image: string;
   content: string;
+  isStatic?: boolean;
 }
 
 const BlogPage = () => {
-  // Immediately seed state from stale cache so something renders on first paint
-  const [blogs, setBlogs] = useState<Blog[]>(() => cacheGetStale<Blog[]>(CACHE_KEY) ?? []);
-  const [loading, setLoading] = useState(() => {
-    // If we have ANY cached data (even stale) we don't show full skeleton
-    return (cacheGetStale<Blog[]>(CACHE_KEY) ?? []).length === 0;
+  // Initialize blogs with clicked blogs from localStorage + static blogs
+  const [blogs, setBlogs] = useState<Blog[]>(() => {
+    try {
+      const raw = localStorage.getItem("clicked_blogs");
+      const clicked: Blog[] = raw ? JSON.parse(raw) : [];
+      
+      const deletedRaw = localStorage.getItem("deleted_blog_slugs");
+      const deletedSlugs: string[] = deletedRaw ? JSON.parse(deletedRaw) : [];
+      const activeClicked = clicked.filter(b => !deletedSlugs.includes(b.slug) && !deletedSlugs.includes(b._id));
+
+      const combined = [...activeClicked];
+      staticBlogs.forEach(sb => {
+        if (!combined.some(cb => cb.slug === sb.slug || cb._id === sb._id)) {
+          combined.push(sb as any);
+        }
+      });
+      return combined;
+    } catch {
+      return staticBlogs as any;
+    }
   });
+
+  const [loading, setLoading] = useState(false); // Direct render of initialBlogs, no skeleton
   const [error, setError] = useState("");
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(true);
   const hasFetched = useRef(false);
 
   useEffect(() => {
     if (hasFetched.current) return;
     hasFetched.current = true;
 
-    const stale = cacheGetStale<Blog[]>(CACHE_KEY) ?? [];
-    const fresh = cacheGet<Blog[]>(CACHE_KEY); // null if expired
+    setIsRefreshing(true);
 
-    // If cache is still fresh, no need to re-fetch
-    if (fresh && fresh.length > 0) {
-      setBlogs(fresh);
-      setLoading(false);
-      return;
-    }
-
-    // We have stale data → show it immediately, refresh silently in background
-    if (stale.length > 0) {
-      setBlogs(stale);
-      setLoading(false);
-      setIsRefreshing(true);
-    }
-
-    fetchWithRetry(apiUrl("/api/blogs"))
+    fetchWithRetry(apiUrl("/api/blogs"), { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
         if (data.success && Array.isArray(data.data)) {
           setBlogs(data.data);
           cacheSet(CACHE_KEY, data.data);
           setError("");
+
+          // Clean up deleted blogs from clicked_blogs in localStorage
+          try {
+            const raw = localStorage.getItem("clicked_blogs");
+            if (raw) {
+              const clicked: Blog[] = JSON.parse(raw);
+              const freshBlogs = data.data;
+
+              // Filter out clicked blogs that are no longer in freshBlogs
+              const updatedClicked = clicked.filter(cb => {
+                if (cb._id.startsWith("static-")) return true;
+                return freshBlogs.some((fb: Blog) => fb._id === cb._id || fb.slug === cb.slug);
+              });
+              localStorage.setItem("clicked_blogs", JSON.stringify(updatedClicked));
+
+              // Record deleted slugs/IDs to avoid showing them
+              const deletedSlugs: string[] = [];
+              clicked.forEach(cb => {
+                if (!cb._id.startsWith("static-")) {
+                  const exists = freshBlogs.some((fb: Blog) => fb._id === cb._id || fb.slug === cb.slug);
+                  if (!exists) {
+                    deletedSlugs.push(cb.slug);
+                    deletedSlugs.push(cb._id);
+                    localStorage.removeItem(`ts_cache_blog_detail_${cb.slug}`);
+                    localStorage.removeItem(`ts_cache_blog_detail_${cb._id}`);
+                  }
+                }
+              });
+
+              if (deletedSlugs.length > 0) {
+                const existingDeletedRaw = localStorage.getItem("deleted_blog_slugs");
+                const existingDeleted: string[] = existingDeletedRaw ? JSON.parse(existingDeletedRaw) : [];
+                const newDeleted = Array.from(new Set([...existingDeleted, ...deletedSlugs]));
+                localStorage.setItem("deleted_blog_slugs", JSON.stringify(newDeleted));
+              }
+            }
+          } catch (e) {
+            console.error("Error updating clicked_blogs storage:", e);
+          }
         } else {
-          if (stale.length === 0) setError(data.message ?? "Failed to load blogs.");
+          // If fetch fails, we just keep displaying static / clicked blogs
+          console.warn("Could not fetch fresh blogs:", data.message);
         }
       })
-      .catch(() => {
-        if (stale.length === 0) setError("Could not reach server. Please try again.");
+      .catch((err) => {
+        console.error("Error fetching fresh blogs:", err);
       })
       .finally(() => {
-        setLoading(false);
         setIsRefreshing(false);
       });
   }, []);
+
 
   return (
     <>
@@ -132,6 +176,19 @@ const BlogPage = () => {
                 to={`/Knowledgwe/${post.slug || post._id}`}
                 key={post._id}
                 className="group"
+                onClick={() => {
+                  if (!post.isStatic) {
+                    try {
+                      const raw = localStorage.getItem("clicked_blogs");
+                      let clicked: Blog[] = raw ? JSON.parse(raw) : [];
+                      clicked = clicked.filter(b => b.slug !== post.slug && b._id !== post._id);
+                      clicked.unshift(post);
+                      localStorage.setItem("clicked_blogs", JSON.stringify(clicked));
+                    } catch (e) {
+                      console.error("Failed to store clicked blog:", e);
+                    }
+                  }
+                }}
               >
                 <div className="rounded-xl border border-gray-200 bg-white shadow-md hover:shadow-2xl transition-all duration-300 h-full flex flex-col overflow-hidden">
                   <div className="overflow-hidden">
