@@ -62,27 +62,19 @@ const BlogDetails = () => {
       console.error("Error reading deleted blog slugs:", e);
     }
 
-    // Check if it's a static dummy blog first
-    const staticMatch = staticBlogs.find((sb) => sb.slug === slug);
-    if (staticMatch) {
-      setBlog(staticMatch as any);
-      setLoading(false);
-      setIsRefreshing(false);
-      setError("");
-      return;
-    }
-
+    // Seed UI from stale cache or static matching blogs first for instant paint
     const stale = cacheGetStale<Blog>(cacheKey);
+    const staticMatch = staticBlogs.find((sb) => sb.slug === slug);
+    const initialBlog = stale || staticMatch;
 
-    // Seed UI with whatever we have from cache first
-    if (stale) {
-      setBlog(stale);
+    if (initialBlog) {
+      setBlog(initialBlog as any);
       setLoading(false);
     }
 
     // Refresh in background to ensure it is still active and up-to-date
-    setIsRefreshing(!!stale);
-    if (!stale) setLoading(true);
+    setIsRefreshing(!!initialBlog);
+    if (!initialBlog) setLoading(true);
 
     const isObjectId = /^[a-f\d]{24}$/i.test(slug || '');
     const endpoint   = isObjectId
@@ -97,14 +89,23 @@ const BlogDetails = () => {
           cacheSet(cacheKey, data.data);
           setError("");
         } else {
-          // If the server explicitly says success=false (e.g. blog deleted), we must clear the cache and show the error!
-          localStorage.removeItem(`ts_cache_${cacheKey}`);
-          setBlog(null);
-          setError(data.message ?? "Blog post not found.");
+          // If the server explicitly says success=false (e.g. blog not in db or deleted)
+          if (staticMatch) {
+            // Keep displaying the static dummy content since it's a known static blog
+            setBlog(staticMatch as any);
+            setError("");
+          } else {
+            // It's a genuine 404 for a dynamic blog
+            localStorage.removeItem(`ts_cache_${cacheKey}`);
+            setBlog(null);
+            setError(data.message ?? "Blog post not found.");
+          }
         }
       })
       .catch(() => {
-        if (!stale) setError("Failed to load blog post. Please try again later.");
+        if (!initialBlog) {
+          setError("Failed to load blog post. Please try again later.");
+        }
       })
       .finally(() => {
         setLoading(false);

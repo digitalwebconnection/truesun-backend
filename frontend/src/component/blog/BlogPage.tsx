@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Clock, AlertCircle, RefreshCw } from "lucide-react";
 import { apiUrl } from "../../lib/api";
 import { fetchWithRetry } from "../../lib/fetchWithRetry";
-import { cacheSet } from "../../lib/dataCache";
+import { cacheGetStale, cacheSet } from "../../lib/dataCache";
 import { staticBlogs } from "../../lib/staticBlogs";
 
 const CACHE_KEY = "blogs_list";
@@ -22,23 +22,35 @@ interface Blog {
 }
 
 const BlogPage = () => {
-  // Initialize blogs with clicked blogs from localStorage + static blogs
+  // Initialize blogs with cached list if exists, otherwise clicked blogs + static blogs
   const [blogs, setBlogs] = useState<Blog[]>(() => {
     try {
+      // 1. Try to load the full cached dynamic blogs list first (if user is returning / navigating back)
+      const cachedList = cacheGetStale<Blog[]>(CACHE_KEY);
+      if (cachedList && cachedList.length > 0) {
+        return cachedList;
+      }
+
+      // 2. Fall back to static blogs + clicked blogs hybrid list on very first load
+      const list = [...staticBlogs] as any[];
       const raw = localStorage.getItem("clicked_blogs");
-      const clicked: Blog[] = raw ? JSON.parse(raw) : [];
+      const clickedData = raw ? JSON.parse(raw) : [];
       
       const deletedRaw = localStorage.getItem("deleted_blog_slugs");
       const deletedSlugs: string[] = deletedRaw ? JSON.parse(deletedRaw) : [];
-      const activeClicked = clicked.filter(b => !deletedSlugs.includes(b.slug) && !deletedSlugs.includes(b._id));
 
-      const combined = [...activeClicked];
-      staticBlogs.forEach(sb => {
-        if (!combined.some(cb => cb.slug === sb.slug || cb._id === sb._id)) {
-          combined.push(sb as any);
-        }
-      });
-      return combined;
+      if (Array.isArray(clickedData)) {
+        clickedData.forEach((item) => {
+          if (item && typeof item === "object" && "blog" in item && "index" in item) {
+            const b = item.blog;
+            const idx = item.index;
+            if (idx >= 0 && idx < list.length && !deletedSlugs.includes(b.slug) && !deletedSlugs.includes(b._id)) {
+              list[idx] = b;
+            }
+          }
+        });
+      }
+      return list;
     } catch {
       return staticBlogs as any;
     }
@@ -67,29 +79,46 @@ const BlogPage = () => {
           try {
             const raw = localStorage.getItem("clicked_blogs");
             if (raw) {
-              const clicked: Blog[] = JSON.parse(raw);
+              const clickedData = JSON.parse(raw);
               const freshBlogs = data.data;
 
-              // Filter out clicked blogs that are no longer in freshBlogs
-              const updatedClicked = clicked.filter(cb => {
-                if (cb._id.startsWith("static-")) return true;
-                return freshBlogs.some((fb: Blog) => fb._id === cb._id || fb.slug === cb.slug);
-              });
-              localStorage.setItem("clicked_blogs", JSON.stringify(updatedClicked));
+              if (Array.isArray(clickedData)) {
+                // Filter out clicked blogs that are no longer in freshBlogs, and update their index
+                const updatedClicked = clickedData
+                  .map((item) => {
+                    if (item && typeof item === "object" && "blog" in item && "index" in item) {
+                      const cb = item.blog;
+                      if (cb._id.startsWith("static-")) return item;
+                      const freshIndex = freshBlogs.findIndex((fb: Blog) => fb._id === cb._id || fb.slug === cb.slug);
+                      if (freshIndex !== -1) {
+                        return { blog: freshBlogs[freshIndex], index: freshIndex };
+                      }
+                    }
+                    return null;
+                  })
+                  .filter(Boolean);
+
+                localStorage.setItem("clicked_blogs", JSON.stringify(updatedClicked));
+              }
 
               // Record deleted slugs/IDs to avoid showing them
               const deletedSlugs: string[] = [];
-              clicked.forEach(cb => {
-                if (!cb._id.startsWith("static-")) {
-                  const exists = freshBlogs.some((fb: Blog) => fb._id === cb._id || fb.slug === cb.slug);
-                  if (!exists) {
-                    deletedSlugs.push(cb.slug);
-                    deletedSlugs.push(cb._id);
-                    localStorage.removeItem(`ts_cache_blog_detail_${cb.slug}`);
-                    localStorage.removeItem(`ts_cache_blog_detail_${cb._id}`);
+              if (Array.isArray(clickedData)) {
+                clickedData.forEach((item) => {
+                  if (item && typeof item === "object" && "blog" in item) {
+                    const cb = item.blog;
+                    if (!cb._id.startsWith("static-")) {
+                      const exists = freshBlogs.some((fb: Blog) => fb._id === cb._id || fb.slug === cb.slug);
+                      if (!exists) {
+                        deletedSlugs.push(cb.slug);
+                        deletedSlugs.push(cb._id);
+                        localStorage.removeItem(`ts_cache_blog_detail_${cb.slug}`);
+                        localStorage.removeItem(`ts_cache_blog_detail_${cb._id}`);
+                      }
+                    }
                   }
-                }
-              });
+                });
+              }
 
               if (deletedSlugs.length > 0) {
                 const existingDeletedRaw = localStorage.getItem("deleted_blog_slugs");
@@ -171,7 +200,7 @@ const BlogPage = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-10">
-            {blogs.map((post) => (
+            {blogs.map((post, index) => (
               <Link
                 to={`/Knowledgwe/${post.slug || post._id}`}
                 key={post._id}
@@ -180,9 +209,9 @@ const BlogPage = () => {
                   if (!post.isStatic) {
                     try {
                       const raw = localStorage.getItem("clicked_blogs");
-                      let clicked: Blog[] = raw ? JSON.parse(raw) : [];
-                      clicked = clicked.filter(b => b.slug !== post.slug && b._id !== post._id);
-                      clicked.unshift(post);
+                      let clicked: { blog: Blog; index: number }[] = raw ? JSON.parse(raw) : [];
+                      clicked = clicked.filter(item => item.blog.slug !== post.slug && item.blog._id !== post._id);
+                      clicked.push({ blog: post, index });
                       localStorage.setItem("clicked_blogs", JSON.stringify(clicked));
                     } catch (e) {
                       console.error("Failed to store clicked blog:", e);
