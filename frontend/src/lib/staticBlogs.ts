@@ -20,7 +20,7 @@ export const staticBlogs: StaticBlog[] = [
     readTime: "7 min",
     date: "May 25, 2026",
     excerpt: "Looking for Solar Installation Near Me? Discover how long Solar Installation in Mumbai takes, including approvals, setup, and activation timelines.",
-    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=600&q=80",
+    image: "/media__1779702063029.png",
     content: `
       <h2>Understanding the Solar Installation Timeline</h2>
       <p>Switching to solar energy is a significant step toward sustainability and cost savings. One of the most common questions homeowners and business owners ask is: <strong>How long does a solar panel installation take?</strong></p>
@@ -50,7 +50,7 @@ export const staticBlogs: StaticBlog[] = [
     readTime: "7 min",
     date: "May 24, 2026",
     excerpt: "Discover how much you can save on electricity bills with residential solar panel installation in Mumbai flats. Learn about costs, savings potential (up to 90%), system options, and government subsidies that make solar a smart and sustainable investment for homeowners.",
-    image: "https://images.unsplash.com/photo-1613665813446-82a78c468a1d?auto=format&fit=crop&w=600&q=80",
+    image: "/media__1779702063205.jpg",
     content: `
       <h2>Solar Savings for Mumbai Apartment Owners</h2>
       <p>Living in a Mumbai flat doesn't mean you can't enjoy the benefits of solar energy. With rising tariff rates, residential solar panel installations are becoming highly attractive for housing societies and flat owners who have access to shared roof space.</p>
@@ -71,7 +71,7 @@ export const staticBlogs: StaticBlog[] = [
     readTime: "8 min",
     date: "May 22, 2026",
     excerpt: "It is essential to understand the amount of energy that a 100kW solar system produces because many businesses and other entities who have considered switching to solar energy are currently in the lookout of a reliable Solar Energy Company.",
-    image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=600&q=80",
+    image: "/media__1779702091935.jpg",
     content: `
       <h2>The Output Capacity of a 100kW Solar System</h2>
       <p>For commercial facilities, medium-sized industries, and large residential complexes, a 100kW solar system is a common sweet spot. But what does a 100kW system actually deliver in terms of power output?</p>
@@ -86,13 +86,31 @@ export const staticBlogs: StaticBlog[] = [
   },
   {
     _id: "static-4",
+    slug: "green-credits-promising-programme-if-done-right",
+    title: "Green Credits – Promising Programme if Done Right",
+    categories: "Renewable Energy",
+    readTime: "5 min",
+    date: "May 20, 2026",
+    excerpt: "Explore India’s Green Credit Programme and how it promotes sustainable actions through incentives.",
+    image: "/media__1779702092028.jpg",
+    content: `
+      <h2>The Concept of Green Credits</h2>
+      <p>India's Green Credit Programme is an innovative initiative designed to incentivize voluntary environmental actions across various sectors. Unlike traditional carbon markets, which focus exclusively on greenhouse gas emissions, Green Credits reward activities like tree plantation, water conservation, and sustainable agriculture.</p>
+      
+      <h3>Why Implementation Matters</h3>
+      <p>For the programme to succeed, robust verification methodologies and transparent registries are essential. Done right, it can unlock massive public and private capital for environmental restoration.</p>
+    `,
+    isStatic: true
+  },
+  {
+    _id: "static-5",
     slug: "how-much-can-industries-save-with-solar-in-mumbai",
     title: "How much can industries save with solar in Mumbai?",
     categories: "Energy Cost Savings",
     readTime: "8 min",
-    date: "May 20, 2026",
+    date: "May 18, 2026",
     excerpt: "Increasing rates of power bills have been causing serious trouble for many industries operating in Mumbai, as it raises their expenditure as well as reduces their profit margins",
-    image: "https://images.unsplash.com/photo-1548613053-220efc6202f9?auto=format&fit=crop&w=600&q=80",
+    image: "/media__1779702092139.jpg",
     content: `
       <h2>Industrial Solar Savings in Mumbai</h2>
       <p>Industries in Mumbai and surrounding industrial areas (like Thane, Taloja, and Rabale) face some of the highest commercial electricity tariffs in India. Transitioning to solar is no longer just a green initiative—it is a critical strategy for financial competitiveness.</p>
@@ -103,14 +121,14 @@ export const staticBlogs: StaticBlog[] = [
     isStatic: true
   },
   {
-    _id: "static-5",
+    _id: "static-6",
     slug: "why-businesses-are-switching-to-solar-energy-in-2026",
     title: "Why Businesses Are Switching to Solar Energy in 2026",
     categories: "Solar Energy for Businesses",
     readTime: "7 min",
-    date: "May 18, 2026",
+    date: "May 15, 2026",
     excerpt: "Discover why businesses are rapidly adopting solar energy in 2026 to reduce costs, improve efficiency, and achieve sustainability goals.",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+    image: "/media__1779702321280.jpg",
     content: `
       <h2>The Corporate Shift to Solar in 2026</h2>
       <p>In 2026, corporate sustainability targets are stricter than ever. Beyond corporate social responsibility (CSR), financial pragmatism is driving businesses of all sizes to install on-site solar systems.</p>
@@ -121,38 +139,20 @@ export const staticBlogs: StaticBlog[] = [
     isStatic: true
   },
   {
-    _id: "static-6",
+    _id: "static-7",
     slug: "how-solar-panels-empower-hospitals",
     title: "How Solar Panels Empower Hospitals?",
     categories: "Solar for Healthcare",
     readTime: "5 min",
-    date: "May 15, 2026",
+    date: "May 12, 2026",
     excerpt: "Discover how hospitals reduce costs and improve sustainability using rooftop solar systems.",
-    image: "https://images.unsplash.com/photo-1586773860418-d3b3de97e963?auto=format&fit=crop&w=600&q=80",
+    image: "/media__1779702321035.jpg",
     content: `
-      <h2>Solar Energy: A Lifeline for Healthcare Facilities</h2>
+      <h2>Source of Reliability for Healthcare</h2>
       <p>Hospitals and clinics require continuous, uninterrupted power 24/7. However, the high power consumption of HVAC systems, MRI machines, ventilators, and lighting leads to sky-high utility costs.</p>
       
       <h3>Reliable Backup and Reduced Overhead</h3>
       <p>By pairing solar panels with battery storage or combining them with generator sets (hybrid systems), hospitals can safeguard critical operations while cutting down their base electricity expenditure. The money saved on utilities can be directly reinvested in patient care and advanced medical equipment.</p>
-    `,
-    isStatic: true
-  },
-  {
-    _id: "static-7",
-    slug: "green-credits-promising-programme-if-done-right",
-    title: "Green Credits – Promising Programme if Done Right",
-    categories: "Renewable Energy",
-    readTime: "5 min",
-    date: "May 12, 2026",
-    excerpt: "Explore India’s Green Credit Programme and how it promotes sustainable actions through incentives.",
-    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
-    content: `
-      <h2>The Concept of Green Credits</h2>
-      <p>India's Green Credit Programme is an innovative initiative designed to incentivize voluntary environmental actions across various sectors. Unlike traditional carbon markets, which focus exclusively on greenhouse gas emissions, Green Credits reward activities like tree plantation, water conservation, and sustainable agriculture.</p>
-      
-      <h3>Why Implementation Matters</h3>
-      <p>For the programme to succeed, robust verification methodologies and transparent registries are essential. Done right, it can unlock massive public and private capital for environmental restoration.</p>
     `,
     isStatic: true
   },
@@ -164,7 +164,7 @@ export const staticBlogs: StaticBlog[] = [
     readTime: "7 min",
     date: "May 10, 2026",
     excerpt: "Understand how Article 6 enables global carbon trading and international cooperation for emission reduction.",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80",
+    image: "/media__1779702321282.jpg",
     content: `
       <h2>Demystifying Article 6 of the Paris Agreement</h2>
       <p>Article 6 of the Paris Agreement is one of the most critical and complex parts of the global climate treaty. It allows countries to cooperate voluntarily to meet their emission reduction targets (NDCs) using international carbon markets.</p>
