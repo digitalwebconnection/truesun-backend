@@ -13,6 +13,7 @@ import {
 import { apiUrl } from "../../lib/api";
 import { fetchWithRetry } from "../../lib/fetchWithRetry";
 import { cacheGetStale, cacheSet } from "../../lib/dataCache";
+import { staticProjects } from "../../lib/staticProjects";
 
 const CACHE_KEY = "projects_list";
 
@@ -117,28 +118,32 @@ function InfoCard({
 
 /* ──────────────────── Main Page ──────────────────── */
 export default function ProjectShowcasePage() {
-  // Seed state instantly from stale cache so something renders on first paint
-  const [projects, setProjects]       = useState<Project[]>(() => cacheGetStale<Project[]>(CACHE_KEY) ?? []);
+  // Seed state instantly from stale cache or staticProjects so something renders on first paint
+  const [projects, setProjects]       = useState<Project[]>(() => {
+    try {
+      const cachedList = cacheGetStale<Project[]>(CACHE_KEY);
+      if (cachedList && cachedList.length > 0) {
+        return cachedList;
+      }
+      return staticProjects as any[];
+    } catch {
+      return staticProjects as any[];
+    }
+  });
   const [activeIndex, setActiveIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [, setModalProject]           = useState<Project | null>(null);
-  const [loading, setLoading]         = useState(() => (cacheGetStale<Project[]>(CACHE_KEY) ?? []).length === 0);
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [loading, setLoading]         = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(true);
   const hasFetched = useRef(false);
+  const detailSectionRef = useRef<HTMLDivElement>(null);
 
   /* ── Stale-while-revalidate fetch ── */
   useEffect(() => {
     if (hasFetched.current) return;
     hasFetched.current = true;
 
-    const stale = cacheGetStale<Project[]>(CACHE_KEY) ?? [];
-
-    // Show cached data immediately, then silently refresh in the background
-    if (stale.length > 0) {
-      setProjects(stale);
-      setLoading(false);
-      setIsRefreshing(true);
-    }
+    setIsRefreshing(true);
 
     fetchWithRetry(apiUrl("/api/projects"), { cache: "no-store" })
       .then(r => r.json())
@@ -203,6 +208,7 @@ export default function ProjectShowcasePage() {
     setActiveIndex(index);
     setModalProject(project);
     setIsModalOpen(true);
+    detailSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   if (!loading && !activeProject) return null;
@@ -281,7 +287,7 @@ export default function ProjectShowcasePage() {
       ) : (
         <>
       {/* Active project hero + side stats */}
-      <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
+      <div ref={detailSectionRef} className="scroll-mt-24 mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
         {/* Hero */}
         <motion.div
           key={activeProject.name}
@@ -359,7 +365,7 @@ export default function ProjectShowcasePage() {
                 key={project._id ?? project.name}
                 type="button"
                 onClick={() => openModalForProject(project, index)}
-                className={`group relative flex w-full flex-col overflow-hidden rounded-2xl border bg-white text-left shadow-sm transition-all duration-300 ${
+                className={`group relative cursor-pointer flex w-full flex-col overflow-hidden rounded-2xl border bg-white text-left shadow-sm transition-all duration-300 ${
                   isActive
                     ? "border-sky-500 ring-2 ring-sky-500/20 scale-[1.02] z-10"
                     : "border-slate-200 hover:border-sky-400 hover:shadow-xl hover:-translate-y-1"
