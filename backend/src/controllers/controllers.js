@@ -67,6 +67,18 @@ async function destroyCloudinaryImage(url) {
     console.warn('⚠️  Could not delete Cloudinary image:', err.message);
   }
 }
+// Convert a Cloudinary URL to the backend proxy path used by the frontend
+function convertCloudinaryUrl(url) {
+  if (!url) return '';
+  const cloudinaryDomain = 'res.cloudinary.com';
+  if (url.includes(cloudinaryDomain)) {
+    const match = url.match(/\/upload\/([^?]+)(\\?.*)?$/);
+    if (match) {
+      return `/api/blogs/image/${match[1]}`;
+    }
+  }
+  return url;
+}
 
 // ─── PROJECT CONTROLLERS ──────────────────────────────────────────────────────
 
@@ -205,7 +217,8 @@ const getBlogById = async (req, res) => {
 const createBlog = async (req, res) => {
   try {
     const { body } = req;
-    const imageUrl = req.cloudinaryFile ? req.cloudinaryFile.secure_url : (body.image || '');
+    const rawUrl = req.cloudinaryFile ? req.cloudinaryFile.secure_url : (body.image || '');
+    const imageUrl = convertCloudinaryUrl(rawUrl);
 
     const title = body.title || '';
     const slug  = await generateUniqueSlug(title);
@@ -248,9 +261,9 @@ const updateBlog = async (req, res) => {
 
     if (req.cloudinaryFile) {
       await destroyCloudinaryImage(blog.image);
-      blog.image = req.cloudinaryFile.secure_url;
+      blog.image = convertCloudinaryUrl(req.cloudinaryFile.secure_url);
     } else if (body.image !== undefined) {
-      blog.image = body.image;
+      blog.image = convertCloudinaryUrl(body.image);
     }
 
     const scalars = ['title', 'excerpt', 'categories', 'readTime', 'date', 'content'];
@@ -290,6 +303,39 @@ const deleteBlog = async (req, res) => {
   }
 };
 
+/** GET /api/blogs/image/* — proxy Cloudinary image through backend */
+const getBlogImageProxy = async (req, res) => {
+  try {
+    const filePath = req.params[0];
+    if (!filePath) {
+      return res.status(400).send('Image path is required');
+    }
+    const cloudName = process.env.CLOUDINARY_CLOUD_NAME || 'dyyv00jvc';
+    const cloudinaryUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${filePath}`;
+
+    const response = await fetch(cloudinaryUrl);
+    if (!response.ok) {
+      return res.status(response.status).send('Error fetching image from storage');
+    }
+
+    const contentType = response.headers.get('content-type');
+    if (contentType) {
+      res.setHeader('Content-Type', contentType);
+    }
+    const cacheControl = response.headers.get('cache-control');
+    if (cacheControl) {
+      res.setHeader('Cache-Control', cacheControl);
+    }
+
+    const arrayBuffer = await response.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    res.send(buffer);
+  } catch (err) {
+    console.error('Error proxying image:', err);
+    res.status(500).send('Internal server error');
+  }
+};
+
 // ─── Exports ──────────────────────────────────────────────────────────────────
 module.exports = {
   // Projects
@@ -305,4 +351,6 @@ module.exports = {
   createBlog,
   updateBlog,
   deleteBlog,
+  getBlogImageProxy,
 };
+

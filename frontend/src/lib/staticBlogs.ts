@@ -20,7 +20,7 @@ export const staticBlogs: StaticBlog[] = [
     readTime: "7 min",
     date: "May 25, 2026",
     excerpt: "Looking for Solar Installation Near Me? Discover how long Solar Installation in Mumbai takes, including approvals, setup, and activation timelines.",
-    image: "/media__1779702063029.png",
+    image: "/how-long-does-a-solar-panel-installation-take.png",
     content: `
       <h2>Understanding the Solar Installation Timeline</h2>
       <p>Switching to solar energy is a significant step toward sustainability and cost savings. One of the most common questions homeowners and business owners ask is: <strong>How long does a solar panel installation take?</strong></p>

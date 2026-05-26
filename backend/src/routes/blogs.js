@@ -8,11 +8,13 @@ const {
   createBlog,
   updateBlog,
   deleteBlog,
+  getBlogImageProxy,
 } = require('../controllers/controllers');
 
 // ─── Routes ──────────────────────────────────────────────────────────────────
 router.get('/',              getAllBlogs);
 router.get('/slug/:slug',    getBlogBySlug);   // must be BEFORE /:id
+router.get('/image/*',       getBlogImageProxy); // must be BEFORE /:id
 router.get('/:id',           getBlogById);
 router.post('/',             handleImageUpload('truesun/blogs'), createBlog);
 router.put('/:id',           handleImageUpload('truesun/blogs'), updateBlog);

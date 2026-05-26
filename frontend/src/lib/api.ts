@@ -52,3 +52,32 @@ export function warmUpBackend(): void {
   // Ping immediately, then retry up to 3 times (2s, 4s, 8s gaps)
   attempt(3, 2000);
 }
+
+/**
+ * Resolves a blog/project image URL. If it's a Cloudinary URL,
+ * it routes it through the backend proxy to hide the Cloudinary origin.
+ */
+export function getImageUrl(url: string): string {
+  if (!url) return '';
+  // If it's a relative local URL, ensure it starts with a leading slash
+  if (!url.startsWith('http')) {
+    // Ensure the path starts with a leading slash
+    const path = url.startsWith('/') ? url : `/${url}`;
+    // Prepend the current origin so the URL is absolute (e.g. http://localhost:5173/api/blogs/image/...)
+    return `${window.location.origin}${path}`;
+  }
+
+  // Convert Cloudinary URLs to site‑relative proxy path
+  // Example: https://res.cloudinary.com/<cloud>/image/upload/v12345/truesun/blogs/img.jpg
+  // becomes /api/blogs/image/truesun/blogs/img.jpg
+  const cloudinaryDomain = 'res.cloudinary.com';
+  if (url.includes(cloudinaryDomain)) {
+    const match = url.match(/\/upload\/([^?]+)(\?.*)?$/);
+    if (match) {
+      // Build an absolute URL that points to our backend proxy and includes the site origin
+      return `${window.location.origin}/api/blogs/image/${match[1]}`;
+    }
+  }
+  // Fallback – return the original URL if it doesn't match Cloudinary pattern
+  return url;
+}

@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import ProjectForm, { type Project } from './ProjectForm';
 import BlogForm, { type Blog } from './BlogForm';
-import { apiUrl } from '../../lib/api';
+import { apiUrl, getImageUrl } from '../../lib/api';
 
 /* ── Palette ──────────────────────────────────────────────── */
 const CLR = {
@@ -477,7 +477,7 @@ export default function AdminDashboard() {
                         <td style={S.td}>
                           {item.image ? (
                             <img
-                              src={item.image}
+                              src={getImageUrl(item.image)}
                               alt={item.name || item.title}
                               style={S.imgThumb}
                               onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Clock, AlertCircle, RefreshCw } from "lucide-react";
-import { apiUrl } from "../../lib/api";
+import { apiUrl, getImageUrl } from "../../lib/api";
 import { fetchWithRetry } from "../../lib/fetchWithRetry";
 import { cacheGetStale, cacheSet } from "../../lib/dataCache";
 import { staticBlogs } from "../../lib/staticBlogs";
@@ -200,36 +200,40 @@ const BlogPage = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-10">
-            {blogs.map((post, index) => (
-              <Link
-                to={`/Knowledgwe/${post.slug || post._id}`}
-                key={post._id}
-                className="group"
-                onClick={() => {
-                  if (!post.isStatic) {
-                    try {
-                      const raw = localStorage.getItem("clicked_blogs");
-                      let clicked: { blog: Blog; index: number }[] = raw ? JSON.parse(raw) : [];
-                      clicked = clicked.filter(item => item.blog.slug !== post.slug && item.blog._id !== post._id);
-                      clicked.push({ blog: post, index });
-                      localStorage.setItem("clicked_blogs", JSON.stringify(clicked));
-                    } catch (e) {
-                      console.error("Failed to store clicked blog:", e);
+            {blogs.map((post, index) => {
+              const staticMatch = staticBlogs.find((sb) => sb.slug === post.slug);
+              const displayImage = getImageUrl(staticMatch ? staticMatch.image : post.image);
+              return (
+                <Link
+                  to={`/Knowledgwe/${post.slug || post._id}`}
+                  key={post._id}
+                  className="group"
+                  onClick={() => {
+                    if (!post.isStatic) {
+                      try {
+                        const raw = localStorage.getItem("clicked_blogs");
+                        let clicked: { blog: Blog; index: number }[] = raw ? JSON.parse(raw) : [];
+                        clicked = clicked.filter(item => item.blog.slug !== post.slug && item.blog._id !== post._id);
+                        clicked.push({ blog: post, index });
+                        localStorage.setItem("clicked_blogs", JSON.stringify(clicked));
+                      } catch (e) {
+                        console.error("Failed to store clicked blog:", e);
+                      }
                     }
-                  }
-                }}
-              >
-                <div className="rounded-xl border border-gray-200 bg-white shadow-md hover:shadow-2xl transition-all duration-300 h-full flex flex-col overflow-hidden">
-                  <div className="overflow-hidden">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                  </div>
+                  }}
+                >
+                  <div className="rounded-xl border border-gray-200 bg-white shadow-md hover:shadow-2xl transition-all duration-300 h-full flex flex-col overflow-hidden">
+                    <div className="overflow-hidden">
+                      <img
+                        src={displayImage}
+                        alt={post.title}
+                        className="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                    </div>
 
-                  <div className="p-6 flex flex-col grow">
+                    <div className="p-6 flex flex-col grow">
+
                     <div className="flex justify-between items-center mb-4">
                       <span className="bg-slate-100 text-slate-800 font-semibold px-3 py-1 rounded-full text-[13px]">
                         {post.categories}
@@ -248,7 +252,8 @@ const BlogPage = () => {
                   </div>
                 </div>
               </Link>
-            ))}
+            );
+          })}
           </div>
         )}
       </div>

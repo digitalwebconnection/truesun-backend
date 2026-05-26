@@ -1,9 +1,9 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import LeadPopup from "../../component/LeadPopup";
 import { useState, useEffect, useRef } from "react";
 import { Clock, Calendar, ArrowLeft, Loader2, AlertCircle, RefreshCw } from "lucide-react";
 import { Helmet } from "react-helmet";
-import { apiUrl } from "../../lib/api";
+import { apiUrl, getImageUrl } from "../../lib/api";
 import { fetchWithRetry } from "../../lib/fetchWithRetry";
 import { cacheGetStale, cacheSet } from "../../lib/dataCache";
 import { staticBlogs } from "../../lib/staticBlogs";
@@ -29,7 +29,8 @@ interface Blog {
 }
 
 const BlogDetails = () => {
-  const { slug } = useParams();
+  const { slug: slugParam } = useParams();
+  const slug = slugParam ?? "";
 
   // Cache key is unique per slug so each post is cached separately
   const cacheKey = `blog_detail_${slug}`;
@@ -40,7 +41,8 @@ const BlogDetails = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError]           = useState("");
   const [openLeadPopup, setOpenLeadPopup] = useState(false);
-  const hasFetched = useRef<string | undefined>(undefined);
+  const hasFetched = useRef<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Reset when slug changes (navigating between blog posts)
@@ -48,21 +50,20 @@ const BlogDetails = () => {
     hasFetched.current = slug;
 
     // Check if the blog was deleted by the admin
-    try {
-      const deletedRaw = localStorage.getItem("deleted_blog_slugs");
-      const deletedSlugs: string[] = deletedRaw ? JSON.parse(deletedRaw) : [];
-      if (deletedSlugs.includes(slug || "")) {
-        setBlog(null);
-        setError("Blog post not found.");
-        setLoading(false);
-        setIsRefreshing(false);
-        return;
-      }
-    } catch (e) {
-      console.error("Error reading deleted blog slugs:", e);
+    const deletedRaw = localStorage.getItem("deleted_blog_slugs");
+    const deletedSlugs: string[] = deletedRaw ? JSON.parse(deletedRaw) : [];
+    if (deletedSlugs.includes(slug || "")) {
+      // Blog was deleted, navigate back to list
+      navigate('/Knowledgwe');
+      return;
     }
 
-    // Seed UI from stale cache or static matching blogs first for instant paint
+    // Early exit if slug is missing
+  if (!slug) {
+    setError('Blog not found');
+    setLoading(false);
+    return;
+  }
     const stale = cacheGetStale<Blog>(cacheKey);
     const staticMatch = staticBlogs.find((sb) => sb.slug === slug);
     const initialBlog = stale || staticMatch;
@@ -177,13 +178,17 @@ const BlogDetails = () => {
 
       <h1 className="text-4xl md:text-5xl font-bold mt-2 text-slate-900 leading-tight">{blog.title}</h1>
 
-      {blog.image && (
-        <img
-          src={blog.image}
-          alt={blog.title}
-          className="mt-8 w-full md:h-[500px] object-cover rounded-2xl shadow-lg"
-        />
-      )}
+      {(() => {
+        const staticMatch = staticBlogs.find((sb) => sb.slug === blog.slug);
+        const displayImage = getImageUrl(staticMatch ? staticMatch.image : blog.image);
+        return displayImage ? (
+          <img
+            src={displayImage}
+            alt={blog.title}
+            className="mt-8 w-full md:h-[500px] object-cover rounded-2xl shadow-lg"
+          />
+        ) : null;
+      })()}
 
       <div
         className="mt-12 text-gray-800 text-lg md:text-xl blog-content"
