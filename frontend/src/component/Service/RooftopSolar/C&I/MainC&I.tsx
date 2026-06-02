@@ -68,7 +68,7 @@ const MainCI = () => {
         />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://truesun.in//services/rooftop/C&I" />
+        <link rel="canonical" href="https://truesun.in/services/rooftop/C&I/" />
 
         {/* Open Graph */}
         <meta property="og:title" content="Commercial Solar Installation in Mumbai | Industrial Solar Company" />

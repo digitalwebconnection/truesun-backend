@@ -49,7 +49,7 @@ const bessSchema = {
 const BESS = () => {
   return (
     <>
-    <Helmet>
+      <Helmet>
         {/* Title */}
         <title>Energy Storage System Solutions | TrueSun Energy</title>
 
@@ -66,12 +66,12 @@ const BESS = () => {
         />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://truesun.in/services/rooftop/bess" />
+        <link rel="canonical" href="https://truesun.in/services/rooftop/BESS/" />
 
         {/* Open Graph */}
         <meta property="og:title" content="Energy Storage System Solutions | TrueSun Energy" />
         <meta property="og:description" content="Reliable battery energy storage systems for solar backup and uninterrupted power. Maximize efficiency with TrueSun Energy." />
-        <meta property="og:url" content="https://truesun.in/services/rooftop/bess" />
+        <meta property="og:url" content="https://truesun.in/services/rooftop/BESS/" />
         <meta property="og:type" content="website" />
 
         {/* OG Image */}
@@ -86,12 +86,12 @@ const BESS = () => {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bessSchema) }} />
       </Helmet>
 
-     <BESSHero/> 
-     <BESSSection/>
-     <BESSBenefits/>
-     <EnergyFlowSection/>
-     <OurScope/>
-     <BESSUseCases/>
+      <BESSHero />
+      <BESSSection />
+      <BESSBenefits />
+      <EnergyFlowSection />
+      <OurScope />
+      <BESSUseCases />
     </>
   )
 }

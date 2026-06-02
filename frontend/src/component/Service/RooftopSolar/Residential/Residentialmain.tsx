@@ -66,7 +66,7 @@ const Residentialmain = () => {
         />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://truesun.in/services/rooftop/residential" />
+        <link rel="canonical" href="https://truesun.in/services/rooftop/residential/" />
 
         {/* Open Graph */}
         <meta property="og:title" content="Residential Solar System in Mumbai | TrueSun Energy" />

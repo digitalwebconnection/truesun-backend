@@ -64,7 +64,7 @@ const OM = () => {
         />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://truesun.in/services/rooftop/o-and-m" />
+        <link rel="canonical" href="https://truesun.in/services/rooftop/O&M/" />
 
         {/* Open Graph */}
         <meta property="og:title" content="Solar Maintenance Services in Mumbai | TrueSun Energy" />

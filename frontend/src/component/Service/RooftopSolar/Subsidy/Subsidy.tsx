@@ -75,7 +75,7 @@ const Subsidy = () => {
         />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://truesun.in/services/rooftop/subsidy" />
+        <link rel="canonical" href="https://truesun.in/services/rooftop/Subsidy/" />
 
         {/* Open Graph */}
         <meta property="og:title" content="Solar Subsidy in India | Govt Solar Panel Subsidy & Benefits" />

@@ -64,7 +64,7 @@ const ServiceMain = () => {
         />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://truesun.in/services" />
+        <link rel="canonical" href="https://truesun.in/services/" />
 
         {/* Open Graph */}
         <meta property="og:title" content="Solar Panel Installation in Mumbai | TrueSun Energy" />

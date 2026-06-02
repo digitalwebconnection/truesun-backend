@@ -67,7 +67,7 @@ const MainAbout = () => {
         />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://truesun.in/about" />
+        <link rel="canonical" href="https://truesun.in/about/" />
 
         {/* Open Graph */}
         <meta property="og:title" content="Trusted Solar Company in Mumbai | About TrueSun Energy" />
