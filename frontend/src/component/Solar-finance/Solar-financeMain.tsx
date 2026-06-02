@@ -2,6 +2,51 @@ import SolarFinanceHero from "./HeroSolarfinance"
 import SolarFinancePage from "./SolarFinancePage"
 import { Helmet } from "react-helmet";
 
+const solarFinanceSchema = {
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
+  "@id": "https://truesun.in/solar-finance",
+  "name": "Affordable Solar Panel Financing | Install Solar with Easy EMI",
+  "url": "https://truesun.in/solar-finance",
+  "description": "Solar panel financing for home and business with EMI and loan options. Make solar affordable and enjoy long-term energy savings.",
+  "provider": {
+    "@type": "Organization",
+    "name": "TrueSun Energy",
+    "url": "https://truesun.in/",
+    "logo": "https://truesun.in/assets/truesun-BPKZEvcM.png",
+    "image": "https://truesun.in/wp-content/uploads/logo.png",
+    "telephone": "+91-88508 45149",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mumbai",
+      "addressRegion": "Maharashtra",
+      "addressCountry": "IN"
+    }
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Mumbai"
+  },
+  "serviceType": [
+    "Solar Panel Financing",
+    "Easy EMI for Solar Installation",
+    "Residential Solar Finance",
+    "Commercial Solar Loan Solutions"
+  ],
+  "keywords": [
+    "Affordable Solar Panel Financing",
+    "Install Solar with Easy EMI",
+    "Solar Loan Mumbai",
+    "Solar EMI Plans",
+    "Rooftop Solar Financing"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "INR",
+    "availability": "https://schema.org/InStock"
+  }
+};
+
 const SolarfinanceMain = () => {
   return (
     <>
@@ -37,6 +82,9 @@ const SolarfinanceMain = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Solar Panel Financing Options" />
         <meta name="twitter:description" content="Affordable EMI plans to install solar and start saving on electricity bills." />
+
+        {/* JSON-LD Schema */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(solarFinanceSchema) }} />
       </Helmet>
       <SolarFinanceHero/>
       <SolarFinancePage/>

@@ -6,6 +6,46 @@ import BESSUseCases from "./BESSUseCases"
 import EnergyFlowSection from "./EnergyFlowSection"
 import OurScope from "./OurScope"
 
+const bessSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://truesun.in/services/rooftop/BESS",
+  "name": "Energy Storage System Solutions",
+  "serviceType": "Battery Energy Storage System Services",
+  "url": "https://truesun.in/services/rooftop/BESS",
+  "description": "Energy storage system for solar power backup and energy savings. Improve efficiency and ensure uninterrupted power with battery storage solutions.",
+  "provider": {
+    "@type": "Organization",
+    "name": "TrueSun Energy",
+    "url": "https://truesun.in/",
+    "logo": "https://truesun.in/assets/truesun-BPKZEvcM.png",
+    "image": "https://truesun.in/wp-content/uploads/logo.png",
+    "telephone": "+91-88508 45149",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mumbai",
+      "addressRegion": "Maharashtra",
+      "addressCountry": "IN"
+    }
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Mumbai"
+  },
+  "keywords": [
+    "Energy Storage System Solutions",
+    "Battery Energy Storage System",
+    "BESS Solutions Mumbai",
+    "Solar Battery Storage Mumbai",
+    "Commercial Energy Storage Solutions"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "INR",
+    "availability": "https://schema.org/InStock"
+  }
+};
+
 const BESS = () => {
   return (
     <>
@@ -41,6 +81,9 @@ const BESS = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Energy Storage System Solutions" />
         <meta name="twitter:description" content="Advanced battery storage solutions for solar power backup and energy savings." />
+
+        {/* JSON-LD Schema */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bessSchema) }} />
       </Helmet>
 
      <BESSHero/> 

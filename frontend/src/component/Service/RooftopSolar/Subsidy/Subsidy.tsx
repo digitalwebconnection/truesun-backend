@@ -4,6 +4,56 @@ import SolarEligibilitySection from "./SolarEligibilitySection"
 import SolarSubsidyHero from "./SolarSubsidyHero "
 import { Helmet } from "react-helmet";
 
+const subsidySchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://truesun.in/services/rooftop/Subsidy",
+  "url": "https://truesun.in/services/rooftop/Subsidy",
+  "name": "Solar Subsidy in India | Govt Solar Panel Subsidy & Benefits",
+  "description": "Solar subsidy in India to reduce solar installation cost. Learn about government schemes, benefits, and how to apply for rooftop solar subsidies.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "TrueSun Energy",
+    "url": "https://truesun.in/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://truesun.in/wp-content/uploads/logo.png"
+    }
+  },
+  "keywords": [
+    "Solar Subsidy in India",
+    "Govt Solar Panel Subsidy & Benefits",
+    "PM Surya Ghar Yojana",
+    "Residential Solar Subsidy",
+    "Government Solar Scheme India"
+  ],
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the solar subsidy in India?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Government of India provides subsidies for residential rooftop solar installations under approved renewable energy schemes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who can apply for solar subsidy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Residential property owners installing rooftop solar systems can apply for government solar subsidies in India."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the benefits of solar subsidy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Solar subsidy helps reduce installation costs, lowers electricity bills, and promotes clean renewable energy usage."
+      }
+    }
+  ]
+};
 
 const Subsidy = () => {
   return (
@@ -40,6 +90,9 @@ const Subsidy = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Solar Subsidy in India" />
         <meta name="twitter:description" content="Save on solar installation costs with government subsidy schemes in India." />
+
+        {/* JSON-LD Schema */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(subsidySchema) }} />
       </Helmet>
       <SolarSubsidyHero />
       <SolarBenefits />

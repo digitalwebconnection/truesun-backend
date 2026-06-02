@@ -4,6 +4,46 @@ import ProtectionPlans from "./ProtectionPlans"
 import WhyOMSection from "./WhyOMSection"
 import { Helmet } from "react-helmet";
 
+const omSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://truesun.in/services/rooftop/O&M",
+  "name": "Solar Maintenance Services in Mumbai",
+  "serviceType": "Solar Operation and Maintenance Services",
+  "url": "https://truesun.in/services/rooftop/O&M",
+  "description": "Solar maintenance services in Mumbai to improve efficiency and extend system life. Get expert solar care and reliable support from TrueSun Energy.",
+  "provider": {
+    "@type": "Organization",
+    "name": "TrueSun Energy",
+    "url": "https://truesun.in/",
+    "logo": "https://truesun.in/assets/truesun-BPKZEvcM.png",
+    "image": "https://truesun.in/wp-content/uploads/logo.png",
+    "telephone": "+91-88508 45149",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mumbai",
+      "addressRegion": "Maharashtra",
+      "addressCountry": "IN"
+    }
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Mumbai"
+  },
+  "keywords": [
+    "Solar Maintenance Services in Mumbai",
+    "Solar Panel Maintenance Mumbai",
+    "Solar AMC Services Mumbai",
+    "Solar Repair Services Mumbai",
+    "Solar Operation and Maintenance Mumbai"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "INR",
+    "availability": "https://schema.org/InStock"
+  }
+};
+
 const OM = () => {
   return (
     <>
@@ -39,6 +79,9 @@ const OM = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Solar Maintenance Services in Mumbai" />
         <meta name="twitter:description" content="Professional solar maintenance and AMC services to maximize system performance and lifespan." />
+
+        {/* JSON-LD Schema */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(omSchema) }} />
       </Helmet>
       <SolarHero/>
       <ProtectionPlans/>
