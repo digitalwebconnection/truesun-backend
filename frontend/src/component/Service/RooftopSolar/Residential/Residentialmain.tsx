@@ -82,9 +82,11 @@ const Residentialmain = () => {
         <meta name="twitter:title" content="Residential Solar System in Mumbai" />
         <meta name="twitter:description" content="Affordable rooftop solar solutions for homes. Reduce electricity bills with TrueSun Energy." />
 
-        {/* JSON-LD Schema */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(residentialSchema) }} />
       </Helmet>
+
+      {/* JSON-LD Schema */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(residentialSchema) }} />
+
       <div className="overflow-x-hidden">
         <ResidentialHero />
         <ResidentialSolarDetailsPage />

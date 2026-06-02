@@ -84,9 +84,10 @@ const MainCI = () => {
         <meta name="twitter:title" content="Industrial & Commercial Solar Company Mumbai" />
         <meta name="twitter:description" content="Power your business with cost-saving solar solutions in Mumbai." />
 
-        {/* JSON-LD Schema */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ciSchema) }} />
       </Helmet>
+
+      {/* JSON-LD Schema */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ciSchema) }} />
 
       <CIHeroSection />
       <SolarNovaIndustrialPage />

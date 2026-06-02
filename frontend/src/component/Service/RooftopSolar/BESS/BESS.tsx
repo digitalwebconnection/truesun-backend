@@ -82,9 +82,10 @@ const BESS = () => {
         <meta name="twitter:title" content="Energy Storage System Solutions" />
         <meta name="twitter:description" content="Advanced battery storage solutions for solar power backup and energy savings." />
 
-        {/* JSON-LD Schema */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bessSchema) }} />
       </Helmet>
+
+      {/* JSON-LD Schema */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bessSchema) }} />
 
       <BESSHero />
       <BESSSection />

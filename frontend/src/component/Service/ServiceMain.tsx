@@ -80,9 +80,11 @@ const ServiceMain = () => {
         <meta name="twitter:title" content="Solar Panel Installation in Mumbai" />
         <meta name="twitter:description" content="Affordable and efficient solar installation services for businesses in Mumbai." />
 
-        {/* JSON-LD Services Schema */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }} />
       </Helmet>
+
+      {/* JSON-LD Services Schema */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }} />
+
       <ServicesHero />
       <RooftopSolarServicesPage />
       <CustomerJourney/>

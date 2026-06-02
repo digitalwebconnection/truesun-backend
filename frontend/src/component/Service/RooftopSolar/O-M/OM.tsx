@@ -80,9 +80,11 @@ const OM = () => {
         <meta name="twitter:title" content="Solar Maintenance Services in Mumbai" />
         <meta name="twitter:description" content="Professional solar maintenance and AMC services to maximize system performance and lifespan." />
 
-        {/* JSON-LD Schema */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(omSchema) }} />
       </Helmet>
+
+      {/* JSON-LD Schema */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(omSchema) }} />
+
       <SolarHero/>
       <ProtectionPlans/>
       <ProcessAndPlans/>

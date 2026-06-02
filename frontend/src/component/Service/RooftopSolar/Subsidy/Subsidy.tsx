@@ -91,9 +91,11 @@ const Subsidy = () => {
         <meta name="twitter:title" content="Solar Subsidy in India" />
         <meta name="twitter:description" content="Save on solar installation costs with government subsidy schemes in India." />
 
-        {/* JSON-LD Schema */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(subsidySchema) }} />
       </Helmet>
+
+      {/* JSON-LD Schema */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(subsidySchema) }} />
+
       <SolarSubsidyHero />
       <SolarBenefits />
       <RwaSubsidySection />

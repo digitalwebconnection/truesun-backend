@@ -83,9 +83,11 @@ const SolarfinanceMain = () => {
         <meta name="twitter:title" content="Solar Panel Financing Options" />
         <meta name="twitter:description" content="Affordable EMI plans to install solar and start saving on electricity bills." />
 
-        {/* JSON-LD Schema */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(solarFinanceSchema) }} />
       </Helmet>
+
+      {/* JSON-LD Schema */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(solarFinanceSchema) }} />
+
       <SolarFinanceHero/>
       <SolarFinancePage/>
     </>

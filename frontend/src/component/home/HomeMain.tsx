@@ -85,9 +85,11 @@ const HomeMain = () => {
                 {/* Canonical URL */}
                 <link rel="canonical" href="https://truesun.in/" />
 
-                {/* JSON-LD Home Schema */}
-                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
             </Helmet>
+
+            {/* JSON-LD Home Schema */}
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+
             <HeroSection />
             <SolarCalculatorSection />
             <TruesunStats />

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Helmet } from "react-helmet";
 
 const DEFAULT_ITEMS = [
   {
@@ -250,11 +249,10 @@ export default function PremiumFAQ({ items = DEFAULT_ITEMS }) {
 
   return (
     <>
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchema)}
-        </script>
-      </Helmet>
+
+      {/* FAQ Schema */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
       <section className="mx-auto max-w-4xl overflow-hidden px-4 py-10">
 
         {/* Header */}

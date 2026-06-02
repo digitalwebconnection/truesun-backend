@@ -141,12 +141,16 @@ const BlogDetails = () => {
         {blog.meta?.description && <meta name="description" content={blog.meta.description} />}
         {blog.meta?.keywords && <meta name="keywords" content={blog.meta.keywords} />}
         {blog.meta?.canonical && <link rel="canonical" href={blog.meta.canonical} />}
-        {blog.meta?.schema && (
-          <script type="application/ld+json">
-            {blog.meta.schema.replace(/<script.*?>|<\/script>/gi, '').trim()}
-          </script>
-        )}
       </Helmet>
+
+      {blog.meta?.schema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: blog.meta.schema.replace(/<script.*?>|<\/script>/gi, '').trim()
+          }}
+        />
+      )}
 
       <div className="flex items-center justify-between mt-12 mb-8">
         <Link

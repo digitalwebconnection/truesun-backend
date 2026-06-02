@@ -86,9 +86,10 @@ const CarbonFootprintingmain = () => {
         <meta name="twitter:title" content="Carbon Footprinting Services in Mumbai" />
         <meta name="twitter:description" content="Expert carbon assessment and sustainability consulting to reduce emissions and improve ESG performance." />
 
-        {/* JSON-LD Schema */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(carbonFootprintingSchema) }} />
       </Helmet>
+
+      {/* JSON-LD Schema */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(carbonFootprintingSchema) }} />
 
       <CarbonFootprintHero />
       <CarbonFootprintSection />
