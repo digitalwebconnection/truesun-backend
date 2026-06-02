@@ -82,10 +82,10 @@ const MainAbout = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Trusted Solar Company in Mumbai" />
         <meta name="twitter:description" content="Choose TrueSun Energy for reliable and efficient solar solutions in Mumbai." />
-
-        {/* JSON-LD About Schema */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }} />
       </Helmet>
+
+      {/* JSON-LD About Schema */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }} />
 
       <AboutHero />
       <Aboutab />
