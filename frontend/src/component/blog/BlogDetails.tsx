@@ -228,6 +228,8 @@ const BlogDetails = () => {
         .blog-content h2 { font-size: 2rem; font-weight: 700; margin-top: 1.75rem; margin-bottom: 0.85rem; line-height: 1.25; text-align: left; }
         .blog-content h3 { font-size: 1.75rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; text-align: left; }
         .blog-content h4 { font-size: 1.5rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.65rem; text-align: left; }
+        .blog-content h5 { font-size: 1.25rem; font-weight: 600; margin-top: 1.1rem; margin-bottom: 0.5rem; text-align: left; }
+        .blog-content h6 { font-size: 1.1rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.4rem; text-align: left; }
         .blog-content p { margin-bottom: 1.25rem; line-height: 1.8; text-align: left; white-space: normal; }
         .blog-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1.25rem; }
         .blog-content ol { list-style-type: decimal; margin-left: 1.5rem; margin-bottom: 1.25rem; }
@@ -244,6 +246,9 @@ const BlogDetails = () => {
           .blog-content h1 { font-size: 2rem; }
           .blog-content h2 { font-size: 1.75rem; }
           .blog-content h3 { font-size: 1.5rem; }
+          .blog-content h4 { font-size: 1.3rem; }
+          .blog-content h5 { font-size: 1.15rem; }
+          .blog-content h6 { font-size: 1.05rem; }
           .blog-content { font-size: 1.125rem; }
         }
       `}</style>

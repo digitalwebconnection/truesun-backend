@@ -3,6 +3,46 @@ import ServicesHero from "./ServiceHero"
 import RooftopSolarServicesPage from "./ServicesPage"
 import CustomerJourney from "./CustomerJourney";
 
+const servicesSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://truesun.in/services",
+  "name": "Solar Panel Installation in Mumbai",
+  "serviceType": "Rooftop Solar Installation Services",
+  "url": "https://truesun.in/services",
+  "description": "Expert industrial & commercial solar company offering customized rooftop solar solutions to reduce electricity costs and power business growth.",
+  "provider": {
+    "@type": "Organization",
+    "name": "TrueSun Energy",
+    "url": "https://truesun.in/",
+    "logo": "https://truesun.in/assets/truesun-BPKZEvcM.png",
+    "image": "https://truesun.in/wp-content/uploads/logo.png",
+    "telephone": "+91-88508 45149",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mumbai",
+      "addressRegion": "Maharashtra",
+      "addressCountry": "IN"
+    }
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Mumbai"
+  },
+  "keywords": [
+    "Solar Panel Installation in Mumbai",
+    "Rooftop Solar Installation Mumbai",
+    "Residential Solar Installation Mumbai",
+    "Commercial Solar Installation Mumbai",
+    "Industrial Solar Solutions Mumbai"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "INR",
+    "availability": "https://schema.org/InStock"
+  }
+};
+
 const ServiceMain = () => {
 
   return (
@@ -39,11 +79,13 @@ const ServiceMain = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Solar Panel Installation in Mumbai" />
         <meta name="twitter:description" content="Affordable and efficient solar installation services for businesses in Mumbai." />
+
+        {/* JSON-LD Services Schema */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }} />
       </Helmet>
       <ServicesHero />
       <RooftopSolarServicesPage />
       <CustomerJourney/>
-
     </>
   )
 }
