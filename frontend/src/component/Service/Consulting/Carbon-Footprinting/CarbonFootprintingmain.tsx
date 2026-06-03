@@ -70,7 +70,7 @@ const CarbonFootprintingmain = () => {
         />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://truesun.in/services/consulting/carbon-footprinting" />
+        <link rel="canonical" href="https://truesun.in/services/consulting/carbon-footprinting/" />
 
         {/* Open Graph */}
         <meta property="og:title" content="Carbon Footprinting Services in Mumbai | TrueSun Energy" />

@@ -67,7 +67,7 @@ const SolarfinanceMain = () => {
         />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://truesun.in/solar-finance" />
+        <link rel="canonical" href="https://truesun.in/solar-finance/" />
 
         {/* Open Graph */}
         <meta property="og:title" content="Affordable Solar Panel Financing | Easy EMI Options" />

@@ -1,4 +1,29 @@
 User-agent: *
 Allow: /
 
+# Important folders allowed
+Allow: /
+Allow: /about/
+Allow: /services/
+Allow: /services/rooftop/C&I/
+Allow: /services/rooftop/residential/
+Allow: /services/rooftop/O&M/
+Allow: /services/rooftop/Subsidy/
+Allow: /services/rooftop/BESS/
+Allow: /solar-finance/
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: / 
+
+# Block admin and unnecessary pages
+Disallow: /wp-admin/
+Disallow: /projects/
+Disallow: /careers/
+Disallow: /Knowledge/
+Disallow: /services/consulting/carbon-footprinting/
+
+# Sitemap
 Sitemap: https://truesun.in/sitemap.xml

@@ -22,7 +22,7 @@ const Careersmain = () => {
         />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://truesun.in/careers" />
+        <link rel="canonical" href="https://truesun.in/careers/" />
 
         {/* Open Graph */}
         <meta property="og:title" content="Careers in Solar Energy | Join TrueSun Energy" />

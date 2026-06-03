@@ -23,7 +23,7 @@ const Projectsmain = () => {
         />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://truesun.in/projects" />
+        <link rel="canonical" href="https://truesun.in/projects/" />
 
         {/* Open Graph */}
         <meta property="og:title" content="Solar Projects in Mumbai | TrueSun Energy" />
