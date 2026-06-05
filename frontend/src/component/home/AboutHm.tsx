@@ -18,7 +18,7 @@ export default function AboutTrueSunNew() {
         <section className="relative overflow-hidden bg-gray-50 pt-5 pb-20 sm:pt-8 sm:pb-6">
             {/* Subtle background texture/pattern */}
             <div
-                className="absolute inset-0 bg-[url('/img/solar-pattern.svg')] opacity-5 bg-size-[220px]"
+                className="absolute inset-0 opacity-5 bg-size-[220px]"
                 aria-hidden="true"
             />
             <div className="relative mx-auto max-w-7xl px-6 lg:px-0 space-y-16 lg:space-y-10">

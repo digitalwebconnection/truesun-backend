@@ -63,8 +63,8 @@ export function getImageUrl(url: string): string {
   if (!url.startsWith('http')) {
     // Ensure the path starts with a leading slash
     const path = url.startsWith('/') ? url : `/${url}`;
-    // Prepend the current origin so the URL is absolute (e.g. http://localhost:5173/api/blogs/image/...)
-    return `${window.location.origin}${path}`;
+    // Prepend the current origin so the URL is absolute (e.g. http://localhost:5000/api/blogs/image/...)
+    return apiUrl(path);
   }
 
   // Convert Cloudinary URLs to site‑relative proxy path
@@ -74,8 +74,8 @@ export function getImageUrl(url: string): string {
   if (url.includes(cloudinaryDomain)) {
     const match = url.match(/\/upload\/([^?]+)(\?.*)?$/);
     if (match) {
-      // Build an absolute URL that points to our backend proxy and includes the site origin
-      return `${window.location.origin}/api/blogs/image/${match[1]}`;
+      // Build an absolute URL that points to our backend proxy
+      return apiUrl(`/api/blogs/image/${match[1]}`);
     }
   }
   // Fallback – return the original URL if it doesn't match Cloudinary pattern
