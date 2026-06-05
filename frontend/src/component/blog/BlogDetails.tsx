@@ -189,7 +189,7 @@ const BlogDetails = () => {
           <img
             src={displayImage}
             alt={blog.title}
-            className="mt-8 w-full md:h-[500px] object-cover rounded-2xl shadow-lg"
+            className="mt-8 w-full md:h-[500px] object-fill rounded-2xl shadow-lg"
           />
         ) : null;
       })()}
