@@ -59,25 +59,36 @@ export function warmUpBackend(): void {
  */
 export function getImageUrl(url: string): string {
   if (!url) return '';
-  // If it's a relative local URL, ensure it starts with a leading slash
-  if (!url.startsWith('http')) {
-    // Ensure the path starts with a leading slash
-    const path = url.startsWith('/') ? url : `/${url}`;
-    // Prepend the current origin so the URL is absolute (e.g. http://localhost:5000/api/blogs/image/...)
-    return apiUrl(path);
+
+  // If the database stored a backend proxy path like /api/blogs/image/v12345/truesun/...
+  // Reconstruct the direct Cloudinary URL to bypass the backend proxy entirely!
+  // This completely eliminates hanging requests and 404s.
+  const proxyPrefix = '/api/blogs/image/';
+  if (url.includes(proxyPrefix)) {
+    const imagePath = url.split(proxyPrefix)[1];
+    return `https://res.cloudinary.com/dyyv00jvc/image/upload/${imagePath}`;
   }
 
-  // Convert Cloudinary URLs to site‑relative proxy path
-  // Example: https://res.cloudinary.com/<cloud>/image/upload/v12345/truesun/blogs/img.jpg
-  // becomes /api/blogs/image/truesun/blogs/img.jpg
+  // If it's a relative local URL, ensure it starts with a leading slash
+  if (!url.startsWith('http')) {
+    const path = url.startsWith('/') ? url : `/${url}`;
+    
+    // If it's an API route or upload route, use the backend URL
+    if (path.startsWith('/api/') || path.startsWith('/uploads/')) {
+      return apiUrl(path);
+    }
+    
+    // Otherwise it's a frontend static image (e.g. /how-long-does-a-solar-panel-installation-take.png)
+    // Use the frontend origin
+    return `${window.location.origin}${path}`;
+  }
+
+  // Serve Cloudinary URLs directly from the CDN
   const cloudinaryDomain = 'res.cloudinary.com';
   if (url.includes(cloudinaryDomain)) {
-    const match = url.match(/\/upload\/([^?]+)(\?.*)?$/);
-    if (match) {
-      // Build an absolute URL that points to our backend proxy
-      return apiUrl(`/api/blogs/image/${match[1]}`);
-    }
+    return url;
   }
-  // Fallback – return the original URL if it doesn't match Cloudinary pattern
+
+  // Fallback
   return url;
 }
