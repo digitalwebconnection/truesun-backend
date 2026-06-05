@@ -202,7 +202,7 @@ const BlogPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-10">
             {blogs.map((post, index) => {
               const staticMatch = staticBlogs.find((sb) => sb.slug === post.slug);
-              const displayImage = getImageUrl(staticMatch ? staticMatch.image : post.image);
+              const displayImage = getImageUrl(post.image || (staticMatch ? staticMatch.image : ''));
               return (
                 <Link
                   to={`/Knowledgwe/${post.slug || post._id}`}

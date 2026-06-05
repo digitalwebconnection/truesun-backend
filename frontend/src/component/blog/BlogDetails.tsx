@@ -184,7 +184,7 @@ const BlogDetails = () => {
 
       {(() => {
         const staticMatch = staticBlogs.find((sb) => sb.slug === blog.slug);
-        const displayImage = getImageUrl(staticMatch ? staticMatch.image : blog.image);
+        const displayImage = getImageUrl(blog.image || (staticMatch ? staticMatch.image : ''));
         return displayImage ? (
           <img
             src={displayImage}
