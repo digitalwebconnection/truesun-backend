@@ -6,6 +6,24 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const DEFAULT_ITEMS = [
   {
+    id: "best-company-mumbai",
+    question: "Which is the best solar company in Mumbai?",
+    answer:
+      "Choosing the best solar company in Mumbai depends on a few important factors such as quality of equipment, installation expertise, long-term support, project experience, and customer satisfaction.\n\nTrueSun has become a trusted name for residential, commercial, and housing society solar installations across Mumbai because of its strong focus on quality, performance, and customer experience.\n\nAt TrueSun, we use high-quality solar panels, inverters, and mounting structures designed for long-term performance and safety. Our team also pays special attention to the aesthetics of every installation, ensuring the solar system looks clean, organized, and professionally integrated with the property.\n\nWe have successfully completed multiple solar projects across Mumbai and nearby regions, including premium projects in Ambey Valley. Our clients appreciate not only the savings generated through solar, but also the smooth installation process and reliable post-installation support.\n\nMany housing societies have seen a massive reduction in electricity bills after switching to solar with TrueSun:\n\n- Rustomjee CHS, Virar reduced its common area electricity bill from around ₹75,000 per month to nearly ₹0 after solar installation.\n- Saraswati Heights CHS, Nallasopara reduced its monthly electricity bill from approximately ₹68,000 to just around ₹880 after going solar.\n\nWhat truly makes TrueSun stand out is our commitment after installation. Our team is always available to answer queries, provide maintenance support, and ensure the system continues to perform efficiently for years. Customer satisfaction and long-term relationships remain at the center of everything we do.\n\nIf you are looking for a reliable solar company in Mumbai that combines quality equipment, expert execution, clean design, and dependable support, TrueSun is one of the strongest choices available.",
+  },
+  {
+    id: "worth-it-mumbai",
+    question: "Is solar worth it in Mumbai? Will I actually save money?",
+    answer:
+      "Yes, Mumbai is one of the best cities in India for solar. With 280–300 sunny days per year and rising electricity tariffs from MSEDCL, Adani, Tata the return on investment is compelling.\n\nA typical 3 kW residential system saves ₹2,000–₹3,000 per month on electricity bills\nPayback period: 3–5 years (faster with subsidy)\nSystem lifespan: 25+ years with minimal maintenance\nNet metering means you earn credits for unused electricity fed back to the grid\n\nA TrueSun Customer in Worli with a 5 kW system reduced their monthly MSEDCL bill from ₹6,200 to under ₹800, that's ₹64,000+ in annual savings.",
+  },
+  {
+    id: "legitimate-company",
+    question: "Is TrueSun Energy a legitimate and trustworthy company?",
+    answer:
+      "TrueSun Energy Solutions Pvt Ltd is a registered Indian company (CIN: U74999MH2018PTC303522), incorporated in 2018 and headquartered in Mumbai. Our directors - Nitu Goel and Rajnish Chandra Goyal, have combined experience of 40+ years across renewable energy, carbon finance, and project management.\n\nPrior experience: TATA Cleantech Capital (JV of IFC & Tata Capital), TERI, Indian Oil Corporation, C-Quest Capital\nRepresented at COP28 UAE on Indian carbon markets and rooftop solar.\nListed on ENF Solar global installer directory\nVerified Google Business profile with customer reviews",
+  },
+  {
     id: "cost",
     question: "I don’t have rooftop space available, but I have ground space. Can this be utilized for solar power generation?",
     answer:
@@ -164,6 +182,30 @@ export default function PremiumFAQ({ items = DEFAULT_ITEMS }) {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: [
+      {
+        "@type": "Question",
+        name: "Which is the best solar company in Mumbai?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "TrueSun has become a trusted name for residential, commercial, and housing society solar installations across Mumbai. We combine quality equipment, expert execution, clean design, and dependable long-term support."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "Is solar worth it in Mumbai? Will I actually save money?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, Mumbai is one of the best cities for solar with 280–300 sunny days per year. A typical 3 kW residential system saves ₹2,000–₹3,000 per month, meaning your payback period is just 3–5 years."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "Is TrueSun Energy a legitimate and trustworthy company?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "TrueSun Energy Solutions Pvt Ltd is a registered Indian company incorporated in 2018. The directors have over 40 years of combined experience across renewable energy, carbon finance, and project management."
+        }
+      },
       {
         "@type": "Question",
         name: "I don’t have any available roof space available but ground space is available. Can I utilize this for solar power generation?",
@@ -330,7 +372,7 @@ export default function PremiumFAQ({ items = DEFAULT_ITEMS }) {
                     >
                       <div className="px-6 pb-6">
                         <div className="mb-4 h-px w-full bg-orange-100" />
-                        <p className="text-gray-600 leading-relaxed italic">
+                        <p className="text-gray-600 leading-relaxed italic whitespace-pre-line">
                           {answer}
                         </p>
                       </div>

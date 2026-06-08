@@ -227,7 +227,7 @@ const BlogPage = () => {
                       <img
                         src={displayImage}
                         alt={post.title}
-                        className="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="h-56 w-full object-fill group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />
                     </div>
