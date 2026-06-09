@@ -13,6 +13,10 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.16",
+    "@tiptap/extension-link": "^3.26.0",
+    "@tiptap/extension-underline": "^3.26.0",
+    "@tiptap/react": "^3.26.0",
+    "@tiptap/starter-kit": "^3.26.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^5.2.1",

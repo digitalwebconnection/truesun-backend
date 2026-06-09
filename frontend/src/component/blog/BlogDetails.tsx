@@ -195,8 +195,8 @@ const BlogDetails = () => {
       })()}
 
       <div
-        className="mt-12 text-gray-800 text-lg md:text-xl blog-content"
-        dangerouslySetInnerHTML={{ __html: blog.content }}
+        className="mt-12 text-gray-800 text-lg md:text-xl blog-content overflow-hidden"
+        dangerouslySetInnerHTML={{ __html: (blog.content || '').replace(/&nbsp;/g, ' ') }}
       />
 
       {blog.meta?.longContent && (
@@ -222,19 +222,27 @@ const BlogDetails = () => {
 
       <style>{`
         .blog-content {
-          overflow-wrap: break-word;
-          word-wrap: break-word;
-          word-break: break-word;
-          text-align: left;
           line-height: 1.8;
+          text-align: left;
         }
+        
+        /* Force reset on all text elements to override Quill's or pasted inline styles causing word cuts */
+        .blog-content p, 
+        .blog-content span, 
+        .blog-content div, 
+        .blog-content h1, .blog-content h2, .blog-content h3, .blog-content h4, .blog-content h5, .blog-content h6,
+        .blog-content li, 
+        .blog-content a {
+          white-space: normal !important;
+        }
+
         .blog-content h1 { font-size: 2.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; line-height: 1.2; text-align: left; }
         .blog-content h2 { font-size: 2rem; font-weight: 700; margin-top: 1.75rem; margin-bottom: 0.85rem; line-height: 1.25; text-align: left; }
         .blog-content h3 { font-size: 1.75rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; text-align: left; }
         .blog-content h4 { font-size: 1.5rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.65rem; text-align: left; }
         .blog-content h5 { font-size: 1.25rem; font-weight: 600; margin-top: 1.1rem; margin-bottom: 0.5rem; text-align: left; }
         .blog-content h6 { font-size: 1.1rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.4rem; text-align: left; }
-        .blog-content p { margin-bottom: 1.25rem; line-height: 1.8; text-align: left; white-space: normal; }
+        .blog-content p { margin-bottom: 1.25rem; line-height: 1.8; text-align: left; }
         .blog-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1.25rem; }
         .blog-content ol { list-style-type: decimal; margin-left: 1.5rem; margin-bottom: 1.25rem; }
         .blog-content li { margin-bottom: 0.5rem; line-height: 1.8; }

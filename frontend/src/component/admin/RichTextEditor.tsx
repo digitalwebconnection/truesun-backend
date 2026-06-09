@@ -1,269 +1,236 @@
-import React, { useMemo, useRef } from 'react';
-import ReactQuill from 'react-quill-new';
-import 'react-quill-new/dist/quill.snow.css';
-import { apiUrl } from '../../lib/api';
+import { useEditor, EditorContent } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import Link from '@tiptap/extension-link';
+import Underline from '@tiptap/extension-underline';
+import { useEffect, useCallback, useState } from 'react';
 
 interface RichTextEditorProps {
   value: string;
-  onChange: (content: string) => void;
+  onChange: (value: string) => void;
   placeholder?: string;
+  label?: string;
 }
 
-const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange, placeholder }) => {
-  const quillRef = useRef<ReactQuill>(null);
+export default function RichTextEditor({ value, onChange, placeholder, label }: RichTextEditorProps) {
+  const [linkUrl, setLinkUrl] = useState('');
+  const [showLinkInput, setShowLinkInput] = useState(false);
 
-  const imageHandler = () => {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
-    input.click();
-
-    input.onchange = async () => {
-      const file = input.files?.[0];
-      if (file) {
-        const formData = new FormData();
-        formData.append('image', file);
-
-        try {
-          const res = await fetch(apiUrl('/api/upload'), {
-            method: 'POST',
-            body: formData,
-          });
-          const data = await res.json();
-          if (data.success && data.url) {
-            const quill = quillRef.current?.getEditor();
-            if (quill) {
-              const range = quill.getSelection();
-              quill.insertEmbed(range ? range.index : 0, 'image', data.url);
-            }
-          }
-        } catch (error) {
-          console.error('Image upload failed:', error);
-        }
-      }
-    };
-  };
-
-  const modules = useMemo(() => {
-    const Quill = (ReactQuill as any).Quill;
-    if (!Quill) {
-      return {
-        toolbar: {
-          container: [
-            [{ header: [1, 2, 3, 4, 5, 6, false] }],
-            ['bold', 'italic', 'underline', 'strike'],
-            [{ list: 'ordered' }, { list: 'bullet' }],
-            [{ color: [] }, { background: [] }],
-            ['link', 'image'],
-            ['clean'],
-          ],
-          handlers: {
-            image: imageHandler,
-          },
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      Underline,
+      Link.configure({
+        openOnClick: false,
+        autolink: true,
+        defaultProtocol: 'https',
+        HTMLAttributes: {
+          target: '_blank',
+          rel: 'noopener noreferrer',
         },
-      };
-    }
-
-    const Delta = Quill.import('delta');
-
-    return {
-      toolbar: {
-        container: [
-          [{ header: [1, 2, 3, 4, 5, 6, false] }],
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ list: 'ordered' }, { list: 'bullet' }],
-          [{ color: [] }, { background: [] }],
-          ['link', 'image'],
-          ['clean'],
-        ],
-        handlers: {
-          image: imageHandler,
-        },
+      }),
+    ],
+    content: value,
+    onUpdate({ editor }) {
+      onChange(editor.getHTML());
+    },
+    editorProps: {
+      attributes: {
+        class: 'rte-editor',
+        ...(placeholder ? { 'data-placeholder': placeholder } : {}),
       },
-      clipboard: {
-        matchers: [
-          ['STRONG', (node: any, delta: any) => {
-            if (node.innerText && node.innerText.includes(':')) {
-              return delta;
-            }
-            return delta.compose(new Delta().retain(delta.length(), { bold: true }));
-          }],
-          ['B', (node: any, delta: any) => {
-            if (node.innerText && node.innerText.includes(':')) {
-              return delta;
-            }
-            return delta.compose(new Delta().retain(delta.length(), { bold: true }));
-          }],
-          ['*', (node: any, delta: any) => {
-            const fontWeight = node.style ? node.style.fontWeight : '';
-            const isBold = fontWeight === 'bold' || fontWeight === 'bolder' || parseInt(fontWeight) >= 600;
-            if (isBold) {
-              if (node.innerText && node.innerText.includes(':')) {
-                return delta;
-              }
-              return delta.compose(new Delta().retain(delta.length(), { bold: true }));
-            }
-            return delta;
-          }],
-          [Node.TEXT_NODE || 3, (node: any, delta: any) => {
-            const text = node.data;
-            if (typeof text !== 'string' || !text.includes(':')) return delta;
+    },
+  });
 
-            const lines = text.split('\n');
-            const newDelta = new Delta();
-            let hasFormatted = false;
+  // Sync external value on first load or reset
+  useEffect(() => {
+    if (editor && value !== editor.getHTML()) {
+      editor.commands.setContent(value || '', { emitUpdate: false });
+    }
+  }, [value, editor]);
 
-            for (let i = 0; i < lines.length; i++) {
-              const line = lines[i];
-              // Match short labels (up to 30 characters) before a colon (e.g., username: message)
-              const match = line.match(/^([^:]{1,30}):(.*)$/);
-              if (match) {
-                hasFormatted = true;
-                const label = match[1] + ':';
-                const rest = match[2];
-                newDelta.insert(label, { bold: true });
-                if (rest) {
-                  newDelta.insert(rest);
-                }
-              } else {
-                newDelta.insert(line);
-              }
-              
-              if (i < lines.length - 1) {
-                newDelta.insert('\n');
-              }
-            }
+  // Intercept paste to format 'name: message' patterns (bolding only the label before the colon)
+  useEffect(() => {
+    if (!editor) return;
 
-            return hasFormatted ? newDelta : delta;
-          }]
-        ]
+    const handlePasteEvent = (event: ClipboardEvent) => {
+      const text = event.clipboardData?.getData('text/plain');
+      if (!text || !text.includes(':')) return;
+
+      const lines = text.split('\n');
+      let hasPattern = false;
+      const htmlParts = lines.map(line => {
+        const match = line.match(/^([^:]{1,30}):(.*)$/);
+        if (match) {
+          hasPattern = true;
+          return `<strong>${match[1]}:</strong>${match[2]}`;
+        }
+        // HTML escape non-matching text to prevent layout breaks
+        return line.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      });
+
+      if (hasPattern) {
+        event.preventDefault();
+        event.stopPropagation();
+        const htmlContent = htmlParts.map(p => `<p>${p}</p>`).join('');
+        editor.commands.insertContent(htmlContent);
       }
     };
-  }, []);
 
-  const formats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike',
-    'list', 'bullet',
-    'color', 'background',
-    'link', 'image',
-  ];
+    const element = editor.view.dom;
+    element.addEventListener('paste', handlePasteEvent, true);
+    return () => {
+      element.removeEventListener('paste', handlePasteEvent, true);
+    };
+  }, [editor]);
+
+  const applyLink = useCallback(() => {
+    if (!editor) return;
+    if (!linkUrl.trim()) {
+      editor.chain().focus().extendMarkRange('link').unsetLink().run();
+    } else {
+      editor.chain().focus().extendMarkRange('link').setLink({ href: linkUrl.trim() }).run();
+    }
+    setLinkUrl('');
+    setShowLinkInput(false);
+  }, [editor, linkUrl]);
+
+  const removeLink = useCallback(() => {
+    if (!editor) return;
+    editor.chain().focus().extendMarkRange('link').unsetLink().run();
+    setShowLinkInput(false);
+  }, [editor]);
+
+  if (!editor) return null;
+
+  const btn = (active: boolean, extra = '') =>
+    `px-2 py-1 rounded text-xs font-medium transition select-none ${extra} ${
+      active
+        ? 'bg-amber-500 text-white'
+        : 'text-slate-400 hover:text-white hover:bg-slate-700'
+    }`;
 
   return (
-    <div className="rich-text-editor">
-      <ReactQuill
-        ref={quillRef}
-        theme="snow"
-        value={value}
-        onChange={onChange}
-        modules={modules}
-        formats={formats}
-        placeholder={placeholder}
-        style={{ height: '300px', marginBottom: '50px' }}
-      />
+    <div>
+      {/* Editor Styles */}
       <style>{`
-        .rich-text-editor {
-          margin-bottom: 2rem;
-        }
-        .rich-text-editor .ql-container {
-          border-bottom-left-radius: 12px;
-          border-bottom-right-radius: 12px;
-          border: 1px solid #e2e8f0 !important;
-          font-family: 'Inter', system-ui, sans-serif;
-          min-height: 300px;
-        }
-        .rich-text-editor .ql-toolbar {
-          border-top-left-radius: 12px;
-          border-top-right-radius: 12px;
-          border: 1px solid #e2e8f0 !important;
-          border-bottom: none !important;
-          background: #f8fafc;
-          padding: 0.75rem !important;
-        }
-        .rich-text-editor .ql-editor {
-          font-size: 0.95rem;
-          line-height: 1.7;
-          color: #1e293b;
-          padding: 1.25rem !important;
-        }
-        .rich-text-editor .ql-editor h1 { font-size: 2.2rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #0f172a; }
-        .rich-text-editor .ql-editor h2 { font-size: 1.8rem; font-weight: 700; margin-top: 1.25rem; margin-bottom: 0.6rem; color: #0f172a; }
-        .rich-text-editor .ql-editor h3 { font-size: 1.5rem; font-weight: 600; margin-top: 1.1rem; margin-bottom: 0.5rem; color: #1e293b; }
-        .rich-text-editor .ql-editor h4 { font-size: 1.25rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.4rem; color: #1e293b; }
-        .rich-text-editor .ql-editor h5 { font-size: 1.1rem; font-weight: 600; margin-top: 0.9rem; margin-bottom: 0.3rem; color: #334155; }
-        .rich-text-editor .ql-editor h6 { font-size: 1rem; font-weight: 600; margin-top: 0.8rem; margin-bottom: 0.3rem; color: #475569; }
-        .rich-text-editor .ql-editor.ql-blank::before {
-          color: #94a3b8;
-          font-style: normal;
-          left: 1.25rem !important;
-        }
-        .rich-text-editor .ql-snow.ql-toolbar button:hover,
-        .rich-text-editor .ql-snow .ql-toolbar button:hover,
-        .rich-text-editor .ql-snow.ql-toolbar button:focus,
-        .rich-text-editor .ql-snow .ql-toolbar button:focus,
-        .rich-text-editor .ql-snow.ql-toolbar button.ql-active,
-        .rich-text-editor .ql-snow .ql-toolbar button.ql-active,
-        .rich-text-editor .ql-snow.ql-toolbar .ql-picker-label:hover,
-        .rich-text-editor .ql-snow .ql-toolbar .ql-picker-label:hover,
-        .rich-text-editor .ql-snow.ql-toolbar .ql-picker-label.ql-active,
-        .rich-text-editor .ql-snow .ql-toolbar .ql-picker-label.ql-active,
-        .rich-text-editor .ql-snow.ql-toolbar .ql-picker-item:hover,
-        .rich-text-editor .ql-snow .ql-toolbar .ql-picker-item:hover,
-        .rich-text-editor .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
-        .rich-text-editor .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
-          color: #FC763A !important;
-        }
-        .rich-text-editor .ql-snow.ql-toolbar button:hover .ql-stroke,
-        .rich-text-editor .ql-snow .ql-toolbar button:hover .ql-stroke,
-        .rich-text-editor .ql-snow.ql-toolbar button.ql-active .ql-stroke,
-        .rich-text-editor .ql-snow .ql-toolbar button.ql-active .ql-stroke,
-        .rich-text-editor .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke,
-        .rich-text-editor .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke,
-        .rich-text-editor .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
-        .rich-text-editor .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke {
-          stroke: #FC763A !important;
-        }
-        .rich-text-editor .ql-snow.ql-toolbar button:hover .ql-fill,
-        .rich-text-editor .ql-snow .ql-toolbar button:hover .ql-fill,
-        .rich-text-editor .ql-snow.ql-toolbar button.ql-active .ql-fill,
-        .rich-text-editor .ql-snow .ql-toolbar button.ql-active .ql-fill,
-        .rich-text-editor .ql-snow.ql-toolbar .ql-picker-label:hover .ql-fill,
-        .rich-text-editor .ql-snow .ql-toolbar .ql-picker-label:hover .ql-fill,
-        .rich-text-editor .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-fill,
-        .rich-text-editor .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-fill {
-          fill: #FC763A !important;
-        }
-        .rich-text-editor .ql-snow .ql-picker.ql-header .ql-picker-label::before,
-        .rich-text-editor .ql-snow .ql-picker.ql-header .ql-picker-item::before {
-          content: 'Normal';
-        }
-        .rich-text-editor .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="1"]::before,
-        .rich-text-editor .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
-          content: 'Heading 1' !important;
-        }
-        .rich-text-editor .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="2"]::before,
-        .rich-text-editor .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
-          content: 'Heading 2' !important;
-        }
-        .rich-text-editor .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="3"]::before,
-        .rich-text-editor .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="3"]::before {
-          content: 'Heading 3' !important;
-        }
-        .rich-text-editor .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="4"]::before,
-        .rich-text-editor .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="4"]::before {
-          content: 'Heading 4' !important;
-        }
-        .rich-text-editor .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="5"]::before,
-        .rich-text-editor .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="5"]::before {
-          content: 'Heading 5' !important;
-        }
-        .rich-text-editor .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="6"]::before,
-        .rich-text-editor .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="6"]::before {
-          content: 'Heading 6' !important;
-        }
+        .rte-editor { min-height: 120px; outline: none; color: #e2e8f0; font-size: 0.875rem; line-height: 1.6; padding: 12px 16px; }
+        .rte-editor p { margin: 0 0 0.5rem 0; }
+        .rte-editor strong { font-weight: 700; color: #f8fafc; }
+        .rte-editor em { font-style: italic; }
+        .rte-editor u { text-decoration: underline; }
+        .rte-editor a { color: #f59e0b; text-decoration: underline; cursor: pointer; }
+        .rte-editor ul { list-style: disc; padding-left: 1.25rem; margin: 0.5rem 0; }
+        .rte-editor ol { list-style: decimal; padding-left: 1.25rem; margin: 0.5rem 0; }
+        .rte-editor li { margin-bottom: 0.25rem; }
+        .rte-editor h1, .rte-editor h2, .rte-editor h3, .rte-editor h4, .rte-editor h5, .rte-editor h6 { font-weight: 600; color: #fff; margin: 0.75rem 0 0.25rem; }
+        .rte-editor h1 { font-size: 1.5rem; }
+        .rte-editor h2 { font-size: 1.35rem; }
+        .rte-editor h3 { font-size: 1.2rem; }
+        .rte-editor h4 { font-size: 1.1rem; }
+        .rte-editor h5 { font-size: 1rem; }
+        .rte-editor h6 { font-size: 0.9rem; color: #94a3b8; }
+        .rte-editor blockquote { border-left: 3px solid #f59e0b; padding-left: 1rem; color: #94a3b8; margin: 0.5rem 0; }
+        .rte-editor[data-placeholder]:empty::before { content: attr(data-placeholder); color: #64748b; pointer-events: none; }
+        .rte-editor p.is-editor-empty:first-child::before { content: attr(data-placeholder); color: #64748b; float: left; height: 0; pointer-events: none; }
       `}</style>
+
+      {label && (
+        <label className="block text-sm font-medium text-slate-300 mb-1.5">{label}</label>
+      )}
+
+      {/* Toolbar */}
+      <div className="flex flex-wrap items-center gap-1 bg-slate-900 border border-slate-700 border-b-0 rounded-t-xl px-3 py-2">
+        <button type="button" title="Bold" onClick={() => editor.chain().focus().toggleBold().run()}
+          className={btn(editor.isActive('bold'), 'font-bold')}>B</button>
+
+        <button type="button" title="Italic" onClick={() => editor.chain().focus().toggleItalic().run()}
+          className={btn(editor.isActive('italic'), 'italic')}>I</button>
+
+        <button type="button" title="Underline" onClick={() => editor.chain().focus().toggleUnderline().run()}
+          className={btn(editor.isActive('underline'), 'underline')}>U</button>
+
+        <span className="w-px h-4 bg-slate-700 mx-1" />
+
+        {/* H1 to H6 Header Buttons */}
+        {[1, 2, 3, 4, 5, 6].map((level) => (
+          <button
+            key={level}
+            type="button"
+            title={`Heading ${level}`}
+            onClick={() => editor.chain().focus().toggleHeading({ level: level as any }).run()}
+            className={btn(editor.isActive('heading', { level }), 'font-semibold')}
+          >
+            H{level}
+          </button>
+        ))}
+
+        <span className="w-px h-4 bg-slate-700 mx-1" />
+
+        <button type="button" title="Bullet List" onClick={() => editor.chain().focus().toggleBulletList().run()}
+          className={btn(editor.isActive('bulletList'))}>• List</button>
+
+        <button type="button" title="Ordered List" onClick={() => editor.chain().focus().toggleOrderedList().run()}
+          className={btn(editor.isActive('orderedList'))}>1. List</button>
+
+        <span className="w-px h-4 bg-slate-700 mx-1" />
+
+        {/* 🔗 Link button */}
+        <button
+          type="button"
+          title="Add Link — select text first, then click this"
+          onClick={() => setShowLinkInput(v => !v)}
+          className={btn(editor.isActive('link'))}
+        >
+          🔗 Link
+        </button>
+
+        {editor.isActive('link') && (
+          <button type="button" onClick={removeLink}
+            className="px-2 py-1 rounded text-xs text-red-400 hover:text-red-300 hover:bg-red-500/10 transition">
+            ✕ Remove Link
+          </button>
+        )}
+
+        <span className="w-px h-4 bg-slate-700 mx-1" />
+
+        <button type="button" title="Clear all formatting"
+          onClick={() => editor.chain().focus().clearNodes().unsetAllMarks().run()}
+          className={btn(false)}>Clear</button>
+      </div>
+
+      {/* Link URL input panel */}
+      {showLinkInput && (
+        <div className="flex gap-2 items-center bg-slate-900 border-x border-slate-700 px-3 py-2">
+          <span className="text-slate-400 text-xs shrink-0">URL:</span>
+          <input
+            type="text"
+            value={linkUrl}
+            onChange={e => setLinkUrl(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); applyLink(); } }}
+            placeholder="https://example.com  or  /services"
+            autoFocus
+            className="flex-1 bg-slate-800 border border-slate-600 text-white placeholder-slate-500 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-amber-400"
+          />
+          <button type="button" onClick={applyLink}
+            className="shrink-0 px-3 py-1.5 rounded-lg bg-amber-500 text-white text-xs font-semibold hover:bg-amber-400 transition">
+            Apply
+          </button>
+          <button type="button" onClick={() => { setShowLinkInput(false); setLinkUrl(''); }}
+            className="shrink-0 px-3 py-1.5 rounded-lg bg-slate-700 text-slate-300 text-xs hover:bg-slate-600 transition">
+            Cancel
+          </button>
+        </div>
+      )}
+
+      {/* Editor content */}
+      <div className="border border-slate-700 rounded-b-xl overflow-hidden bg-slate-800">
+        <EditorContent editor={editor} />
+      </div>
+
+      {/* Helper hint */}
+      <p className="text-slate-600 text-xs mt-1">
+        💡 To add a link: <strong className="text-slate-500">select the text</strong> → click 🔗 Link → enter URL → Apply
+      </p>
     </div>
   );
-};
-
-export default RichTextEditor;
+}
