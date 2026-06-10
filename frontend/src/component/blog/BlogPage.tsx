@@ -71,8 +71,15 @@ const BlogPage = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success && Array.isArray(data.data)) {
-          setBlogs(data.data);
-          cacheSet(CACHE_KEY, data.data);
+          // Merge static blogs with fresh data, ensuring no duplicates by slug
+          const allBlogs = [...data.data];
+          staticBlogs.forEach((sb) => {
+            if (!allBlogs.find((b: any) => b.slug === sb.slug)) {
+              allBlogs.push(sb as any);
+            }
+          });
+          setBlogs(allBlogs);
+          cacheSet(CACHE_KEY, allBlogs);
           setError("");
 
           // Clean up deleted blogs from clicked_blogs in localStorage

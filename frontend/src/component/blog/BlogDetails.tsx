@@ -230,38 +230,56 @@ const BlogDetails = () => {
         .blog-content p, 
         .blog-content span, 
         .blog-content div, 
-        .blog-content h1, .blog-content h2, .blog-content h3, .blog-content h4, .blog-content h5, .blog-content h6,
-        .blog-content li, 
-        .blog-content a {
+        .blog-content li {
           white-space: normal !important;
+          font-family: inherit !important;
+          font-size: inherit !important;
+          line-height: inherit !important;
+          color: inherit !important;
+          background-color: transparent !important;
         }
 
-        .blog-content h1 { font-size: 2.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; line-height: 1.2; text-align: left; }
-        .blog-content h2 { font-size: 2rem; font-weight: 700; margin-top: 1.75rem; margin-bottom: 0.85rem; line-height: 1.25; text-align: left; }
-        .blog-content h3 { font-size: 1.75rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; text-align: left; }
-        .blog-content h4 { font-size: 1.5rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.65rem; text-align: left; }
-        .blog-content h5 { font-size: 1.25rem; font-weight: 600; margin-top: 1.1rem; margin-bottom: 0.5rem; text-align: left; }
-        .blog-content h6 { font-size: 1.1rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.4rem; text-align: left; }
-        .blog-content p { margin-bottom: 1.25rem; line-height: 1.8; text-align: left; }
-        .blog-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1.25rem; }
-        .blog-content ol { list-style-type: decimal; margin-left: 1.5rem; margin-bottom: 1.25rem; }
-        .blog-content li { margin-bottom: 0.5rem; line-height: 1.8; }
-        .blog-content img { max-width: 100%; height: auto; border-radius: 12px; margin: 2rem 0; }
-        .blog-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-        .blog-content table td, .blog-content table th { border: 1px solid #e2e8f0; padding: 0.75rem; text-align: left; }
-        .blog-content a { color: #FC763A; text-decoration: underline; }
-        .blog-content blockquote { border-left: 4px solid #FC763A; padding-left: 1.5rem; font-style: italic; margin: 1.5rem 0; color: #475569; }
-        .blog-content pre { background: #f1f5f9; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1.5rem 0; }
-        .blog-content iframe, .blog-content video { max-width: 100%; border-radius: 12px; margin: 2rem 0; }
+        .blog-content a {
+          white-space: normal !important;
+          font-family: inherit !important;
+          font-size: inherit !important;
+          line-height: inherit !important;
+          background-color: transparent !important;
+        }
+
+        .blog-content h1, .blog-content h2, .blog-content h3, .blog-content h4, .blog-content h5, .blog-content h6 {
+          white-space: normal !important;
+          font-family: inherit !important;
+          color: inherit !important;
+          background-color: transparent !important;
+        }
+
+        .blog-content h1 { font-size: 2.5rem !important; font-weight: 700 !important; margin-top: 2rem !important; margin-bottom: 1rem !important; line-height: 1.2 !important; text-align: left !important; }
+        .blog-content h2 { font-size: 2rem !important; font-weight: 700 !important; margin-top: 1.75rem !important; margin-bottom: 0.85rem !important; line-height: 1.25 !important; text-align: left !important; }
+        .blog-content h3 { font-size: 1.75rem !important; font-weight: 600 !important; margin-top: 1.5rem !important; margin-bottom: 0.75rem !important; text-align: left !important; }
+        .blog-content h4 { font-size: 1.5rem !important; font-weight: 600 !important; margin-top: 1.25rem !important; margin-bottom: 0.65rem !important; text-align: left !important; }
+        .blog-content h5 { font-size: 1.25rem !important; font-weight: 600 !important; margin-top: 1.1rem !important; margin-bottom: 0.5rem !important; text-align: left !important; }
+        .blog-content h6 { font-size: 1.1rem !important; font-weight: 600 !important; margin-top: 1rem !important; margin-bottom: 0.4rem !important; text-align: left !important; }
+        .blog-content p { margin-bottom: 1.25rem !important; line-height: 1.8 !important; text-align: left !important; }
+        .blog-content ul { list-style-type: disc !important; margin-left: 1.5rem !important; margin-bottom: 1.25rem !important; }
+        .blog-content ol { list-style-type: decimal !important; margin-left: 1.5rem !important; margin-bottom: 1.25rem !important; }
+        .blog-content li { margin-bottom: 0.5rem !important; line-height: 1.8 !important; }
+        .blog-content img { max-width: 100% !important; height: auto !important; border-radius: 12px !important; margin: 2rem 0 !important; }
+        .blog-content table { width: 100% !important; border-collapse: collapse !important; margin: 1.5rem 0 !important; display: block !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; }
+        .blog-content table td, .blog-content table th { border: 1px solid #e2e8f0 !important; padding: 0.75rem !important; text-align: left !important; }
+        .blog-content a { color: #FC763A !important; text-decoration: underline !important; }
+        .blog-content blockquote { border-left: 4px solid #FC763A !important; padding-left: 1.5rem !important; font-style: italic !important; margin: 1.5rem 0 !important; color: #475569 !important; }
+        .blog-content pre { background: #f1f5f9 !important; padding: 1rem !important; border-radius: 8px !important; overflow-x: auto !important; margin: 1.5rem 0 !important; }
+        .blog-content iframe, .blog-content video { max-width: 100% !important; border-radius: 12px !important; margin: 2rem 0 !important; }
         
         @media (max-width: 768px) {
-          .blog-content h1 { font-size: 2rem; }
-          .blog-content h2 { font-size: 1.75rem; }
-          .blog-content h3 { font-size: 1.5rem; }
-          .blog-content h4 { font-size: 1.3rem; }
-          .blog-content h5 { font-size: 1.15rem; }
-          .blog-content h6 { font-size: 1.05rem; }
-          .blog-content { font-size: 1.125rem; }
+          .blog-content h1 { font-size: 2rem !important; }
+          .blog-content h2 { font-size: 1.75rem !important; }
+          .blog-content h3 { font-size: 1.5rem !important; }
+          .blog-content h4 { font-size: 1.3rem !important; }
+          .blog-content h5 { font-size: 1.15rem !important; }
+          .blog-content h6 { font-size: 1.05rem !important; }
+          .blog-content { font-size: 1.125rem !important; }
         }
       `}</style>
     </div>
